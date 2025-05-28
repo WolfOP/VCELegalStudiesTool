@@ -180,3 +180,61 @@ body {
     margin-right: 0.3rem;
     accent-color: #fb923c; /* orange-500 */
 }
+/* Styles for Term Match Game */
+.term-item {
+    padding: 0.5rem;
+    background-color: #f0fdf4; /* lime-50 (Tailwind's lime palette) */
+    border: 1px solid #bbf7d0; /* lime-200 */
+    border-radius: 0.25rem;
+    cursor: grab;
+    text-align: center;
+    font-size: 0.875rem; /* text-sm */
+    transition: background-color 0.2s;
+}
+.term-item.selected, .term-item:hover {
+    background-color: #dcfce7; /* lime-100 */
+}
+.term-item.dragging {
+    opacity: 0.5;
+    border-style: dashed;
+}
+
+.definition-slot {
+    padding: 0.75rem;
+    background-color: #fafafa; /* gray-50 */
+    border: 2px dashed #d1d5db; /* gray-300 */
+    border-radius: 0.25rem;
+    min-height: 50px; /* Ensure it's a decent drop target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem; /* text-sm */
+    color: #6b7280; /* gray-500 */
+    transition: background-color 0.2s, border-color 0.2s;
+}
+.definition-slot.drag-over {
+    background-color: #f3f4f6; /* gray-100 */
+    border-color: #9ca3af; /* gray-400 */
+}
+.definition-slot.matched {
+    border-style: solid;
+    border-color: #22c55e; /* green-500 */
+    background-color: #dcfce7; /* green-100 */
+    color: #166534; /* green-800 */
+}
+.definition-slot.incorrect-match {
+    border-style: solid;
+    border-color: #ef4444; /* red-500 */
+    background-color: #fee2e2; /* red-100 */
+}
+.definition-slot .term-item { /* Term inside a definition slot */
+    cursor: default;
+    background-color: #dcfce7; /* lime-100, or another contrasting color if needed */
+    border: 1px solid #86efac; /* lime-300 */
+}
+
+/* Active style for the new game toggle button */
+.u4aos1-content-toggle.bg-lime-100.text-lime-700.active-game-toggle {
+    background-color: #84cc16; /* lime-500 */
+    color: white;
+}
