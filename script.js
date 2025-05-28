@@ -519,5 +519,170 @@ document.addEventListener('DOMContentLoaded', function () {
             caseDeconFeedback.innerHTML = feedbackHTML;
         });
     }
+// ... (existing code above, no changes until line 522)
 
+// --- NEW: Term Match Game ---
+const termMatchGameContainer = document.getElementById('termMatchGameContainer');
+const termsContainer = document.getElementById('termsContainer');
+const definitionsContainer = document.getElementById('definitionsContainer');
+const checkTermMatchesBtn = document.getElementById('checkTermMatchesBtn');
+const resetTermMatchGameBtn = document.getElementById('resetTermMatchGameBtn');
+const termMatchFeedback = document.getElementById('termMatchFeedback');
+
+const termMatchData = [
+    { id: 'tm1', term: "Bicameral Parliament", definition: "A law-making body with two houses or chambers that must approve new bills. Requirement for federal level in s1 of Constitution." },
+    { id: 'tm2', term: "Section 109", definition: "Section of the Australian Constitution that resolves inconsistencies between state and Commonwealth laws in concurrent areas; Commonwealth law prevails." },
+    { id: 'tm3', term: "Ratio Decidendi", definition: "Latin for 'the reason for the decision'; the binding legal principle of a judgment." },
+    { id: 'tm4', term: "Ultra Vires", definition: "Latin term meaning 'beyond the powers'. Used to describe an act by a government body that requires legal authority but is done without it." },
+    { id: 'tm5', term: "Statutory Interpretation", definition: "Process by which courts give meaning to words in legislation when applying it to a case." }
+];
+
+let draggedTerm = null;
+let selectedTermElement = null; // For click-based matching
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function setupTermMatchGame() {
+    if (!termsContainer || !definitionsContainer || !termMatchFeedback) return;
+
+    termsContainer.innerHTML = '';
+    definitionsContainer.innerHTML = '';
+    termMatchFeedback.innerHTML = '';
+
+    const shuffledTerms = shuffleArray([...termMatchData]);
+    const shuffledDefinitions = shuffleArray([...termMatchData]); // Keep a link to original term via id
+
+    shuffledTerms.forEach(item => {
+        const termDiv = document.createElement('div');
+        termDiv.classList.add('term-item', 'p-2', 'bg-lime-100', 'border', 'border-lime-300', 'rounded', 'cursor-grab', 'text-center', 'text-sm');
+        termDiv.textContent = item.term;
+        termDiv.draggable = true;
+        termDiv.dataset.termId = item.id;
+        termDiv.addEventListener('dragstart', handleDragStart);
+        termDiv.addEventListener('click', handleTermClick); // For click matching
+        termsContainer.appendChild(termDiv);
+    });
+
+    shuffledDefinitions.forEach(item => {
+        const defSlot = document.createElement('div');
+        defSlot.classList.add('definition-slot', 'p-3', 'bg-slate-50', 'border-2', 'border-dashed', 'border-slate-300', 'rounded', 'min-h-[60px]', 'flex', 'items-center', 'justify-center', 'text-sm', 'text-slate-500');
+        defSlot.dataset.definitionForId = item.id; // This ID links to the term's original ID
+        defSlot.textContent = item.definition; // Display definition directly
+
+        defSlot.addEventListener('dragover', handleDragOver);
+        defSlot.addEventListener('drop', handleDropOnDefinition);
+        defSlot.addEventListener('click', handleDefinitionClick); // For click matching
+
+        defSlot.dataset.correctTermId = item.id;
+        defSlot.dataset.matchedTermId = ""; // To store what user matched
+
+        definitionsContainer.appendChild(defSlot);
+    });
+    selectedTermElement = null; // Reset selected term for click matching
+}
+
+function handleTermClick(event) {
+    if (selectedTermElement) {
+        selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
+    }
+    selectedTermElement = event.target;
+    selectedTermElement.classList.add('selected', 'ring-2', 'ring-lime-500');
+}
+
+function handleDefinitionClick(event) {
+    const definitionSlot = event.target.closest('.definition-slot');
+    if (selectedTermElement && definitionSlot) {
+        // If the slot already has a term, put it back
+        const existingTermDiv = definitionSlot.querySelector('.term-item');
+        if (existingTermDiv) {
+            termsContainer.appendChild(existingTermDiv); // Put it back to terms list
+            existingTermDiv.style.display = '';
+        }
+        definitionSlot.dataset.matchedTermId = selectedTermElement.dataset.termId;
+        definitionSlot.classList.add('bg-lime-100'); 
+        selectedTermElement.classList.add('opacity-50');
+        termMatchFeedback.textContent = `Term "${selectedTermElement.textContent}" tentatively matched with definition. Click 'Check My Matches'.`;
+        selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
+        selectedTermElement = null;
+    }
+}
+
+function handleDragStart(event) {
+    draggedTerm = event.target;
+    event.dataTransfer.setData('text/plain', event.target.dataset.termId);
+    event.target.classList.add('dragging');
+}
+
+function handleDragOver(event) {
+    event.preventDefault(); 
+    event.target.closest('.definition-slot').classList.add('drag-over');
+}
+
+function handleDropOnDefinition(event) {
+    event.preventDefault();
+    const definitionSlot = event.target.closest('.definition-slot');
+    definitionSlot.classList.remove('drag-over');
+    if (draggedTerm && definitionSlot) {
+        // If the slot already contains a term, move it back to the terms container
+        const existingTermInSlot = definitionSlot.querySelector('.term-item');
+        if (existingTermInSlot) {
+            termsContainer.appendChild(existingTermInSlot);
+            existingTermInSlot.classList.remove('opacity-50', 'cursor-default');
+            existingTermInSlot.draggable = true;
+        }
+        definitionSlot.innerHTML = '';
+        definitionSlot.appendChild(draggedTerm);
+        draggedTerm.classList.remove('dragging');
+        draggedTerm.classList.add('opacity-50', 'cursor-default');
+        draggedTerm.draggable = false;
+        definitionSlot.dataset.matchedTermId = draggedTerm.dataset.termId;
+        draggedTerm = null;
+    }
+}
+
+if (checkTermMatchesBtn) {
+    checkTermMatchesBtn.addEventListener('click', () => {
+        if (!termMatchFeedback || !definitionsContainer) return;
+        let correctMatches = 0;
+        const definitionSlots = definitionsContainer.querySelectorAll('.definition-slot');
+        definitionSlots.forEach(slot => {
+            slot.classList.remove('matched', 'incorrect-match', 'bg-lime-100');
+            const matchedTermId = slot.dataset.matchedTermId;
+            const correctTermIdForDefinition = slot.dataset.correctTermId;
+            const placedTermElement = slot.querySelector('.term-item');
+            if (matchedTermId && matchedTermId === correctTermIdForDefinition) {
+                correctMatches++;
+                slot.classList.add('matched');
+                if(placedTermElement) placedTermElement.classList.add('!bg-green-200', '!border-green-400');
+            } else if (matchedTermId) {
+                slot.classList.add('incorrect-match');
+                 if(placedTermElement) placedTermElement.classList.add('!bg-red-200', '!border-red-400');
+            }
+        });
+        termMatchFeedback.innerHTML = `You got <strong class="text-lg">${correctMatches}</strong> out of <strong>${termMatchData.length}</strong> correct.`;
+        if (correctMatches === termMatchData.length) {
+            termMatchFeedback.innerHTML += ' <span class="text-green-600 font-semibold">Excellent! All correct!</span>';
+        }
+    });
+}
+
+if (resetTermMatchGameBtn) {
+    resetTermMatchGameBtn.addEventListener('click', () => {
+        setupTermMatchGame();
+    });
+}
+
+// (Optional) To initialize immediately if visible:
+// if (document.getElementById('u4aos1-term-match-game') && !document.getElementById('u4aos1-term-match-game').classList.contains('hidden')) {
+//     setupTermMatchGame();
+// }
+
+// End of DOMContentLoaded event listener
+});
 });
