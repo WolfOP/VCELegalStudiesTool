@@ -7,6 +7,9 @@ body {
 .main-content-section.active, .unit4-aos-section.active {
     display: block;
 }
+.u4aos1-content.hidden { /* Ensure new content sections are hidden by default */
+    display: none;
+}
 .accordion-content {
     max-height: 0;
     overflow: hidden;
@@ -58,7 +61,7 @@ body {
     display: flex; 
     justify-content: space-around; 
     margin-bottom: 1rem; 
-    align-items: stretch; /* Ensure boxes in a row have same height if needed */
+    align-items: stretch; 
 }
 .diagram-box { 
     border: 2px solid #6366f1; /* Indigo-500 */ 
@@ -68,11 +71,11 @@ body {
     background-color: white; 
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); 
     min-width: 150px; 
-    flex: 1; /* Allow boxes to grow and shrink */
-    margin: 0 0.5rem; /* Add some space between boxes */
-    display: flex; /* For vertical centering of content if needed */
-    flex-direction: column; /* For vertical centering of content */
-    justify-content: center; /* For vertical centering of content */
+    flex: 1; 
+    margin: 0 0.5rem; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
 }
 .diagram-box h4 { 
     font-weight: 600; 
@@ -84,7 +87,7 @@ body {
     font-size: 1.5rem; 
     color: #818cf8; /* Indigo-400 */ 
     margin: 0.5rem 0; 
-    line-height: 1; /* Ensure arrow doesn't take too much vertical space */
+    line-height: 1; 
 }
 .diagram-connector { 
     flex-grow: 1; 
@@ -92,7 +95,6 @@ body {
     margin: auto 0.5rem; 
 }
 
-/* Specific styling for parliament structure diagram (can be expanded) */
 .parliament-diagram { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -115,16 +117,66 @@ body {
     font-size: 0.875rem; 
 }
 
-/* Ensure task word tabs wrap nicely on smaller screens */
 #taskWordTabs {
     flex-wrap: wrap;
 }
 .task-word-tab {
-    white-space: nowrap; /* Prevent individual tabs from breaking line */
+    white-space: nowrap; 
 }
 
-/* Adjustments for accordion arrows to prevent layout shift if text wraps */
 .accordion-toggle .flex > span.arrow-icon {
-    min-width: 1.5rem; /* Ensure space for arrow */
+    min-width: 1.5rem; 
     text-align: right;
+}
+
+/* Styles for Guided Answer Construction */
+.guided-answer-blank {
+    border: 1px solid #cbd5e1; /* slate-300 */
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin: 0 0.25rem;
+    min-width: 100px; /* Ensure blanks are somewhat visible */
+}
+.guided-answer-blank.correct {
+    border-color: #10b981; /* green-500 */
+    background-color: #d1fae5; /* green-100 */
+}
+.guided-answer-blank.incorrect {
+    border-color: #ef4444; /* red-500 */
+    background-color: #fee2e2; /* red-100 */
+}
+.task-word-checklist {
+    list-style-type: none;
+    padding-left: 0;
+}
+.task-word-checklist li {
+    margin-bottom: 0.25rem;
+}
+.task-word-checklist input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: #fb923c; /* orange-500 */
+}
+
+/* Styles for Case Deconstruction */
+.case-decon-select {
+    font-size: 0.875rem; /* text-sm */
+}
+.case-decon-feedback-item.correct {
+    color: #16a34a; /* green-600 */
+}
+.case-decon-feedback-item.incorrect {
+    color: #dc2626; /* red-600 */
+}
+.case-decon-element label {
+    margin-bottom: 0.125rem; /* Adjust spacing */
+}
+.case-decon-element select,
+#caseDeconImpactOptions label,
+#caseDeconConceptOptions label {
+    margin-bottom: 0.5rem; /* Add some space below each interactive element */
+}
+#caseDeconImpactOptions input[type="radio"],
+#caseDeconConceptOptions input[type="checkbox"] {
+    margin-right: 0.3rem;
+    accent-color: #fb923c; /* orange-500 */
 }
