@@ -1,1 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive VCE Legal Studies Study Hub (Unit 3 & 4)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+<body class="bg-slate-100 text-slate-800 antialiased">
 
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-6xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl sm:text-4xl font-bold text-indigo-700">VCE Legal Studies Interactive Study Hub</h1>
+            <p class="mt-2 text-slate-600 text-lg">Units 3 & 4 (2024-2025 Study Design Focus)</p>
+        </header>
+
+        <nav id="mainNav" class="mb-8 flex justify-center space-x-2 sm:space-x-4 border-b pb-4">
+            <button data-target="unit3-content" class="nav-button main-nav-button bg-slate-200 text-slate-700 hover:bg-indigo-500 hover:text-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors duration-150">Unit 3: Rights and Justice</button>
+            <button data-target="unit4-content" class="nav-button main-nav-button bg-slate-200 text-slate-700 hover:bg-indigo-500 hover:text-white focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 font-medium py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors duration-150">Unit 4: The People, the Law and Reform</button>
+        </nav>
+
+        <main>
+            <section id="unit3-content" class="main-content-section bg-white p-6 rounded-xl shadow-lg">
+                <h2 class="text-2xl font-semibold text-indigo-700 mb-4">Unit 3: Rights and Justice</h2>
+                <p class="mb-4 text-slate-600">This unit examines the Victorian criminal and civil justice systems, focusing on the rights of individuals and the achievement of justice[cite: 18]. Content for this interactive section is currently under development.</p>
+                
+                <div class="space-y-4 mt-6">
+                    <div>
+                        <h3 class="text-xl font-medium text-indigo-600 mb-2">Area of Study 1: The Victorian Criminal Justice System</h3>
+                        <p class="text-slate-500 italic">Key topics include: summary and indictable offences, key principles (burden/standard of proof, presumption of innocence), rights of accused and victims, role of VLA/CLCs, plea negotiations, court hierarchy, roles of personnel, sentencing[cite: 19]. Detailed interactive content coming soon.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium text-indigo-600 mb-2">Area of Study 2: The Victorian Civil Justice System</h3>
+                        <p class="text-slate-500 italic">Key topics include: key principles, factors before initiating a claim, dispute resolution methods/institutions, court hierarchy, roles of personnel, class actions, remedies[cite: 20]. Detailed interactive content coming soon.</p>
+                    </div>
+                </div>
+                 <p class="mt-6 p-4 bg-amber-100 text-amber-700 rounded-md">Further interactive tools and detailed breakdowns for Unit 3 will be added here.</p>
+            </section>
+
+            <section id="unit4-content" class="main-content-section">
+                <h2 class="text-2xl font-semibold text-indigo-700 mb-6 text-center">Unit 4: The People, the Law and Reform</h2>
+                <p class="mb-6 text-center text-slate-600">This unit explores the institutions that make and reform laws in Australia, and the ability of individuals and groups to influence these processes[cite: 22].</p>
+
+                <nav id="unit4Nav" class="mb-6 flex justify-center space-x-2 sm:space-x-4 border-b pb-4">
+                    <button data-target="unit4-aos1" class="nav-button-secondary unit4-nav-button bg-slate-200 text-slate-700 hover:bg-indigo-400 hover:text-white focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 font-medium py-2 px-4 rounded-lg transition-colors duration-150">AOS 1: The People and the Law-makers</button>
+                    <button data-target="unit4-aos2" class="nav-button-secondary unit4-nav-button bg-slate-200 text-slate-700 hover:bg-indigo-400 hover:text-white focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 font-medium py-2 px-4 rounded-lg transition-colors duration-150">AOS 2: The People, the Law and Reform</button>
+                </nav>
+
+                <section id="unit4-aos1" class="unit4-aos-section bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Area of Study 1: The People and the Law-makers</h3>
+                    <p class="mb-6 text-slate-600">This area of study focuses on how the Australian Constitution establishes law-making powers and acts as a check on parliament, the significance of the High Court, and the roles of parliament and courts in law-making[cite: 23, 352]. You will explore their relationship and the factors affecting their ability to make law.</p>
+
+                    <div class="mb-6 flex flex-wrap justify-center gap-2">
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-parliament-constitution">Parliament & Constitution</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-factors-parliament">Factors Affecting Parliament</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-constitution-checks">Constitution as a Check</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-courts-lawmaking">Courts in Law-Making</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-factors-courts">Factors Affecting Courts</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-sm" data-target="u4aos1-courts-parliament-relationship">Courts & Parliament Relationship</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-teal-100 text-teal-700 rounded hover:bg-teal-200 text-sm" data-target="u4aos1-glossary">Interactive Glossary</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-teal-100 text-teal-700 rounded hover:bg-teal-200 text-sm" data-target="u4aos1-interactive-diagrams">Interactive Diagrams</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-teal-100 text-teal-700 rounded hover:bg-teal-200 text-sm" data-target="u4aos1-case-explorer">Case Explorer</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-exam-skills">Exam Skills Helper</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-practice-questions">Practice Questions</button>
+                    </div>
+
+                    <div id="u4aos1-accordion-container" class="space-y-3">
+                        <div id="u4aos1-parliament-constitution" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">Parliament and the Australian Constitution</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">This section explores the roles of the Crown and Houses of Parliament in law-making, the division of law-making powers, the significance of s109, and the impact of High Court cases.</p>
+                                    <h5 class="font-semibold text-indigo-600 mt-2 mb-1">Roles of Crown & Houses of Parliament (Vic & Cth)</h5>
+                                    <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li>Commonwealth Parliament: King (rep. by Governor-General), Senate (Upper House), House of Representatives (Lower House)[cite: 401, 742].</li>
+                                        <li>Victorian Parliament: King (rep. by Governor), Legislative Council (Upper House), Legislative Assembly (Lower House)[cite: 402, 906].</li>
+                                        <li>Lower Houses (House of Reps/Legislative Assembly): Initiate laws (especially money bills [cite: 73, 404]), form government, represent people, scrutinise government[cite: 404].</li>
+                                        <li>Upper Houses (Senate/Legislative Council): Act as house of review, scrutinise bills, represent states/regions, can initiate non-money bills.</li>
+                                        <li>The Crown (Governor-General/Governor): Grants Royal Assent to bills for them to become law[cite: 408, 866].</li>
+                                    </ul>
+                                    <h5 class="font-semibold text-indigo-600 mt-3 mb-1">Division of Law-Making Powers</h5>
+                                     <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li>Exclusive Powers: Exercised only by Commonwealth Parliament (e.g., defence, currency, customs [cite: 412, 495, 773]).</li>
+                                        <li>Concurrent Powers: Shared by Commonwealth and State Parliaments (e.g., taxation, marriage, trade [cite: 413, 497, 743]).</li>
+                                        <li>Residual Powers: Powers remaining with State Parliaments, not listed in Constitution (e.g., criminal law, education, public transport [cite: 414, 499, 861]).</li>
+                                    </ul>
+                                    <h5 class="font-semibold text-indigo-600 mt-3 mb-1">Significance of Section 109</h5>
+                                    <p class="text-slate-600 text-sm">If a state law is inconsistent with a Commonwealth law in an area of concurrent power, the Commonwealth law prevails, and the state law is invalid to the extent of the inconsistency[cite: 55, 416, 875]. This requires a court challenge[cite: 508, 875].</p>
+                                    <h5 class="font-semibold text-indigo-600 mt-3 mb-1">High Court Cases Impacting Law-Making Powers</h5>
+                                    <p class="text-slate-600 text-sm">Cases like <em>R v Brislan</em> (broadened Cth power over communications) and <em>Commonwealth v Tasmania (Tasmanian Dams Case)</em> (Cth can legislate on matters of international treaties, impacting state residual powers) have significantly affected the division of powers.</p>
+                                    <p class="mt-2 text-xs text-slate-400">Refer to 'Interactive Diagrams' and 'Case Explorer' for more.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-factors-parliament" class="u4aos1-content hidden">
+                           <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">Factors Affecting Parliament's Ability to Make Law</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Parliament's effectiveness in law-making is influenced by several factors[cite: 631].</p>
+                                    <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li><strong>Bicameral Structure:</strong>
+                                            A 'hostile upper house' (government lacks majority) can increase scrutiny but slow law-making[cite: 59, 371, 518]. A 'rubber stamp' (government controls both houses) can mean less scrutiny but faster law-making.
+                                        </li>
+                                        <li><strong>International Pressures:</strong> Treaties and international organisations (e.g., UN) can pressure parliament to make laws complying with international standards. Failure to comply can lead to criticism[cite: 375, 453].</li>
+                                        <li><strong>Representative Nature of Parliament (Representative Government):</strong> Parliament should reflect community views (s7 & s24 of Constitution)[cite: 61, 380, 454]. Regular elections, political parties, and independents influence this[cite: 380, 456].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-constitution-checks" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">The Constitution as a Check on Parliament</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">The Australian Constitution acts as a check on parliamentary law-making power through several mechanisms.</p>
+                                     <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li><strong>Role of the High Court in Protecting Representative Government:</strong> The High Court interprets ss 7 and 24 of the Constitution to protect representative government[cite: 632, 592], including an implied right to freedom of political communication (<em>ACTV case</em>) and defining voting rights (<em>Roach v Electoral Commissioner</em>).</li>
+                                        <li><strong>Separation of Powers:</strong> Divides power between legislative (parliament [cite: 64, 234, 530]), executive (government), and judicial (courts) branches to prevent abuse[cite: 63, 233, 529]. The independent judiciary can declare laws ultra vires (<em>Australian Communist Party v Commonwealth</em> [cite: 385, 541, 1052]). Overlap exists between legislative and executive[cite: 237, 536].</li>
+                                        <li><strong>Express Protection of Rights:</strong> Five rights are explicitly stated (e.g., s51(xxxi) acquisition of property on just terms[cite: 67, 582], s116 freedom of religion [cite: 67, 584]). These are entrenched [cite: 238, 580] and can be enforced by the High Court[cite: 240, 581], but are limited in number and scope[cite: 240, 588].</li>
+                                        <li><strong>Bicameral Structure:</strong> (Covered under 'Factors Affecting Parliament') The need for bills to pass both houses acts as a check[cite: 231, 550].</li>
+                                        <li><strong>Requirement for a Double Majority in a Referendum (s128):</strong> Changing the Constitution requires approval by a national majority of voters and a majority of voters in a majority of states[cite: 244, 435, 765]. This makes constitutional change difficult[cite: 246, 436].</li>
+                                    </ul>
+                                    <p class="mt-2 text-xs text-slate-400">Refer to 'Interactive Diagrams' for a visual representation.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-courts-lawmaking" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">Victorian Courts and High Court in Law-Making</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Courts make law through statutory interpretation and the doctrine of precedent.</p>
+                                    <h5 class="font-semibold text-indigo-600 mt-2 mb-1">Statutory Interpretation</h5>
+                                    <p class="text-slate-600 text-sm">Courts give meaning to words in legislation when applying it to a case[cite: 27, 258, 393, 892]. Reasons include clarifying ambiguity (<em>Deing v Tarola</em> [cite: 258, 1032]), reflecting changing word nature (<em>A-G v Kevin and Jennifer</em> [cite: 258, 1036]), and applying to unforeseen circumstances[cite: 258, 394, 443]. Effects include creating precedent, broadening/narrowing statutes, and prompting legislative change[cite: 260, 444, 838].</p>
+                                    <h5 class="font-semibold text-indigo-600 mt-3 mb-1">Doctrine of Precedent</h5>
+                                    <p class="text-slate-600 text-sm">Judges follow reasons for decisions (ratio decidendi) of superior courts in the same hierarchy for similar cases (stare decisis [cite: 28, 255, 890]).
+                                    Features include: binding precedent (must follow [cite: 29, 736]), persuasive precedent (can guide, e.g., obiter dictum[cite: 31, 255, 831], decisions from other hierarchies [cite: 837]).
+                                    Ways of developing/avoiding: reversing (same case on appeal [cite: 256, 864]), overruling (different later case by superior court [cite: 256, 832]), distinguishing (material facts different [cite: 256, 760]), disapproving (lower court disagrees but follows [cite: 256, 759]).</p>
+                                    <p class="mt-2 text-xs text-slate-400">Refer to 'Case Explorer' for examples.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-factors-courts" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">Factors Affecting Courts' Ability to Make Law</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Several factors can influence or limit the courts' law-making role[cite: 636, 457].</p>
+                                    <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li><strong>Doctrine of Precedent:</strong> While providing consistency, it also restricts judges as they are bound by higher court decisions and must wait for a relevant case[cite: 261, 457].</li>
+                                        <li><strong>Judicial Conservatism and Judicial Activism:</strong> Conservatism is a reluctance to make significant new law, deferring to parliament[cite: 261, 458, 810]. Activism is a willingness to develop common law considering social/political factors[cite: 261, 459, 808], which can lead to major changes but may be seen as overstepping.</li>
+                                        <li><strong>Costs and Time:</strong> Litigation can be expensive and lengthy[cite: 33, 261, 460, 750], deterring individuals and limiting cases that come before courts[cite: 34, 461, 752].</li>
+                                        <li><strong>Requirement for Standing (Locus Standi):</strong> Parties must have a 'special interest' and be directly affected by an issue to bring a case. This prevents frivolous cases but can also stop public interest matters from being heard[cite: 463].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-courts-parliament-relationship" class="u4aos1-content hidden">
+                           <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-indigo-50 hover:bg-indigo-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-indigo-700">Relationship Between Courts and Parliament in Law-Making</h4>
+                                        <span class="arrow-icon text-indigo-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Courts and Parliament have a dynamic and complementary relationship in law-making[cite: 638, 38, 446].</p>
+                                    <ul class="list-disc list-inside ml-4 text-slate-600 text-sm space-y-1">
+                                        <li><strong>Supremacy of Parliament:</strong> Parliament is the supreme law-making body [cite: 39, 262, 447, 894] and can make or change any law within its constitutional powers, including overriding common law (except High Court constitutional interpretations [cite: 262, 450, 718]).</li>
+                                        <li><strong>Ability of Courts to Influence Parliament:</strong> Judicial decisions, statutory interpretations, and obiter dicta [cite: 43, 262] can highlight legal issues or gaps, prompting Parliament to consider law reform[cite: 448].</li>
+                                        <li><strong>Codification of Common Law:</strong> Parliament can enact legislation that incorporates and gives statutory authority to common law principles established by courts (e.g., <em>Mabo case</em> and the Native Title Act 1993 (Cth) [cite: 262, 449, 740]).</li>
+                                        <li><strong>Abrogation of Common Law:</strong> Parliament can pass legislation that overrides or cancels common law decisions made by courts (unless the court decision is based on constitutional interpretation by the High Court [cite: 262, 450, 717]). E.g., Wrongs (Animals Straying on Highways) Act 1984 (Vic) abrogated the common law position in <em>Trigwell's case</em>[cite: 1048].</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-glossary" class="u4aos1-content hidden">
+                           <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-teal-50 hover:bg-teal-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-teal-700">Interactive Glossary (U4AOS1)</h4>
+                                        <span class="arrow-icon text-teal-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Click on a term to see its definition. Key terms are drawn from various sources covering Unit 4 AOS 1.</p>
+                                    <input type="text" id="glossarySearch" placeholder="Search terms..." class="w-full p-2 border border-slate-300 rounded mb-3">
+                                    <div id="glossaryList" class="max-h-96 overflow-y-auto space-y-1 text-sm">
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Abrogation of Common Law:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">The process of parliament overruling common law by creating a statute that is contrary to a decision of the courts[cite: 717]. Parliament can override most common law except High Court constitutional decisions[cite: 718].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Bicameral Parliament:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">A law-making body with two houses or chambers that must approve new bills[cite: 731]. Requirement for federal level in s1 of Constitution[cite: 369].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Binding Precedent:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Legal reasoning of a higher court that must be followed by all lower courts in the same court hierarchy with similar material facts[cite: 29, 736].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Codification of Common Law:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">When parliament makes laws to affirm previous decisions within common law[cite: 262, 740].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Concurrent Powers:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Law-making powers shared by both Commonwealth and state parliaments, listed in s51 of the Constitution (e.g., taxation, marriage)[cite: 53, 413, 743].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Exclusive Powers:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Law-making powers granted only to the Commonwealth Parliament by s51 and s52 of the Constitution (e.g., currency, defence)[cite: 54, 412, 773].</span>
+                                        </div>
+                                         <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Express Rights:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Rights explicitly stated and entrenched in the Australian Constitution, changeable only by referendum (e.g., s116 freedom of religion).</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Locus Standi (Standing):</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">The requirement that a party must be directly affected by or have a 'special interest' in an issue to bring a case to court.</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Ratio Decidendi:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Latin for 'the reason for the decision'; the binding legal principle of a judgment.</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Residual Powers:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Law-making powers left solely with state parliaments, not listed in the Constitution (e.g., criminal law, education)[cite: 52, 414, 861].</span>
+                                        </div>
+                                         <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Section 109:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Section of the Australian Constitution that resolves inconsistencies between state and Commonwealth laws in concurrent areas; Commonwealth law prevails.</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Separation of Powers:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Constitutional principle dividing governmental powers into legislative (makes law), executive (administers law), and judicial (interprets/applies law) to prevent abuse[cite: 63, 233, 429, 881].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Statutory Interpretation:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Process by which courts give meaning to words in legislation when applying it to a case[cite: 27, 258, 442, 892].</span>
+                                        </div>
+                                        <div class="glossary-item">
+                                            <strong class="glossary-term text-teal-600 hover:text-teal-800">Supremacy of Parliament:</strong>
+                                            <span class="glossary-definition ml-2 text-slate-500">Parliament is the ultimate law-making body and can make or change laws, including overriding common law (except High Court constitutional interpretations)[cite: 39, 262, 447, 894].</span>
+                                        </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-interactive-diagrams" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-teal-50 hover:bg-teal-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-teal-700">Interactive Conceptual Diagrams</h4>
+                                        <span class="arrow-icon text-teal-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Explore key concepts through visual diagrams. Click on elements for more information. These diagrams are based on concepts discussed in your study materials[cite: 912].</p>
+                                    
+                                    <div class="diagram-container mt-4">
+                                        <h5 class="text-md font-semibold text-teal-700 mb-2">Division of Law-Making Powers & Section 109 [cite: 913]</h5>
+                                        <div class="diagram-row">
+                                            <div class="diagram-box interactive-diagram-node" data-info="Exclusive Powers: Held only by the Commonwealth Parliament (e.g., defence, currency, customs [cite: 915]). Click for more examples."><h4>Exclusive Powers</h4>(Commonwealth)</div>
+                                            <div class="diagram-box interactive-diagram-node" data-info="Concurrent Powers: Shared by Commonwealth and State Parliaments (e.g., taxation, marriage [cite: 916]). Section 109: If state law is inconsistent with Cth law, Cth law prevails[cite: 918]."><h4>Concurrent Powers</h4>(Shared)</div>
+                                            <div class="diagram-box interactive-diagram-node" data-info="Residual Powers: Left with the States, not listed in Constitution (e.g., criminal law, education [cite: 917])."><h4>Residual Powers</h4>(States)</div>
+                                        </div>
+                                        <div id="diagram-popup" class="info-popup"></div>
+                                        <p class="text-xs text-slate-500 mt-1">Click boxes for details. S109 applies to Concurrent Powers if conflict arises[cite: 918].</p>
+                                    </div>
+
+                                    <div class="diagram-container mt-4">
+                                        <h5 class="text-md font-semibold text-teal-700 mb-2">Separation of Powers (Federal Level) [cite: 948]</h5>
+                                        <div class="diagram-row">
+                                            <div class="diagram-box interactive-diagram-node" data-info="Legislative Power: Makes laws. Vested in Parliament (s1 Constitution)."><h4>Legislative</h4>(Parliament)</div>
+                                            <div class="diagram-box interactive-diagram-node" data-info="Executive Power: Administers laws. Vested in King, exercised by Governor-General/Cabinet (s61 Constitution). Note: Overlap with Legislature as Ministers are MPs."><h4>Executive</h4>(Government)</div>
+                                            <div class="diagram-box interactive-diagram-node" data-info="Judicial Power: Interprets & Applies laws. Vested in High Court & other federal courts (s71 Constitution). Must be independent."><h4>Judicial</h4>(Courts)</div>
+                                        </div>
+                                        <p class="text-xs text-slate-500 mt-1">Aims to prevent abuse of power. Judiciary checks by declaring laws 'ultra vires'[cite: 949].</p>
+                                    </div>
+                                    
+                                     <div class="diagram-container mt-4">
+                                        <h5 class="text-md font-semibold text-teal-700 mb-2">Simplified Victorian Law-Making Process (Example) [cite: 101]</h5>
+                                        <div class="text-center">
+                                            <div class="diagram-box inline-block interactive-diagram-node" data-info="Ideas for laws can come from many sources (public, parties, media [cite: 175]). Idea developed into a Bill by Parliamentary Counsel[cite: 176].">Idea → Bill Drafting</div>
+                                            <div class="diagram-arrow">↓</div>
+                                            <div class="diagram-box inline-block interactive-diagram-node" data-info="Introduced in Legislative Assembly. 1st Reading (formal [cite: 179]), 2nd Reading (debate purpose [cite: 180]), Consideration in Detail (optional, clause-by-clause [cite: 181]), 3rd Reading (final vote [cite: 182]).">Legislative Assembly</div>
+                                            <div class="diagram-arrow">↓</div>
+                                            <div class="diagram-box inline-block interactive-diagram-node" data-info="Bill sent to Legislative Council. Same stages: 1st Reading, 2nd Reading, Committee of the Whole, 3rd Reading[cite: 183]. If amended, returns to Assembly[cite: 184].">Legislative Council</div>
+                                            <div class="diagram-arrow">↓</div>
+                                            <div class="diagram-box inline-block interactive-diagram-node" data-info="Approved Bill presented to Governor for Royal Assent[cite: 186]. Once given, Bill becomes an Act of Parliament (a law)[cite: 187].">Royal Assent</div>
+                                            <div class="diagram-arrow">↓</div>
+                                            <div class="diagram-box inline-block interactive-diagram-node" data-info="Law commences immediately, or on a date specified in the Act, or proclaimed by Governor[cite: 189].">New Law</div>
+                                        </div>
+                                        <p class="text-xs text-slate-500 mt-1">This is a simplified view of the process outlined in sources like.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="u4aos1-case-explorer" class="u4aos1-content hidden">
+                           <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-teal-50 hover:bg-teal-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-teal-700">Case Explorer (U4AOS1)</h4>
+                                        <span class="arrow-icon text-teal-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Explore significant High Court cases relevant to Unit 4 AOS 1. Select a case for details on facts, legal issues, decision, and significance. Based on cases listed in sources.</p>
+                                    <select id="caseSelector" class="w-full p-2 border border-slate-300 rounded mb-3">
+                                        <option value="">Select a Case...</option>
+                                        <option value="tasmanianDams">Commonwealth v Tasmania (Tasmanian Dams Case) (1983)</option>
+                                        <option value="brislan">R v Brislan (1935)</option>
+                                        <option value="mcbain">McBain v Victoria (2000)</option>
+                                        <option value="roach">Roach v Electoral Commissioner (2007)</option>
+                                        <option value="mabo">Mabo v Queensland (No. 2) (1992)</option>
+                                        <option value="deingTarola">Deing v Tarola (1993)</option>
+                                        <option value="kevinJennifer">Attorney-General (Cth) v Kevin and Jennifer (2003)</option>
+                                        <option value="trigwell">State Insurance Commission v Trigwell (1979)</option>
+                                        <option value="communistParty">Australian Communist Party v Commonwealth (1951)</option>
+                                    </select>
+                                    <div id="caseDetails" class="p-3 bg-slate-50 rounded">
+                                        <p>Select a case to see details here.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-exam-skills" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-purple-50 hover:bg-purple-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-purple-700">Exam Skills Helper</h4>
+                                        <span class="arrow-icon text-purple-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Understand VCAA task words and learn how to structure your exam answers effectively. Content based on guides in sources.</p>
+                                    <div id="taskWordTabs" class="flex border-b mb-3 flex-wrap">
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-explain">Explain</button>
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-discuss">Discuss</button>
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-evaluate">Evaluate</button>
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-analyse">Analyse</button>
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-compare">Compare</button>
+                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-distinguish">Distinguish</button>
+                                    </div>
+                                    <div id="taskWordContentContainer" class="text-sm">
+                                        <div id="task-explain" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Explain</h5>
+                                            <p><strong>Meaning:</strong> Detail how/why; link cause/effect[cite: 649].</p>
+                                            <p><strong>Structure (Example):</strong></p>
+                                            <ul class="list-disc ml-5"><li>SIGNPOST: State main point using keywords from the question[cite: 689].</li><li>ELABORATE & EXAMPLE: Give specific example, use legal terms[cite: 690].</li><li>EXPLANATION: Detail how example supports point, consider effect/impact[cite: 691].</li></ul>
+                                        </div>
+                                        <div id="task-discuss" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Discuss</h5>
+                                            <p><strong>Meaning:</strong> Explore multiple perspectives (pros/cons, strengths/weaknesses [cite: 650]). Present a clear, balanced argument[cite: 676].</p>
+                                            <p><strong>Structure (Example [cite: 677]):</strong></p>
+                                            <ul class="list-disc ml-5"><li>Paragraph 1 (Benefits/Strengths): Introduce point, explain, add ideas.</li><li>Paragraph 2 (Limitations/Weaknesses): Introduce point, explain, add ideas.</li></ul>
+                                            <p>For 'Discuss the extent to which...': Opener stating position, supporting arguments, conflicting/limiting arguments, conclusion restating extent.</p>
+                                        </div>
+                                        <div id="task-evaluate" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Evaluate</h5>
+                                            <p><strong>Meaning:</strong> Make a JUDGEMENT based on criteria (e.g., Principles of Justice); weigh strengths/weaknesses; conclude.</p>
+                                            <p><strong>Structure (Example):</strong></p>
+                                            <ul class="list-disc ml-5"><li>Opener (Optional but recommended): State position clearly[cite: 660].</li><li>Paragraph 1 (Benefits/Strengths): Introduce point, explain, add ideas[cite: 662].</li><li>Paragraph 2 (Limitations/Weaknesses): Introduce point, explain, add ideas[cite: 662].</li><li>Conclusion: Provide overall conclusion/opinion, substantiating judgment[cite: 663].</li></ul>
+                                        </div>
+                                        <div id="task-analyse" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Analyse</h5>
+                                            <p><strong>Meaning:</strong> Break down; examine relationships/impacts (how/why [cite: 650]). Study parts in detail to determine interrelations; 'Unpack'.</p>
+                                            <p><strong>Structure (Example):</strong></p>
+                                            <ul class="list-disc ml-5"><li>Identify key components/factors related to the question's focus[cite: 667].</li><li>Explain how components interrelate or connect[cite: 667].</li><li>Draw out significance, consequences, impacts (positive/negative)[cite: 668].</li></ul>
+                                        </div>
+                                        <div id="task-compare" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Compare</h5>
+                                            <p><strong>Meaning:</strong> Recognise similarities AND differences between features/characteristics and their significance[cite: 649, 680].</p>
+                                            <p><strong>Structure (Example):</strong></p>
+                                            <ul class="list-disc ml-5"><li>Paragraph 1 (Similarities): Introduce similarity, use comparative language[cite: 681].</li><li>Paragraph 2 (Differences): Introduce difference, use contrasting language[cite: 682].</li></ul>
+                                        </div>
+                                        <div id="task-distinguish" class="task-word-content hidden">
+                                            <h5 class="font-semibold text-purple-700">Distinguish</h5>
+                                            <p><strong>Meaning:</strong> Explain points of difference ONLY[cite: 649, 685].</p>
+                                            <p><strong>Structure (Example [cite: 686]):</strong></p>
+                                            <ul class="list-disc ml-5"><li>Focus sentences on points of difference. Use contrasting language (e.g., "In contrast", "Unlike" [cite: 686]).</li></ul>
+                                        </div>
+                                        <p class="mt-3 text-xs text-slate-400">Use analytical and signposting words to improve structure (e.g., "Therefore", "Significantly", "However", "For example").</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-practice-questions" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-purple-50 hover:bg-purple-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-purple-700">Practice Questions (U4AOS1)</h4>
+                                        <span class="arrow-icon text-purple-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="mb-3 text-slate-600">Test your understanding with these practice questions based on Unit 4 AOS 1 content. Click a question to see suggested answer points.</p>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="practice-question">
+                                            <p class="font-medium practice-question-text">1. Explain the role of the Governor-General in the Commonwealth law-making process. (3 marks) [cite: 961]</p>
+                                            <button class="text-xs text-purple-600 hover:underline practice-question-toggle-answer">Show/Hide Answer Points</button>
+                                            <div class="practice-question-answer p-2 bg-purple-50 rounded mt-1">
+                                                <ul class="list-disc ml-5 text-xs"><li>Grants Royal Assent to bills passed by both Houses of Parliament (final step for a bill to become law)[cite: 82, 356, 408, 866].</li><li>Can (theoretically/rarely) withhold Royal Assent[cite: 82, 356, 409].</li><li>Appoints Executive Council / Summons Parliament / Dissolves Parliament (reserve powers)[cite: 82, 202, 220, 356].</li></ul>
+                                            </div>
+                                        </div>
+                                        <div class="practice-question">
+                                            <p class="font-medium practice-question-text">2. Distinguish between exclusive and concurrent law-making powers as outlined in the Australian Constitution, using an example for each. (4 marks) [cite: 964]</p>
+                                            <button class="text-xs text-purple-600 hover:underline practice-question-toggle-answer">Show/Hide Answer Points</button>
+                                            <div class="practice-question-answer p-2 bg-purple-50 rounded mt-1">
+                                                 <ul class="list-disc ml-5 text-xs"><li>Exclusive powers: Law-making powers only the Commonwealth Parliament can exercise (e.g., defence, currency, customs [cite: 54, 412, 495, 773]). States cannot legislate in these areas.</li><li>Concurrent powers: Law-making powers shared by both Commonwealth and state parliaments (e.g., taxation, marriage [cite: 53, 413, 497, 743]). Both can legislate in these areas.</li><li>Difference: Exclusive means Cth only; Concurrent means Cth and States can both make laws.</li><li>Difference: If inconsistency in concurrent area, s109 states Cth law prevails[cite: 55, 416, 875]. No such provision needed for exclusive as only Cth legislates.</li></ul>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs text-slate-400 mt-3">More questions and detailed answer guides will be added.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> </section> <section id="unit4-aos2" class="unit4-aos-section bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Area of Study 2: The People, the Law and Reform</h3>
+                    <p class="mb-4 text-slate-600">This area of study explores the reasons for law reform, the means by which law reform can be influenced, and the processes of constitutional reform[cite: 24]. Content for this interactive section is currently under development.</p>
+                    
+                    <div class="space-y-4 mt-6">
+                        <div>
+                            <h4 class="text-lg font-medium text-indigo-500 mb-1">Reasons for Law Reform</h4>
+                            <p class="text-slate-500 italic text-sm">Examines why laws need to change (e.g., changes in values, technology, protection of community [cite: 263]). Detailed content coming soon.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-indigo-500 mb-1">Influencing Law Reform</h4>
+                            <p class="text-slate-500 italic text-sm">Investigates methods used by individuals, groups, and the media to influence changes in the law. Role of law reform bodies like the VLRC and Royal Commissions. Detailed content coming soon.</p>
+                        </div>
+                         <div>
+                            <h4 class="text-lg font-medium text-indigo-500 mb-1">Constitutional Reform</h4>
+                            <p class="text-slate-500 italic text-sm">Covers reasons for constitutional reform, the formal process under section 128 (referendum [cite: 24, 477]), factors affecting referendum success, and significant referendums (e.g., 1967, 2023 [cite: 24, 26, 479]). Detailed content coming soon.</p>
+                        </div>
+                    </div>
+                    <p class="mt-6 p-4 bg-amber-100 text-amber-700 rounded-md">Further interactive tools and detailed breakdowns for Unit 4 AOS 2 will be added here.</p>
+                </section>
+            </section> </main>
+
+        <footer class="mt-12 pt-8 border-t border-slate-300 text-center text-sm text-slate-500">
+            <p>&copy; <span id="currentYear"></span> Interactive Legal Studies Hub. For educational purposes.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
