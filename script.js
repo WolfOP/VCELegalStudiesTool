@@ -93,12 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
             else if (btn.classList.contains('text-teal-700')) btn.classList.add('hover:bg-teal-200');
             else if (btn.classList.contains('text-purple-700')) btn.classList.add('hover:bg-purple-200');
             else if (btn.classList.contains('text-orange-700')) btn.classList.add('hover:bg-orange-200');
+            else if (btn.classList.contains('bg-lime-100')) btn.classList.add('hover:bg-lime-200'); // NEW LIME
         });
 
         if (button.classList.contains('text-indigo-700')) button.classList.add('bg-indigo-500', 'text-white');
         else if (button.classList.contains('text-teal-700')) button.classList.add('bg-teal-500', 'text-white');
         else if (button.classList.contains('text-purple-700')) button.classList.add('bg-purple-500', 'text-white');
         else if (button.classList.contains('text-orange-700')) button.classList.add('bg-orange-500', 'text-white');
+        else if (button.classList.contains('text-lime-700')) button.classList.add('bg-lime-500', 'text-white', 'active-game-toggle'); // NEW LIME
         
         u4aos1AllContent.forEach(contentSection => {
             contentSection.classList.toggle('hidden', contentSection.id !== targetId);
@@ -111,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
                  // Initialize specific tool if it's being shown
                 if (targetId === 'u4aos1-guided-answers') loadGuidedAnswerQuestion(0); // Load first question
                 if (targetId === 'u4aos1-case-deconstruction') populateCaseDeconSelector(); // Populate case selector
+                if (targetId === 'u4aos1-term-match-game') setupTermMatchGame(); // match game
             }
         });
     }
