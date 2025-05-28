@@ -1,1 +1,130 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+.main-content-section, .unit4-aos-section {
+    display: none;
+}
+.main-content-section.active, .unit4-aos-section.active {
+    display: block;
+}
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+}
+.glossary-term { 
+    cursor: pointer; 
+}
+.glossary-definition { 
+    display: none; 
+}
+.interactive-diagram-node { 
+    cursor: pointer; 
+    border: 1px solid; 
+    padding: 8px; 
+    margin: 4px; 
+    border-radius: 4px; 
+}
+.info-popup { 
+    display: none; 
+    position: absolute; 
+    background-color: white; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    z-index: 10; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
+    max-width: 300px; 
+}
+.practice-question-answer { 
+    display: none; 
+}
+.nav-button.active { 
+    background-color: #4f46e5; /* Indigo-600 from Tailwind */
+    color: white; 
+}
+.nav-button-secondary.active { 
+    background-color: #6366f1; /* Indigo-500 from Tailwind */
+    color: white; 
+}
 
+/* Styles for HTML-based diagrams */
+.diagram-container { 
+    padding: 1rem; 
+    background-color: #f9fafb; /* gray-50 */
+    border-radius: 0.5rem; 
+    margin-bottom:1rem;
+}
+.diagram-row { 
+    display: flex; 
+    justify-content: space-around; 
+    margin-bottom: 1rem; 
+    align-items: stretch; /* Ensure boxes in a row have same height if needed */
+}
+.diagram-box { 
+    border: 2px solid #6366f1; /* Indigo-500 */ 
+    border-radius: 0.375rem; 
+    padding: 1rem; 
+    text-align: center; 
+    background-color: white; 
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); 
+    min-width: 150px; 
+    flex: 1; /* Allow boxes to grow and shrink */
+    margin: 0 0.5rem; /* Add some space between boxes */
+    display: flex; /* For vertical centering of content if needed */
+    flex-direction: column; /* For vertical centering of content */
+    justify-content: center; /* For vertical centering of content */
+}
+.diagram-box h4 { 
+    font-weight: 600; 
+    color: #3730a3; /* Indigo-800 */ 
+    margin-bottom: 0.25rem;
+}
+.diagram-arrow { 
+    text-align: center; 
+    font-size: 1.5rem; 
+    color: #818cf8; /* Indigo-400 */ 
+    margin: 0.5rem 0; 
+    line-height: 1; /* Ensure arrow doesn't take too much vertical space */
+}
+.diagram-connector { 
+    flex-grow: 1; 
+    border-bottom: 2px dashed #a5b4fc; /* Indigo-300 */ 
+    margin: auto 0.5rem; 
+}
+
+/* Specific styling for parliament structure diagram (can be expanded) */
+.parliament-diagram { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 1rem; 
+}
+.parliament-entity { 
+    background-color: #e0e7ff; /* Indigo-100 */ 
+    border: 1px solid #c7d2fe; /* Indigo-200 */ 
+    padding: 1rem; 
+    border-radius: 0.5rem; 
+}
+.parliament-entity h5 { 
+    color: #4338ca; /* Indigo-700 */ 
+    font-weight: bold; 
+    margin-bottom: 0.5rem; 
+}
+.parliament-entity ul { 
+    list-style-type: disc; 
+    margin-left: 1.5rem; 
+    font-size: 0.875rem; 
+}
+
+/* Ensure task word tabs wrap nicely on smaller screens */
+#taskWordTabs {
+    flex-wrap: wrap;
+}
+.task-word-tab {
+    white-space: nowrap; /* Prevent individual tabs from breaking line */
+}
+
+/* Adjustments for accordion arrows to prevent layout shift if text wraps */
+.accordion-toggle .flex > span.arrow-icon {
+    min-width: 1.5rem; /* Ensure space for arrow */
+    text-align: right;
+}
