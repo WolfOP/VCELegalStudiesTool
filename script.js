@@ -688,4 +688,3 @@ if (resetTermMatchGameBtn) {
 
 // End of DOMContentLoaded event listener
 });
-});
