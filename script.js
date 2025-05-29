@@ -680,11 +680,3 @@ if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub
         resetTermMatchGameBtn.addEventListener('click', () => {
             setupTermMatchGame();
         });
-    }
-
-    // (Optional) To initialize immediately if visible:
-    // if (document.getElementById('u4aos1-term-match-game') && !document.getElementById('u4aos1-term-match-game').classList.contains('hidden')) {
-    //     setupTermMatchGame();
-    // }
-
-}); // End of DOMContentLoaded
