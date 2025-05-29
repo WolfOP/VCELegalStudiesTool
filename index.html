@@ -486,7 +486,61 @@
                     <div id="sacFeedbackArea" class="mt-2 text-xs"></div>
                 </div>
             </div>
+<div class="p-4 border border-cyan-200 rounded-lg bg-white shadow">
+                <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill: Explain the law-making powers of state and Commonwealth parliaments, using examples</h5>
+                <p class="text-sm text-slate-600 mb-3">Drag and drop the law-making areas into the correct power classification (Exclusive, Concurrent, or Residual).</p>
+                <div id="powerSortGameContainer" class="space-y-4">
+                    <div id="powerSortSourceItems" class="p-3 bg-slate-100 rounded border min-h-[50px] flex flex-wrap gap-2 justify-center">
+                        </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div id="exclusiveDropZone" class="power-drop-zone p-3 bg-red-50 border-2 border-dashed border-red-300 rounded min-h-[100px]">
+                            <h6 class="font-semibold text-red-700 text-center">Exclusive Powers (Cth Only)</h6>
+                            <div class="dropped-items-list space-y-1 mt-2"></div>
+                        </div>
+                        <div id="concurrentDropZone" class="power-drop-zone p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[100px]">
+                            <h6 class="font-semibold text-yellow-700 text-center">Concurrent Powers (Shared)</h6>
+                            <div class="dropped-items-list space-y-1 mt-2"></div>
+                        </div>
+                        <div id="residualDropZone" class="power-drop-zone p-3 bg-blue-50 border-2 border-dashed border-blue-300 rounded min-h-[100px]">
+                            <h6 class="font-semibold text-blue-700 text-center">Residual Powers (States Only)</h6>
+                            <div class="dropped-items-list space-y-1 mt-2"></div>
+                        </div>
+                    </div>
+                    <button id="checkPowerSortBtn" class="py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm">Check Power Classifications</button>
+                    <button id="resetPowerSortBtn" class="py-2 px-4 bg-slate-400 text-white rounded hover:bg-slate-500 text-sm ml-2">Reset Sort</button>
+                    <div id="powerSortFeedback" class="mt-2 text-xs"></div>
+                </div>
+            </div>
 
+            <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow">
+                <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill: Analyse the relationship between parliament and courts</h5>
+                <p class="text-sm text-slate-600 mb-3">Drag each scenario/description to the quadrant representing the aspect of the parliament-court relationship it best illustrates.</p>
+                <div id="relationshipMatcherContainer" class="space-y-4">
+                    <div id="relationshipScenariosSource" class="p-3 bg-slate-100 rounded border min-h-[50px] flex flex-wrap gap-2 justify-center">
+                        </div>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div id="supremacyQuadrant" class="relationship-quadrant p-3 bg-purple-50 border-2 border-dashed border-purple-300 rounded min-h-[120px]">
+                            <h6 class="font-semibold text-purple-700 text-center">Supremacy of Parliament</h6>
+                            <div class="dropped-scenarios-list space-y-1 mt-2"></div>
+                        </div>
+                        <div id="influenceQuadrant" class="relationship-quadrant p-3 bg-pink-50 border-2 border-dashed border-pink-300 rounded min-h-[120px]">
+                            <h6 class="font-semibold text-pink-700 text-center">Courts Influence Parliament</h6>
+                            <div class="dropped-scenarios-list space-y-1 mt-2"></div>
+                        </div>
+                        <div id="codificationQuadrant" class="relationship-quadrant p-3 bg-green-50 border-2 border-dashed border-green-300 rounded min-h-[120px]">
+                            <h6 class="font-semibold text-green-700 text-center">Parliament Codifies Common Law</h6>
+                            <div class="dropped-scenarios-list space-y-1 mt-2"></div>
+                        </div>
+                        <div id="interpretationQuadrant" class="relationship-quadrant p-3 bg-sky-50 border-2 border-dashed border-sky-300 rounded min-h-[120px]">
+                            <h6 class="font-semibold text-sky-700 text-center">Courts Interpret Statutes</h6>
+                            <div class="dropped-scenarios-list space-y-1 mt-2"></div>
+                        </div>
+                    </div>
+                    <button id="checkRelationshipMatchesBtn" class="py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm">Check Matches</button>
+                    <button id="resetRelationshipMatcherBtn" class="py-2 px-4 bg-slate-400 text-white rounded hover:bg-slate-500 text-sm ml-2">Reset Matcher</button>
+                    <div id="relationshipMatcherFeedback" class="mt-2 text-xs"></div>
+                </div>
+            </div>
             <p class="text-center text-slate-400 italic mt-6">More Key Skill activities coming soon!</p>
 
         </div>
