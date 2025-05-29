@@ -246,3 +246,51 @@ body {
     border-radius: 0.25rem; /* Equivalent to rounded */
     border: 1px solid #e5e7eb; /* A light border for definition */
 }
+/* Styles for Key Skills Hub */
+.u4aos1-content-toggle.bg-cyan-100.text-cyan-700.active-skill-hub-toggle { /* Active state for the new hub button */
+    background-color: #06b6d4; /* cyan-500 */
+    color: white;
+}
+
+/* Scenario Term Challenge Styles */
+#stcOptionsArea .stc-option-label {
+    display: block;
+    padding: 0.5rem;
+    background-color: #f8fafc; /* slate-50 */
+    border: 1px solid #e2e8f0; /* slate-200 */
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.875rem; /* text-sm */
+}
+#stcOptionsArea .stc-option-label:hover {
+    background-color: #ecfeff; /* cyan-50 */
+}
+#stcOptionsArea input[type="radio"]:checked + .stc-option-label {
+    background-color: #cffafe; /* cyan-100 */
+    border-color: #22d3ee; /* cyan-400 */
+    font-weight: 500;
+}
+#stcFeedbackArea .correct {
+    color: #10b981; /* green-500 */
+    font-weight: bold;
+}
+#stcFeedbackArea .incorrect {
+    color: #ef4444; /* red-500 */
+    font-weight: bold;
+}
+
+/* Source Analysis Challenge Styles */
+#sacFeedbackArea .feedback-item {
+    margin-bottom: 0.25rem;
+    padding: 0.25rem;
+    border-left-width: 4px;
+}
+#sacFeedbackArea .feedback-item.met {
+    border-left-color: #10b981; /* green-500 */
+    background-color: #f0fdf4; /* green-50 */
+}
+#sacFeedbackArea .feedback-item.not-met {
+    border-left-color: #f59e0b; /* amber-500 */
+    background-color: #fffbeb; /* amber-50 */
+}
