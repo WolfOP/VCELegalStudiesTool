@@ -668,7 +668,7 @@ if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub
                     slot.classList.add('incorrect-match');
                     if(placedTermElement) placedTermElement.classList.add('!bg-red-200', '!border-red-400');
                 }
-            });
+                       });
             termMatchFeedback.innerHTML = `You got <strong class="text-lg">${correctMatches}</strong> out of <strong>${termMatchData.length}</strong> correct.`;
             if (correctMatches === termMatchData.length) {
                 termMatchFeedback.innerHTML += ' <span class="text-green-600 font-semibold">Excellent! All correct!</span>';
