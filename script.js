@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const targetSection = document.getElementById(firstAOSContentId);
                         if(targetSection) targetSection.classList.add('active');
                         if (firstAOSContentId === 'unit4-aos1') {
-                            const firstU4AOS1Button = document.querySelector('#u4aos1-guided-answers.u4aos1-content-toggle') || document.querySelector('.u4aos1-content-toggle'); // Prioritize new tools or first available
+                            const firstU4AOS1Button = document.querySelector('#u4aos1-guided-answers.u4aos1-content-toggle') || document.querySelector('.u4aos1-content-toggle');
                             if (firstU4AOS1Button && !isActiveU4AOS1Toggle(firstU4AOS1Button)) {
                                 handleU4AOS1ContentToggle(firstU4AOS1Button);
                             }
@@ -93,14 +93,12 @@ document.addEventListener('DOMContentLoaded', function () {
             else if (btn.classList.contains('text-teal-700')) btn.classList.add('hover:bg-teal-200');
             else if (btn.classList.contains('text-purple-700')) btn.classList.add('hover:bg-purple-200');
             else if (btn.classList.contains('text-orange-700')) btn.classList.add('hover:bg-orange-200');
-            else if (btn.classList.contains('bg-lime-100')) btn.classList.add('hover:bg-lime-200'); // NEW LIME
         });
 
         if (button.classList.contains('text-indigo-700')) button.classList.add('bg-indigo-500', 'text-white');
         else if (button.classList.contains('text-teal-700')) button.classList.add('bg-teal-500', 'text-white');
         else if (button.classList.contains('text-purple-700')) button.classList.add('bg-purple-500', 'text-white');
         else if (button.classList.contains('text-orange-700')) button.classList.add('bg-orange-500', 'text-white');
-        else if (button.classList.contains('text-lime-700')) button.classList.add('bg-lime-500', 'text-white', 'active-game-toggle'); // NEW LIME
         
         u4aos1AllContent.forEach(contentSection => {
             contentSection.classList.toggle('hidden', contentSection.id !== targetId);
@@ -113,7 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
                  // Initialize specific tool if it's being shown
                 if (targetId === 'u4aos1-guided-answers') loadGuidedAnswerQuestion(0); // Load first question
                 if (targetId === 'u4aos1-case-deconstruction') populateCaseDeconSelector(); // Populate case selector
-                if (targetId === 'u4aos1-term-match-game') setupTermMatchGame(); // match game
             }
         });
     }
@@ -245,15 +242,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const caseSelectExplorer = document.getElementById('caseSelectExplorer');
     const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
     const caseExplorerData = {
-        tasmanianDams: { name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)", details: "<strong>Facts:</strong> Tas wanted to build a dam; Cth passed law to stop it based on World Heritage treaty [cite: 998-1000].<br><strong>Issue:</strong> Scope of 'external affairs' power (s51(xxix)).<br><strong>Decision:</strong> Cth law valid; external affairs power allows legislating to fulfill international treaty obligations.<br><strong>Significance:</strong> Shifted law-making power to Cth in areas covered by treaties, potentially making residual state areas concurrent [cite: 98, 1003-1004, 250, 325, 424]." },
-        brislan: { name: "R v Brislan (1935)", details: "<strong>Facts:</strong> Challenge to Cth law requiring wireless set licences [cite: 251, 319, 1005-1006].<br><strong>Issue:</strong> Meaning of 'postal, telegraphic, telephonic, and other like services' (s51(v)).<br><strong>Decision:</strong> Wireless broadcasting is a 'like service'; Cth law valid.<br><strong>Significance:</strong> Extended Cth power over communications, shifting power from states to Cth (concurrent) [cite: 95, 252, 321, 1009-1010]. Influenced future tech interpretation." },
-        mcbain: { name: "McBain v Victoria (2000)", details: "<strong>Facts:</strong> Vic law restricted IVF to married/de facto couples; Cth law banned marital status discrimination [cite: 90, 230, 1012-1013].<br><strong>Issue:</strong> Inconsistency between Vic and Cth laws.<br><strong>Decision:</strong> Vic law invalid under s109 due to inconsistency with Cth Sex Discrimination Act.<br><strong>Significance:</strong> Demonstrated s109 application; state laws must be consistent with Cth laws in concurrent areas." },
-        roach: { name: "Roach v Electoral Commissioner (2007)", details: "<strong>Facts:</strong> Cth law banned all prisoners from voting [cite: 247, 316, 1022-1023].<br><strong>Issue:</strong> Consistency with representative government (ss 7 & 24 Constitution).<br><strong>Decision:</strong> Complete ban unconstitutional; original ban (3+ yrs) valid.<br><strong>Significance:</strong> Affirmed structural right to vote; HCA check on Parliament's power to legislate on voting rights." },
-        mabo: { name: "Mabo v Queensland (No. 2) (1992)", details: "<strong>Facts:</strong> Indigenous activists challenged 'terra nullius', claiming native title.<br><strong>Issue:</strong> Existence of native title.<br><strong>Decision:</strong> 'Terra nullius' rejected; native title can exist.<br><strong>Significance:</strong> Overturned common law principle (judicial activism); led to Native Title Act 1993 (Cth) (codification) [cite: 262, 445, 1030-1031]." },
-        deingTarola: { name: "Deing v Tarola (1993)", details: "<strong>Facts:</strong> Person charged for possessing studded belt as 'regulated weapon'.<br><strong>Issue:</strong> Interpretation of 'regulated weapon' in Vic law.<br><strong>Decision:</strong> Studded belt not a 'regulated weapon'; definition narrowed.<br><strong>Significance:</strong> Example of statutory interpretation (narrowing statute)." },
-        kevinJennifer: { name: "Attorney-General (Cth) v Kevin and Jennifer (2003)", details: "<strong>Facts:</strong> Validity of marriage involving a transgender man (Kevin) challenged.<br><strong>Issue:</strong> Interpretation of 'man' in Marriage Act.<br><strong>Decision:</strong> 'Man' given contemporary meaning; marriage valid.<br><strong>Significance:</strong> Statutory interpretation reflecting changing societal values." },
-        trigwell: { name: "State Insurance Commission v Trigwell (1979)", details: "<strong>Facts:</strong> Car accident involving straying sheep; issue of landowner duty of care [cite: 256, 1044-1045]. HCA followed old English precedent.<br><strong>Issue:</strong> Application of existing common law precedent.<br><strong>Decision:</strong> Followed outdated precedent (judicial conservatism).<br><strong>Significance:</strong> Example of disapproving precedent; led to Parliament abrogating common law with Wrongs (Animals Straying on Highways) Act 1984 (Vic)." },
-        communistParty: { name: "Australian Communist Party v Commonwealth (1951)", details: "<strong>Facts:</strong> Cth passed law banning Communist Party.<br><strong>Issue:</strong> Validity of the Cth law.<br><strong>Decision:</strong> Legislation invalid.<br><strong>Significance:</strong> Example of judicial independence under separation of powers; HCA checking parliamentary power." }
+        tasmanianDams: { name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)", details: "<strong>Facts:</strong> Tas wanted to build a dam; Cth passed law to stop it based on World Heritage Convention. HC upheld Cth power under external affairs.<br><strong>Significance:</strong> Expanded Cth power via s51(xxix)." },
+        brislan: { name: "R v Brislan (1935)", details: "<strong>Facts:</strong> Challenge to Cth law requiring wireless set licences [cite: 251, 319, 1005-1006].<br><strong>Issue:</strong> Meaning of 'other like services' in s51(v)." },
+        mcbain: { name: "McBain v Victoria (2000)", details: "<strong>Facts:</strong> Vic law restricted IVF to married/de facto couples; Cth law banned marital status discrimination [cite: 90, 247, 1008].<br><strong>Significance:</strong> s109: Cth law prevails." },
+        roach: { name: "Roach v Electoral Commissioner (2007)", details: "<strong>Facts:</strong> Cth law banned all prisoners from voting [cite: 247, 316, 1022-1023].<br><strong>Issue:</strong> Did it breach representative government?" },
+        mabo: { name: "Mabo v Queensland (No. 2) (1992)", details: "<strong>Facts:</strong> Indigenous activists challenged 'terra nullius', claiming native title.<br><strong>Issue:</strong> Existence of native title in Australian law." },
+        deingTarola: { name: "Deing v Tarola (1993)", details: "<strong>Facts:</strong> Person charged for possessing studded belt as 'regulated weapon'.<br><strong>Significance:</strong> Statutory interpretation: what is a 'weapon'?" },
+        kevinJennifer: { name: "Attorney-General (Cth) v Kevin and Jennifer (2003)", details: "<strong>Facts:</strong> Validity of marriage involving a transgender man (Kevin) challenged.<br><strong>Significance:</strong> Statutory interpretation of 'man' and 'woman'." },
+        trigwell: { name: "State Insurance Commission v Trigwell (1979)", details: "<strong>Facts:</strong> Car accident involving straying sheep; issue of landowner duty of care [cite: 256, 1044].<br><strong>Significance:</strong> Precedent and legislative override." },
+        communistParty: { name: "Australian Communist Party v Commonwealth (1951)", details: "<strong>Facts:</strong> Cth passed law banning Communist Party.<br><strong>Issue:</strong> Validity of Cth law under Constitution." }
     };
     if (caseSelectExplorer) {
         caseSelectExplorer.addEventListener('change', function() {
@@ -312,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
             question: "Explain one reason for statutory interpretation. (3 marks)",
             taskWord: "Explain",
             taskWordChecklist: ["Provide details", "State reasons", "Link cause/effect"],
-            scaffold: `One reason courts interpret statutes is to clarify the <input type="text" id="gaq1_blank1" class="guided-answer-blank" placeholder="e.g., specific meaning"> in an Act. This is necessary because words can be <input type="text" id="gaq1_blank2" class="guided-answer-blank" placeholder="e.g., ambiguous">, or new <input type="text" id="gaq1_blank3" class="guided-answer-blank" placeholder="e.g., technologies"> may arise that were not foreseen by Parliament. For example, in the case of <input type="text" id="gaq1_blank4" class="guided-answer-blank" placeholder="e.g., Deing v Tarola">, the court had to interpret <input type="text" id="gaq1_blank5" class="guided-answer-blank" placeholder="e.g., 'regulated weapon'">. The effect of this interpretation was <input type="text" id="gaq1_blank6" class="guided-answer-blank" placeholder="e.g., to narrow the scope">.`,
+            scaffold: `One reason courts interpret statutes is to clarify the <input type="text" id="gaq1_blank1" class="guided-answer-blank" placeholder="e.g., specific meaning"> in an Act. This can occur if the words are <input type="text" id="gaq1_blank2" class="guided-answer-blank" placeholder="e.g., ambiguous">, or if new <input type="text" id="gaq1_blank3" class="guided-answer-blank" placeholder="e.g., technologies"> arise. For example, in <input type="text" id="gaq1_blank4" class="guided-answer-blank" placeholder="Case">, the court had to interpret <input type="text" id="gaq1_blank5" class="guided-answer-blank" placeholder="word/phrase">. Courts do this to <input type="text" id="gaq1_blank6" class="guided-answer-blank" placeholder="purpose">.`,
             blanks: [
                 { id: "gaq1_blank1", answer: ["specific meaning", "meaning of words", "ambiguity"] },
                 { id: "gaq1_blank2", answer: ["ambiguous", "unclear", "have multiple meanings"] },
@@ -388,18 +385,18 @@ document.addEventListener('DOMContentLoaded', function () {
             id: "tasmanianDams",
             name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)",
             elements: {
-                facts: "Tasmania planned to build a hydro-electric dam on the Gordon River, an area listed for World Heritage protection after Australia ratified the World Heritage Convention. The Commonwealth Parliament passed legislation to stop the dam construction.",
-                issue: "Did the Commonwealth have the constitutional power (under s51(xxix) 'external affairs') to pass legislation to prevent the dam construction, thereby overriding Tasmania's residual power over land management and dam construction?",
+                facts: "Tasmania planned to build a hydro-electric dam on the Gordon River, an area listed for World Heritage protection after Australia ratified the World Heritage Convention. The Commonwealth passed laws prohibiting the dam, leading to a challenge from Tasmania.",
+                issue: "Did the Commonwealth have the constitutional power (under s51(xxix) 'external affairs') to pass legislation to prevent the dam construction, thereby overriding Tasmania's residual powers?",
                 decision: "The High Court held (4:3 majority) that the Commonwealth's legislation was valid. The 'external affairs' power extends to legislating to fulfill obligations under bona fide international treaties.",
-                significance: "Significantly expanded the Commonwealth's law-making power by allowing it to legislate on matters previously considered within state residual powers, provided it was to implement a genuine international treaty. This altered the division of powers."
+                significance: "Significantly expanded the Commonwealth's law-making power by allowing it to legislate on matters previously considered within state residual powers, provided it was to implement international obligations."
             },
-            allSnippets: [ // Jumbled snippets for dropdowns
-                "Tasmania planned to build a hydro-electric dam on the Gordon River, an area listed for World Heritage protection after Australia ratified the World Heritage Convention. The Commonwealth Parliament passed legislation to stop the dam construction.",
-                "Did the Commonwealth have the constitutional power (under s51(xxix) 'external affairs') to pass legislation to prevent the dam construction, thereby overriding Tasmania's residual power over land management and dam construction?",
+            allSnippets: [
+                "Tasmania planned to build a hydro-electric dam on the Gordon River, an area listed for World Heritage protection after Australia ratified the World Heritage Convention. The Commonwealth passed laws prohibiting the dam, leading to a challenge from Tasmania.",
+                "Did the Commonwealth have the constitutional power (under s51(xxix) 'external affairs') to pass legislation to prevent the dam construction, thereby overriding Tasmania's residual powers?",
                 "The High Court held (4:3 majority) that the Commonwealth's legislation was valid. The 'external affairs' power extends to legislating to fulfill obligations under bona fide international treaties.",
-                "Significantly expanded the Commonwealth's law-making power by allowing it to legislate on matters previously considered within state residual powers, provided it was to implement a genuine international treaty. This altered the division of powers.",
-                "A prisoner challenged a Commonwealth law banning all prisoners from voting.", // Incorrect snippet
-                "The High Court interpreted 'other like services' in s51(v) to include wireless radio broadcasting." // Incorrect snippet
+                "Significantly expanded the Commonwealth's law-making power by allowing it to legislate on matters previously considered within state residual powers, provided it was to implement international obligations.",
+                "A prisoner challenged a Commonwealth law banning all prisoners from voting.",
+                "The High Court interpreted 'other like services' in s51(v) to include wireless radio broadcasting."
             ],
             impactedAreaOptions: ["Division of Powers", "Express Rights", "Separation of Powers", "Representative Government"],
             correctImpactedArea: "Division of Powers",
@@ -439,7 +436,6 @@ document.addEventListener('DOMContentLoaded', function () {
             shuffledSnippets.forEach(snippet => {
                 const option = document.createElement('option');
                 option.value = snippet;
-                // Truncate long snippets for display in dropdown
                 option.textContent = snippet.length > 70 ? snippet.substring(0, 67) + "..." : snippet;
                 select.appendChild(option);
             });
@@ -522,169 +518,165 @@ document.addEventListener('DOMContentLoaded', function () {
             caseDeconFeedback.innerHTML = feedbackHTML;
         });
     }
-// ... (existing code above, no changes until line 522)
 
-// --- NEW: Term Match Game ---
-const termMatchGameContainer = document.getElementById('termMatchGameContainer');
-const termsContainer = document.getElementById('termsContainer');
-const definitionsContainer = document.getElementById('definitionsContainer');
-const checkTermMatchesBtn = document.getElementById('checkTermMatchesBtn');
-const resetTermMatchGameBtn = document.getElementById('resetTermMatchGameBtn');
-const termMatchFeedback = document.getElementById('termMatchFeedback');
+    // --- NEW: Term Match Game ---
+    const termMatchGameContainer = document.getElementById('termMatchGameContainer');
+    const termsContainer = document.getElementById('termsContainer');
+    const definitionsContainer = document.getElementById('definitionsContainer');
+    const checkTermMatchesBtn = document.getElementById('checkTermMatchesBtn');
+    const resetTermMatchGameBtn = document.getElementById('resetTermMatchGameBtn');
+    const termMatchFeedback = document.getElementById('termMatchFeedback');
 
-const termMatchData = [
-    { id: 'tm1', term: "Bicameral Parliament", definition: "A law-making body with two houses or chambers that must approve new bills. Requirement for federal level in s1 of Constitution." },
-    { id: 'tm2', term: "Section 109", definition: "Section of the Australian Constitution that resolves inconsistencies between state and Commonwealth laws in concurrent areas; Commonwealth law prevails." },
-    { id: 'tm3', term: "Ratio Decidendi", definition: "Latin for 'the reason for the decision'; the binding legal principle of a judgment." },
-    { id: 'tm4', term: "Ultra Vires", definition: "Latin term meaning 'beyond the powers'. Used to describe an act by a government body that requires legal authority but is done without it." },
-    { id: 'tm5', term: "Statutory Interpretation", definition: "Process by which courts give meaning to words in legislation when applying it to a case." }
-];
+    const termMatchData = [
+        { id: 'tm1', term: "Bicameral Parliament", definition: "A law-making body with two houses or chambers that must approve new bills. Requirement for federal level in s1 of Constitution." },
+        { id: 'tm2', term: "Section 109", definition: "Section of the Australian Constitution that resolves inconsistencies between state and Commonwealth laws in concurrent areas; Commonwealth law prevails." },
+        { id: 'tm3', term: "Ratio Decidendi", definition: "Latin for 'the reason for the decision'; the binding legal principle of a judgment." },
+        { id: 'tm4', term: "Ultra Vires", definition: "Latin term meaning 'beyond the powers'. Used to describe an act by a government body that requires legal authority but is done without it." },
+        { id: 'tm5', term: "Statutory Interpretation", definition: "Process by which courts give meaning to words in legislation when applying it to a case." }
+    ];
 
-let draggedTerm = null;
-let selectedTermElement = null; // For click-based matching
+    let draggedTerm = null;
+    let selectedTermElement = null; // For click-based matching
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-function setupTermMatchGame() {
-    if (!termsContainer || !definitionsContainer || !termMatchFeedback) return;
-
-    termsContainer.innerHTML = '';
-    definitionsContainer.innerHTML = '';
-    termMatchFeedback.innerHTML = '';
-
-    const shuffledTerms = shuffleArray([...termMatchData]);
-    const shuffledDefinitions = shuffleArray([...termMatchData]); // Keep a link to original term via id
-
-    shuffledTerms.forEach(item => {
-        const termDiv = document.createElement('div');
-        termDiv.classList.add('term-item', 'p-2', 'bg-lime-100', 'border', 'border-lime-300', 'rounded', 'cursor-grab', 'text-center', 'text-sm');
-        termDiv.textContent = item.term;
-        termDiv.draggable = true;
-        termDiv.dataset.termId = item.id;
-        termDiv.addEventListener('dragstart', handleDragStart);
-        termDiv.addEventListener('click', handleTermClick); // For click matching
-        termsContainer.appendChild(termDiv);
-    });
-
-    shuffledDefinitions.forEach(item => {
-        const defSlot = document.createElement('div');
-        defSlot.classList.add('definition-slot', 'p-3', 'bg-slate-50', 'border-2', 'border-dashed', 'border-slate-300', 'rounded', 'min-h-[60px]', 'flex', 'items-center', 'justify-center', 'text-sm', 'text-slate-500');
-        defSlot.dataset.definitionForId = item.id; // This ID links to the term's original ID
-        defSlot.textContent = item.definition; // Display definition directly
-
-        defSlot.addEventListener('dragover', handleDragOver);
-        defSlot.addEventListener('drop', handleDropOnDefinition);
-        defSlot.addEventListener('click', handleDefinitionClick); // For click matching
-
-        defSlot.dataset.correctTermId = item.id;
-        defSlot.dataset.matchedTermId = ""; // To store what user matched
-
-        definitionsContainer.appendChild(defSlot);
-    });
-    selectedTermElement = null; // Reset selected term for click matching
-}
-
-function handleTermClick(event) {
-    if (selectedTermElement) {
-        selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
-    }
-    selectedTermElement = event.target;
-    selectedTermElement.classList.add('selected', 'ring-2', 'ring-lime-500');
-}
-
-function handleDefinitionClick(event) {
-    const definitionSlot = event.target.closest('.definition-slot');
-    if (selectedTermElement && definitionSlot) {
-        // If the slot already has a term, put it back
-        const existingTermDiv = definitionSlot.querySelector('.term-item');
-        if (existingTermDiv) {
-            termsContainer.appendChild(existingTermDiv); // Put it back to terms list
-            existingTermDiv.style.display = '';
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        definitionSlot.dataset.matchedTermId = selectedTermElement.dataset.termId;
-        definitionSlot.classList.add('bg-lime-100'); 
-        selectedTermElement.classList.add('opacity-50');
-        termMatchFeedback.textContent = `Term "${selectedTermElement.textContent}" tentatively matched with definition. Click 'Check My Matches'.`;
-        selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
+        return array;
+    }
+
+    function setupTermMatchGame() {
+        if (!termsContainer || !definitionsContainer || !termMatchFeedback) return;
+
+        termsContainer.innerHTML = '';
+        definitionsContainer.innerHTML = '';
+        termMatchFeedback.innerHTML = '';
+
+        const shuffledTerms = shuffleArray([...termMatchData]);
+        const shuffledDefinitions = shuffleArray([...termMatchData]);
+
+        shuffledTerms.forEach(item => {
+            const termDiv = document.createElement('div');
+            termDiv.classList.add('term-item', 'p-2', 'bg-lime-100', 'border', 'border-lime-300', 'rounded', 'cursor-grab', 'text-center', 'text-sm');
+            termDiv.textContent = item.term;
+            termDiv.draggable = true;
+            termDiv.dataset.termId = item.id;
+            termDiv.addEventListener('dragstart', handleDragStart);
+            termDiv.addEventListener('click', handleTermClick);
+            termsContainer.appendChild(termDiv);
+        });
+
+        shuffledDefinitions.forEach(item => {
+            const defSlot = document.createElement('div');
+            defSlot.classList.add('definition-slot', 'p-3', 'bg-slate-50', 'border-2', 'border-dashed', 'border-slate-300', 'rounded', 'min-h-[60px]', 'flex', 'items-center', 'justify-center', 'text-sm', 'text-slate-500');
+            defSlot.dataset.definitionForId = item.id;
+            defSlot.textContent = item.definition;
+
+            defSlot.addEventListener('dragover', handleDragOver);
+            defSlot.addEventListener('drop', handleDropOnDefinition);
+            defSlot.addEventListener('click', handleDefinitionClick);
+
+            defSlot.dataset.correctTermId = item.id;
+            defSlot.dataset.matchedTermId = "";
+
+            definitionsContainer.appendChild(defSlot);
+        });
         selectedTermElement = null;
     }
-}
 
-function handleDragStart(event) {
-    draggedTerm = event.target;
-    event.dataTransfer.setData('text/plain', event.target.dataset.termId);
-    event.target.classList.add('dragging');
-}
-
-function handleDragOver(event) {
-    event.preventDefault(); 
-    event.target.closest('.definition-slot').classList.add('drag-over');
-}
-
-function handleDropOnDefinition(event) {
-    event.preventDefault();
-    const definitionSlot = event.target.closest('.definition-slot');
-    definitionSlot.classList.remove('drag-over');
-    if (draggedTerm && definitionSlot) {
-        // If the slot already contains a term, move it back to the terms container
-        const existingTermInSlot = definitionSlot.querySelector('.term-item');
-        if (existingTermInSlot) {
-            termsContainer.appendChild(existingTermInSlot);
-            existingTermInSlot.classList.remove('opacity-50', 'cursor-default');
-            existingTermInSlot.draggable = true;
+    function handleTermClick(event) {
+        if (selectedTermElement) {
+            selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
         }
-        definitionSlot.innerHTML = '';
-        definitionSlot.appendChild(draggedTerm);
-        draggedTerm.classList.remove('dragging');
-        draggedTerm.classList.add('opacity-50', 'cursor-default');
-        draggedTerm.draggable = false;
-        definitionSlot.dataset.matchedTermId = draggedTerm.dataset.termId;
-        draggedTerm = null;
+        selectedTermElement = event.target;
+        selectedTermElement.classList.add('selected', 'ring-2', 'ring-lime-500');
     }
-}
 
-if (checkTermMatchesBtn) {
-    checkTermMatchesBtn.addEventListener('click', () => {
-        if (!termMatchFeedback || !definitionsContainer) return;
-        let correctMatches = 0;
-        const definitionSlots = definitionsContainer.querySelectorAll('.definition-slot');
-        definitionSlots.forEach(slot => {
-            slot.classList.remove('matched', 'incorrect-match', 'bg-lime-100');
-            const matchedTermId = slot.dataset.matchedTermId;
-            const correctTermIdForDefinition = slot.dataset.correctTermId;
-            const placedTermElement = slot.querySelector('.term-item');
-            if (matchedTermId && matchedTermId === correctTermIdForDefinition) {
-                correctMatches++;
-                slot.classList.add('matched');
-                if(placedTermElement) placedTermElement.classList.add('!bg-green-200', '!border-green-400');
-            } else if (matchedTermId) {
-                slot.classList.add('incorrect-match');
-                 if(placedTermElement) placedTermElement.classList.add('!bg-red-200', '!border-red-400');
+    function handleDefinitionClick(event) {
+        const definitionSlot = event.target.closest('.definition-slot');
+        if (selectedTermElement && definitionSlot) {
+            const existingTermDiv = definitionSlot.querySelector('.term-item');
+            if (existingTermDiv) {
+                termsContainer.appendChild(existingTermDiv);
+                existingTermDiv.style.display = '';
+            }
+            definitionSlot.dataset.matchedTermId = selectedTermElement.dataset.termId;
+            definitionSlot.classList.add('bg-lime-100');
+            selectedTermElement.classList.add('opacity-50');
+            termMatchFeedback.textContent = `Term "${selectedTermElement.textContent}" tentatively matched with definition. Click 'Check My Matches'.`;
+            selectedTermElement.classList.remove('selected', 'ring-2', 'ring-lime-500');
+            selectedTermElement = null;
+        }
+    }
+
+    function handleDragStart(event) {
+        draggedTerm = event.target;
+        event.dataTransfer.setData('text/plain', event.target.dataset.termId);
+        event.target.classList.add('dragging');
+    }
+
+    function handleDragOver(event) {
+        event.preventDefault();
+        event.target.closest('.definition-slot').classList.add('drag-over');
+    }
+
+    function handleDropOnDefinition(event) {
+        event.preventDefault();
+        const definitionSlot = event.target.closest('.definition-slot');
+        definitionSlot.classList.remove('drag-over');
+        if (draggedTerm && definitionSlot) {
+            const existingTermInSlot = definitionSlot.querySelector('.term-item');
+            if (existingTermInSlot) {
+                termsContainer.appendChild(existingTermInSlot);
+                existingTermInSlot.classList.remove('opacity-50', 'cursor-default');
+                existingTermInSlot.draggable = true;
+            }
+            definitionSlot.innerHTML = '';
+            definitionSlot.appendChild(draggedTerm);
+            draggedTerm.classList.remove('dragging');
+            draggedTerm.classList.add('opacity-50', 'cursor-default');
+            draggedTerm.draggable = false;
+            definitionSlot.dataset.matchedTermId = draggedTerm.dataset.termId;
+            draggedTerm = null;
+        }
+    }
+
+    if (checkTermMatchesBtn) {
+        checkTermMatchesBtn.addEventListener('click', () => {
+            if (!termMatchFeedback || !definitionsContainer) return;
+            let correctMatches = 0;
+            const definitionSlots = definitionsContainer.querySelectorAll('.definition-slot');
+            definitionSlots.forEach(slot => {
+                slot.classList.remove('matched', 'incorrect-match', 'bg-lime-100');
+                const matchedTermId = slot.dataset.matchedTermId;
+                const correctTermIdForDefinition = slot.dataset.correctTermId;
+                const placedTermElement = slot.querySelector('.term-item');
+                if (matchedTermId && matchedTermId === correctTermIdForDefinition) {
+                    correctMatches++;
+                    slot.classList.add('matched');
+                    if(placedTermElement) placedTermElement.classList.add('!bg-green-200', '!border-green-400');
+                } else if (matchedTermId) {
+                    slot.classList.add('incorrect-match');
+                    if(placedTermElement) placedTermElement.classList.add('!bg-red-200', '!border-red-400');
+                }
+            });
+            termMatchFeedback.innerHTML = `You got <strong class="text-lg">${correctMatches}</strong> out of <strong>${termMatchData.length}</strong> correct.`;
+            if (correctMatches === termMatchData.length) {
+                termMatchFeedback.innerHTML += ' <span class="text-green-600 font-semibold">Excellent! All correct!</span>';
             }
         });
-        termMatchFeedback.innerHTML = `You got <strong class="text-lg">${correctMatches}</strong> out of <strong>${termMatchData.length}</strong> correct.`;
-        if (correctMatches === termMatchData.length) {
-            termMatchFeedback.innerHTML += ' <span class="text-green-600 font-semibold">Excellent! All correct!</span>';
-        }
-    });
-}
+    }
 
-if (resetTermMatchGameBtn) {
-    resetTermMatchGameBtn.addEventListener('click', () => {
-        setupTermMatchGame();
-    });
-}
+    if (resetTermMatchGameBtn) {
+        resetTermMatchGameBtn.addEventListener('click', () => {
+            setupTermMatchGame();
+        });
+    }
 
-// (Optional) To initialize immediately if visible:
-// if (document.getElementById('u4aos1-term-match-game') && !document.getElementById('u4aos1-term-match-game').classList.contains('hidden')) {
-//     setupTermMatchGame();
-// }
+    // (Optional) To initialize immediately if visible:
+    // if (document.getElementById('u4aos1-term-match-game') && !document.getElementById('u4aos1-term-match-game').classList.contains('hidden')) {
+    //     setupTermMatchGame();
+    // }
 
-// End of DOMContentLoaded event listener
-});
+}); // End of DOMContentLoaded
