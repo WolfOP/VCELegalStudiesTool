@@ -713,7 +713,9 @@ function handleU4AOS1ContentToggle(button) {
         
         });
     }
-    
+    if (mainNavButtons.length > 0) { 
+        mainNavButtons[0].click(); // This will cascade to select default U4AOS and U4AOS1 content
+    }
     // --- End of U4AOS1 Content Toggles ---
 
 // THIS IS THE SINGLE CLOSING TAG for the main DOMContentLoaded listener in your main script.js
