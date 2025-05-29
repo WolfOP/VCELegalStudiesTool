@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', function () {
         {
             scenario: "Parliament passes a law that directly contradicts a previous High Court ruling on a non-constitutional common law matter.",
             options: ["Statutory Interpretation", "Abrogation of Common Law", "Codification of Common Law", "Judicial Activism"],
-            answerIndex: 1, // Abrogation of Common Law
+            answerIndex: 1,
             explanation: "Abrogation of common law occurs when parliament passes legislation that overrides or cancels a common law principle established by courts (except High Court constitutional interpretations)."
         },
         {
             scenario: "The High Court is asked to determine the meaning of the word 'vehicle' in a new Commonwealth Act regulating transport emissions, as the Act does not define it and new types of electric scooters have become popular.",
             options: ["Doctrine of Precedent", "Section 109", "Statutory Interpretation", "Residual Powers"],
-            answerIndex: 2, // Statutory Interpretation
+            answerIndex: 2,
             explanation: "Statutory interpretation is the process where courts give meaning to words in legislation when applying it to a case, especially when words are ambiguous or new circumstances arise."
         },
         {
             scenario: "A judge in the County Court of Victoria is deciding a case with similar facts to a case previously decided by the Supreme Court of Victoria (Court of Appeal).",
             options: ["Persuasive Precedent", "Binding Precedent", "Obiter Dictum", "Distinguishing Precedent"],
-            answerIndex: 1, // Binding Precedent
+            answerIndex: 1,
             explanation: "Binding precedent means the legal reasoning of a higher court in the same hierarchy must be followed by lower courts in that hierarchy when dealing with similar material facts."
         }
     ];
@@ -37,22 +37,20 @@ document.addEventListener('DOMContentLoaded', function () {
         q.options.forEach((option, i) => {
             stcOptionsArea.innerHTML += `
                 <div>
-                    <input type="radio" name="stcOption" id="stcOpt${i}" value="<span class="math-inline">\{i\}" class\="sr\-only"\>
-                    <label for="stcOpt{i}" class="stc-option-label">${option}</label>
-</div>
-`;
-});
-if (stcFeedbackArea) stcFeedbackArea.innerHTML = '';
-if (stcCheckAnswerBtn) stcCheckAnswerBtn.classList.remove('hidden');
-if (stcNextQuestionBtn) stcNextQuestionBtn.classList.add('hidden');
-}
-if (goToGlossaryBtn) {
+                    <input type="radio" name="stcOption" id="stcOpt${i}" value="${i}" class="sr-only">
+                    <label for="stcOpt${i}" class="stc-option-label">${option}</label>
+                </div>
+            `;
+        });
+        if (stcFeedbackArea) stcFeedbackArea.innerHTML = '';
+        if (stcCheckAnswerBtn) stcCheckAnswerBtn.classList.remove('hidden');
+        if (stcNextQuestionBtn) stcNextQuestionBtn.classList.add('hidden');
+    }
+    if (goToGlossaryBtn) {
         goToGlossaryBtn.addEventListener('click', () => {
-            // Find the glossary toggle button and click it
             const glossaryToggleBtn = document.querySelector('button.u4aos1-content-toggle[data-target="u4aos1-glossary"]');
             if (glossaryToggleBtn) {
-                glossaryToggleBtn.click(); // This should trigger the main script's toggle logic
-                // Scroll to glossary if needed (optional)
+                glossaryToggleBtn.click();
                 const glossarySection = document.getElementById('u4aos1-glossary');
                 if (glossarySection) glossarySection.scrollIntoView({ behavior: 'smooth' });
             }
@@ -87,9 +85,9 @@ if (goToGlossaryBtn) {
         stcNextQuestionBtn.addEventListener('click', () => {
             currentSTCQuestion++;
             if (currentSTCQuestion >= scenarioTermChallenges.length) {
-                currentSTCQuestion = 0; // Loop back or show completion message
-                 if (stcQuestionArea) stcQuestionArea.textContent = "Term Challenge Complete! Resetting...";
-                 if (stcOptionsArea) stcOptionsArea.innerHTML = "";
+                currentSTCQuestion = 0;
+                if (stcQuestionArea) stcQuestionArea.textContent = "Term Challenge Complete! Resetting...";
+                if (stcOptionsArea) stcOptionsArea.innerHTML = "";
             }
             loadSTCQuestion(currentSTCQuestion);
         });
@@ -120,7 +118,7 @@ if (goToGlossaryBtn) {
     function loadSACExcerpt(index) {
         if (!sacExcerptArea || !sacQuestionArea || !sacAnswerInput || index >= sourceAnalysisChallenges.length) return;
         const q = sourceAnalysisChallenges[index];
-        sacExcerptArea.innerHTML = q.excerpt; // Use innerHTML if excerpts contain citations as HTML
+        sacExcerptArea.innerHTML = q.excerpt;
         sacQuestionArea.textContent = q.question;
         sacAnswerInput.value = '';
         if (sacFeedbackArea) sacFeedbackArea.innerHTML = '';
@@ -157,10 +155,9 @@ if (goToGlossaryBtn) {
         sacNextExcerptBtn.addEventListener('click', () => {
             currentSACExcerpt++;
             if (currentSACExcerpt >= sourceAnalysisChallenges.length) {
-                currentSACExcerpt = 0; // Loop back or show completion
+                currentSACExcerpt = 0;
                 if(sacExcerptArea) sacExcerptArea.textContent = "Source Analysis Complete! Resetting...";
                 if(sacQuestionArea) sacQuestionArea.textContent = "";
-
             }
             loadSACExcerpt(currentSACExcerpt);
         });
@@ -171,11 +168,8 @@ if (goToGlossaryBtn) {
         console.log("Key Skills Hub Initialized");
         loadSTCQuestion(currentSTCQuestion);
         loadSACExcerpt(currentSACExcerpt);
-        // Add other initializations for future key skill activities here
     }
 
-    // Make initializeKeySkillsHub globally accessible if needed by main script, or listen for custom event
     window.initializeKeySkillsHub = initializeKeySkillsHub;
 
 }); // End of DOMContentLoaded for keySkillsHub.js
-```
