@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Date for footer
+const u4aos1ContentToggles = document.querySelectorAll('.u4aos1-content-toggle');
+const u4aos1AllContent = document.querySelectorAll('#unit4-aos1 .u4aos1-content');
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     // Main Navigation
@@ -712,9 +714,6 @@ if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub
         });
     }
     
-    u4aos1ContentToggles.forEach(button => {
-        button.addEventListener('click', () => handleU4AOS1ContentToggle(button));
-    });
     // --- End of U4AOS1 Content Toggles ---
 
 // THIS IS THE SINGLE CLOSING TAG for the main DOMContentLoaded listener in your main script.js
