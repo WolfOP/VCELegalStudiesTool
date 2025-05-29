@@ -93,12 +93,16 @@ document.addEventListener('DOMContentLoaded', function () {
             else if (btn.classList.contains('text-teal-700')) btn.classList.add('hover:bg-teal-200');
             else if (btn.classList.contains('text-purple-700')) btn.classList.add('hover:bg-purple-200');
             else if (btn.classList.contains('text-orange-700')) btn.classList.add('hover:bg-orange-200');
+            else if (btn.dataset.baseBg === 'bg-cyan-100') btn.classList.add('hover:bg-cyan-200'); // NEW
         });
 
         if (button.classList.contains('text-indigo-700')) button.classList.add('bg-indigo-500', 'text-white');
         else if (button.classList.contains('text-teal-700')) button.classList.add('bg-teal-500', 'text-white');
         else if (button.classList.contains('text-purple-700')) button.classList.add('bg-purple-500', 'text-white');
         else if (button.classList.contains('text-orange-700')) button.classList.add('bg-orange-500', 'text-white');
+        else if (button.classList.contains('text-cyan-700')) { // NEW FOR KEY SKILLS HUB
+    button.classList.add('bg-cyan-500', 'text-white', 'active-skill-hub-toggle');
+    button.dataset.baseBg = 'bg-cyan-100';
         
         u4aos1AllContent.forEach(contentSection => {
             contentSection.classList.toggle('hidden', contentSection.id !== targetId);
@@ -111,6 +115,10 @@ document.addEventListener('DOMContentLoaded', function () {
                  // Initialize specific tool if it's being shown
                 if (targetId === 'u4aos1-guided-answers') loadGuidedAnswerQuestion(0); // Load first question
                 if (targetId === 'u4aos1-case-deconstruction') populateCaseDeconSelector(); // Populate case selector
+                if (targetId === 'u4aos1-term-match-game') setupTermMatchGame(); 
+if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
+    window.initializeKeySkillsHub(); // NEW
+}
             }
         });
     }
