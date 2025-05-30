@@ -24,17 +24,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 const firstUnit4AOSButton = document.querySelector('#unit4Nav .unit4-nav-button');
                 if (firstUnit4AOSButton) {
                     if (!firstUnit4AOSButton.classList.contains('active')) {
-                        firstUnit4AOSButton.click();
+                        firstUnit4AOSButton.click(); // This will trigger its own logic, including U4AOS1 default
                     } else {
-                        const firstAOSContentId = firstUnit4AOSButton.dataset.target;
-                        document.querySelectorAll('.unit4-aos-section').forEach(s => s.classList.remove('active'));
-                        const targetSection = document.getElementById(firstAOSContentId);
-                        if(targetSection) targetSection.classList.add('active');
-                        if (firstAOSContentId === 'unit4-aos1') {
-                            const firstU4AOS1Button = document.querySelector('#u4aos1-guided-answers.u4aos1-content-toggle') || document.querySelector('.u4aos1-content-toggle');
-                            if (firstU4AOS1Button && !isActiveU4AOS1Toggle(firstU4AOS1Button)) {
+                        // If already active, ensure U4AOS1 default is triggered if necessary
+                        const currentActiveAOS = document.querySelector('#unit4Nav .unit4-nav-button.active');
+                        if (currentActiveAOS && currentActiveAOS.dataset.target === 'unit4-aos1') {
+                             const firstU4AOS1Button = document.querySelector('.u4aos1-content-toggle'); // Get the first U4AOS1 tool button
+                             if (firstU4AOS1Button && !isActiveU4AOS1Toggle(firstU4AOS1Button)) { // Check if it's not already styled as active
                                 handleU4AOS1ContentToggle(firstU4AOS1Button);
-                            }
+                             }
+                        } else if (currentActiveAOS && currentActiveAOS.dataset.target !== 'unit4-aos1') {
+                            // If another AOS is active, clicking Unit 4 main nav should default to AOS1
+                             firstUnit4AOSButton.click();
                         }
                     }
                 }
@@ -42,133 +43,144 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    if (mainNavButtons.length > 0) { 
-        mainNavButtons[0].click();
-    }
+    // Unit 4 AOS Navigation
+    const unit4NavButtons = document.querySelectorAll('.unit4-nav-button');
+    const unit4AosSections = document.querySelectorAll('.unit4-aos-section');
 
-function isActiveU4AOS1Toggle(button) {
-    return button.classList.contains('bg-indigo-500') || button.classList.contains('bg-teal-500') || button.classList.contains('bg-purple-500') || button.classList.contains('bg-orange-500');
-}
-
-// Unit 4 AOS Navigation
-const unit4NavButtons = document.querySelectorAll('.unit4-nav-button');
-const unit4AosSections = document.querySelectorAll('.unit4-aos-section');
-
-unit4NavButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const targetId = button.dataset.target;
-         unit4NavButtons.forEach(btn => {
-            btn.classList.remove('active', 'bg-indigo-500', 'text-white');
-            btn.classList.add('bg-slate-200', 'text-slate-700', 'hover:bg-indigo-400');
-        });
-        button.classList.add('active', 'bg-indigo-500', 'text-white');
-        button.classList.remove('bg-slate-200', 'text-slate-700', 'hover:bg-indigo-400');
-
-        unit4AosSections.forEach(section => {
-            section.classList.toggle('active', section.id === targetId);
-        });
-        
-        if (targetId === 'unit4-aos1') {
-            const firstU4AOS1Button = document.querySelector('#u4aos1-guided-answers.u4aos1-content-toggle') || document.querySelector('.u4aos1-content-toggle');
-             if (firstU4AOS1Button) {
-                handleU4AOS1ContentToggle(firstU4AOS1Button); 
-             } else { 
-                const allU4AOS1Content = document.querySelectorAll('#unit4-aos1 .u4aos1-content');
-                allU4AOS1Content.forEach(s => s.classList.add('hidden')); 
-             }
-        }
-    });
-});
-
-// --- Unit 4 AOS 1 Content Toggles ---
-const u4aos1ContentToggles = document.querySelectorAll('.u4aos1-content-toggle');
-const u4aos1AllContent = document.querySelectorAll('#unit4-aos1 .u4aos1-content');
-
-function handleU4AOS1ContentToggle(button) {
-    const targetId = button.dataset.target; // targetId is defined here, local to this function
-    
-    u4aos1ContentToggles.forEach(btn => {
-        // Reset active styles from all categories
-        btn.classList.remove('bg-indigo-500', 'text-white', 
-                             'bg-teal-500', 'text-white', 
-                             'bg-orange-500', 'text-white', 
-                             'bg-cyan-500', 'text-white', 'active-skill-hub-toggle', 
-                             'bg-purple-500', 'text-white',
-                             'bg-lime-500', 'text-white', 'active-game-toggle');
-        
-        if (btn.classList.contains('text-indigo-700')) btn.classList.add('hover:bg-indigo-200');
-        else if (btn.classList.contains('text-teal-700')) btn.classList.add('hover:bg-teal-200');
-        else if (btn.classList.contains('text-orange-700')) btn.classList.add('hover:bg-orange-200');
-        else if (btn.classList.contains('text-cyan-700')) btn.classList.add('hover:bg-cyan-200'); 
-        else if (btn.classList.contains('text-lime-700')) btn.classList.add('hover:bg-lime-200'); 
-        else if (btn.classList.contains('text-purple-700')) btn.classList.add('hover:bg-purple-200');
-    });
-
-    // Apply active style to the clicked button based on its category
-    if (button.classList.contains('text-indigo-700')) {
-        button.classList.add('bg-indigo-500', 'text-white');
-    } else if (button.classList.contains('text-teal-700')) {
-        button.classList.add('bg-teal-500', 'text-white');
-    } else if (button.classList.contains('text-orange-700')) {
-        button.classList.add('bg-orange-500', 'text-white');
-    } else if (button.classList.contains('text-cyan-700')) { 
-        button.classList.add('bg-cyan-500', 'text-white', 'active-skill-hub-toggle');
-    } else if (button.classList.contains('text-lime-700')) { 
-         button.classList.add('bg-lime-500', 'text-white', 'active-game-toggle');
-    } else if (button.classList.contains('text-purple-700')) {
-        button.classList.add('bg-purple-500', 'text-white');
-    }
-    
-    u4aos1AllContent.forEach(contentSection => {
-        const isTarget = contentSection.id === targetId;
-        contentSection.classList.toggle('hidden', !isTarget);
-        
-        if (isTarget) {
-            contentSection.querySelectorAll('.accordion-content').forEach(ac => {
-                const parentToolContainer = ac.closest('#u4aos1-key-skills-hub, #u4aos1-guided-answers, #u4aos1-case-deconstruction, #u4aos1-term-match-game'); 
-                if (!parentToolContainer) { 
-                    ac.style.maxHeight = '0px';
-                    const accordionButton = ac.previousElementSibling;
-                    if (accordionButton && accordionButton.classList.contains('accordion-toggle')) {
-                         const arrow = accordionButton.querySelector('.arrow-icon');
-                         if (arrow) arrow.style.transform = 'rotate(0deg)';
-                    }
-                }
+    unit4NavButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const targetId = button.dataset.target;
+            unit4NavButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-500', 'text-white');
+                btn.classList.add('bg-slate-200', 'text-slate-700', 'hover:bg-indigo-400');
             });
+            button.classList.add('active', 'bg-indigo-500', 'text-white');
+            button.classList.remove('bg-slate-200', 'text-slate-700', 'hover:bg-indigo-400');
 
-            if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
-                window.initializeKeySkillsHub(); 
+            unit4AosSections.forEach(section => {
+                section.classList.toggle('active', section.id === targetId);
+            });
+            
+            if (targetId === 'unit4-aos1') {
+                // When AOS1 tab is clicked, ensure its first tool/content is shown
+                const firstU4AOS1Button = document.querySelector('.u4aos1-content-toggle');
+                if (firstU4AOS1Button) {
+                    handleU4AOS1ContentToggle(firstU4AOS1Button); 
+                }
             }
-        }
+        });
     });
 
-    // Initialize specific tool if it's being shown AND the function exists
-    if (targetId === 'u4aos1-guided-answers' && typeof loadGuidedAnswerQuestion === 'function') {
-        loadGuidedAnswerQuestion(0);
-    }
-    if (targetId === 'u4aos1-case-deconstruction' && typeof populateCaseDeconSelector === 'function') {
-        populateCaseDeconSelector();
-    }
-    if (targetId === 'u4aos1-term-match-game' && typeof setupTermMatchGame === 'function') {
-        setupTermMatchGame();
-    }
-    if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
-        window.initializeKeySkillsHub();
-    }
-}
+    // --- Unit 4 AOS 1 Content Toggles ---
+    const u4aos1ContentToggles = document.querySelectorAll('.u4aos1-content-toggle');
+    const u4aos1AllContent = document.querySelectorAll('#unit4-aos1 .u4aos1-content');
 
+    function isActiveU4AOS1Toggle(button) {
+        // Check against all possible active color classes
+        return button.classList.contains('bg-indigo-500') || 
+               button.classList.contains('bg-teal-500') || 
+               button.classList.contains('bg-orange-500') ||
+               button.classList.contains('bg-cyan-500') ||
+               button.classList.contains('bg-lime-500') ||
+               button.classList.contains('bg-purple-500');
+    }
 
-    // Accordion Logic
+    function handleU4AOS1ContentToggle(buttonToActivate) {
+        const targetId = buttonToActivate.dataset.target;
+        
+        u4aos1ContentToggles.forEach(btn => {
+            // Reset active styles from all categories
+            btn.classList.remove('bg-indigo-500', 'text-white', 
+                                 'bg-teal-500', 'text-white', 
+                                 'bg-orange-500', 'text-white', 
+                                 'bg-cyan-500', 'text-white', 'active-skill-hub-toggle', 
+                                 'bg-purple-500', 'text-white',
+                                 'bg-lime-500', 'text-white', 'active-game-toggle');
+            // Re-apply base hover styles by relying on Tailwind's default class behavior
+            // No need to re-add specific hover classes here if base classes are correct in HTML
+        });
+
+        // Apply active style to the clicked button based on its category
+        if (buttonToActivate.classList.contains('text-indigo-700')) {
+            buttonToActivate.classList.add('bg-indigo-500', 'text-white');
+        } else if (buttonToActivate.classList.contains('text-teal-700')) {
+            buttonToActivate.classList.add('bg-teal-500', 'text-white');
+        } else if (buttonToActivate.classList.contains('text-orange-700')) {
+            buttonToActivate.classList.add('bg-orange-500', 'text-white');
+        } else if (buttonToActivate.classList.contains('text-cyan-700')) { 
+            buttonToActivate.classList.add('bg-cyan-500', 'text-white', 'active-skill-hub-toggle');
+        } else if (buttonToActivate.classList.contains('text-lime-700')) { 
+            buttonToActivate.classList.add('bg-lime-500', 'text-white', 'active-game-toggle');
+        } else if (buttonToActivate.classList.contains('text-purple-700')) {
+            buttonToActivate.classList.add('bg-purple-500', 'text-white');
+        }
+        
+        u4aos1AllContent.forEach(contentSection => {
+            const isTarget = contentSection.id === targetId;
+            contentSection.classList.toggle('hidden', !isTarget);
+            
+            if (isTarget) {
+                // Reset accordions within the newly shown content section,
+                // EXCEPT if the content section is one of the new interactive tools
+                // that manage their own internal state (like Key Skills Hub, Guided Answers etc.)
+                const isComplexTool = ['u4aos1-key-skills-hub', 'u4aos1-guided-answers', 
+                                     'u4aos1-case-deconstruction', 'u4aos1-term-match-game',
+                                     'u4aos1-glossary', 'u4aos1-interactive-diagrams', 
+                                     'u4aos1-case-explorer', 'u4aos1-exam-skills', 
+                                     'u4aos1-practice-questions'].includes(targetId);
+
+                if (!isComplexTool) {
+                    contentSection.querySelectorAll('.accordion-content').forEach(ac => {
+                        ac.style.maxHeight = '0px';
+                        const accordionButton = ac.previousElementSibling;
+                        if (accordionButton && accordionButton.classList.contains('accordion-toggle')) {
+                             const arrow = accordionButton.querySelector('.arrow-icon');
+                             if (arrow) arrow.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                }
+
+                // Call initialization functions for specific tools
+                // These functions should be defined (either in this file or keySkillsHub.js and exposed via window)
+                if (targetId === 'u4aos1-guided-answers' && typeof window.loadGuidedAnswerQuestion === 'function') {
+                    window.loadGuidedAnswerQuestion(0);
+                }
+                if (targetId === 'u4aos1-case-deconstruction' && typeof window.populateCaseDeconSelector === 'function') {
+                    window.populateCaseDeconSelector();
+                }
+                if (targetId === 'u4aos1-term-match-game' && typeof window.setupTermMatchGame === 'function') {
+                    window.setupTermMatchGame();
+                }
+                if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
+                    window.initializeKeySkillsHub();
+                }
+                // Add calls for other tools if they have specific initializers e.g. glossary search, diagram handlers
+            }
+        });
+    }
+
+    // **CRITICAL: ATTACH EVENT LISTENERS TO U4AOS1 TOGGLE BUTTONS**
+    u4aos1ContentToggles.forEach(button => {
+        button.addEventListener('click', () => handleU4AOS1ContentToggle(button));
+    });
+    
+    // Accordion Logic (ensure this is correctly placed and not conflicting)
     const accordionToggles = document.querySelectorAll('.accordion-toggle');
     accordionToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const content = toggle.nextElementSibling;
+            if (!content || !content.classList.contains('accordion-content')) return; // Ensure we have valid content
+
             const arrow = toggle.querySelector('.arrow-icon');
             const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
             
+            // Only close other accordions if this one is opening AND it's part of the main U4AOS1 knowledge sections
             const parentAccordionContainer = toggle.closest('#u4aos1-accordion-container');
-            if (!isExpanded && parentAccordionContainer) {
-                parentAccordionContainer.querySelectorAll('.accordion-toggle').forEach(otherToggle => {
+            const isMainKnowledgeAccordion = !toggle.closest('#u4aos1-key-skills-hub, #u4aos1-guided-answers, #u4aos1-case-deconstruction, #u4aos1-term-match-game, #u4aos1-glossary, #u4aos1-interactive-diagrams, #u4aos1-case-explorer, #u4aos1-exam-skills, #u4aos1-practice-questions');
+
+            if (!isExpanded && parentAccordionContainer && isMainKnowledgeAccordion) {
+                // Close other main knowledge accordions
+                parentAccordionContainer.querySelectorAll(':scope > .u4aos1-content > .border > .accordion-toggle').forEach(otherToggle => {
                     if (otherToggle !== toggle) {
                         const otherContent = otherToggle.nextElementSibling;
                         const otherArrow = otherToggle.querySelector('.arrow-icon');
