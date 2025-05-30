@@ -406,3 +406,46 @@ body {
 #categorizedGlossaryContainer h5 {
     z-index: 15; /* Below search but above terms */
 }
+/* Styles for AI Explain Further in Glossary */
+.ai-explain-further-btn {
+    margin-left: 10px;
+    padding: 2px 6px;
+    font-size: 0.7rem; /* text-xs */
+    background-color: #ede9fe; /* purple-100 */
+    color: #6d28d9; /* purple-700 */
+    border: 1px solid #c4b5fd; /* purple-300 */
+    border-radius: 0.25rem; /* rounded */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.ai-explain-further-btn:hover {
+    background-color: #ddd6fe; /* purple-200 */
+}
+.ai-explanation-content {
+    display: none; /* Hidden by default, JS will toggle */
+    margin-left: 1.5rem; /* Indent further than definition */
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background-color: #f3e8ff; /* purple-50 */
+    border: 1px dashed #c084fc; /* purple-400 */
+    border-radius: 0.25rem;
+    font-size: 0.8rem; /* Slightly smaller than main definition */
+    color: #581c87; /* purple-900 */
+}
+.ai-explanation-content.loading-ai span {
+    display: inline-block;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* Styles for AI Case Insights */
+#aiCaseInsightContainer.hidden {
+    display: none;
+}
+#aiCaseInsightLoading .animate-pulse {
+    /* Simple pulse for loading text */
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .5; }
+}

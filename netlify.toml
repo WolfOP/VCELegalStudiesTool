@@ -1,0 +1,5 @@
+[functions]
+  directory = "netlify/functions"
+  # If your function uses Node.js features requiring a specific version, you can specify it.
+  # node_bundler = "esbuild" # Or "zisi"
+  # node_version = "18" # Or your desired version

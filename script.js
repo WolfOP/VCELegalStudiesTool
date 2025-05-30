@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') { // ADD THIS
                     window.setupCategorizedGlossary();
-        }
+                }
                 // Add calls for other tools if they have specific initializers e.g. glossary search, diagram handlers
             }
         });
@@ -294,18 +294,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Case Explorer (Existing functionality)
     const caseSelectExplorer = document.getElementById('caseSelectExplorer');
-    const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
-    const caseExplorerData = {
-        tasmanianDams: { name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)", details: "<strong>Facts:</strong> Tas wanted to build a dam; Cth passed law to stop it based on World Heritage Convention. HC upheld Cth power under external affairs.<br><strong>Significance:</strong> Expanded Cth power via s51(xxix)." },
-        brislan: { name: "R v Brislan (1935)", details: "<strong>Facts:</strong> Challenge to Cth law requiring wireless set licences [cite: 251, 319, 1005-1006].<br><strong>Issue:</strong> Meaning of 'other like services' in s51(v)." },
-        mcbain: { name: "McBain v Victoria (2000)", details: "<strong>Facts:</strong> Vic law restricted IVF to married/de facto couples; Cth law banned marital status discrimination [cite: 90, 247, 1008].<br><strong>Significance:</strong> s109: Cth law prevails." },
-        roach: { name: "Roach v Electoral Commissioner (2007)", details: "<strong>Facts:</strong> Cth law banned all prisoners from voting [cite: 247, 316, 1022-1023].<br><strong>Issue:</strong> Did it breach representative government?" },
-        mabo: { name: "Mabo v Queensland (No. 2) (1992)", details: "<strong>Facts:</strong> Indigenous activists challenged 'terra nullius', claiming native title.<br><strong>Issue:</strong> Existence of native title in Australian law." },
-        deingTarola: { name: "Deing v Tarola (1993)", details: "<strong>Facts:</strong> Person charged for possessing studded belt as 'regulated weapon'.<br><strong>Significance:</strong> Statutory interpretation: what is a 'weapon'?" },
-        kevinJennifer: { name: "Attorney-General (Cth) v Kevin and Jennifer (2003)", details: "<strong>Facts:</strong> Validity of marriage involving a transgender man (Kevin) challenged.<br><strong>Significance:</strong> Statutory interpretation of 'man' and 'woman'." },
-        trigwell: { name: "State Insurance Commission v Trigwell (1979)", details: "<strong>Facts:</strong> Car accident involving straying sheep; issue of landowner duty of care [cite: 256, 1044].<br><strong>Significance:</strong> Precedent and legislative override." },
-        communistParty: { name: "Australian Communist Party v Commonwealth (1951)", details: "<strong>Facts:</strong> Cth passed law banning Communist Party.<br><strong>Issue:</strong> Validity of Cth law under Constitution." }
-    };
+const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
+window.caseExplorerData = { // <-- Changed from const caseExplorerData = { ... };
+    tasmanianDams: { name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)", details: "<strong>Facts:</strong> Tas wanted to build a dam; Cth passed law to stop it based on World Heritage Convention. HC upheld Cth power under external affairs.<br><strong>Significance:</strong> Expanded Cth power via s51(xxix)." },
+    brislan: { name: "R v Brislan (1935)", details: "<strong>Facts:</strong> Challenge to Cth law requiring wireless set licences [cite: 251, 319, 1005-1006].<br><strong>Issue:</strong> Meaning of 'other like services' in s51(v)." },
+    mcbain: { name: "McBain v Victoria (2000)", details: "<strong>Facts:</strong> Vic law restricted IVF to married/de facto couples; Cth law banned marital status discrimination [cite: 90, 247, 1008].<br><strong>Significance:</strong> s109: Cth law prevails." },
+    roach: { name: "Roach v Electoral Commissioner (2007)", details: "<strong>Facts:</strong> Cth law banned all prisoners from voting [cite: 247, 316, 1022-1023].<br><strong>Issue:</strong> Did it breach representative government?" },
+    mabo: { name: "Mabo v Queensland (No. 2) (1992)", details: "<strong>Facts:</strong> Indigenous activists challenged 'terra nullius', claiming native title.<br><strong>Issue:</strong> Existence of native title in Australian law." },
+    deingTarola: { name: "Deing v Tarola (1993)", details: "<strong>Facts:</strong> Person charged for possessing studded belt as 'regulated weapon'.<br><strong>Significance:</strong> Statutory interpretation: what is a 'weapon'?" },
+    kevinJennifer: { name: "Attorney-General (Cth) v Kevin and Jennifer (2003)", details: "<strong>Facts:</strong> Validity of marriage involving a transgender man (Kevin) challenged.<br><strong>Significance:</strong> Statutory interpretation of 'man' and 'woman'." },
+    trigwell: { name: "State Insurance Commission v Trigwell (1979)", details: "<strong>Facts:</strong> Car accident involving straying sheep; issue of landowner duty of care [cite: 256, 1044].<br><strong>Significance:</strong> Precedent and legislative override." },
+    communistParty: { name: "Australian Communist Party v Commonwealth (1951)", details: "<strong>Facts:</strong> Cth passed law banning Communist Party.<br><strong>Issue:</strong> Validity of Cth law under Constitution." }
+};
     if (caseSelectExplorer) {
         caseSelectExplorer.addEventListener('change', function() {
             const selectedCaseKey = this.value;
