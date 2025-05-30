@@ -1,3 +1,4 @@
+@import "tailwindcss";
 body {
     font-family: 'Inter', sans-serif;
 }
@@ -368,3 +369,40 @@ body {
 #relationshipMatcherFeedback .feedback-correct { color: #15803d; }
 #relationshipMatcherFeedback .feedback-incorrect { color: #b91c1c; }
 /* Styles for Case Study Reflection */
+/* Ensure existing glossary item styles are still effective */
+.glossary-item {
+    padding: 0.25rem 0; /* Adjust padding if needed */
+}
+.glossary-term { 
+    cursor: pointer; 
+    font-weight: 500; /* Make terms slightly bolder */
+    color: #0f766e; /* Tailwind teal-700 */
+}
+.glossary-term:hover {
+    color: #0d9488; /* Tailwind teal-600 */
+}
+.glossary-definition { 
+    display: none; 
+    margin-left: 1rem; /* Indent definition */
+    padding-left: 0.5rem;
+    border-left: 2px solid #99f6e4; /* Tailwind teal-200 */
+    color: #475569; /* Tailwind slate-600 */
+    font-size: 0.875rem; /* text-sm */
+    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Styles for categorized glossary */
+#categorizedGlossaryContainer h5 {
+    /* Tailwind classes in HTML handle sticky, bg, py, z-index */
+    /* Add any additional specific styling here if needed */
+    border-bottom: 1px solid #ccfbf1; /* Tailwind teal-100 for a subtle separator */
+}
+#glossarySearch {
+    /* Tailwind classes in HTML handle sticky, bg, z-index */
+    /* Ensure it appears above category titles if they are also sticky */
+    z-index: 20; 
+}
+#categorizedGlossaryContainer h5 {
+    z-index: 15; /* Below search but above terms */
+}

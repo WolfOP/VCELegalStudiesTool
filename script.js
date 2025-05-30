@@ -154,6 +154,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
                     window.initializeKeySkillsHub();
                 }
+                if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') { // ADD THIS
+                    window.setupCategorizedGlossary();
+        }
                 // Add calls for other tools if they have specific initializers e.g. glossary search, diagram handlers
             }
         });
@@ -729,6 +732,134 @@ document.addEventListener('DOMContentLoaded', function () {
         mainNavButtons[0].click(); // This will cascade to select default U4AOS and U4AOS1 content
     }
     // --- End of U4AOS1 Content Toggles ---
+
+    // --- Categorized Glossary Logic ---
+const categorizedGlossaryData = {
+    "The Australian Constitution": [
+        { term: "Acquisition of Property on Just Terms", definition: "An express right under section 51(xxxi) of the Australian Constitution, giving the Commonwealth Parliament power to acquire property on just terms. The Commonwealth must provide 'just terms', like fair compensation. Limitations include no specific definition of 'just terms' and it not applying to states." },
+        { term: "Australian Constitution", definition: "A set of rules for the nature, functions, powers, duties, and limits of government in Australia. It establishes the Commonwealth Parliament and High Court, outlines state matters, defines Commonwealth law-making powers, and provides a referendum mechanism for change. It also establishes state and Commonwealth parliamentary law-making powers and protects Australians through structures checking parliament." },
+        { term: "Concurrent Powers", definition: "Law-making powers shared by Commonwealth and state parliaments, listed in section 51 of the Constitution (e.g., taxation, marriage, divorce)." },
+        { term: "Constitution", definition: "A set of rules and principles establishing the nature, functions, powers, duties, and limits of government. Australia has a formal written constitution." },
+        { term: "Constitutional Monarchy", definition: "A system where the Crown is Head of State, but elected representatives create laws." },
+        { term: "Constitutional Reform", definition: "The process of changing the Australian Constitution, requiring a referendum." },
+        { term: "Division of Powers", definition: "The constitutional allocation of law-making powers between Commonwealth and state parliaments, divided into exclusive, concurrent, and residual powers to avoid power abuses and share responsibility." },
+        { term: "Double Majority", definition: "A requirement for a successful referendum, needing a majority of voters nationwide and a majority of voters in a majority of states (at least four)." },
+        { term: "Exclusive Powers", definition: "Law-making powers granted only to the Commonwealth Parliament by sections 51 and 52 of the Constitution. States cannot legislate in these areas (e.g., currency, defence, customs)." },
+        { term: "Express Protection of Rights", definition: "Rights explicitly stated and entrenched in the Australian Constitution, changeable only by referendum. The five express rights are: acquisition of property on just terms, trial by jury for Commonwealth indictable offences, interstate trade and commerce, freedom of religion, and no discrimination based on state residence." },
+        { term: "External Affairs Power", definition: "Commonwealth Parliament's law-making power under section 51(xxix) of the Constitution, interpreted by the High Court to allow legislation on areas covered by international treaties." },
+        { term: "Freedom of Religion", definition: "An express right under section 116 of the Australian Constitution, stating the Commonwealth shall not make laws establishing religion, imposing observance, or prohibiting free exercise. It primarily limits the Commonwealth, not states." },
+        { term: "High Court of Australia (HCA)", definition: "Established by the Constitution, with jurisdiction under sections 75 and 76 to hear matters arising under or interpreting the Constitution. It acts as guardian of the Constitution, interprets it, settles disputes, and can declare laws ultra vires." },
+        { term: "Implied Right", definition: "A right not explicitly in the Constitution but interpreted by the High Court to exist, like the implied right to freedom of political communication from sections 7 and 24." },
+        { term: "Interstate Trade and Commerce", definition: "An express right under section 92 of the Constitution, stating 'trade, commerce, and intercourse among the States... shall be absolutely free'. Not absolute; laws can restrict movement if non-discriminatory." },
+        { term: "Referendum", definition: "A compulsory national vote on a proposed change to the Australian Constitution's wording, as per section 128. Requires a double majority." },
+        { term: "Residual Powers", definition: "Law-making powers left solely with state parliaments at federation, not explicitly listed in the Constitution (e.g., criminal law, medical procedures, education)." },
+        { term: "Section 109", definition: "A section of the Constitution resolving inconsistencies between state and Commonwealth laws in concurrent areas. If inconsistent, Commonwealth law prevails, and state law is invalid to the extent of the inconsistency. Can restrict state parliaments." },
+        { term: "Sections 7 and 24", definition: "Sections of the Constitution establishing Senate and House of Representatives composition, stipulating members be 'directly chosen by the people' via regular elections. They enforce representative government." },
+        { term: "Significance of High Court Cases", definition: "The impact of a High Court constitutional interpretation on state and Commonwealth law-making powers, e.g., Brislan (telecommunications) and Tasmanian Dams (external affairs) cases." },
+        { term: "Significance of Referendums", definition: "The impact a referendum has on changing the Constitution, e.g., the 1967 referendum altering law-making powers regarding Indigenous Australians." },
+        { term: "Trial by Jury (Commonwealth Indictable Offences)", definition: "An express right under section 80 of the Constitution, requiring jury trial for Commonwealth indictable offences. Limited to Commonwealth indictable offences, not state or summary ones." }
+    ],
+    "Parliament and Statute Law": [
+        { term: "Abrogation of Common Law", definition: "Parliament overruling common law by creating a contrary statute. Parliament can override most common law, except High Court constitutional decisions." },
+        { term: "Act of Parliament (Legislation/Statute Law)", definition: "A law made by parliament. A bill becomes an Act after agreement by both houses and royal assent." },
+        { term: "Bicameral Parliament/Structure", definition: "A law-making body with two houses that must approve new bills or amendments. Required by Victorian and Commonwealth constitutions. A second house can prevent purely partisan legislation." },
+        { term: "Bill", definition: "A proposed law introduced in parliament. Becomes law after agreement by both houses and royal assent." },
+        { term: "Codification of Common Law", definition: "Parliament making laws to affirm common law decisions, possible due to its supreme law-making power." }
+        // ... Add all other terms for this category from your list ...
+    ],
+    "Courts and Common Law": [
+        { term: "Binding Precedent", definition: "Legal reasoning of a higher court that lower courts in the same hierarchy must follow with similar material facts. Judges must follow if binding, regardless of agreement." }
+        // ... Add all other terms for this category ...
+    ],
+    "Key Legal Principles and Rights (Overarching)": [
+        { term: "Access", definition: "All people should be able to engage with the justice system and its processes on an informed basis." }
+        // ... Add all other terms for this category ...
+    ],
+    "Government, Politics, and Law Reform": [
+        { term: "Balance of Power", definition: "Support of minor parties/independents enabling government to form a majority and enact laws. Occurs with a hostile upper house." }
+        // ... Add all other terms for this category ...
+    ],
+    "VCE Legal Studies Meta-Terms": [
+        { term: "Aims (of Study)", definition: "VCE Legal Studies aims: understand/apply legal terminology/principles, apply principles to scenarios, analyse law-making institutions/influences, understand rights, analyse dispute resolution, examine justice system's ability to achieve justice principles." }
+        // ... Add all other terms for this category ...
+    ]
+};
+
+const glossarySearchInput = document.getElementById('glossarySearch');
+const categorizedGlossaryContainer = document.getElementById('categorizedGlossaryContainer');
+
+function setupCategorizedGlossary() {
+    if (!categorizedGlossaryContainer) return;
+
+    // Clear previous content if any (important if called multiple times)
+    Object.keys(categorizedGlossaryData).forEach(categoryName => {
+        const categoryKey = categoryName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g,''); // Create a simple key
+        const categoryDiv = document.getElementById(`glossaryCategory-${categoryKey}`);
+        if (categoryDiv) {
+            categoryDiv.innerHTML = ''; // Clear previous terms
+        }
+    });
+
+    Object.entries(categorizedGlossaryData).forEach(([categoryName, terms]) => {
+        const categoryKey = categoryName.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g,'');
+        const categoryDiv = document.getElementById(`glossaryCategory-${categoryKey}`);
+        if (categoryDiv) {
+            terms.sort((a, b) => a.term.localeCompare(b.term)); // Sort terms alphabetically
+            terms.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('glossary-item');
+
+                const termStrong = document.createElement('strong');
+                termStrong.classList.add('glossary-term');
+                termStrong.textContent = item.term + ":"; // Add colon for clarity
+
+                const defSpan = document.createElement('span');
+                defSpan.classList.add('glossary-definition');
+                defSpan.textContent = item.definition;
+
+                itemDiv.appendChild(termStrong);
+                itemDiv.appendChild(defSpan);
+                categoryDiv.appendChild(itemDiv);
+
+                termStrong.addEventListener('click', () => {
+                    defSpan.style.display = defSpan.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+        } else {
+            console.warn("Could not find div for category:", `glossaryCategory-${categoryKey}`);
+        }
+    });
+}
+
+if (glossarySearchInput && categorizedGlossaryContainer) {
+    glossarySearchInput.addEventListener('keyup', function() {
+        const filter = glossarySearchInput.value.toLowerCase();
+        const allGlossaryItems = categorizedGlossaryContainer.querySelectorAll('.glossary-item');
+
+        allGlossaryItems.forEach(item => {
+            const termText = item.querySelector('.glossary-term').textContent.toLowerCase();
+            const definitionText = item.querySelector('.glossary-definition').textContent.toLowerCase();
+            if (termText.includes(filter) || definitionText.includes(filter)) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        });
+
+        // Show/hide category titles if all items within are hidden
+        const categoryDivs = categorizedGlossaryContainer.querySelectorAll('div[id^="glossaryCategory-"]');
+        categoryDivs.forEach(catDiv => {
+            const parentWrapper = catDiv.parentElement; // The div containing the h5 and the catDiv
+            const visibleItems = Array.from(catDiv.querySelectorAll('.glossary-item')).some(item => item.style.display !== "none");
+            if (parentWrapper) {
+                parentWrapper.style.display = visibleItems ? "" : "none";
+            }
+        });
+    });
+}
+
+// Expose setup function to be called from main script if glossary is activated
+window.setupCategorizedGlossary = setupCategorizedGlossary;
 
 // THIS IS THE SINGLE CLOSING TAG for the main DOMContentLoaded listener in your main script.js
 }); // <-- Properly close the DOMContentLoaded event listener
