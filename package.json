@@ -1,0 +1,25 @@
+{
+  "name": "vcelegalstudiestool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "keySkillsHub.js",
+  "scripts": {
+    "dev": "postcss style.css -o output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WolfOP/VCELegalStudiesTool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WolfOP/VCELegalStudiesTool/issues"
+  },
+  "homepage": "https://github.com/WolfOP/VCELegalStudiesTool#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.8"
+  }
+}
