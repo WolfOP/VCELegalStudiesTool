@@ -162,21 +162,30 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', () => handleU4AOS1ContentToggle(button));
     });
     
-    // Accordion Logic
+    // Accordion Logic (REVISED)
     const accordionToggles = document.querySelectorAll('.accordion-toggle');
     accordionToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const content = toggle.nextElementSibling;
-            if (!content || !content.classList.contains('accordion-content')) return;
+            // Ensure we are dealing with a valid accordion structure
+            if (!content || !content.classList.contains('accordion-content')) {
+                console.warn("Accordion structure issue for toggle:", toggle);
+                return;
+            }
 
             const arrow = toggle.querySelector('.arrow-icon');
             const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
-            
-            const parentAccordionContainer = toggle.closest('#u4aos1-accordion-container');
-            const isMainKnowledgeAccordion = parentAccordionContainer && !toggle.closest('#u4aos1-key-skills-hub, #u4aos1-guided-answers, #u4aos1-case-deconstruction, #u4aos1-term-match-game, #u4aos1-glossary, #u4aos1-interactive-diagrams, #u4aos1-case-explorer, #u4aos1-exam-skills, #u4aos1-practice-questions');
 
-            if (!isExpanded && isMainKnowledgeAccordion) {
-                parentAccordionContainer.querySelectorAll(':scope > .u4aos1-content > .border > .accordion-toggle').forEach(otherToggle => {
+            // Check if this accordion is one of the main U4AOS1 content blocks
+            const parentU4AOS1ContentBlock = toggle.closest('.u4aos1-content');
+            const mainAccordionContainer = document.getElementById('u4aos1-accordion-container');
+            
+            // isMainU4AOS1Accordion: true if the toggle's parent '.u4aos1-content' is a direct child of '#u4aos1-accordion-container'
+            const isMainU4AOS1Accordion = parentU4AOS1ContentBlock && parentU4AOS1ContentBlock.parentElement === mainAccordionContainer;
+
+            if (!isExpanded && isMainU4AOS1Accordion) {
+                // If this is a main U4AOS1 accordion and it's being opened, close all OTHER main U4AOS1 accordions
+                mainAccordionContainer.querySelectorAll(':scope > .u4aos1-content > .border > .accordion-toggle').forEach(otherToggle => {
                     if (otherToggle !== toggle) {
                         const otherContent = otherToggle.nextElementSibling;
                         const otherArrow = otherToggle.querySelector('.arrow-icon');
@@ -188,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
             
+            // Toggle the current accordion
             if (isExpanded) {
                 content.style.maxHeight = '0px';
                 if (arrow) arrow.style.transform = 'rotate(0deg)';

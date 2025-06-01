@@ -440,22 +440,29 @@ if (resetRelationshipMatcherBtn) {
 // For Netlify/Vercel, it might be a relative path like '/.netlify/functions/gemini-proxy' or '/api/gemini-proxy'.
 const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
-async function callGeminiAPI(promptText) { // Renamed parameter for clarity
-    if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE") {
+async function callGeminiAPI(promptText) {
+    if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
         const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
         console.error(errorMessage);
-        // Display this error to the user in the UI as well
-        // For example, if called from glossary:
+        // Update UI with this specific error
         const activeAIContentDiv = document.querySelector('.ai-explanation-content:not([style*="display: none"])');
         if (activeAIContentDiv) {
             activeAIContentDiv.innerHTML = `<span class="text-red-600 font-semibold">Configuration Error:</span> ${errorMessage}`;
+            activeAIContentDiv.classList.remove('loading-ai'); // Ensure loading state is removed
         }
-        // For case insights:
-        const aiCaseInsightError = document.getElementById('aiCaseInsightError');
-        if (aiCaseInsightError) {
-            aiCaseInsightError.textContent = errorMessage;
-            aiCaseInsightError.classList.remove('hidden');
+        const aiCaseInsightErrorEl = document.getElementById('aiCaseInsightError');
+        if (aiCaseInsightErrorEl) {
+            aiCaseInsightErrorEl.textContent = errorMessage;
+            aiCaseInsightErrorEl.classList.remove('hidden');
+            const aiCaseInsightLoadingEl = document.getElementById('aiCaseInsightLoading');
+            if(aiCaseInsightLoadingEl) aiCaseInsightLoadingEl.classList.add('hidden');
         }
+        // Disable buttons if relevant
+        const getAICaseInsightBtnEl = document.getElementById('getAICaseInsightBtn');
+        if(getAICaseInsightBtnEl) getAICaseInsightBtnEl.disabled = false;
+        const activeExplainBtn = document.querySelector('.ai-explain-further-btn:disabled');
+        if(activeExplainBtn) activeExplainBtn.disabled = false;
+
         throw new Error(errorMessage);
     }
 
@@ -463,53 +470,58 @@ async function callGeminiAPI(promptText) { // Renamed parameter for clarity
         const response = await fetch(PROXY_ENDPOINT_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ prompt: promptText }) // Send the prompt in the request body
+            body: JSON.stringify({ prompt: promptText })
         });
 
         if (!response.ok) {
-            let errorData;
-            try {
-                errorData = await response.json();
-            } catch (e) {
-                // If response is not JSON, use text
-                const textError = await response.text();
-                errorData = { error: { message: textError || "Proxy returned non-JSON error" }};
+            let errorPayload;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.includes("application/json")) {
+                errorPayload = await response.json(); // Read body once as JSON
+            } else {
+                const textError = await response.text(); // Read body once as text
+                errorPayload = { error: { message: textError || "Proxy returned non-JSON error" } };
             }
-            console.error("Proxy API Error Details:", errorData);
-            throw new Error(`Proxy Error: ${response.status} ${response.statusText}. ${errorData?.error?.message || errorData.message || 'Unknown proxy error.'}`);
+            console.error("Proxy API Error Response:", errorPayload);
+            const errorMessage = errorPayload?.error?.message || errorPayload?.message || response.statusText || 'Unknown proxy error.';
+            throw new Error(`Proxy Error: ${response.status}. ${errorMessage}`);
         }
 
         const result = await response.json();
 
-        // The proxy should ideally return a simple structure like { text: "..." }
-        // This part needs to match what YOUR proxy function returns.
         if (result && result.text) {
             return result.text;
+        } else if (result.candidates && result.candidates.length > 0 &&
+            result.candidates[0].content && result.candidates[0].content.parts &&
+            result.candidates[0].content.parts.length > 0) {
+            console.warn("Proxy returned full Gemini structure. Consider simplifying proxy response to { text: '...' }.");
+            return result.candidates[0].content.parts[0].text;
         } else {
-            // Fallback if the proxy still returns the full Gemini structure (less ideal for a proxy)
-            if (result.candidates && result.candidates.length > 0 &&
-                result.candidates[0].content && result.candidates[0].content.parts &&
-                result.candidates[0].content.parts.length > 0) {
-                console.warn("Proxy returned full Gemini structure. Consider simplifying proxy response to { text: '...' }.");
-                return result.candidates[0].content.parts[0].text;
-            } else {
-                console.error("Proxy API Response Unexpected:", result);
-                throw new Error("Could not extract text from proxy response. Ensure proxy returns { text: '...' }.");
-            }
+            console.error("Proxy API Response Unexpected Structure:", result);
+            throw new Error("Could not extract text from proxy response. Ensure proxy returns { text: '...' } or standard Gemini structure.");
         }
     } catch (error) {
-        console.error("Error calling Proxy API:", error);
-        // Display a user-friendly error in the UI
+        console.error("Error calling Proxy API or processing response:", error);
+        // Update UI with this error
         const activeAIContentDiv = document.querySelector('.ai-explanation-content:not([style*="display: none"])');
         if (activeAIContentDiv) {
-            activeAIContentDiv.innerHTML = `<span class="text-red-600 font-semibold">Error:</span> Could not connect to AI service. ${error.message}`;
+            activeAIContentDiv.innerHTML = `<span class=\"text-red-600 font-semibold\">Error:</span> ${error.message}`;
+            activeAIContentDiv.classList.remove('loading-ai');
         }
-        const aiCaseInsightError = document.getElementById('aiCaseInsightError');
-        if (aiCaseInsightError) {
-            aiCaseInsightError.textContent = `Error: Could not connect to AI service. ${error.message}`;
-            aiCaseInsightError.classList.remove('hidden');
+        const aiCaseInsightErrorEl = document.getElementById('aiCaseInsightError');
+        if (aiCaseInsightErrorEl) {
+            aiCaseInsightErrorEl.textContent = `Error: ${error.message}`;
+            aiCaseInsightErrorEl.classList.remove('hidden');
+            const aiCaseInsightLoadingEl = document.getElementById('aiCaseInsightLoading');
+            if(aiCaseInsightLoadingEl) aiCaseInsightLoadingEl.classList.add('hidden');
         }
-        throw error; // Re-throw to be caught by caller if needed for specific UI updates
+        // Re-enable buttons that might have been disabled
+        const getAICaseInsightBtnEl = document.getElementById('getAICaseInsightBtn');
+        if(getAICaseInsightBtnEl) getAICaseInsightBtnEl.disabled = false;
+        const activeExplainBtn = document.querySelector('.ai-explain-further-btn:disabled');
+        if(activeExplainBtn) activeExplainBtn.disabled = false;
+        
+        throw error; 
     }
 }
 
