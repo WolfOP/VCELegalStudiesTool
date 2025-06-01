@@ -435,6 +435,7 @@ const categorizedGlossaryData = {
         { term: "Victorian Study Design", definition: "VCE Legal Studies Study Design, outlining the curriculum." }
     ]
 };
+window.categorizedGlossaryData = categorizedGlossaryData;
 
     // Glossary Interaction
     const glossaryItems = document.querySelectorAll('.glossary-item');

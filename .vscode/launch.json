@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "https://wolfop.github.io/VCELegalStudiesTool/",
+            "request": "launch",
+            "url": "https://wolfop.github.io/VCELegalStudiesTool/"
+        }
+    ]
+}

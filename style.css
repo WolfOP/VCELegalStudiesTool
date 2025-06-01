@@ -556,3 +556,35 @@ body {
 #relationshipMatcherFeedback li {
     margin-bottom: 0.25rem;
 }
+/* Styles for Inconsistency Resolver Tool */
+#inconsistencyResolverContainer input[type="text"].correct,
+#inconsistencyResolverContainer select.correct,
+#inconsistencyResolverContainer textarea.correct {
+    border-color: #10b981; /* green-500 */
+    background-color: #f0fdf4; /* green-50 */
+}
+#inconsistencyResolverContainer input[type="text"].incorrect,
+#inconsistencyResolverContainer select.incorrect,
+#inconsistencyResolverContainer textarea.incorrect {
+    border-color: #ef4444; /* red-500 */
+    background-color: #fee2e2; /* red-50 */
+}
+#irFeedbackArea .feedback-item {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+#irFeedbackArea .feedback-correct {
+    background-color: #ecfdf5; /* green-50 */
+    color: #065f46; /* green-800 */
+    border-left: 4px solid #22c55e; /* green-500 */
+}
+#irFeedbackArea .feedback-incorrect {
+    background-color: #fff1f2; /* rose-50 */
+    color: #9f1239; /* rose-800 */
+    border-left: 4px solid #f43f5e; /* rose-500 */
+}
+#irFeedbackArea .feedback-hint {
+    color: #57534e; /* stone-600 */
+    font-style: italic;
+}

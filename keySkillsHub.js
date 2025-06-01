@@ -647,6 +647,189 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // --- Key Skill 5: Explain the significance of section 109 (Inconsistency Resolver) ---
+    const irScenarioArea = document.getElementById('irScenarioArea');
+    const irInputSection = document.getElementById('irInputSection');
+    const irInputPrevails = document.getElementById('irInputPrevails');
+    const irInputEffect = document.getElementById('irInputEffect');
+    const irInputSignificance = document.getElementById('irInputSignificance');
+    const irCheckAnswerBtn = document.getElementById('irCheckAnswerBtn');
+    const irNextScenarioBtn = document.getElementById('irNextScenarioBtn');
+    const irFeedbackArea = document.getElementById('irFeedbackArea');
+
+    const inconsistencyResolverScenarios = [
+        {
+            id: 'ir1',
+            scenario: "The Commonwealth Parliament passes the 'National Data Security Act 2025 (Cth)' which requires all businesses handling personal data to implement specific encryption standards. Victoria later passes the 'Victorian Data Privacy Act 2026 (Vic)' which sets lower encryption standards for small businesses operating only within Victoria, arguing it's less burdensome for them.",
+            answers: {
+                section: ["s109", "section 109", "109"],
+                prevails: "Commonwealth",
+                effect: ["invalid to the extent of the inconsistency", "inoperative to the extent of inconsistency"],
+                significanceKeywords: ["restricts state power", "ensures uniformity", "commonwealth paramount", "concurrent powers"]
+            },
+            modelSignificance: "Section 109 ensures that in areas where both Commonwealth and State parliaments can make laws (concurrent powers), a single, uniform national approach (the Commonwealth's) will apply if there's a direct conflict, thus restricting state legislative power in such instances."
+        },
+        {
+            id: 'ir2',
+            scenario: "A state law mandates specific labeling requirements for all food products sold within that state, including detailed allergen warnings. The Commonwealth Parliament has an existing 'Food Standards Australia New Zealand Act 1991 (Cth)' that sets out national food labeling standards, which are less prescriptive regarding certain allergens than the new state law.",
+            answers: {
+                section: ["s109", "section 109", "109"],
+                prevails: "Commonwealth",
+                effect: ["invalid to the extent of the inconsistency", "inoperative to the extent of inconsistency"],
+                significanceKeywords: ["national standard", "prevents conflicting regulations", "consistency in trade", "concurrent area (food standards)"]
+            },
+            modelSignificance: "Section 109 is significant here as it provides a mechanism to resolve conflicting regulations in areas of shared law-making power like food standards, ensuring that national standards set by the Commonwealth prevail over inconsistent state laws, promoting consistency for businesses and consumers across Australia."
+        }
+        // Add more scenarios here
+    ];
+    let currentIRScenarioIndex = 0;
+
+    window.loadIRScenario = function(index) { // Expose to window
+        if (!irScenarioArea || index === undefined || index >= inconsistencyResolverScenarios.length) {
+            // console.warn("IR Load: Invalid index or missing elements.");
+            if (irScenarioArea) irScenarioArea.innerHTML = "<p>No more scenarios or error loading.</p>";
+            return;
+        }
+        currentIRScenarioIndex = index;
+        const scenarioData = inconsistencyResolverScenarios[index];
+        irScenarioArea.innerHTML = `<p class="font-medium mb-1">Scenario ${index + 1}:</p><p>${scenarioData.scenario}</p>`;
+
+        // Clear inputs and feedback
+        if(irInputSection) irInputSection.value = '';
+        if(irInputPrevails) irInputPrevails.value = '';
+        if(irInputEffect) irInputEffect.value = '';
+        if(irInputSignificance) irInputSignificance.value = '';
+
+        [irInputSection, irInputPrevails, irInputEffect, irInputSignificance].forEach(el => {
+            if(el) el.classList.remove('correct', 'incorrect');
+        });
+
+        if(irFeedbackArea) irFeedbackArea.innerHTML = '';
+        if(irCheckAnswerBtn) irCheckAnswerBtn.classList.remove('hidden');
+        if(irNextScenarioBtn) irNextScenarioBtn.classList.add('hidden');
+    }
+
+    if (irCheckAnswerBtn) {
+        irCheckAnswerBtn.addEventListener('click', () => {
+            if (!irFeedbackArea || currentIRScenarioIndex >= inconsistencyResolverScenarios.length) return;
+
+            const scenarioData = inconsistencyResolverScenarios[currentIRScenarioIndex];
+            let allCorrect = true;
+            let feedbackHTML = "";
+
+            // 1. Check Section
+            const userSection = irInputSection.value.trim().toLowerCase();
+            if (scenarioData.answers.section.map(s => s.toLowerCase()).includes(userSection)) {
+                irInputSection.classList.add('correct');
+                irInputSection.classList.remove('incorrect');
+                feedbackHTML += `<div class="feedback-item feedback-correct">1. Relevant Section: Correct! (${irInputSection.value})</div>`;
+            } else {
+                irInputSection.classList.add('incorrect');
+                irInputSection.classList.remove('correct');
+                feedbackHTML += `<div class="feedback-item feedback-incorrect">1. Relevant Section: Incorrect. Hint: It's a key section for resolving Cth/State law conflicts. (Expected: s109)</div>`;
+                allCorrect = false;
+            }
+
+            // 2. Check Prevails
+            const userPrevails = irInputPrevails.value;
+            if (userPrevails === scenarioData.answers.prevails) {
+                irInputPrevails.classList.add('correct');
+                irInputPrevails.classList.remove('incorrect');
+                feedbackHTML += `<div class="feedback-item feedback-correct">2. Prevailing Law: Correct! (${userPrevails})</div>`;
+            } else {
+                irInputPrevails.classList.add('incorrect');
+                irInputPrevails.classList.remove('correct');
+                feedbackHTML += `<div class="feedback-item feedback-incorrect">2. Prevailing Law: Incorrect. Hint: Which level of government's law takes precedence under s109? (Expected: ${scenarioData.answers.prevails})</div>`;
+                allCorrect = false;
+            }
+
+            // 3. Check Effect
+            const userEffect = irInputEffect.value.trim().toLowerCase();
+            let effectCorrect = false;
+            for (const ans of scenarioData.answers.effect) {
+                if (userEffect.includes(ans.toLowerCase())) { // Check if user's answer contains a valid phrase
+                    effectCorrect = true;
+                    break;
+                }
+            }
+            if (effectCorrect) {
+                irInputEffect.classList.add('correct');
+                irInputEffect.classList.remove('incorrect');
+                feedbackHTML += `<div class="feedback-item feedback-correct">3. Effect on State Law: Correct! (e.g., ${scenarioData.answers.effect[0]})</div>`;
+            } else {
+                irInputEffect.classList.add('incorrect');
+                irInputEffect.classList.remove('correct');
+                feedbackHTML += `<div class="feedback-item feedback-incorrect">3. Effect on State Law: Needs review. Hint: What happens to the state law where it clashes? (e.g., invalid to the extent of the inconsistency)</div>`;
+                allCorrect = false;
+            }
+
+            // 4. Check Significance (Keyword based for simplicity)
+            const userSignificance = irInputSignificance.value.trim().toLowerCase();
+            let significanceKeywordsMet = 0;
+            let significanceFeedback = "4. Significance: ";
+            scenarioData.answers.significanceKeywords.forEach(keyword => {
+                if (userSignificance.includes(keyword.toLowerCase())) {
+                    significanceKeywordsMet++;
+                }
+            });
+            if (significanceKeywordsMet >= 1) { // Require at least one keyword for "correct"
+                irInputSignificance.classList.add('correct');
+                irInputSignificance.classList.remove('incorrect');
+                significanceFeedback += `<span class="feedback-correct">Looks good! You've touched on key aspects.</span><br><small class="feedback-hint">Model significance: ${scenarioData.modelSignificance}</small>`;
+            } else {
+                irInputSignificance.classList.add('incorrect');
+                irInputSignificance.classList.remove('correct');
+                significanceFeedback += `<span class="feedback-incorrect">Consider elaborating on the impact. Hint: Think about how s109 affects state power or ensures national consistency.</span><br><small class="feedback-hint">Model significance: ${scenarioData.modelSignificance}</small>`;
+                allCorrect = false;
+            }
+            feedbackHTML += `<div class="feedback-item">${significanceFeedback}</div>`;
+
+            irFeedbackArea.innerHTML = feedbackHTML;
+            if (irCheckAnswerBtn) irCheckAnswerBtn.classList.add('hidden');
+            if (irNextScenarioBtn) irNextScenarioBtn.classList.remove('hidden');
+        });
+    }
+
+    if (irNextScenarioBtn) {
+        irNextScenarioBtn.addEventListener('click', () => {
+            currentIRScenarioIndex++;
+            if (currentIRScenarioIndex >= inconsistencyResolverScenarios.length) {
+                currentIRScenarioIndex = 0; // Loop back
+                if(irScenarioArea) irScenarioArea.innerHTML = "<p>All scenarios completed! Resetting...</p>";
+            }
+            if(typeof window.loadIRScenario === 'function') window.loadIRScenario(currentIRScenarioIndex);
+        });
+    }
+
+    // Update initializeKeySkillsHub to include setup for Inconsistency Resolver
+    // This function should already be defined at the end of your keySkillsHub.js
+    // We are modifying it here to add the new call.
+    const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
+    window.initializeKeySkillsHub = function() {
+        if(typeof originalInitializeKeySkillsHub === 'function') {
+            originalInitializeKeySkillsHub(); // Call previous initializations
+        } else {
+            // Fallback if original was not defined, initialize other tools if their containers exist
+            if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') {
+                if(typeof currentSTCQuestion !== 'undefined') window.loadSTCQuestion(currentSTCQuestion); else window.loadSTCQuestion(0);
+            }
+            if (document.getElementById('sourceAnalysisChallengeContainer') && typeof window.loadSACExcerpt === 'function') {
+                 if(typeof currentSACExcerpt !== 'undefined') window.loadSACExcerpt(currentSACExcerpt); else window.loadSACExcerpt(0);
+            }
+            if (document.getElementById('powerSortGameContainer') && typeof window.setupPowerSortGame === 'function') {
+                window.setupPowerSortGame();
+            }
+            if (document.getElementById('relationshipMatcherContainer') && typeof window.setupRelationshipMatcherGame === 'function') {
+                window.setupRelationshipMatcherGame();
+            }
+        }
+        // Initialize Inconsistency Resolver
+        if (document.getElementById('inconsistencyResolverContainer') && typeof window.loadIRScenario === 'function') {
+            window.loadIRScenario(0); // Load the first scenario
+        }
+        console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver.");
+    };
+
     // --- Gemini API Integration ---
     // REMOVE or leave empty: const GEMINI_API_KEY = ""; 
     // The API key will now be handled by your server-side proxy.

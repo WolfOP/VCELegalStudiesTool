@@ -526,6 +526,44 @@
                     <div id="relationshipMatcherFeedback" class="mt-2 text-xs"></div>
                 </div>
             </div>
+            <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow">
+    <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill: Explain the significance of section 109 of the Australian Constitution</h5>
+    <p class="text-sm text-slate-600 mb-3">Practice applying section 109 to resolve inconsistencies between Commonwealth and State laws and explain its importance.</p>
+
+    <div id="inconsistencyResolverContainer" class="space-y-4">
+        <div id="irScenarioArea" class="text-sm text-slate-700 mb-2 p-3 bg-cyan-50 rounded border border-cyan-100">
+            <p>Loading scenario...</p>
+        </div>
+
+        <div class="space-y-3 text-sm">
+            <div>
+                <label for="irInputSection" class="block font-medium text-slate-700">1. Which section of the Australian Constitution is relevant here?</label>
+                <input type="text" id="irInputSection" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="e.g., s 109">
+            </div>
+            <div>
+                <label for="irInputPrevails" class="block font-medium text-slate-700">2. In this scenario, which law will prevail?</label>
+                <select id="irInputPrevails" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm">
+                    <option value="">Select...</option>
+                    <option value="Commonwealth">Commonwealth Law</option>
+                    <option value="State">State Law</option>
+                </select>
+            </div>
+            <div>
+                <label for="irInputEffect" class="block font-medium text-slate-700">3. What happens to the inconsistent part of the State law?</label>
+                <input type="text" id="irInputEffect" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="e.g., It is ... to the extent of the ...">
+            </div>
+            <div>
+                <label for="irInputSignificance" class="block font-medium text-slate-700">4. Briefly state one key significance of section 109 shown in this scenario.</label>
+                <textarea id="irInputSignificance" rows="3" class="mt-1 block w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" placeholder="e.g., It limits state power..."></textarea>
+            </div>
+        </div>
+
+        <button id="irCheckAnswerBtn" class="py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm transition-colors">Check Answers</button>
+        <button id="irNextScenarioBtn" class="py-2 px-4 bg-slate-400 text-white rounded hover:bg-slate-500 text-sm ml-2 transition-colors hidden">Next Scenario</button>
+        <div id="irFeedbackArea" class="mt-3 text-xs space-y-1"></div>
+    </div>
+</div>
+
             <p class="text-center text-slate-400 italic mt-6">More Key Skill activities coming soon!</p>
 
         </div>
