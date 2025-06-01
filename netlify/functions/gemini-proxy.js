@@ -16,7 +16,7 @@ exports.handler = async function(event, context) {
             statusCode: 500,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
@@ -24,13 +24,13 @@ exports.handler = async function(event, context) {
         };
     }
 
-    // Handle CORS preflight requests
+    // Handle CORS preflight requests (OPTIONS) for any origin (for debugging, can restrict later)
     if (event.httpMethod === "OPTIONS") {
         return {
             statusCode: 204,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
@@ -44,7 +44,7 @@ exports.handler = async function(event, context) {
             statusCode: 405, // Method Not Allowed
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
@@ -62,7 +62,7 @@ exports.handler = async function(event, context) {
             statusCode: 400,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
@@ -76,7 +76,7 @@ exports.handler = async function(event, context) {
             statusCode: 400,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
@@ -106,7 +106,7 @@ exports.handler = async function(event, context) {
                 statusCode: geminiResponse.status,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "POST, OPTIONS"
                 },
@@ -128,7 +128,7 @@ exports.handler = async function(event, context) {
                 statusCode: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "POST, OPTIONS"
                 },
@@ -140,7 +140,7 @@ exports.handler = async function(event, context) {
                 statusCode: 500,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "POST, OPTIONS"
                 },
@@ -154,7 +154,7 @@ exports.handler = async function(event, context) {
             statusCode: 500,
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Methods": "POST, OPTIONS"
             },
