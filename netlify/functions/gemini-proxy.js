@@ -24,6 +24,20 @@ exports.handler = async function(event, context) {
         };
     }
 
+    // Handle CORS preflight requests
+    if (event.httpMethod === "OPTIONS") {
+        return {
+            statusCode: 204,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
+            body: "",
+        };
+    }
+
     // 2. Ensure it's a POST request
     if (event.httpMethod !== "POST") {
         return {
