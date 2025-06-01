@@ -6,49 +6,44 @@
 // const fetch = require('node-fetch'); // or import fetch from 'node-fetch';
 
 exports.handler = async function(event, context) {
-    // 1. Get your Gemini API Key from Netlify's environment variables
-    //    NEVER hardcode it here.
+    // Handle OPTIONS request for CORS preflight
+    if (event.httpMethod === "OPTIONS") {
+        return {
+            statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
+            },
+            body: "" // Empty body for OPTIONS
+        };
+    }
+
+    // 1. Check for POST request
+    if (event.httpMethod !== "POST") {
+        return {
+            statusCode: 405, // Method Not Allowed
+            headers: { 
+                "Content-Type": "application/json", 
+                "Allow": "POST",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
+            body: JSON.stringify({ error: { message: "Method Not Allowed. Please use POST." } }),
+        };
+    }
+
+    // 2. Get your Gemini API Key from environment variables
+    //    Set this in your Netlify site settings (Build & deploy > Environment > Environment variables)
     const GEMINI_API_KEY_SECRET = process.env.GEMINI_API_KEY_SECRET;
 
     if (!GEMINI_API_KEY_SECRET) {
         console.error("Gemini API key not configured on server.");
         return {
             statusCode: 500,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
             body: JSON.stringify({ error: { message: "API key not configured on server." } }),
-        };
-    }
-
-    // Handle CORS preflight requests (OPTIONS) for any origin (for debugging, can restrict later)
-    if (event.httpMethod === "OPTIONS") {
-        return {
-            statusCode: 204,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
-            body: "",
-        };
-    }
-
-    // 2. Ensure it's a POST request
-    if (event.httpMethod !== "POST") {
-        return {
-            statusCode: 405, // Method Not Allowed
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
-            body: JSON.stringify({ error: { message: "Only POST requests are allowed." } }),
         };
     }
 
@@ -60,12 +55,7 @@ exports.handler = async function(event, context) {
         console.error("Invalid JSON in request body:", event.body);
         return {
             statusCode: 400,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
             body: JSON.stringify({ error: { message: "Invalid JSON in request body." } }),
         };
     }
@@ -74,18 +64,12 @@ exports.handler = async function(event, context) {
     if (!promptText) {
         return {
             statusCode: 400,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
             body: JSON.stringify({ error: { message: "No prompt provided in request." } }),
         };
     }
 
     // 4. Construct the request to the Gemini API
-    // Using gemini-2.0-flash as per previous client-side setup
     const geminiApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY_SECRET}`;
     const geminiPayload = {
         contents: [{ role: "user", parts: [{ text: promptText }] }]
@@ -103,32 +87,21 @@ exports.handler = async function(event, context) {
         if (!geminiResponse.ok) {
             console.error("Error from Gemini API:", geminiResult);
             return {
-                statusCode: geminiResponse.status,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Methods": "POST, OPTIONS"
-                },
-                // Return Gemini's error message if available
-                body: JSON.stringify({ 
-                    error: { 
-                        message: `Gemini API Error: ${geminiResult?.error?.message || geminiResponse.statusText}`,
-                        details: geminiResult?.error // Include full error details if present
-                    } 
-                }),
+                statusCode: geminiResponse.status, // Forward Gemini's status
+                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
+                body: JSON.stringify({ error: { message: `Gemini API Error: ${geminiResult?.error?.message || geminiResponse.statusText}` } }),
             };
         }
 
         if (geminiResult.candidates && geminiResult.candidates.length > 0 &&
             geminiResult.candidates[0].content && geminiResult.candidates[0].content.parts &&
             geminiResult.candidates[0].content.parts.length > 0) {
-            // 5. Send the extracted text back to your client
+            
             return {
                 statusCode: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/", 
                     "Access-Control-Allow-Headers": "Content-Type",
                     "Access-Control-Allow-Methods": "POST, OPTIONS"
                 },
@@ -138,27 +111,17 @@ exports.handler = async function(event, context) {
             console.error("Unexpected response structure from Gemini API:", geminiResult);
             return {
                 statusCode: 500,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Headers": "Content-Type",
-                    "Access-Control-Allow-Methods": "POST, OPTIONS"
-                },
+                headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
                 body: JSON.stringify({ error: { message: "Could not extract text from Gemini response via proxy." } }),
             };
         }
 
     } catch (error) {
-        console.error("Error in Netlify function:", error);
+        console.error("Error in serverless function execution:", error);
         return {
             statusCode: 500,
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "POST, OPTIONS"
-            },
-            body: JSON.stringify({ error: { message: `Netlify function error: ${error.message}` } }),
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/" },
+            body: JSON.stringify({ error: { message: `Serverless function execution error: ${error.message}` } }),
         };
     }
 };
