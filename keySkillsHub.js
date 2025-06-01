@@ -804,31 +804,288 @@ document.addEventListener('DOMContentLoaded', function () {
     // Update initializeKeySkillsHub to include setup for Inconsistency Resolver
     // This function should already be defined at the end of your keySkillsHub.js
     // We are modifying it here to add the new call.
-    const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
-    window.initializeKeySkillsHub = function() {
-        if(typeof originalInitializeKeySkillsHub === 'function') {
-            originalInitializeKeySkillsHub(); // Call previous initializations
+    // Duplicate declaration removed to avoid redeclaration error
+
+    // Ensure this is within your main DOMContentLoaded listener in keySkillsHub.js
+
+// ... (existing code for Skill 1, Skill 2, Power Sort, Relationship Matcher, Gemini API, etc.) ...
+
+// --- Key Skill 5: Explain the significance of section 109 (Inconsistency Resolver) ---
+// Duplicate variable declarations removed to avoid redeclaration errors.
+
+// (This duplicate declaration block has been removed to fix the redeclaration error)
+
+window.loadIRScenario = function(index) {
+    if (!irScenarioArea || index === undefined || index >= inconsistencyResolverScenarios.length) {
+        if (irScenarioArea) irScenarioArea.innerHTML = "<p>No more scenarios or error loading. Click 'Next Scenario' to restart.</p>";
+        if(irCheckAnswerBtn) irCheckAnswerBtn.classList.add('hidden');
+        if(irNextScenarioBtn && inconsistencyResolverScenarios.length > 0) irNextScenarioBtn.classList.remove('hidden');
+        return;
+    }
+    currentIRScenarioIndex = index;
+    const scenarioData = inconsistencyResolverScenarios[index];
+    irScenarioArea.innerHTML = `<p class="font-medium mb-1">Scenario ${index + 1}:</p><p>${scenarioData.scenario}</p>`;
+    
+    if(irInputSection) irInputSection.value = '';
+    if(irInputPrevails) irInputPrevails.value = '';
+    if(irInputEffect) irInputEffect.value = '';
+    if(irInputSignificance) irInputSignificance.value = '';
+    
+    [irInputSection, irInputPrevails, irInputEffect, irInputSignificance].forEach(el => {
+        if(el) el.classList.remove('correct', 'incorrect');
+    });
+
+    if(irFeedbackArea) irFeedbackArea.innerHTML = '';
+    if(irCheckAnswerBtn) irCheckAnswerBtn.classList.remove('hidden');
+    if(irNextScenarioBtn) irNextScenarioBtn.classList.add('hidden');
+};
+
+if (irCheckAnswerBtn) {
+    irCheckAnswerBtn.addEventListener('click', () => {
+        if (!irFeedbackArea || currentIRScenarioIndex >= inconsistencyResolverScenarios.length) return;
+        
+        const scenarioData = inconsistencyResolverScenarios[currentIRScenarioIndex];
+        let allQuestionsAttempted = true;
+        let overallCorrect = true; 
+        let feedbackHTML = "";
+
+        const checkAndStyle = (inputEl, correctAnswers, feedbackCorrectText, feedbackIncorrectText, isStrict = true, isTextArea = false) => {
+            if (!inputEl) return;
+            const userValue = inputEl.value.trim().toLowerCase();
+            if (userValue === "") {
+                allQuestionsAttempted = false;
+                inputEl.classList.add('incorrect'); 
+                inputEl.classList.remove('correct');
+                // Add feedback for empty field only if other fields are also being checked
+                // This avoids premature "please attempt" if user is still working.
+                // The main "Please attempt all parts" will cover it if submitted empty.
+                overallCorrect = false; 
+                return; // Don't add specific feedback for empty yet, let main check handle it
+            }
+            
+            let isMatch = false;
+            if (Array.isArray(correctAnswers)) {
+                isMatch = correctAnswers.map(s => s.toLowerCase()).includes(userValue) || 
+                          (!isStrict && correctAnswers.some(ans => userValue.includes(ans.toLowerCase())));
+            } else {
+                isMatch = userValue === correctAnswers.toLowerCase();
+            }
+
+            if (isTextArea) { 
+                let keywordsMet = 0;
+                correctAnswers.forEach(keyword => { // Here correctAnswers is significanceKeywords
+                    if (userValue.includes(keyword.toLowerCase())) {
+                        keywordsMet++;
+                    }
+                });
+                isMatch = keywordsMet >= 1; 
+            }
+
+            if (isMatch) {
+                inputEl.classList.add('correct');
+                inputEl.classList.remove('incorrect');
+                feedbackHTML += `<div class="feedback-item feedback-correct">${feedbackCorrectText}</div>`;
+            } else {
+                inputEl.classList.add('incorrect');
+                inputEl.classList.remove('correct');
+                feedbackHTML += `<div class="feedback-item feedback-incorrect">${feedbackIncorrectText}</div>`;
+                overallCorrect = false;
+            }
+        };
+        
+        // Check if all inputs have some value before proceeding with detailed checks
+        if (!irInputSection.value.trim() || !irInputPrevails.value.trim() || !irInputEffect.value.trim() || !irInputSignificance.value.trim()) {
+            allQuestionsAttempted = false;
+        }
+
+        checkAndStyle(irInputSection, scenarioData.answers.section, "1. Relevant Section: Correct!", `1. Relevant Section: Incorrect. (Hint: s109)`);
+        checkAndStyle(irInputPrevails, scenarioData.answers.prevails, "2. Prevailing Law: Correct!", `2. Prevailing Law: Incorrect. (Hint: ${scenarioData.answers.prevails})`);
+        checkAndStyle(irInputEffect, scenarioData.answers.effect, "3. Effect on State Law: Correct!", `3. Effect on State Law: Needs review. (Hint: invalid to the extent of the inconsistency)`, false);
+        checkAndStyle(irInputSignificance, scenarioData.answers.significanceKeywords, `4. Significance: Looks good! You've touched on key aspects. <br><small class="feedback-hint">Model: ${scenarioData.modelSignificance}</small>`, `4. Significance: Consider elaborating. <br><small class="feedback-hint">Model: ${scenarioData.modelSignificance}</small>`, false, true);
+
+        if (!allQuestionsAttempted) {
+            irFeedbackArea.innerHTML = "<p class='text-orange-600 font-semibold'>Please attempt all parts of the question.</p>" + feedbackHTML;
+        } else if (overallCorrect) {
+             irFeedbackArea.innerHTML = "<p class='text-green-600 font-semibold'>Great job! All parts seem correct.</p>" + feedbackHTML;
         } else {
-            // Fallback if original was not defined, initialize other tools if their containers exist
-            if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') {
-                if(typeof currentSTCQuestion !== 'undefined') window.loadSTCQuestion(currentSTCQuestion); else window.loadSTCQuestion(0);
+            // If not all correct, but all attempted, just show the detailed feedback.
+            irFeedbackArea.innerHTML = feedbackHTML;
+        }
+
+        if (irCheckAnswerBtn) irCheckAnswerBtn.classList.add('hidden');
+        if (irNextScenarioBtn) irNextScenarioBtn.classList.remove('hidden');
+    });
+}
+
+if (irNextScenarioBtn) {
+    irNextScenarioBtn.addEventListener('click', () => {
+        currentIRScenarioIndex++;
+        if (currentIRScenarioIndex >= inconsistencyResolverScenarios.length) {
+            currentIRScenarioIndex = 0; 
+            if(irScenarioArea) irScenarioArea.innerHTML = "<p>All scenarios completed! Click 'Next Scenario' to restart or choose another tool.</p>";
+        }
+        // Ensure loadIRScenario is globally accessible or correctly referenced
+        if(typeof window.loadIRScenario === 'function') {
+            window.loadIRScenario(currentIRScenarioIndex);
+        } else if (typeof loadIRScenario === 'function') { // Fallback if not on window but in scope
+            loadIRScenario(currentIRScenarioIndex);
+        }
+    });
+}
+
+// --- Update initializeKeySkillsHub ---
+// Ensure this function is defined only ONCE, typically at the end of keySkillsHub.js
+if (!window.initializeKeySkillsHub) {
+    window.initializeKeySkillsHub = function() { /* Placeholder */ };
+}
+const originalInitializeKeySkillsHub = window.initializeKeySkillsHub; // Capture previous definition if any
+
+window.initializeKeySkillsHub = function() {
+    // Check if originalInitializeKeySkillsHub is the same as the current function to avoid recursion
+    // Or if it's the placeholder, don't call it.
+    if(typeof originalInitializeKeySkillsHub === 'function' && originalInitializeKeySkillsHub.toString() !== window.initializeKeySkillsHub.toString()) {
+        originalInitializeKeySkillsHub(); 
+    } else {
+        // Fallback or initial setup for tools if originalInitializeKeySkillsHub was just a placeholder or this is the first full definition
+        // This ensures tools are initialized even if this is the first "real" definition of initializeKeySkillsHub
+        if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') {
+            window.loadSTCQuestion(typeof currentSTCQuestion !== 'undefined' ? currentSTCQuestion : 0);
+        }
+        if (document.getElementById('sourceAnalysisChallengeContainer') && typeof window.loadSACExcerpt === 'function') {
+             window.loadSACExcerpt(typeof currentSACExcerpt !== 'undefined' ? currentSACExcerpt : 0);
+        }
+        if (document.getElementById('powerSortGameContainer') && typeof window.setupPowerSortGame === 'function') {
+            window.setupPowerSortGame();
+        }
+        if (document.getElementById('relationshipMatcherContainer') && typeof window.setupRelationshipMatcherGame === 'function') {
+            window.setupRelationshipMatcherGame();
+        }
+    }
+    // Initialize Inconsistency Resolver
+    if (document.getElementById('inconsistencyResolverContainer') && typeof window.loadIRScenario === 'function') {
+        window.loadIRScenario(0); // Load the first scenario
+    }
+    console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver.");
+};
+const guidedAnswerContainer = document.getElementById('guidedAnswerContainer');
+const checkGuidedAnswerBtn = document.getElementById('checkGuidedAnswerBtn');
+const guidedAnswerFeedback = document.getElementById('guidedAnswerFeedback');
+let currentGuidedQuestionIndex = 0; // Ensure this is defined if not already for this tool
+
+// THIS IS THE ARRAY YOU NEED TO POPULATE
+const guidedAnswerQuestions = [
+    {
+        id: 'gaq1',
+        question: "Explain one reason for statutory interpretation. (3 marks)",
+        taskWord: "Explain",
+        taskWordChecklist: ["Provide details", "State reasons", "Link cause/effect"],
+        scaffold: `One reason courts interpret statutes is to clarify the <input type="text" id="gaq1_blank1" data-gaq-id="gaq1" data-blank-index="0" class="guided-answer-blank" placeholder="e.g., specific meaning"> in an Act. This can occur if the words are <input type="text" id="gaq1_blank2" data-gaq-id="gaq1" data-blank-index="1" class="guided-answer-blank" placeholder="e.g., ambiguous">, or if new <input type="text" id="gaq1_blank3" data-gaq-id="gaq1" data-blank-index="2" class="guided-answer-blank" placeholder="e.g., technologies"> arise. For example, in <input type="text" id="gaq1_blank4" data-gaq-id="gaq1" data-blank-index="3" class="guided-answer-blank" placeholder="Case">, the court had to interpret <input type="text" id="gaq1_blank5" data-gaq-id="gaq1" data-blank-index="4" class="guided-answer-blank" placeholder="word/phrase">. Courts do this to <input type="text" id="gaq1_blank6" data-gaq-id="gaq1" data-blank-index="5" class="guided-answer-blank" placeholder="purpose">.`,
+        blanks: [
+            { id: "gaq1_blank1", answer: ["specific meaning", "meaning of words", "ambiguity"] },
+            { id: "gaq1_blank2", answer: ["ambiguous", "unclear", "have multiple meanings"] },
+            { id: "gaq1_blank3", answer: ["technologies", "circumstances", "situations"] },
+            { id: "gaq1_blank4", answer: ["Deing v Tarola", "Kevin and Jennifer"] }, // Example cases
+            { id: "gaq1_blank5", answer: ["'regulated weapon'", "'man'"] }, // Example phrases
+            { id: "gaq1_blank6", answer: ["resolve the dispute", "clarify its application", "apply law to facts"] }
+        ]
+    }
+    // Add more question objects here for the Guided Answer Construction tool
+];
+
+window.loadGuidedAnswerQuestion = function(index) { // Expose to window if called from script.js
+    if (!guidedAnswerContainer || index === undefined || index >= guidedAnswerQuestions.length) {
+        if (guidedAnswerContainer) guidedAnswerContainer.innerHTML = "<p>No more guided questions or error loading.</p>";
+        console.warn("Guided Answers Load: Invalid index or missing elements. Index:", index, "Total Qs:", guidedAnswerQuestions.length);
+        return;
+    }
+    currentGuidedQuestionIndex = index;
+    const qData = guidedAnswerQuestions[index];
+
+    let checklistHTML = '<h5 class="font-semibold text-sm text-orange-700 mb-1">Task Word Checklist (' + qData.taskWord + '):</h5><ul class="task-word-checklist text-xs mb-2">';
+    qData.taskWordChecklist.forEach(item => {
+        checklistHTML += `<li><label><input type="checkbox" class="task-word-item accent-orange-500"> ${item}</label></li>`;
+    });
+    checklistHTML += '</ul>';
+
+    guidedAnswerContainer.innerHTML = `
+        <h4 class="font-semibold text-orange-700">${qData.question}</h4>
+        ${checklistHTML}
+        <div class="text-sm mt-2">${qData.scaffold}</div>
+    `;
+    if (guidedAnswerFeedback) guidedAnswerFeedback.innerHTML = ""; // Clear previous feedback
+    // Ensure check button is visible if it was hidden
+    if (checkGuidedAnswerBtn) checkGuidedAnswerBtn.classList.remove('hidden');
+}
+
+if (checkGuidedAnswerBtn) {
+    checkGuidedAnswerBtn.addEventListener('click', () => {
+        if (!guidedAnswerFeedback || currentGuidedQuestionIndex >= guidedAnswerQuestions.length) return;
+        
+        const qData = guidedAnswerQuestions[currentGuidedQuestionIndex];
+        let allBlanksCorrect = true;
+        let feedbackText = "<strong>Feedback:</strong><ul>";
+
+        qData.blanks.forEach((blankInfo, idx) => {
+            // The input elements are now created dynamically, so we need to select them based on their dynamic IDs or data attributes
+            const inputElement = document.querySelector(`.guided-answer-blank[data-gaq-id="${qData.id}"][data-blank-index="${idx}"]`);
+            
+            if (inputElement) {
+                const userAnswer = inputElement.value.trim().toLowerCase();
+                const correctAnswers = blankInfo.answer.map(a => a.toLowerCase());
+                let isCorrect = false;
+                // Check if user's answer is one of the possible correct answers or contains a correct phrase
+                if (correctAnswers.includes(userAnswer) || correctAnswers.some(ca => userAnswer.includes(ca) && userAnswer.length > 2)) {
+                    isCorrect = true;
+                }
+
+                if (isCorrect) {
+                    inputElement.classList.remove('incorrect');
+                    inputElement.classList.add('correct');
+                    feedbackText += `<li class="text-green-600">Blank ${idx + 1} (e.g., "${blankInfo.answer[0]}") appears correct!</li>`;
+                } else {
+                    inputElement.classList.remove('correct');
+                    inputElement.classList.add('incorrect');
+                    allBlanksCorrect = false;
+                    feedbackText += `<li class="text-red-600">Blank ${idx + 1} (e.g., "${blankInfo.answer[0]}") - check your answer. One possible answer: ${blankInfo.answer[0]}</li>`;
+                }
+            } else {
+                console.warn(`Could not find input element for blank index ${idx} in question ${qData.id}`);
+                allBlanksCorrect = false; // Consider it incorrect if the element isn't found
             }
-            if (document.getElementById('sourceAnalysisChallengeContainer') && typeof window.loadSACExcerpt === 'function') {
-                 if(typeof currentSACExcerpt !== 'undefined') window.loadSACExcerpt(currentSACExcerpt); else window.loadSACExcerpt(0);
-            }
-            if (document.getElementById('powerSortGameContainer') && typeof window.setupPowerSortGame === 'function') {
-                window.setupPowerSortGame();
-            }
-            if (document.getElementById('relationshipMatcherContainer') && typeof window.setupRelationshipMatcherGame === 'function') {
-                window.setupRelationshipMatcherGame();
+        });
+        feedbackText += "</ul>";
+        
+        if (guidedAnswerFeedback) {
+            guidedAnswerFeedback.innerHTML = feedbackText;
+            if (allBlanksCorrect) {
+                guidedAnswerFeedback.innerHTML = '<p class="text-green-600 font-semibold">All blanks filled correctly! Well done!</p>' + feedbackText;
             }
         }
-        // Initialize Inconsistency Resolver
-        if (document.getElementById('inconsistencyResolverContainer') && typeof window.loadIRScenario === 'function') {
-            window.loadIRScenario(0); // Load the first scenario
-        }
-        console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver.");
-    };
+    });
+}
+
+// Update initializeKeySkillsHub OR ensure initializeToolIfNeeded in script.js calls this
+// If initializeKeySkillsHub is your main initializer for tools in keySkillsHub.js:
+const originalInitializeKeySkillsHubForGuidedAnswers = window.initializeKeySkillsHub;
+window.initializeKeySkillsHub = function() {
+    if(typeof originalInitializeKeySkillsHubForGuidedAnswers === 'function' && originalInitializeKeySkillsHubForGuidedAnswers.toString() !== window.initializeKeySkillsHub.toString()) {
+        originalInitializeKeySkillsHubForGuidedAnswers(); 
+    } else {
+        // Fallback initializations if original was placeholder or for other tools in keySkillsHub.js
+        if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') { /* ... */ }
+        // ... other initializations from keySkillsHub.js ...
+    }
+    // Initialize Guided Answer Construction if its container exists
+    if (document.getElementById('guidedAnswerContainer') && typeof window.loadGuidedAnswerQuestion === 'function') {
+        window.loadGuidedAnswerQuestion(0); // Load the first question
+    }
+    console.log("Key Skills Hub Initialized/Re-initialized, ensuring Guided Answers is loaded if visible.");
+};
+
+
+
+
+
 
     // --- Gemini API Integration ---
     // REMOVE or leave empty: const GEMINI_API_KEY = ""; 

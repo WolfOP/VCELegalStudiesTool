@@ -308,6 +308,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
     
+    // Dynamically populate Case Explorer dropdown
+    const caseSelectExplorer = document.getElementById('caseSelectExplorer');
+    const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
+    if (caseSelectExplorer && window.caseExplorerData) {
+        // Remove all existing options except the first (placeholder)
+        while (caseSelectExplorer.options.length > 1) {
+            caseSelectExplorer.remove(1);
+        }
+        // Add an <option> for each case
+        Object.entries(window.caseExplorerData).forEach(([key, caseObj]) => {
+            const option = document.createElement('option');
+            option.value = key;
+            option.textContent = caseObj.name;
+            caseSelectExplorer.appendChild(option);
+        });
+    }
+
+    if (caseSelectExplorer) {
+        caseSelectExplorer.addEventListener('change', function() {
+            const selectedCaseKey = this.value;
+            if (selectedCaseKey && window.caseExplorerData[selectedCaseKey] && caseDetailsExplorerDiv) {
+                caseDetailsExplorerDiv.innerHTML = `<h5 class="font-semibold text-teal-700 mb-1">${window.caseExplorerData[selectedCaseKey].name}</h5><p class="text-xs">${window.caseExplorerData[selectedCaseKey].details}</p>`;
+            } else if (caseDetailsExplorerDiv) {
+                caseDetailsExplorerDiv.innerHTML = '<p>Select a case to see details here.</p>';
+            }
+        });
+    }
+
     // --- Categorized Glossary Data ---
 const categorizedGlossaryData = {
     "The Australian Constitution": [
@@ -525,8 +553,7 @@ window.categorizedGlossaryData = categorizedGlossaryData;
     });
 
     // Case Explorer (Existing functionality)
-    const caseSelectExplorer = document.getElementById('caseSelectExplorer');
-    const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
+    // (Variables already declared above, so do not redeclare here)
     if (caseSelectExplorer) {
         caseSelectExplorer.addEventListener('change', function() {
             const selectedCaseKey = this.value;
