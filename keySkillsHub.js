@@ -631,5 +631,56 @@ function initializeKeySkillsHub() {
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
 
+window.setupCategorizedGlossary = function() { // Expose to window
+    if (!categorizedGlossaryContainer) {
+        console.error("Glossary container not found!");
+        return;
+    }
+    // Use explicit mapping to match index.html IDs exactly
+    const categoryMappings = {
+        "The Australian Constitution": "glossaryCategory-the-australian-constitution",
+        "Parliament and Statute Law": "glossaryCategory-parliament-and-statute-law",
+        "Courts and Common Law": "glossaryCategory-courts-and-common-law",
+        "Key Legal Principles and Rights (Overarching)": "glossaryCategory-key-legal-principles-and-rights-overarching",
+        "Government, Politics, and Law Reform": "glossaryCategory-government-politics-and-law-reform",
+        "VCE Legal Studies Meta-Terms": "glossaryCategory-vce-legal-studies-meta-terms"
+    };
+
+    Object.values(categoryMappings).forEach(id => {
+        const div = document.getElementById(id);
+        if (div) div.innerHTML = ''; // Clear previous terms
+    });
+
+    Object.entries(categorizedGlossaryData).forEach(([categoryName, terms]) => {
+        const categoryKey = categoryMappings[categoryName]; // <-- Ensure this matches HTML IDs
+        const categoryDiv = document.getElementById(categoryKey);
+        if (categoryDiv) {
+            terms.sort((a, b) => a.term.localeCompare(b.term));
+            terms.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('glossary-item');
+                const termStrong = document.createElement('strong');
+                termStrong.classList.add('glossary-term');
+                termStrong.textContent = item.term + ":";
+                const defSpan = document.createElement('span');
+                defSpan.classList.add('glossary-definition');
+                defSpan.textContent = item.definition;
+                itemDiv.appendChild(termStrong);
+                itemDiv.appendChild(defSpan);
+                categoryDiv.appendChild(itemDiv);
+                termStrong.addEventListener('click', () => {
+                    defSpan.style.display = defSpan.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+        } else {
+            console.warn("Could not find div for category ID:", categoryKey, "(Derived from: ", categoryName, ")");
+        }
+    });
+    // After populating, add AI explainers if the function exists
+    if (typeof window.addAIGlossaryExplainers === 'function') {
+        window.addAIGlossaryExplainers();
+    }
+}
+
 
 
