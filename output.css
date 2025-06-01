@@ -779,6 +779,9 @@
   .text-lime-700 {
     color: var(--color-lime-700);
   }
+  .text-orange-600 {
+    color: var(--color-orange-600);
+  }
   .text-orange-700 {
     color: var(--color-orange-700);
   }
@@ -1564,6 +1567,111 @@ body {
   50% {
     opacity: .5;
   }
+}
+.power-item {
+  padding: 0.3rem 0.6rem;
+  background-color: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  border-radius: 0.25rem;
+  cursor: grab;
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 0.2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.power-item.dragging {
+  opacity: 0.5;
+  border-style: dashed;
+}
+.power-drop-zone {
+  transition: background-color 0.2s, border-color 0.2s;
+  padding-bottom: 0.5rem;
+}
+.power-drop-zone.drag-over {
+  background-color: #e0e7ff;
+  border-color: #a5b4fc;
+}
+.power-drop-zone .dropped-items-list .power-item {
+  cursor: default;
+  background-color: #fff;
+}
+.power-item.correct-placement {
+  border-left: 4px solid #22c55e;
+  background-color: #f0fdf4 !important;
+}
+.power-item.incorrect-placement {
+  border-left: 4px solid #ef4444;
+  background-color: #fee2e2 !important;
+}
+#powerSortFeedback .feedback-correct {
+  color: #15803d;
+  font-weight: 500;
+}
+#powerSortFeedback .feedback-incorrect {
+  color: #b91c1c;
+  font-weight: 500;
+}
+#powerSortFeedback ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+#powerSortFeedback li {
+  margin-bottom: 0.25rem;
+}
+.relationship-scenario-item {
+  padding: 0.3rem 0.6rem;
+  background-color: #fce7f3;
+  border: 1px solid #f9a8d4;
+  border-radius: 0.25rem;
+  cursor: grab;
+  font-size: 0.8rem;
+  margin: 0.2rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.relationship-scenario-item.dragging {
+  opacity: 0.5;
+  border-style: dashed;
+}
+.relationship-quadrant {
+  transition: background-color 0.2s, border-color 0.2s;
+  padding-bottom: 0.5rem;
+}
+.relationship-quadrant.drag-over {
+  filter: brightness(95%);
+  border-color: #9333ea;
+}
+.relationship-quadrant .dropped-scenarios-list .relationship-scenario-item {
+  cursor: default;
+  background-color: #fff;
+}
+.relationship-scenario-item.correct-match {
+  border-left: 4px solid #22c55e;
+  background-color: #f0fdf4 !important;
+}
+.relationship-scenario-item.incorrect-match {
+  border-left: 4px solid #ef4444;
+  background-color: #fee2e2 !important;
+}
+#relationshipMatcherFeedback .feedback-correct {
+  color: #15803d;
+  font-weight: 500;
+}
+#relationshipMatcherFeedback .feedback-incorrect {
+  color: #b91c1c;
+  font-weight: 500;
+}
+#relationshipMatcherFeedback ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+#relationshipMatcherFeedback li {
+  margin-bottom: 0.25rem;
 }
 @property --tw-rotate-x {
   syntax: "*";
