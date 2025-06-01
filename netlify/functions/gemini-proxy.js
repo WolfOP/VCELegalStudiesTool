@@ -14,6 +14,12 @@ exports.handler = async function(event, context) {
         console.error("Gemini API key not configured on server.");
         return {
             statusCode: 500,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
             body: JSON.stringify({ error: { message: "API key not configured on server." } }),
         };
     }
@@ -22,6 +28,12 @@ exports.handler = async function(event, context) {
     if (event.httpMethod !== "POST") {
         return {
             statusCode: 405, // Method Not Allowed
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
             body: JSON.stringify({ error: { message: "Only POST requests are allowed." } }),
         };
     }
@@ -34,6 +46,12 @@ exports.handler = async function(event, context) {
         console.error("Invalid JSON in request body:", event.body);
         return {
             statusCode: 400,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
             body: JSON.stringify({ error: { message: "Invalid JSON in request body." } }),
         };
     }
@@ -42,6 +60,12 @@ exports.handler = async function(event, context) {
     if (!promptText) {
         return {
             statusCode: 400,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
             body: JSON.stringify({ error: { message: "No prompt provided in request." } }),
         };
     }
@@ -66,6 +90,12 @@ exports.handler = async function(event, context) {
             console.error("Error from Gemini API:", geminiResult);
             return {
                 statusCode: geminiResponse.status,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS"
+                },
                 // Return Gemini's error message if available
                 body: JSON.stringify({ 
                     error: { 
@@ -79,18 +109,14 @@ exports.handler = async function(event, context) {
         if (geminiResult.candidates && geminiResult.candidates.length > 0 &&
             geminiResult.candidates[0].content && geminiResult.candidates[0].content.parts &&
             geminiResult.candidates[0].content.parts.length > 0) {
-            
             // 5. Send the extracted text back to your client
             return {
                 statusCode: 200,
                 headers: {
                     "Content-Type": "application/json",
-                    // Netlify handles CORS for functions on the same site by default.
-                    // If your GitHub Pages site is deployed elsewhere and calls this Netlify function,
-                    // you might need explicit CORS headers here:
-                    // "Access-Control-Allow-Origin": "YOUR_GITHUB_PAGES_URL_OR_ASTERISK_FOR_TESTING",
-                    // "Access-Control-Allow-Headers": "Content-Type",
-                    // "Access-Control-Allow-Methods": "POST, OPTIONS"
+                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS"
                 },
                 body: JSON.stringify({ text: geminiResult.candidates[0].content.parts[0].text }),
             };
@@ -98,6 +124,12 @@ exports.handler = async function(event, context) {
             console.error("Unexpected response structure from Gemini API:", geminiResult);
             return {
                 statusCode: 500,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                    "Access-Control-Allow-Headers": "Content-Type",
+                    "Access-Control-Allow-Methods": "POST, OPTIONS"
+                },
                 body: JSON.stringify({ error: { message: "Could not extract text from Gemini response via proxy." } }),
             };
         }
@@ -106,6 +138,12 @@ exports.handler = async function(event, context) {
         console.error("Error in Netlify function:", error);
         return {
             statusCode: 500,
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "https://wolfop.github.io/VCELegalStudiesTool/",
+                "Access-Control-Allow-Headers": "Content-Type",
+                "Access-Control-Allow-Methods": "POST, OPTIONS"
+            },
             body: JSON.stringify({ error: { message: `Netlify function error: ${error.message}` } }),
         };
     }
