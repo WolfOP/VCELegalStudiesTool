@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.setupPowerSortGame = function() { // Expose to window if called from script.js
-        if (!powerSortSourceItemsContainer || !powerSortFeedback || !powerDropZones.exclusive) {
+        if (!powerSortSourceItemsContainer || !powerSortFeedback || !powerDropZones.exclusive || !powerDropZones.concurrent || !powerDropZones.residual) {
             // console.warn("Power Sort Game elements not found, skipping setup.");
             return;
         }
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                  dz.classList.remove('drag-over'); // Reset drag-over state
             }
         });
-        powerSortFeedback.innerHTML = '';
+        if (powerSortFeedback) powerSortFeedback.innerHTML = '';
 
         shuffleArray([...lawMakingAreasData]).forEach(item => {
             const div = document.createElement('div');
@@ -225,10 +225,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             div.addEventListener('dragstart', (e) => {
                 draggedPowerItem = e.target;
-                setTimeout(() => e.target.classList.add('dragging'), 0); // Timeout for visual effect
+                setTimeout(() => { if(e.target) e.target.classList.add('dragging'); }, 0);
             });
             div.addEventListener('dragend', (e) => {
-                if(draggedPowerItem) draggedPowerItem.classList.remove('dragging');
+                if(e.target) e.target.classList.remove('dragging');
                 draggedPowerItem = null;
             });
             powerSortSourceItemsContainer.appendChild(div);
@@ -251,8 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     const list = zone.querySelector('.dropped-items-list');
                     if(list) {
                         list.appendChild(draggedPowerItem); // Move the item
-                        // draggedPowerItem is nullified in its dragend event
                     }
+                    // draggedPowerItem is nullified in its dragend event
                 }
             });
         }
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!powerSortFeedback) return;
             let feedbackHTML = "<ul>";
             let allCorrectlyPlacedAndAllItemsPlaced = true;
-            let itemsInSourceCount = powerSortSourceItemsContainer.querySelectorAll('.power-item').length;
+            let itemsInSourceCount = powerSortSourceItemsContainer ? powerSortSourceItemsContainer.querySelectorAll('.power-item').length : 0;
 
             lawMakingAreasData.forEach(correctItemData => {
                 const itemElement = document.querySelector(`.power-item[data-id='${correctItemData.id}']`);
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     feedbackHTML += `<li class="feedback-correct">'${correctItemData.area}' is correctly placed as ${correctItemData.correctCategory}. (Ref: ${correctItemData.constitutionRef})</li>`;
                 } else if (parentZoneDiv) { // Placed, but in wrong zone
                     itemElement.classList.add('incorrect-placement');
-                    feedbackHTML += `<li class="feedback-incorrect">'${correctItemData.area}' is incorrectly placed in '${placedCategoryKey}'. Correct is: ${correctItemData.correctCategory}. (Ref: ${correctItemData.constitutionRef})</li>`;
+                    feedbackHTML += `<li class="feedback-incorrect">'${correctItemData.area}' is incorrectly placed in '${placedCategoryKey || 'an unknown zone'}'. Correct is: ${correctItemData.correctCategory}. (Ref: ${correctItemData.constitutionRef})</li>`;
                     allCorrectlyPlacedAndAllItemsPlaced = false;
                 } else { // Not placed in any zone (still in source)
                     feedbackHTML += `<li class="feedback-incorrect">'${correctItemData.area}' was not placed. It is ${correctItemData.correctCategory}. (Ref: ${correctItemData.constitutionRef})</li>`;
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- Skill 4: Analyse the relationship between parliament and courts ---
+    // --- Skill 4: Analyse the relationship between parliament and courts (Relationship Quadrant Matcher) ---
     const relationshipScenariosSourceContainer = document.getElementById('relationshipScenariosSource');
     const relationshipQuadrants = {
         supremacy: document.getElementById('supremacyQuadrant'),
@@ -343,20 +343,24 @@ document.addEventListener('DOMContentLoaded', function () {
         { id: 'rs5', text: "Parliament creates a new law establishing specific penalties for cyberbullying, an area where common law was previously undeveloped.", correctQuadrant: "supremacy" },
         { id: 'rs6', text: "A judge, when sentencing, notes the limitations of current sentencing options under an Act and suggests legislative reform may be needed to address community concerns about a specific type of offence.", correctQuadrant: "influence" },
         { id: 'rs7', text: "The High Court decision in *Deing v Tarola* led to a clearer understanding of what constitutes a 'regulated weapon' under Victorian law.", correctQuadrant: "interpretation" },
-        { id: 'rs8', text: "After a series of court cases highlighted inconsistencies in how negligence was applied in medical contexts, Parliament passed a comprehensive Civil Liability Act.", correctQuadrant: "codification"} // This could also be abrogation if it changed principles, or supremacy creating new law. For this game, let's aim for codification if it affirms.
+        { id: 'rs8', text: "After a series of court cases highlighted inconsistencies in how negligence was applied in medical contexts, Parliament passed a comprehensive Civil Liability Act affirming and clarifying key principles.", correctQuadrant: "codification"} // This could also be abrogation if it changed principles, or supremacy creating new law. For this game, let's aim for codification if it affirms.
     ];
     let draggedScenarioItem = null;
 
-    function setupRelationshipMatcherGame() {
-        if (!relationshipScenariosSourceContainer || !relationshipMatcherFeedback) return;
+    window.setupRelationshipMatcherGame = function() {
+        if (!relationshipScenariosSourceContainer || !relationshipMatcherFeedback || !relationshipQuadrants.supremacy) {
+            // console.warn("Relationship Matcher Game elements not found, skipping setup.");
+            return;
+        }
         relationshipScenariosSourceContainer.innerHTML = '';
          Object.values(relationshipQuadrants).forEach(q => {
             if(q) {
                 const list = q.querySelector('.dropped-scenarios-list');
                 if (list) list.innerHTML = '';
+                 q.classList.remove('drag-over');
             }
         });
-        relationshipMatcherFeedback.innerHTML = '';
+        if(relationshipMatcherFeedback) relationshipMatcherFeedback.innerHTML = '';
 
         shuffleArray([...relationshipScenariosData]).forEach(item => {
             const div = document.createElement('div');
@@ -367,44 +371,43 @@ document.addEventListener('DOMContentLoaded', function () {
             div.dataset.correctQuadrant = item.correctQuadrant;
             div.addEventListener('dragstart', (e) => {
                 draggedScenarioItem = e.target;
-                e.target.classList.add('dragging');
+                setTimeout(() => { if(e.target) e.target.classList.add('dragging'); }, 0);
             });
             div.addEventListener('dragend', (e) => {
-                if(draggedScenarioItem) draggedScenarioItem.classList.remove('dragging');
+                if(e.target) e.target.classList.remove('dragging');
                 draggedScenarioItem = null;
             });
             relationshipScenariosSourceContainer.appendChild(div);
         });
     }
 
-    Object.entries(relationshipQuadrants).forEach(([key, quadrant]) => {
-        if(quadrant) {
-            quadrant.addEventListener('dragover', (e) => {
+    Object.entries(relationshipQuadrants).forEach(([key, quadrantDiv]) => {
+        if(quadrantDiv) {
+            quadrantDiv.dataset.quadrantKey = key; 
+            quadrantDiv.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                quadrant.classList.add('drag-over');
+                quadrantDiv.classList.add('drag-over');
             });
-            quadrant.addEventListener('dragleave', (e) => {
-                quadrant.classList.remove('drag-over');
+            quadrantDiv.addEventListener('dragleave', (e) => {
+                quadrantDiv.classList.remove('drag-over');
             });
-            quadrant.addEventListener('drop', (e) => {
+            quadrantDiv.addEventListener('drop', (e) => {
                 e.preventDefault();
-                quadrant.classList.remove('drag-over');
+                quadrantDiv.classList.remove('drag-over');
                 if (draggedScenarioItem) {
-                    const list = quadrant.querySelector('.dropped-scenarios-list');
+                    const list = quadrantDiv.querySelector('.dropped-scenarios-list');
                     if(list) list.appendChild(draggedScenarioItem);
-                    draggedScenarioItem.classList.remove('dragging');
                 }
             });
         }
     });
 
-    if (relationshipScenariosSourceContainer) { // Also make source container a drop zone to return items
+    if (relationshipScenariosSourceContainer) { 
         relationshipScenariosSourceContainer.addEventListener('dragover', (e) => e.preventDefault());
         relationshipScenariosSourceContainer.addEventListener('drop', (e) => {
             e.preventDefault();
-            if (draggedScenarioItem) {
+            if (draggedScenarioItem && !relationshipScenariosSourceContainer.contains(draggedScenarioItem)) {
                 relationshipScenariosSourceContainer.appendChild(draggedScenarioItem);
-                draggedScenarioItem.classList.remove('dragging');
             }
         });
     }
@@ -413,47 +416,45 @@ document.addEventListener('DOMContentLoaded', function () {
         checkRelationshipMatchesBtn.addEventListener('click', () => {
             if (!relationshipMatcherFeedback) return;
             let feedbackHTML = "<ul>";
-            let allCorrect = true;
+            let allCorrectlyPlacedAndAllItemsPlacedRM = true;
+            let itemsInSourceCountRM = relationshipScenariosSourceContainer ? relationshipScenariosSourceContainer.querySelectorAll('.relationship-scenario-item').length : 0;
 
-            relationshipScenariosData.forEach(correctItem => {
-                const itemElement = document.querySelector(`.relationship-scenario-item[data-id='${correctItem.id}']`);
+            relationshipScenariosData.forEach(correctItemData => {
+                const itemElement = document.querySelector(`.relationship-scenario-item[data-id='${correctItemData.id}']`);
                 if (!itemElement) return;
 
                 itemElement.classList.remove('correct-match', 'incorrect-match');
                 const parentQuadrantDiv = itemElement.closest('.relationship-quadrant');
-                let placedQuadrantKey = null;
-                if (parentQuadrantDiv) {
-                    for (const [key, quadDiv] of Object.entries(relationshipQuadrants)) {
-                        if (quadDiv === parentQuadrantDiv) {
-                            placedQuadrantKey = key;
-                            break;
-                        }
-                    }
-                }
+                let placedQuadrantKey = parentQuadrantDiv ? parentQuadrantDiv.dataset.quadrantKey : null;
 
-                if (placedQuadrantKey === correctItem.correctQuadrant) {
+                if (placedQuadrantKey === correctItemData.correctQuadrant) {
                     itemElement.classList.add('correct-match');
-                    feedbackHTML += `<li class="feedback-correct">Scenario starting "${correctItem.text.substring(0,30)}..." is correctly matched to ${correctItem.correctQuadrant}.</li>`;
+                    feedbackHTML += `<li class="feedback-correct">Scenario starting "${correctItemData.text.substring(0,30)}..." is correctly matched to '${correctItemData.correctQuadrant}'.</li>`;
                 } else if (parentQuadrantDiv) {
                     itemElement.classList.add('incorrect-match');
-                    feedbackHTML += `<li class="feedback-incorrect">Scenario starting "${correctItem.text.substring(0,30)}..." is incorrectly matched. Correct is: ${correctItem.correctQuadrant}.</li>`;
-                    allCorrect = false;
+                    feedbackHTML += `<li class="feedback-incorrect">Scenario starting "${correctItemData.text.substring(0,30)}..." is incorrectly matched to '${placedQuadrantKey || 'an unknown zone'}'. Correct is: '${correctItemData.correctQuadrant}'.</li>`;
+                    allCorrectlyPlacedAndAllItemsPlacedRM = false;
                 } else {
-                    feedbackHTML += `<li class="feedback-incorrect">Scenario starting "${correctItem.text.substring(0,30)}..." was not matched. Correct is: ${correctItem.correctQuadrant}.</li>`;
-                    allCorrect = false;
+                    feedbackHTML += `<li class="feedback-incorrect">Scenario starting "${correctItemData.text.substring(0,30)}..." was not matched. Correct is: '${correctItemData.correctQuadrant}'.</li>`;
+                    allCorrectlyPlacedAndAllItemsPlacedRM = false;
                 }
             });
             feedbackHTML += "</ul>";
-             if (allCorrect && document.querySelectorAll('#relationshipScenariosSource .relationship-scenario-item').length === 0) {
+
+            if (allCorrectlyPlacedAndAllItemsPlacedRM && itemsInSourceCountRM === 0) {
                 relationshipMatcherFeedback.innerHTML = "<p class='text-green-600 font-semibold'>All scenarios matched correctly!</p>" + feedbackHTML;
+            } else if (itemsInSourceCountRM > 0) {
+                relationshipMatcherFeedback.innerHTML = "<p class='text-orange-600 font-semibold'>Some scenarios are not yet matched. Please drag all items to a quadrant.</p>" + feedbackHTML;
             } else {
-                relationshipMatcherFeedback.innerHTML = feedbackHTML;
+                relationshipMatcherFeedback.innerHTML = "<p class='text-red-600 font-semibold'>Some matches are incorrect. Review the feedback.</p>" + feedbackHTML;
             }
         });
     }
 
     if (resetRelationshipMatcherBtn) {
-        resetRelationshipMatcherBtn.addEventListener('click', setupRelationshipMatcherGame);
+        resetRelationshipMatcherBtn.addEventListener('click', () => {
+            if(typeof window.setupRelationshipMatcherGame === 'function') window.setupRelationshipMatcherGame();
+        });
     }
 
     // --- Gemini API Integration ---
