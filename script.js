@@ -81,8 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                button.classList.contains('bg-orange-500') ||
                button.classList.contains('bg-cyan-500') ||
                button.classList.contains('bg-lime-500') ||
-               button.classList.contains('bg-purple-500') ||
-               button.classList.contains('bg-yellow-500'); // Added yellow for DoP tool
+               button.classList.contains('bg-purple-500');
     }
     
     function initializeToolIfNeeded(targetId) {
@@ -103,9 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') {
             window.setupCategorizedGlossary();
         }
-        if (targetId === 'u4aos1-case-reconstruction-dop' && typeof window.initializeDOPReconstructionTool === 'function') {
-            window.initializeDOPReconstructionTool();
-        }
     }
 
     function handleU4AOS1ContentToggle(buttonToActivate) {
@@ -118,12 +114,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                  'bg-orange-500', 'text-white', 
                                  'bg-cyan-500', 'text-white', 'active-skill-hub-toggle', 
                                  'bg-purple-500', 'text-white',
-                                 'bg-lime-500', 'text-white', 'active-game-toggle',
-                                 'bg-yellow-500', 'text-white'); // Remove active yellow
-            // Restore default non-active styles for yellow buttons
-            if (btn.dataset.target === 'u4aos1-case-reconstruction-dop') {
-                btn.classList.add('bg-yellow-100', 'text-yellow-700');
-            }
+                                 'bg-lime-500', 'text-white', 'active-game-toggle');
+            // Note: Logic for restoring default yellow for the now-deleted button is also removed.
         });
 
         // Apply active style to the clicked button based on its category
@@ -139,10 +131,8 @@ document.addEventListener('DOMContentLoaded', function () {
             buttonToActivate.classList.add('bg-lime-500', 'text-white', 'active-game-toggle');
         } else if (buttonToActivate.classList.contains('text-purple-700')) {
             buttonToActivate.classList.add('bg-purple-500', 'text-white');
-        } else if (buttonToActivate.dataset.target === 'u4aos1-case-reconstruction-dop') { // Check specific button for DoP
-            buttonToActivate.classList.remove('bg-yellow-100', 'text-yellow-700');
-            buttonToActivate.classList.add('bg-yellow-500', 'text-white');
         }
+        // Note: The 'else if' for 'u4aos1-case-reconstruction-dop' (yellow button) is removed.
         
         u4aos1AllContent.forEach(contentSection => {
             const isTarget = contentSection.id === targetId;
@@ -153,8 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                      'u4aos1-case-deconstruction', 'u4aos1-term-match-game',
                                      'u4aos1-glossary', 'u4aos1-interactive-diagrams', 
                                      'u4aos1-case-explorer', 'u4aos1-exam-skills', 
-                                     'u4aos1-practice-questions',
-                                     'u4aos1-case-reconstruction-dop'].includes(targetId);
+                                     'u4aos1-practice-questions'].includes(targetId);
 
                 if (!isComplexTool) { // Only reset accordions for simple informational sections
                     contentSection.querySelectorAll('.accordion-content').forEach(ac => {

@@ -811,163 +811,318 @@ document.addEventListener('DOMContentLoaded', function () {
 // ... (existing code for Skill 1, Skill 2, Power Sort, Relationship Matcher, Gemini API, etc.) ...
 
 // --- Key Skill 5: Explain the significance of section 109 (Inconsistency Resolver) ---
-// Duplicate variable declarations removed to avoid redeclaration errors.
+// (Existing code for Inconsistency Resolver - assumed to be correct and largely untouched, except for ensuring it's within the main IIFE)
 
-// (This duplicate declaration block has been removed to fix the redeclaration error)
-
-window.loadIRScenario = function(index) {
-    if (!irScenarioArea || index === undefined || index >= inconsistencyResolverScenarios.length) {
-        if (irScenarioArea) irScenarioArea.innerHTML = "<p>No more scenarios or error loading. Click 'Next Scenario' to restart.</p>";
-        if(irCheckAnswerBtn) irCheckAnswerBtn.classList.add('hidden');
-        if(irNextScenarioBtn && inconsistencyResolverScenarios.length > 0) irNextScenarioBtn.classList.remove('hidden');
-        return;
+// --- Key Skill 6: Case Reconstruction (Division of Powers Focus) ---
+const ks6DopCaseData = [
+    {
+        id: "tasDams",
+        name: "Commonwealth v Tasmania (Tasmanian Dams Case) (1983)",
+        elements: {
+            facts: "The Tasmanian government intended to build a dam on the Franklin River. The Commonwealth Parliament passed legislation to prevent this, based on Australia's obligations under an international treaty (World Heritage Convention).",
+            issue: "Did the Commonwealth have the power to pass legislation to stop the dam construction, overriding Tasmania's residual powers over land management and infrastructure?",
+            decision: "The High Court held (4:3) that the Commonwealth's 'external affairs' power (s51(xxix)) supported the legislation, as it was giving effect to an international treaty. The Commonwealth law was valid and overrode the inconsistent Tasmanian law.",
+            impact: "Significantly expanded the Commonwealth's law-making power through the external affairs power, allowing it to legislate on matters previously considered solely state domain if related to international treaty obligations. Showed how s109 resolves conflicts involving external affairs.",
+            constitution: "Section 51(xxix) (External Affairs power), Section 109 (Inconsistency between Commonwealth and State laws)."
+        }
+    },
+    {
+        id: "brislan",
+        name: "R v Brislan (1935)",
+        elements: {
+            facts: "Mrs. Brislan was charged under the Wireless Telegraphy Act 1905 (Cth) for not having a license for her wireless set (radio).",
+            issue: "Did the Commonwealth Parliament have the power under s51(v) of the Constitution (postal, telegraphic, telephonic, and other like services) to legislate regarding wireless radio sets?",
+            decision: "The High Court held that 'other like services' could be interpreted to include radio broadcasting, even though it wasn't specifically envisaged by the Constitution's drafters in 1901. The Commonwealth law was valid.",
+            impact: "Broadened the interpretation of s51(v), allowing the Commonwealth to legislate on new forms of communication technology. Demonstrated that constitutional powers can be interpreted to adapt to technological advancements.",
+            constitution: "Section 51(v) (Postal, telegraphic, telephonic, and other like services)."
+        }
     }
-    currentIRScenarioIndex = index;
-    const scenarioData = inconsistencyResolverScenarios[index];
-    irScenarioArea.innerHTML = `<p class="font-medium mb-1">Scenario ${index + 1}:</p><p>${scenarioData.scenario}</p>`;
-    
-    if(irInputSection) irInputSection.value = '';
-    if(irInputPrevails) irInputPrevails.value = '';
-    if(irInputEffect) irInputEffect.value = '';
-    if(irInputSignificance) irInputSignificance.value = '';
-    
-    [irInputSection, irInputPrevails, irInputEffect, irInputSignificance].forEach(el => {
-        if(el) el.classList.remove('correct', 'incorrect');
-    });
+];
 
-    if(irFeedbackArea) irFeedbackArea.innerHTML = '';
-    if(irCheckAnswerBtn) irCheckAnswerBtn.classList.remove('hidden');
-    if(irNextScenarioBtn) irNextScenarioBtn.classList.add('hidden');
-};
+ks6DopCaseData.forEach(caseItem => {
+    caseItem.allPrompts = Object.entries(caseItem.elements).map(([category, text]) => ({ category, text }));
+});
 
-if (irCheckAnswerBtn) {
-    irCheckAnswerBtn.addEventListener('click', () => {
-        if (!irFeedbackArea || currentIRScenarioIndex >= inconsistencyResolverScenarios.length) return;
-        
-        const scenarioData = inconsistencyResolverScenarios[currentIRScenarioIndex];
-        let allQuestionsAttempted = true;
-        let overallCorrect = true; 
-        let feedbackHTML = "";
+let ks6CurrentSelectedCase = null;
+let ks6DragSourceElement = null;
 
-        const checkAndStyle = (inputEl, correctAnswers, feedbackCorrectText, feedbackIncorrectText, isStrict = true, isTextArea = false) => {
-            if (!inputEl) return;
-            const userValue = inputEl.value.trim().toLowerCase();
-            if (userValue === "") {
-                allQuestionsAttempted = false;
-                inputEl.classList.add('incorrect'); 
-                inputEl.classList.remove('correct');
-                // Add feedback for empty field only if other fields are also being checked
-                // This avoids premature "please attempt" if user is still working.
-                // The main "Please attempt all parts" will cover it if submitted empty.
-                overallCorrect = false; 
-                return; // Don't add specific feedback for empty yet, let main check handle it
-            }
-            
-            let isMatch = false;
-            if (Array.isArray(correctAnswers)) {
-                isMatch = correctAnswers.map(s => s.toLowerCase()).includes(userValue) || 
-                          (!isStrict && correctAnswers.some(ans => userValue.includes(ans.toLowerCase())));
-            } else {
-                isMatch = userValue === correctAnswers.toLowerCase();
-            }
+// Note: Element getters will be inside ks6InitializeDOPReconstructionTool to ensure DOM is ready for Key Skills Hub
+let ks6CaseSelect, ks6SourceElementsContainer, ks6DropTargets, ks6CheckAnswersBtn, ks6FeedbackDiv;
 
-            if (isTextArea) { 
-                let keywordsMet = 0;
-                correctAnswers.forEach(keyword => { // Here correctAnswers is significanceKeywords
-                    if (userValue.includes(keyword.toLowerCase())) {
-                        keywordsMet++;
-                    }
-                });
-                isMatch = keywordsMet >= 1; 
-            }
+function ks6ShuffleArray(array) { // Renamed from shuffleArray
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
-            if (isMatch) {
-                inputEl.classList.add('correct');
-                inputEl.classList.remove('incorrect');
-                feedbackHTML += `<div class="feedback-item feedback-correct">${feedbackCorrectText}</div>`;
-            } else {
-                inputEl.classList.add('incorrect');
-                inputEl.classList.remove('correct');
-                feedbackHTML += `<div class="feedback-item feedback-incorrect">${feedbackIncorrectText}</div>`;
-                overallCorrect = false;
-            }
-        };
-        
-        // Check if all inputs have some value before proceeding with detailed checks
-        if (!irInputSection.value.trim() || !irInputPrevails.value.trim() || !irInputEffect.value.trim() || !irInputSignificance.value.trim()) {
-            allQuestionsAttempted = false;
-        }
-
-        checkAndStyle(irInputSection, scenarioData.answers.section, "1. Relevant Section: Correct!", `1. Relevant Section: Incorrect. (Hint: s109)`);
-        checkAndStyle(irInputPrevails, scenarioData.answers.prevails, "2. Prevailing Law: Correct!", `2. Prevailing Law: Incorrect. (Hint: ${scenarioData.answers.prevails})`);
-        checkAndStyle(irInputEffect, scenarioData.answers.effect, "3. Effect on State Law: Correct!", `3. Effect on State Law: Needs review. (Hint: invalid to the extent of the inconsistency)`, false);
-        checkAndStyle(irInputSignificance, scenarioData.answers.significanceKeywords, `4. Significance: Looks good! You've touched on key aspects. <br><small class="feedback-hint">Model: ${scenarioData.modelSignificance}</small>`, `4. Significance: Consider elaborating. <br><small class="feedback-hint">Model: ${scenarioData.modelSignificance}</small>`, false, true);
-
-        if (!allQuestionsAttempted) {
-            irFeedbackArea.innerHTML = "<p class='text-orange-600 font-semibold'>Please attempt all parts of the question.</p>" + feedbackHTML;
-        } else if (overallCorrect) {
-             irFeedbackArea.innerHTML = "<p class='text-green-600 font-semibold'>Great job! All parts seem correct.</p>" + feedbackHTML;
-        } else {
-            // If not all correct, but all attempted, just show the detailed feedback.
-            irFeedbackArea.innerHTML = feedbackHTML;
-        }
-
-        if (irCheckAnswerBtn) irCheckAnswerBtn.classList.add('hidden');
-        if (irNextScenarioBtn) irNextScenarioBtn.classList.remove('hidden');
+function ks6PopulateDOPCaseSelect() {
+    if (!ks6CaseSelect) return;
+    ks6CaseSelect.innerHTML = '<option value="">-- Select a Case --</option>'; // Clear existing options first
+    ks6DopCaseData.forEach(caseItem => {
+        const option = document.createElement('option');
+        option.value = caseItem.id;
+        option.textContent = caseItem.name;
+        ks6CaseSelect.appendChild(option);
     });
 }
 
-if (irNextScenarioBtn) {
-    irNextScenarioBtn.addEventListener('click', () => {
-        currentIRScenarioIndex++;
-        if (currentIRScenarioIndex >= inconsistencyResolverScenarios.length) {
-            currentIRScenarioIndex = 0; 
-            if(irScenarioArea) irScenarioArea.innerHTML = "<p>All scenarios completed! Click 'Next Scenario' to restart or choose another tool.</p>";
+function ks6DisplayDOPCaseElements(caseId) {
+    ks6CurrentSelectedCase = ks6DopCaseData.find(c => c.id === caseId);
+    if (!ks6CurrentSelectedCase) return;
+
+    ks6ClearBoard();
+    if(ks6FeedbackDiv) {
+        ks6FeedbackDiv.innerHTML = '';
+        ks6FeedbackDiv.className = 'mt-2 text-xs'; // Reset feedback class
+    }
+
+    const promptsToDisplay = ks6ShuffleArray([...ks6CurrentSelectedCase.allPrompts]);
+
+    if (!ks6SourceElementsContainer) return;
+    // Clear placeholder before adding items
+    ks6SourceElementsContainer.innerHTML = '';
+
+    promptsToDisplay.forEach((prompt, index) => {
+        const draggableItem = document.createElement('div');
+        draggableItem.classList.add('dop-draggable-item'); // Keep class for styling
+        draggableItem.setAttribute('draggable', 'true');
+        draggableItem.textContent = prompt.text;
+        draggableItem.id = `ks6-dop-item-${ks6CurrentSelectedCase.id}-${index}`;
+        draggableItem.dataset.correctCategory = prompt.category;
+        
+        draggableItem.addEventListener('dragstart', ks6HandleDragStart);
+        draggableItem.addEventListener('dragend', ks6HandleDragEnd);
+        ks6SourceElementsContainer.appendChild(draggableItem);
+    });
+}
+
+function ks6ClearBoard() {
+    if (ks6SourceElementsContainer) {
+         ks6SourceElementsContainer.innerHTML = '<span class="text-xs text-slate-500 italic">Select a case to load elements.</span>';
+    }
+    if (ks6DropTargets) {
+        Object.values(ks6DropTargets).forEach(target => {
+            if (target) {
+                const list = target.querySelector('.dropped-items-list');
+                if(list) list.innerHTML = '';
+                // Remove placement classes from the drop target itself if they were applied there
+                target.classList.remove('correct-placement', 'incorrect-placement');
+            }
+        });
+    }
+    if(ks6FeedbackDiv) ks6FeedbackDiv.innerHTML = '';
+}
+
+function ks6HandleDragStart(e) {
+    ks6DragSourceElement = this;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', this.id);
+    setTimeout(() => this.classList.add('dragging'), 0);
+}
+
+function ks6HandleDragEnd() {
+    this.classList.remove('dragging');
+}
+
+function ks6HandleDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+}
+
+function ks6HandleDragEnter(e) {
+    // Check if 'this' is a valid drop target before adding class
+    if (this.classList.contains('dop-drop-target')) {
+        this.classList.add('drag-over');
+    }
+}
+
+function ks6HandleDragLeave(e) {
+    if (this.classList.contains('dop-drop-target')) {
+        this.classList.remove('drag-over');
+    }
+}
+
+function ks6HandleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!this.classList.contains('dop-drop-target')) return; // Ensure drop is on a valid target
+    this.classList.remove('drag-over');
+
+    const draggedItemId = e.dataTransfer.getData('text/plain');
+    const draggedItem = document.getElementById(draggedItemId);
+
+    if (draggedItem && ks6DragSourceElement) {
+        const itemsList = this.querySelector('.dropped-items-list');
+        if (itemsList) {
+            if (itemsList.children.length > 0) {
+                const existingItem = itemsList.children[0];
+                if (ks6SourceElementsContainer) ks6SourceElementsContainer.appendChild(existingItem);
+                existingItem.classList.remove('correct-placement', 'incorrect-placement');
+            }
+            itemsList.appendChild(draggedItem);
         }
-        // Ensure loadIRScenario is globally accessible or correctly referenced
-        if(typeof window.loadIRScenario === 'function') {
-            window.loadIRScenario(currentIRScenarioIndex);
-        } else if (typeof loadIRScenario === 'function') { // Fallback if not on window but in scope
-            loadIRScenario(currentIRScenarioIndex);
+    }
+    ks6DragSourceElement = null;
+}
+
+function ks6CheckDOPAnswers() {
+    if (!ks6CurrentSelectedCase || !ks6FeedbackDiv) {
+        if(ks6FeedbackDiv) {
+            ks6FeedbackDiv.textContent = "Please select a case first.";
+            ks6FeedbackDiv.className = 'mt-2 text-xs p-2 rounded bg-red-100 text-red-700';
+        }
+        return;
+    }
+
+    let allCorrect = true;
+    let feedbackHtml = `<strong>Results for ${ks6CurrentSelectedCase.name}:</strong><ul>`;
+
+    Object.entries(ks6DropTargets).forEach(([categoryKey, targetDiv]) => {
+        if (!targetDiv) return; // Skip if a target div is not found
+        
+        const itemsList = targetDiv.querySelector('.dropped-items-list');
+        const droppedItem = itemsList ? itemsList.children[0] : null;
+
+        // Reset visual feedback on the target div
+        targetDiv.classList.remove('correct-placement-target', 'incorrect-placement-target');
+        // Reset visual feedback on the item itself (if it exists)
+        if (droppedItem) {
+            droppedItem.classList.remove('correct-placement-item', 'incorrect-placement-item');
+        }
+
+
+        if (droppedItem) {
+            const correctCategoryForItem = droppedItem.dataset.correctCategory;
+            // Derive targetCategory from the key of ks6DropTargets (e.g. 'facts', 'issue')
+            const targetCategory = categoryKey;
+
+            if (correctCategoryForItem === targetCategory) {
+                feedbackHtml += `<li class="text-green-700">${ks6CurrentSelectedCase.elements[targetCategory].substring(0,20)}... (Category: ${targetCategory}): Correct!</li>`;
+                targetDiv.classList.add('correct-placement-target'); // Visual feedback for the target
+                droppedItem.classList.add('correct-placement-item'); // Visual feedback for the item
+            } else {
+                feedbackHtml += `<li class="text-red-700">${ks6CurrentSelectedCase.elements[targetCategory].substring(0,20)}... (Category: ${targetCategory}): Incorrect. (This belongs to ${correctCategoryForItem})</li>`;
+                targetDiv.classList.add('incorrect-placement-target');
+                droppedItem.classList.add('incorrect-placement-item');
+                allCorrect = false;
+            }
+        } else {
+            feedbackHtml += `<li class="text-orange-700">Category: ${categoryKey}: Empty.</li>`;
+            allCorrect = false;
         }
     });
+
+    feedbackHtml += "</ul>";
+    ks6FeedbackDiv.innerHTML = feedbackHtml;
+
+    if (allCorrect) {
+        ks6FeedbackDiv.className = 'mt-2 text-xs p-2 rounded bg-green-100 text-green-700';
+    } else {
+        ks6FeedbackDiv.className = 'mt-2 text-xs p-2 rounded bg-red-100 text-red-700';
+    }
+}
+
+function ks6InitializeDOPReconstructionTool() {
+    ks6CaseSelect = document.getElementById('ks6DopCaseSelect');
+    ks6SourceElementsContainer = document.getElementById('ks6DopSourceElements');
+    ks6DropTargets = {
+        facts: document.getElementById('ks6DopDropTargetFacts'),
+        issue: document.getElementById('ks6DopDropTargetIssue'),
+        decision: document.getElementById('ks6DopDropTargetDecision'),
+        impact: document.getElementById('ks6DopDropTargetImpact'),
+        constitution: document.getElementById('ks6DopDropTargetConstitution')
+    };
+    ks6CheckAnswersBtn = document.getElementById('ks6CheckDopReconstructionBtn');
+    ks6FeedbackDiv = document.getElementById('ks6DopReconstructionFeedback');
+
+    if (!ks6CaseSelect || !ks6SourceElementsContainer || !ks6CheckAnswersBtn || !ks6FeedbackDiv) {
+        console.warn("One or more KS6 DoP reconstruction tool elements not found. Initialization incomplete.");
+        return;
+    }
+
+    // Check if all drop targets are found
+    let allTargetsFound = true;
+    for (const key in ks6DropTargets) {
+        if (!ks6DropTargets[key]) {
+            console.warn(`KS6 DoP drop target for '${key}' not found.`);
+            allTargetsFound = false;
+        }
+    }
+    if (!allTargetsFound) {
+        console.warn("Not all KS6 DoP drop targets were found. Functionality may be impaired.");
+    }
+
+    ks6PopulateDOPCaseSelect();
+    ks6CaseSelect.addEventListener('change', (e) => {
+        if (e.target.value) {
+            ks6DisplayDOPCaseElements(e.target.value);
+        } else {
+            ks6ClearBoard();
+            ks6CurrentSelectedCase = null;
+            if(ks6FeedbackDiv) {
+                 ks6FeedbackDiv.innerHTML = '';
+                 ks6FeedbackDiv.className = 'mt-2 text-xs';
+            }
+        }
+    });
+
+    Object.values(ks6DropTargets).forEach(target => {
+        if (target) {
+            target.addEventListener('dragover', ks6HandleDragOver);
+            target.addEventListener('dragenter', ks6HandleDragEnter);
+            target.addEventListener('dragleave', ks6HandleDragLeave);
+            target.addEventListener('drop', ks6HandleDrop);
+        }
+    });
+
+    if(ks6CheckAnswersBtn) ks6CheckAnswersBtn.addEventListener('click', ks6CheckDOPAnswers);
+
+    ks6ClearBoard(); // Initial clear
 }
 
 // --- Update initializeKeySkillsHub ---
 // Ensure this function is defined only ONCE, typically at the end of keySkillsHub.js
-if (!window.initializeKeySkillsHub) {
-    window.initializeKeySkillsHub = function() { /* Placeholder */ };
-}
-const originalInitializeKeySkillsHub = window.initializeKeySkillsHub; // Capture previous definition if any
+
+const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
 
 window.initializeKeySkillsHub = function() {
-    // Check if originalInitializeKeySkillsHub is the same as the current function to avoid recursion
-    // Or if it's the placeholder, don't call it.
     if(typeof originalInitializeKeySkillsHub === 'function' && originalInitializeKeySkillsHub.toString() !== window.initializeKeySkillsHub.toString()) {
         originalInitializeKeySkillsHub(); 
     } else {
-        // Fallback or initial setup for tools if originalInitializeKeySkillsHub was just a placeholder or this is the first full definition
-        // This ensures tools are initialized even if this is the first "real" definition of initializeKeySkillsHub
-        if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') {
-            window.loadSTCQuestion(typeof currentSTCQuestion !== 'undefined' ? currentSTCQuestion : 0);
+        // Fallback initializations for other Key Skills tools if this is the first full definition
+        if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') {
+            loadSTCQuestion(typeof currentSTCQuestion !== 'undefined' ? currentSTCQuestion : 0);
         }
-        if (document.getElementById('sourceAnalysisChallengeContainer') && typeof window.loadSACExcerpt === 'function') {
-             window.loadSACExcerpt(typeof currentSACExcerpt !== 'undefined' ? currentSACExcerpt : 0);
+        if (document.getElementById('sourceAnalysisChallengeContainer') && typeof loadSACExcerpt === 'function') {
+             loadSACExcerpt(typeof currentSACExcerpt !== 'undefined' ? currentSACExcerpt : 0);
         }
-        if (document.getElementById('powerSortGameContainer') && typeof window.setupPowerSortGame === 'function') {
-            window.setupPowerSortGame();
+        if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') { // Corrected: was window.setupPowerSortGame
+            setupPowerSortGame();
         }
-        if (document.getElementById('relationshipMatcherContainer') && typeof window.setupRelationshipMatcherGame === 'function') {
-            window.setupRelationshipMatcherGame();
+        if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') { // Corrected: was window.setupRelationshipMatcherGame
+            setupRelationshipMatcherGame();
         }
     }
-    // Initialize Inconsistency Resolver
-    if (document.getElementById('inconsistencyResolverContainer') && typeof window.loadIRScenario === 'function') {
-        window.loadIRScenario(0); // Load the first scenario
+
+    // Initialize Inconsistency Resolver (Key Skill 5)
+    if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') { // Corrected: was window.loadIRScenario
+        loadIRScenario(0);
     }
-    console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver.");
+
+    // Initialize Case Reconstruction (DoP) (Key Skill 6)
+    ks6InitializeDOPReconstructionTool();
+
+    console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver and KS6 DoP Tool.");
 };
-const guidedAnswerContainer = document.getElementById('guidedAnswerContainer');
+
+// Ensure other initializers like for Guided Answers are also correctly handled if they are part of Key Skills Hub
+// For example, if Guided Answers is part of Key Skills Hub, its initialization should also be here.
+// This example assumes Guided Answers is separate or initialized elsewhere if not part of Key Skills Hub.
+
+const guidedAnswerContainer = document.getElementById('guidedAnswerContainer'); // This seems to be for a separate tool
 const checkGuidedAnswerBtn = document.getElementById('checkGuidedAnswerBtn');
 const guidedAnswerFeedback = document.getElementById('guidedAnswerFeedback');
 let currentGuidedQuestionIndex = 0; // Ensure this is defined if not already for this tool
