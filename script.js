@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                  'bg-cyan-500', 'text-white', 'active-skill-hub-toggle', 
                                  'bg-purple-500', 'text-white',
                                  'bg-lime-500', 'text-white', 'active-game-toggle');
+            // Note: Logic for restoring default yellow for the now-deleted button is also removed.
         });
 
         // Apply active style to the clicked button based on its category
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (buttonToActivate.classList.contains('text-purple-700')) {
             buttonToActivate.classList.add('bg-purple-500', 'text-white');
         }
+        // Note: The 'else if' for 'u4aos1-case-reconstruction-dop' (yellow button) is removed.
         
         u4aos1AllContent.forEach(contentSection => {
             const isTarget = contentSection.id === targetId;

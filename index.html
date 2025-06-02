@@ -7,6 +7,60 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="output.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Updated for Key Skill 6 integration */
+        #ks6DopSourceElements {
+            border: 1px solid #cbd5e1; /* slate-300 */
+            padding: 0.75rem; /* p-3 */
+            min-height: 150px;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .dop-draggable-item {
+            background-color: #ffffff; /* white */
+            padding: 0.5rem 0.75rem; /* py-2 px-3 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: grab;
+            font-size: 0.875rem; /* text-sm */
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        .dop-draggable-item:active {
+            cursor: grabbing;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .dop-drop-target {
+            /* General styling for drop targets, colors are now applied via Tailwind in HTML */
+            transition: background-color 0.2s ease-in-out;
+        }
+        /* Specific drag-over feedback for the new multi-colored drop targets if needed,
+           otherwise, Tailwind's border-dashed to border-solid change might be enough.
+           The example below is generic. If specific colors are needed, more classes would be added. */
+        .dop-drop-target.drag-over {
+            /* Example: make border darker or more prominent.
+               Actual background color changes are handled by Tailwind in HTML for each target.
+               This rule can enhance the border visibility during drag-over. */
+            border-color: #94a3b8; /* slate-400, as a generic darker border */
+            border-style: solid;
+        }
+        .dop-drop-target .dop-draggable-item { /* Style for items when they are inside a drop target */
+            cursor: default; /* No longer grabbing once dropped */
+        }
+        .correct-placement .dop-draggable-item {
+            border-left: 4px solid #22c55e; /* green-500 */
+            background-color: #f0fdf4; /* green-50 */
+        }
+        .incorrect-placement .dop-draggable-item {
+            border-left: 4px solid #ef4444; /* red-500 */
+            background-color: #fef2f2; /* red-50 */
+        }
+        /* Styling for when an item is being dragged */
+        .dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+    </style>
     <!-- Visualization & Content Choices:
         - Guided Answer Construction (U4AOS1): Goal: Skill Development & Reinforce Structure. Method: HTML form elements (text inputs for blanks), lists for task words. Interaction: User types in blanks, clicks 'Check Answer'. JS validates and provides feedback. Justification: Active recall and structured answer practice. Library: HTML/Tailwind/JS.
         - Case Deconstruction (U4AOS1): Goal: Analyze & Understand Cases. Method: Dropdown to select case. For each case component (Facts, Issue, Decision, Significance), users will select the correct description from a dropdown list of jumbled options. Multiple choice for 'Impacted Area'. Checkboxes for 'Related Concepts'. Interaction: User makes selections, clicks 'Check Deconstruction'. JS validates. Justification: Breaks down complex cases into understandable, testable parts. Library: HTML/Tailwind/JS.
@@ -603,6 +657,52 @@
 
             <p class="text-center text-slate-400 italic mt-6">More Key Skill activities coming soon!</p>
 
+            <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow mt-4">
+                <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill 6: Case Reconstruction (Division of Powers Focus)</h5>
+                <p class="text-sm text-slate-600 mb-3">Select a case related to the division of powers and reconstruct its key elements by dragging the jumbled phrases to their correct categories.</p>
+
+                <div class="mb-3">
+                    <label for="ks6DopCaseSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Case:</label>
+                    <select id="ks6DopCaseSelect" class="w-full p-2 border border-slate-300 rounded bg-white text-sm">
+                        <option value="">-- Select a Case --</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <div id="ks6DopCaseDisplay" class="space-y-4">
+                    <div class="p-3 bg-slate-100 rounded border min-h-[60px] flex flex-wrap gap-2 justify-center" id="ks6DopSourceElements">
+                        <!-- Draggable elements will be populated here -->
+                        <span class="text-xs text-slate-500 italic">Select a case to load elements.</span>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-3 text-sm">
+                        <div id="ks6DopDropTargetFacts" class="dop-drop-target p-3 bg-rose-50 border-2 border-dashed border-rose-300 rounded min-h-[80px]">
+                            <h6 class="font-semibold text-rose-700 text-center mb-1">Facts of the Case</h6>
+                            <div class="dropped-items-list space-y-1 mt-1"></div>
+                        </div>
+                        <div id="ks6DopDropTargetIssue" class="dop-drop-target p-3 bg-amber-50 border-2 border-dashed border-amber-300 rounded min-h-[80px]">
+                            <h6 class="font-semibold text-amber-700 text-center mb-1">Legal Issue(s)</h6>
+                            <div class="dropped-items-list space-y-1 mt-1"></div>
+                        </div>
+                        <div id="ks6DopDropTargetDecision" class="dop-drop-target p-3 bg-lime-50 border-2 border-dashed border-lime-300 rounded min-h-[80px]">
+                            <h6 class="font-semibold text-lime-700 text-center mb-1">Decision / Outcome</h6>
+                            <div class="dropped-items-list space-y-1 mt-1"></div>
+                        </div>
+                        <div id="ks6DopDropTargetImpact" class="dop-drop-target p-3 bg-sky-50 border-2 border-dashed border-sky-300 rounded min-h-[80px]">
+                            <h6 class="font-semibold text-sky-700 text-center mb-1">Impact on Division of Powers</h6>
+                            <div class="dropped-items-list space-y-1 mt-1"></div>
+                        </div>
+                        <div id="ks6DopDropTargetConstitution" class="dop-drop-target p-3 bg-violet-50 border-2 border-dashed border-violet-300 rounded min-h-[80px] md:col-span-2">
+                            <h6 class="font-semibold text-violet-700 text-center mb-1">Relevant Constitutional Sections/Principles</h6>
+                            <div class="dropped-items-list space-y-1 mt-1"></div>
+                        </div>
+                    </div>
+
+                    <button id="ks6CheckDopReconstructionBtn" class="mt-3 py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm">Check My Reconstruction</button>
+                    <div id="ks6DopReconstructionFeedback" class="mt-2 text-xs"></div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -749,5 +849,6 @@
 
     <script src="script.js"></script>
     <script src="keySkillsHub.js"></script>
+    <script src="caseReconstructionDOP.js"></script>
 </body>
 </html>
