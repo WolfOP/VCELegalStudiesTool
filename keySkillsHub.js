@@ -1438,19 +1438,149 @@ window.initializeKeySkillsHub = function() {
 
     // Make sure to call addAIGlossaryExplainers when the glossary is displayed/populated.
     window.addAIGlossaryExplainers = addAIGlossaryExplainers;
+
+    // --- Key Skill 7: High Court & Judicial Review (Scenario Spotter) ---
+    const ks7ScenarioData = [
+        {
+            id: "ks7scen1",
+            text: "A community group believes a new Commonwealth law unfairly restricts freedom of speech by banning protests near Parliament House. They decide to challenge the law's validity.",
+            options: ["HCA: Constitutional Interpretation", "HCA: Final Court of Appeal", "Judicial Review of Gov. Action/Law"],
+            correctAnswer: "HCA: Constitutional Interpretation",
+            feedback: "Correct! The High Court interprets the Constitution to determine if laws are valid. Challenging a law's impact on a constitutionally implied right (like freedom of political communication) falls under this role."
+        },
+        {
+            id: "ks7scen2",
+            text: "After losing a negligence case in the State Supreme Court (Court of Appeal), a company seeks to have the decision overturned by a higher judicial body, arguing a point of law was incorrectly applied.",
+            options: ["HCA: Constitutional Interpretation", "HCA: Final Court of Appeal", "Judicial Review of Gov. Action/Law"],
+            correctAnswer: "HCA: Final Court of Appeal",
+            feedback: "Correct! The High Court is the ultimate appellate court in Australia (s73). It hears appeals (with special leave) from state Supreme Courts, ensuring consistency and correct application of law."
+        },
+        {
+            id: "ks7scen3",
+            text: "A government department makes a decision to deny a particular license to a business. The business believes the department did not follow the proper procedures outlined in the relevant Act when making this decision.",
+            options: ["HCA: Constitutional Interpretation", "HCA: Final Court of Appeal", "Judicial Review of Gov. Action/Law"],
+            correctAnswer: "Judicial Review of Gov. Action/Law",
+            feedback: "Correct! Judicial review allows courts to assess the lawfulness of government decisions, ensuring they are made within the scope of the relevant legislation and that proper procedures are followed."
+        },
+        {
+            id: "ks7scen4",
+            text: "The Commonwealth Parliament passes an Act that attempts to give the Minister for Immigration the power to make final decisions on visa applications that cannot be challenged or reviewed by any court. This is challenged as unconstitutional.",
+            options: ["HCA: Constitutional Interpretation", "HCA: Final Court of Appeal", "Judicial Review of Gov. Action/Law"],
+            correctAnswer: "HCA: Constitutional Interpretation",
+            feedback: "Correct! The High Court would interpret the Constitution (particularly Chapter III regarding judicial power) to determine if Parliament can validly oust the courts' jurisdiction. This is a core function of its role as guardian of the Constitution."
+        }
+    ];
+
+    let currentKs7ScenarioIndex = 0;
+    let ks7ScenarioTextEl, ks7ScenarioOptionsEl, ks7CheckScenarioBtnEl, ks7NextScenarioBtnEl, ks7ScenarioFeedbackEl;
+
+    function ks7LoadScenario(index) {
+        if (!ks7ScenarioTextEl || !ks7ScenarioOptionsEl || !ks7CheckScenarioBtnEl || !ks7NextScenarioBtnEl || !ks7ScenarioFeedbackEl) {
+            console.warn("KS7 Scenario Spotter elements not fully initialized.");
+            return;
+        }
+
+        if (index < 0 || index >= ks7ScenarioData.length) {
+            ks7ScenarioTextEl.innerHTML = "<p>All scenarios completed! Click 'Next Scenario' to restart.</p>";
+            ks7ScenarioOptionsEl.innerHTML = "";
+            ks7CheckScenarioBtnEl.classList.add('hidden');
+            ks7NextScenarioBtnEl.classList.remove('hidden'); // Allow restart
+            currentKs7ScenarioIndex = -1; // Flag to restart on next click
+            return;
+        }
+        const scenario = ks7ScenarioData[index];
+        ks7ScenarioTextEl.innerHTML = `<p>${scenario.text}</p>`;
+        ks7ScenarioOptionsEl.innerHTML = "";
+        scenario.options.forEach((option, i) => {
+            const optionId = `ks7opt${index}_${i}`;
+            ks7ScenarioOptionsEl.innerHTML += `
+                <div>
+                    <input type="radio" name="ks7scenarioOption" id="${optionId}" value="${option}" class="sr-only">
+                    <label for="${optionId}" class="cursor-pointer p-1.5 hover:bg-cyan-100 rounded block">${option}</label>
+                </div>`;
+        });
+        ks7ScenarioFeedbackEl.innerHTML = "";
+        ks7CheckScenarioBtnEl.classList.remove('hidden');
+        ks7NextScenarioBtnEl.classList.add('hidden');
+    }
+
+    function ks7CheckScenarioAnswer() {
+        if (!ks7ScenarioFeedbackEl || currentKs7ScenarioIndex < 0) return; // Do nothing if in completion state
+
+        const selectedOptionInput = document.querySelector('input[name="ks7scenarioOption"]:checked');
+        if (!selectedOptionInput) {
+            ks7ScenarioFeedbackEl.textContent = "Please select an option.";
+            ks7ScenarioFeedbackEl.className = 'mt-2 text-xs text-amber-600';
+            return;
+        }
+
+        const userAnswer = selectedOptionInput.value;
+        const correctAnswer = ks7ScenarioData[currentKs7ScenarioIndex].correctAnswer;
+        const feedback = ks7ScenarioData[currentKs7ScenarioIndex].feedback;
+
+        if (userAnswer === correctAnswer) {
+            ks7ScenarioFeedbackEl.innerHTML = `<strong class="text-green-600">Correct!</strong> ${feedback}`;
+            ks7ScenarioFeedbackEl.className = 'mt-2 text-xs text-green-700';
+        } else {
+            ks7ScenarioFeedbackEl.innerHTML = `<strong class="text-red-600">Not quite.</strong> The best fit is '${correctAnswer}'. ${feedback}`;
+            ks7ScenarioFeedbackEl.className = 'mt-2 text-xs text-red-700';
+        }
+        ks7CheckScenarioBtnEl.classList.add('hidden');
+        ks7NextScenarioBtnEl.classList.remove('hidden');
+    }
+
+    function ks7ShowNextScenario() {
+        if (currentKs7ScenarioIndex === -1) { // Restart condition
+            currentKs7ScenarioIndex = 0;
+        } else {
+            currentKs7ScenarioIndex++;
+        }
+        ks7LoadScenario(currentKs7ScenarioIndex);
+    }
+
+    function ks7InitializeHighCourtJudicialReview() {
+        ks7ScenarioTextEl = document.getElementById('ks7ScenarioText');
+        ks7ScenarioOptionsEl = document.getElementById('ks7ScenarioOptions');
+        ks7CheckScenarioBtnEl = document.getElementById('ks7CheckScenarioBtn');
+        ks7NextScenarioBtnEl = document.getElementById('ks7NextScenarioBtn');
+        ks7ScenarioFeedbackEl = document.getElementById('ks7ScenarioFeedback');
+
+        if (!ks7ScenarioTextEl || !ks7ScenarioOptionsEl || !ks7CheckScenarioBtnEl || !ks7NextScenarioBtnEl || !ks7ScenarioFeedbackEl) {
+            console.warn("Could not initialize Key Skill 7 Scenario Spotter: one or more elements are missing.");
+            return;
+        }
+
+        ks7CheckScenarioBtnEl.addEventListener('click', ks7CheckScenarioAnswer);
+        ks7NextScenarioBtnEl.addEventListener('click', ks7ShowNextScenario);
+
+        currentKs7ScenarioIndex = 0; // Reset index on initialization
+        ks7LoadScenario(currentKs7ScenarioIndex);
+        console.log("Key Skill 7 (High Court & Judicial Review) initialized.");
+    }
+    // End of Key Skill 7 specific logic
 });
 
 // Modify initializeKeySkillsHub to include new setups
 function initializeKeySkillsHub() {
     console.log("Key Skills Hub Initialized or Re-initialized");
     // Existing initializations
-    if (document.getElementById('scenarioTermChallengeContainer')) loadSTCQuestion(currentSTCQuestion);
-    if (document.getElementById('sourceAnalysisChallengeContainer')) loadSACExcerpt(currentSACExcerpt);
+    if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') loadSTCQuestion(currentSTCQuestion);
+    if (document.getElementById('sourceAnalysisChallengeContainer') && typeof loadSACExcerpt === 'function') loadSACExcerpt(currentSACExcerpt);
 
-    // NEW initializations
-    if (document.getElementById('powerSortGameContainer')) setupPowerSortGame();
-    if (document.getElementById('relationshipMatcherContainer')) setupRelationshipMatcherGame();
-    // Add other initializations for future key skill activities here
+    // NEW initializations for KS3, KS4, KS5
+    if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') setupPowerSortGame();
+    if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') setupRelationshipMatcherGame();
+    if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') loadIRScenario(0);
+
+    // Initialize KS6 (DoP Case Reconstruction) if its elements exist
+    if (document.getElementById('ks6DopCaseDisplay') && typeof ks6InitializeDOPReconstructionTool === 'function') {
+      ks6InitializeDOPReconstructionTool();
+    }
+
+    // Initialize KS7 (High Court & Judicial Review)
+    if (document.getElementById('ks7ScenarioSpotter') && typeof ks7InitializeHighCourtJudicialReview === 'function') {
+        ks7InitializeHighCourtJudicialReview();
+    }
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
 

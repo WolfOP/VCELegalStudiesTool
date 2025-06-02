@@ -60,6 +60,25 @@
             transform: scale(1.05);
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
         }
+
+        /* Key Skill 7 - Scenario Spotter Options */
+        #ks7ScenarioOptions label { /* Apply to labels within the options container */
+            display: block; /* Ensure each option is on a new line */
+            padding: 0.375rem 0.5rem; /* Equivalent to py-1.5 px-2 */
+            border-radius: 0.25rem; /* rounded-sm */
+            cursor: pointer;
+            border: 1px solid transparent; /* For smooth hover transition */
+        }
+        #ks7ScenarioOptions label:hover {
+            background-color: #f0f9ff; /* sky-50 for a light hover effect */
+            border-color: #e0f2fe; /* sky-100 for a light border on hover */
+        }
+        #ks7ScenarioOptions input[type="radio"]:checked + label { /* Style for the label of a checked radio */
+            background-color: #ecfccb; /* lime-100 */
+            border-color: #d9f99d; /* lime-200 */
+            color: #4d7c0f; /* lime-700 */
+            font-weight: 500; /* medium */
+        }
     </style>
     <!-- Visualization & Content Choices:
         - Guided Answer Construction (U4AOS1): Goal: Skill Development & Reinforce Structure. Method: HTML form elements (text inputs for blanks), lists for task words. Interaction: User types in blanks, clicks 'Check Answer'. JS validates and provides feedback. Justification: Active recall and structured answer practice. Library: HTML/Tailwind/JS.
@@ -700,6 +719,51 @@
 
                     <button id="ks6CheckDopReconstructionBtn" class="mt-3 py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm">Check My Reconstruction</button>
                     <div id="ks6DopReconstructionFeedback" class="mt-2 text-xs"></div>
+                </div>
+            </div>
+
+            <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow mt-4">
+                <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill 7: High Court & Judicial Review</h5>
+                <p class="text-sm text-slate-600 mb-3">Understand the constitutional role of the High Court and the concept of judicial review, and how they act as checks on parliamentary power.</p>
+
+                <!-- Explanatory Content Section -->
+                <div class="space-y-3 text-sm mb-4">
+                    <div>
+                        <h6 class="font-semibold text-cyan-700">The Constitutional Role of the High Court of Australia (HCA)</h6>
+                        <p class="text-xs text-slate-500 italic mb-1">Key roles include interpreting the Constitution, acting as the final court of appeal, and hearing certain cases directly.</p>
+                        <ul class="list-disc list-inside ml-4 space-y-1 text-slate-600 text-xs">
+                            <li><strong>Guardian of the Constitution (s71, s76(i)):</strong> Interprets the Constitution, ensuring Parliament acts within its powers. Decisions are final. Key in division of powers disputes (e.g., s109).</li>
+                            <li><strong>Final Court of Appeal (s73):</strong> Hears appeals (with special leave) from all Australian courts. Clarifies common law and ensures consistent application.</li>
+                            <li><strong>Original Jurisdiction (s75, s76):</strong> Hears certain cases directly (e.g., matters involving treaties, the Commonwealth as a party, or against Commonwealth officers).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="font-semibold text-cyan-700">The Concept of Judicial Review</h6>
+                        <p class="text-xs text-slate-500 italic mb-1">Courts reviewing the lawfulness of legislative and executive actions.</p>
+                        <ul class="list-disc list-inside ml-4 space-y-1 text-slate-600 text-xs">
+                            <li><strong>Review of Legislation:</strong> Courts (especially HCA) determine if Acts of Parliament are constitutional. Unconstitutional laws can be declared 'ultra vires' (invalid).</li>
+                            <li><strong>Review of Government Decisions:</strong> Courts assess if decisions by government bodies/officials were made lawfully (e.g., within power, fair procedure).</li>
+                            <li><strong>Purpose:</strong> Upholds rule of law, ensures government accountability, protects rights.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h6 class="font-semibold text-cyan-700">Checks on Parliamentary Power</h6>
+                        <p class="text-xs text-slate-600">The HCA's constitutional interpretation and the process of judicial review directly limit Parliament by ensuring it doesn't legislate beyond its powers and that its laws can be struck down if unconstitutional. The independence of the judiciary is vital for this.</p>
+                    </div>
+                </div>
+
+                <!-- Scenario Spotter Activity Section -->
+                <div id="ks7ScenarioSpotter" class="p-3 border border-cyan-100 rounded-md bg-cyan-50">
+                    <h6 class="font-medium text-cyan-700 mb-2 text-sm">Scenario Spotter: What's the Primary Role/Concept?</h6>
+                    <div id="ks7ScenarioText" class="text-xs text-slate-700 mb-2 p-2 bg-white rounded min-h-[40px]">
+                        <p>Scenario will load here...</p>
+                    </div>
+                    <div id="ks7ScenarioOptions" class="space-y-1 text-xs mb-2">
+                        <!-- Radio buttons will be populated by JavaScript -->
+                    </div>
+                    <button id="ks7CheckScenarioBtn" class="py-1 px-3 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-xs">Check My Understanding</button>
+                    <button id="ks7NextScenarioBtn" class="py-1 px-3 bg-slate-400 text-white rounded hover:bg-slate-500 text-xs ml-2 hidden">Next Scenario</button>
+                    <div id="ks7ScenarioFeedback" class="mt-2 text-xs"></div>
                 </div>
             </div>
 
