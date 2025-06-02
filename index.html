@@ -7,6 +7,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="output.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        #dopSourceElements {
+            border: 1px solid #cbd5e1; /* slate-300 */
+            padding: 0.75rem; /* p-3 */
+            min-height: 150px;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .dop-draggable-item {
+            background-color: #ffffff; /* white */
+            padding: 0.5rem 0.75rem; /* py-2 px-3 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: grab;
+            font-size: 0.875rem; /* text-sm */
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        .dop-draggable-item:active {
+            cursor: grabbing;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .dop-drop-target {
+            /* Tailwind classes: p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px] */
+            /* These are already applied in HTML, specific CSS for dynamic states below */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .dop-drop-target.drag-over {
+            background-color: #fef9c3; /* yellow-200 - a bit darker than yellow-100 for hover */
+            border-style: solid;
+        }
+        .dop-drop-target .dop-draggable-item { /* Style for items when they are inside a drop target */
+            cursor: default; /* No longer grabbing once dropped */
+        }
+        .correct-placement .dop-draggable-item {
+            border-left: 4px solid #22c55e; /* green-500 */
+            background-color: #f0fdf4; /* green-50 */
+        }
+        .incorrect-placement .dop-draggable-item {
+            border-left: 4px solid #ef4444; /* red-500 */
+            background-color: #fef2f2; /* red-50 */
+        }
+        /* Styling for when an item is being dragged */
+        .dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+    </style>
     <!-- Visualization & Content Choices:
         - Guided Answer Construction (U4AOS1): Goal: Skill Development & Reinforce Structure. Method: HTML form elements (text inputs for blanks), lists for task words. Interaction: User types in blanks, clicks 'Check Answer'. JS validates and provides feedback. Justification: Active recall and structured answer practice. Library: HTML/Tailwind/JS.
         - Case Deconstruction (U4AOS1): Goal: Analyze & Understand Cases. Method: Dropdown to select case. For each case component (Facts, Issue, Decision, Significance), users will select the correct description from a dropdown list of jumbled options. Multiple choice for 'Impacted Area'. Checkboxes for 'Related Concepts'. Interaction: User makes selections, clicks 'Check Deconstruction'. JS validates. Justification: Breaks down complex cases into understandable, testable parts. Library: HTML/Tailwind/JS.
@@ -73,6 +121,7 @@
                         <button class="u4aos1-content-toggle py-2 px-3 bg-lime-100 text-lime-700 rounded hover:bg-lime-200 text-sm" data-target="u4aos1-term-match-game">Term Match Game</button>
                         <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-exam-skills">Exam Skills Helper</button>
                         <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-practice-questions">Practice Questions</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 text-sm" data-target="u4aos1-case-reconstruction-dop">Case Reconstruction (DoP)</button>
                     </div>
 
                     <div id="u4aos1-accordion-container" class="space-y-3">
@@ -720,6 +769,61 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div id="u4aos1-case-reconstruction-dop" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-yellow-50 hover:bg-yellow-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-yellow-700">Case Reconstruction: Division of Powers</h4>
+                                        <span class="arrow-icon text-yellow-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200 space-y-4">
+                                    <p class="text-sm text-slate-600">Select a significant case related to the division of powers. Then, drag and drop the jumbled case components (facts, issue, decision, impact, constitutional elements) into their correct categories to reconstruct the case summary. This will help you understand how these cases have shaped Australia's federal balance.</p>
+
+                                    <div>
+                                        <label for="dopCaseSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Case:</label>
+                                        <select id="dopCaseSelect" class="w-full p-2 border border-slate-300 rounded shadow-sm focus:ring-yellow-500 focus:border-yellow-500">
+                                            <option value="">-- Select a Case --</option>
+                                            {/* Options will be populated by JavaScript */}
+                                        </select>
+                                    </div>
+
+                                    <div class="flex flex-col lg:flex-row gap-4">
+                                        <div id="dopSourceElements" class="lg:w-1/3 p-3 bg-slate-100 rounded border min-h-[150px] space-y-2">
+                                            <h5 class="text-center font-semibold text-slate-700">Jumbled Case Elements</h5>
+                                            {/* Draggable elements will be populated here by JavaScript */}
+                                        </div>
+
+                                        <div class="lg:w-2/3 space-y-3">
+                                            <div id="dopDropTargetFacts" class="dop-drop-target p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px]">
+                                                <h6 class="font-semibold text-yellow-800">Facts of the Case</h6>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopDropTargetIssue" class="dop-drop-target p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px]">
+                                                <h6 class="font-semibold text-yellow-800">Legal Issue(s)</h6>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopDropTargetDecision" class="dop-drop-target p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px]">
+                                                <h6 class="font-semibold text-yellow-800">Decision/Outcome</h6>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopDropTargetImpact" class="dop-drop-target p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px]">
+                                                <h6 class="font-semibold text-yellow-800">Impact on Division of Powers</h6>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopDropTargetConstitution" class="dop-drop-target p-3 bg-yellow-50 border-2 border-dashed border-yellow-300 rounded min-h-[80px]">
+                                                <h6 class="font-semibold text-yellow-800">Relevant Constitutional Sections/Principles</h6>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button id="checkDopReconstructionBtn" class="py-2 px-4 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75">Check Answers</button>
+                                    <div id="dopReconstructionFeedback" class="mt-2 text-sm p-3 rounded"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div> </section> <section id="unit4-aos2" class="unit4-aos-section bg-white p-6 rounded-xl shadow-lg">
                     <h3 class="text-2xl font-semibold text-indigo-600 mb-2">Area of Study 2: The People, the Law and Reform</h3>
                     <p class="mb-4 text-slate-600">This area of study explores the reasons for law reform, the means by which law reform can be influenced, and the processes of constitutional reform. Content for this interactive section is currently under development.</p>
@@ -749,5 +853,6 @@
 
     <script src="script.js"></script>
     <script src="keySkillsHub.js"></script>
+    <script src="caseReconstructionDOP.js"></script>
 </body>
 </html>
