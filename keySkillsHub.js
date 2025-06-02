@@ -882,7 +882,7 @@ function ks6DisplayDOPCaseElements(caseId) {
 
     if (!ks6SourceElementsContainer) return;
     // Clear placeholder before adding items
-    ks6SourceElementsContainer.innerHTML = '';
+    ks6SourceElementsContainer.innerHTML = ''; 
 
     promptsToDisplay.forEach((prompt, index) => {
         const draggableItem = document.createElement('div');
@@ -908,7 +908,7 @@ function ks6ClearBoard() {
                 const list = target.querySelector('.dropped-items-list');
                 if(list) list.innerHTML = '';
                 // Remove placement classes from the drop target itself if they were applied there
-                target.classList.remove('correct-placement', 'incorrect-placement');
+                target.classList.remove('correct-placement', 'incorrect-placement'); 
             }
         });
     }
@@ -927,7 +927,7 @@ function ks6HandleDragEnd() {
 }
 
 function ks6HandleDragOver(e) {
-    e.preventDefault();
+    e.preventDefault(); 
     e.dataTransfer.dropEffect = 'move';
 }
 
@@ -946,11 +946,11 @@ function ks6HandleDragLeave(e) {
 
 function ks6HandleDrop(e) {
     e.preventDefault();
-    e.stopPropagation();
+    e.stopPropagation(); 
 
     if (!this.classList.contains('dop-drop-target')) return; // Ensure drop is on a valid target
     this.classList.remove('drag-over');
-
+    
     const draggedItemId = e.dataTransfer.getData('text/plain');
     const draggedItem = document.getElementById(draggedItemId);
 
@@ -997,7 +997,7 @@ function ks6CheckDOPAnswers() {
         if (droppedItem) {
             const correctCategoryForItem = droppedItem.dataset.correctCategory;
             // Derive targetCategory from the key of ks6DropTargets (e.g. 'facts', 'issue')
-            const targetCategory = categoryKey;
+            const targetCategory = categoryKey; 
 
             if (correctCategoryForItem === targetCategory) {
                 feedbackHtml += `<li class="text-green-700">${ks6CurrentSelectedCase.elements[targetCategory].substring(0,20)}... (Category: ${targetCategory}): Correct!</li>`;
@@ -1014,7 +1014,7 @@ function ks6CheckDOPAnswers() {
             allCorrect = false;
         }
     });
-
+    
     feedbackHtml += "</ul>";
     ks6FeedbackDiv.innerHTML = feedbackHtml;
 
@@ -1024,7 +1024,7 @@ function ks6CheckDOPAnswers() {
         ks6FeedbackDiv.className = 'mt-2 text-xs p-2 rounded bg-red-100 text-red-700';
     }
 }
-
+        
 function ks6InitializeDOPReconstructionTool() {
     ks6CaseSelect = document.getElementById('ks6DopCaseSelect');
     ks6SourceElementsContainer = document.getElementById('ks6DopSourceElements');
@@ -1042,7 +1042,7 @@ function ks6InitializeDOPReconstructionTool() {
         console.warn("One or more KS6 DoP reconstruction tool elements not found. Initialization incomplete.");
         return;
     }
-
+    
     // Check if all drop targets are found
     let allTargetsFound = true;
     for (const key in ks6DropTargets) {
@@ -1077,16 +1077,16 @@ function ks6InitializeDOPReconstructionTool() {
             target.addEventListener('drop', ks6HandleDrop);
         }
     });
-
+    
     if(ks6CheckAnswersBtn) ks6CheckAnswersBtn.addEventListener('click', ks6CheckDOPAnswers);
-
+    
     ks6ClearBoard(); // Initial clear
 }
 
 // --- Update initializeKeySkillsHub ---
 // Ensure this function is defined only ONCE, typically at the end of keySkillsHub.js
 
-const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
+const originalInitializeKeySkillsHub = window.initializeKeySkillsHub; 
 
 window.initializeKeySkillsHub = function() {
     if(typeof originalInitializeKeySkillsHub === 'function' && originalInitializeKeySkillsHub.toString() !== window.initializeKeySkillsHub.toString()) {
@@ -1106,15 +1106,15 @@ window.initializeKeySkillsHub = function() {
             setupRelationshipMatcherGame();
         }
     }
-
+    
     // Initialize Inconsistency Resolver (Key Skill 5)
     if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') { // Corrected: was window.loadIRScenario
-        loadIRScenario(0);
+        loadIRScenario(0); 
     }
 
     // Initialize Case Reconstruction (DoP) (Key Skill 6)
-    ks6InitializeDOPReconstructionTool();
-
+    ks6InitializeDOPReconstructionTool(); 
+    
     console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver and KS6 DoP Tool.");
 };
 
@@ -1552,7 +1552,7 @@ window.initializeKeySkillsHub = function() {
 
         ks7CheckScenarioBtnEl.addEventListener('click', ks7CheckScenarioAnswer);
         ks7NextScenarioBtnEl.addEventListener('click', ks7ShowNextScenario);
-
+        
         currentKs7ScenarioIndex = 0; // Reset index on initialization
         ks7LoadScenario(currentKs7ScenarioIndex);
         console.log("Key Skill 7 (High Court & Judicial Review) initialized.");
@@ -1571,18 +1571,97 @@ function initializeKeySkillsHub() {
     if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') setupPowerSortGame();
     if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') setupRelationshipMatcherGame();
     if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') loadIRScenario(0);
-
+    
     // Initialize KS6 (DoP Case Reconstruction) if its elements exist
     if (document.getElementById('ks6DopCaseDisplay') && typeof ks6InitializeDOPReconstructionTool === 'function') {
       ks6InitializeDOPReconstructionTool();
     }
-
+    
     // Initialize KS7 (High Court & Judicial Review)
     if (document.getElementById('ks7ScenarioSpotter') && typeof ks7InitializeHighCourtJudicialReview === 'function') {
         ks7InitializeHighCourtJudicialReview();
     }
+
+    // Initialize AI Coach Buttons for Task Words
+    if (typeof initializeAICoachButtons === 'function') {
+        initializeAICoachButtons();
+    }
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
+
+
+// --- AI Coach for Task Words ---
+function initializeAICoachButtons() {
+    const aiCoachButtons = document.querySelectorAll('.ai-task-coach-btn');
+    aiCoachButtons.forEach(button => {
+        button.addEventListener('click', async (event) => {
+            const currentButton = event.currentTarget;
+            const taskword = currentButton.dataset.taskword;
+            const parentElement = currentButton.parentElement;
+            
+            if (!parentElement) {
+                console.error("AI Coach: Could not find parent element for button:", currentButton);
+                return;
+            }
+
+            const loadingDiv = parentElement.querySelector('.ai-coach-loading');
+            const tipsDiv = parentElement.querySelector('.ai-coach-tips');
+            const errorP = parentElement.querySelector('.ai-coach-error');
+
+            if (!loadingDiv || !tipsDiv || !errorP) {
+                console.error("AI Coach: Could not find all necessary child elements (loading, tips, error) for taskword:", taskword, "Parent:", parentElement);
+                return;
+            }
+
+            // Update UI (Start)
+            loadingDiv.classList.remove('hidden');
+            tipsDiv.innerHTML = '<!-- AI tips will be displayed here -->'; // Clear previous tips
+            tipsDiv.classList.add('hidden'); // Hide tips div while loading
+            errorP.textContent = '';
+            errorP.classList.add('hidden');
+            currentButton.disabled = true;
+
+            // Construct Gemini API Prompt
+            const prompt = `You are an expert VCE Legal Studies exam coach. For the VCAA task word '${taskword}', provide 3-4 concise, actionable tips for a Year 12 student on how to structure a high-scoring response. Focus on what examiners look for and common pitfalls to avoid. Present as a bulleted list.`;
+
+            try {
+                // Call Gemini API (ensure callGeminiAPI is defined and accessible)
+                const responseText = await callGeminiAPI(prompt);
+
+                // Handle Success: Convert markdown-style bullet points to HTML
+                const lines = responseText.split('\n').filter(line => line.trim() !== '');
+                let htmlList = '<ul>';
+                lines.forEach(line => {
+                    if (line.startsWith('* ') || line.startsWith('- ')) {
+                        htmlList += `<li>${line.substring(2)}</li>`;
+                    } else {
+                        // If not a bullet point, still include it as a list item or paragraph
+                        // For simplicity, treating all non-empty lines as list items if not bullets.
+                        // Consider more sophisticated parsing if Gemini response varies greatly.
+                        htmlList += `<li>${line}</li>`; 
+                    }
+                });
+                htmlList += '</ul>';
+                
+                tipsDiv.innerHTML = htmlList;
+                tipsDiv.classList.remove('hidden');
+
+            } catch (error) {
+                // Handle Error
+                console.error("AI Coach API Error for taskword", taskword, ":", error);
+                errorP.textContent = "Sorry, could not fetch AI tips at this time. Please try again later.";
+                errorP.classList.remove('hidden');
+            } finally {
+                // Update UI (End)
+                loadingDiv.classList.add('hidden');
+                currentButton.disabled = false;
+            }
+        });
+    });
+    console.log("AI Coach buttons initialized.");
+}
+// End of AI Coach for Task Words ---
+
 
 window.setupCategorizedGlossary = function() { // Expose to window
     if (!categorizedGlossaryContainer) {

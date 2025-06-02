@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Updated for Key Skill 6 integration */
-        #ks6DopSourceElements {
+        #ks6DopSourceElements { 
             border: 1px solid #cbd5e1; /* slate-300 */
             padding: 0.75rem; /* p-3 */
             min-height: 150px;
@@ -162,7 +162,7 @@
                                 <div class="accordion-content p-4 border-t border-slate-200">
                                     <h5 class="font-semibold text-indigo-600 mt-2 mb-1">Purpose of Parliament</h5>
                                     <p class="text-sm text-slate-600 mb-2">Parliament is the supreme law-making body within its jurisdiction. It consists of the Crown's representative and two houses.</p>
-
+                                    
                                     <h5 class="font-semibold text-indigo-600 mt-3 mb-1">Commonwealth Parliament</h5>
                                     <p class="text-sm text-slate-600 mb-2">Consists of the King (represented by the Governor-General), the Senate (upper house), and the House of Representatives (lower house).</p>
                                     <div class="ml-4">
@@ -211,7 +211,7 @@
                                             <li>Initiate and pass bills. Bills can start here, but most start in the Assembly.</li>
                                         </ul>
                                     </div>
-
+                                    
                                     <h5 class="font-semibold text-indigo-600 mt-3 mb-1">The Crown (Governor-General Federally, Governor in Victoria)</h5>
                                     <p class="text-sm text-slate-600 mb-2">The British monarch is part of the system, represented by the Governor-General and state Governors. They act on the advice of the government.</p>
                                     <p class="text-sm text-slate-600 mb-1"><strong>Key Roles in Law-Making:</strong></p>
@@ -435,7 +435,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div id="u4aos1-glossary" class="u4aos1-content hidden">
                            <div class="border border-slate-300 rounded-lg">
                                 <button class="accordion-toggle w-full text-left p-4 bg-teal-50 hover:bg-teal-100 rounded-t-lg">
@@ -825,11 +825,11 @@
             </div>
 
             <p class="text-center text-slate-400 italic mt-6">More Key Skill activities coming soon!</p>
-
+            
             <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow mt-4">
                 <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill 6: Case Reconstruction (Division of Powers Focus)</h5>
                 <p class="text-sm text-slate-600 mb-3">Select a case related to the division of powers and reconstruct its key elements by dragging the jumbled phrases to their correct categories.</p>
-
+                
                 <div class="mb-3">
                     <label for="ks6DopCaseSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Case:</label>
                     <select id="ks6DopCaseSelect" class="w-full p-2 border border-slate-300 rounded bg-white text-sm">
@@ -837,13 +837,13 @@
                         <!-- Options will be populated by JavaScript -->
                     </select>
                 </div>
-
+        
                 <div id="ks6DopCaseDisplay" class="space-y-4">
                     <div class="p-3 bg-slate-100 rounded border min-h-[60px] flex flex-wrap gap-2 justify-center" id="ks6DopSourceElements">
                         <!-- Draggable elements will be populated here -->
                         <span class="text-xs text-slate-500 italic">Select a case to load elements.</span>
                     </div>
-
+        
                     <div class="grid md:grid-cols-2 gap-3 text-sm">
                         <div id="ks6DopDropTargetFacts" class="dop-drop-target p-3 bg-rose-50 border-2 border-dashed border-rose-300 rounded min-h-[80px]">
                             <h6 class="font-semibold text-rose-700 text-center mb-1">Facts of the Case</h6>
@@ -866,7 +866,7 @@
                             <div class="dropped-items-list space-y-1 mt-1"></div>
                         </div>
                     </div>
-
+        
                     <button id="ks6CheckDopReconstructionBtn" class="mt-3 py-2 px-4 bg-cyan-600 text-white rounded hover:bg-cyan-700 text-sm">Check My Reconstruction</button>
                     <div id="ks6DopReconstructionFeedback" class="mt-2 text-xs"></div>
                 </div>
@@ -875,7 +875,7 @@
             <div class="p-4 border border-cyan-200 rounded-lg bg-white shadow mt-4">
                 <h5 class="text-md font-semibold text-cyan-800 mb-2">Key Skill 7: High Court & Judicial Review</h5>
                 <p class="text-sm text-slate-600 mb-3">Understand the constitutional role of the High Court and the concept of judicial review, and how they act as checks on parliamentary power.</p>
-
+        
                 <!-- Explanatory Content Section -->
                 <div class="space-y-3 text-sm mb-4">
                     <div>
@@ -901,7 +901,7 @@
                         <p class="text-xs text-slate-600">The HCA's constitutional interpretation and the process of judicial review directly limit Parliament by ensuring it doesn't legislate beyond its powers and that its laws can be struck down if unconstitutional. The independence of the judiciary is vital for this.</p>
                     </div>
                 </div>
-
+        
                 <!-- Scenario Spotter Activity Section -->
                 <div id="ks7ScenarioSpotter" class="p-3 border border-cyan-100 rounded-md bg-cyan-50">
                     <h6 class="font-medium text-cyan-700 mb-2 text-sm">Scenario Spotter: What's the Primary Role/Concept?</h6>
@@ -951,54 +951,395 @@
                                     </div>
                                 </button>
                                 <div class="accordion-content p-4 border-t border-slate-200">
-                                    <p class="mb-3 text-slate-600">Understand VCAA task words and learn how to structure your exam answers effectively. Content based on guides in sources [cite: 648-711].</p>
-                                    <div id="taskWordTabs" class="flex border-b mb-3 flex-wrap">
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-explain">Explain</button>
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-discuss">Discuss</button>
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-evaluate">Evaluate</button>
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-analyse">Analyse</button>
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-compare">Compare</button>
-                                        <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-distinguish">Distinguish</button>
+                                    <p class="mb-6 text-gray-700 text-sm">Tools and guidance to refine your exam technique for Unit 4, Area of Study 1. Select a primary focus area below.</p>
+
+                                    <!-- Primary Tab Navigation -->
+                                    <div class="flex border-b border-purple-300 mb-6">
+                                        <button class="primary-exam-skill-tab-button active-primary-exam-skill-tab py-2 px-4 text-purple-700 font-semibold focus:outline-none text-sm" data-target="task-word-deep-dive-content">Task Word Deep Dive</button>
+                                        <button class="primary-exam-skill-tab-button py-2 px-4 text-gray-500 hover:text-purple-700 focus:outline-none text-sm" data-target="bridging-skills-to-knowledge-content">Bridging Skills to Knowledge</button>
+                                        <button class="primary-exam-skill-tab-button py-2 px-4 text-gray-500 hover:text-purple-700 focus:outline-none text-sm" data-target="exam-pitfalls-pro-tips-content">Exam Pitfalls & Pro Tips</button>
                                     </div>
-                                    <div id="taskWordContentContainer" class="text-sm">
-                                        <div id="task-explain" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Explain</h5>
-                                            <p><strong>Meaning:</strong> Detail how/why; link cause/effect.</p>
-                                            <p><strong>Structure (Example [cite: 689-691]):</strong></p>
-                                            <ul class="list-disc ml-5"><li>SIGNPOST: State main point using keywords from the question.</li><li>ELABORATE & EXAMPLE: Give specific example, use legal terms.</li><li>EXPLANATION: Detail how example supports point, consider effect/impact.</li></ul>
+
+                                    <!-- Primary Tab Content Sections -->
+                                    <div id="task-word-deep-dive-content" class="primary-exam-skill-content">
+                                        <p class="mb-3 text-slate-600 text-xs italic">Understand VCAA task words and learn how to structure your exam answers effectively. Content based on guides in sources [cite: 648-711].</p>
+                                        <div id="taskWordTabs" class="flex border-b mb-3 flex-wrap">
+                                            <!-- Task Word Buttons (Secondary Tabs) -->
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-define">Define</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-outline">Outline</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm active-task-word-tab" data-target="task-explain">Explain</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-discuss">Discuss</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-evaluate">Evaluate</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-analyse">Analyse</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-compare">Compare</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-distinguish">Distinguish</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-justify">Justify</button>
+                                            <button class="task-word-tab py-2 px-4 text-purple-600 hover:text-purple-800 border-b-2 border-transparent hover:border-purple-500 focus:outline-none text-sm" data-target="task-interpret">Interpret</button>
                                         </div>
-                                        <div id="task-discuss" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Discuss</h5>
-                                            <p><strong>Meaning:</strong> Explore multiple perspectives (pros/cons, strengths/weaknesses). Present a clear, balanced argument.</p>
-                                            <p><strong>Structure (Example):</strong></p>
-                                            <ul class="list-disc ml-5"><li>Paragraph 1 (Benefits/Strengths): Introduce point, explain, add ideas.</li><li>Paragraph 2 (Limitations/Weaknesses): Introduce point, explain, add ideas.</li></ul>
-                                            <p>For 'Discuss the extent to which...': Opener stating position, supporting arguments, conflicting/limiting arguments, conclusion restating extent [cite: 651-657].</p>
+
+                                        <!-- Content for each task word -->
+                                        <div id="taskWordContentContainer" class="text-sm">
+                                            <div id="task-define" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Define</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">State the meaning of a term or concept.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'define' requires you to give the precise meaning of a legal term or concept. This should be a clear, concise statement that accurately reflects its usage in a legal context.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Provide a clear and precise meaning.</li>
+                                                    <li>Focus on the essential qualities or characteristics of the term.</li>
+                                                    <li>Avoid using the term itself in its definition where possible.</li>
+                                                    <li>Be specific to the legal context.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Define the term 'bicameral parliament'."</li>
+                                                    <li>"Define 'residual powers' as it relates to the division of law-making powers."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Define">Get AI Coach Tips for 'Define' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-outline" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Outline</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Provide a brief summary of the main features.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'outline' requires you to give a general description or summary of the main points or features of a topic. It is less detailed than 'explain' but more than a simple list.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Identify the main points or features.</li>
+                                                    <li>Provide a brief description of each.</li>
+                                                    <li>Focus on the key aspects without going into excessive detail.</li>
+                                                    <li>Present information in a structured and logical way.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Outline the role of one Victorian law reform body."</li>
+                                                    <li>"Outline two functions of the High Court of Australia."</li>
+                                                    <li>"Outline the key features of the adversary system of trial."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Outline">Get AI Coach Tips for 'Outline' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-explain" class="task-word-content">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Explain</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Make clear; provide details and reasons.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'define' requires you to give the precise meaning of a legal term or concept. This should be a clear, concise statement that accurately reflects its usage in a legal context.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Provide a clear and precise meaning.</li>
+                                                    <li>Focus on the essential qualities or characteristics of the term.</li>
+                                                    <li>Avoid using the term itself in its definition where possible.</li>
+                                                    <li>Be specific to the legal context.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Define the term 'bicameral parliament'."</li>
+                                                    <li>"Define 'residual powers' as it relates to the division of law-making powers."</li>
+                                                </ul>
+                                                <!-- AI Coach section will be added in a later step -->
+                                            </div>
+                                            <div id="task-explain" class="task-word-content">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Explain</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Make clear; provide details and reasons.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'explain' requires you to make an idea or concept clear and easy to understand by describing it in more detail or revealing relevant facts or ideas. It often involves showing cause and effect or linking concepts.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Provide details about the topic.</li>
+                                                    <li>State reasons or causes where appropriate.</li>
+                                                    <li>Link concepts or show relationships if the question implies it.</li>
+                                                    <li>Use precise legal terminology.</li>
+                                                    <li>Structure your answer logically with clear points.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Explain one role of the Governor-General in the law-making process."</li>
+                                                    <li>"Explain how the doctrine of precedent operates in the Victorian court hierarchy."</li>
+                                                    <li>"Explain two ways the Australian Constitution acts as a check on parliamentary power."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Explain">Get AI Coach Tips for 'Explain' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-discuss" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Discuss</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Examine by argument; consider various points of view, for and against.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'discuss' requires an examination of a topic from different viewpoints. This typically involves presenting arguments for and against a proposition, or exploring various aspects or impacts of a legal concept or institution. A balanced approach is key.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Identify different aspects or arguments related to the topic.</li>
+                                                    <li>Present arguments for and/or against, or explore strengths and weaknesses.</li>
+                                                    <li>Use evidence or examples to support points made.</li>
+                                                    <li>Often requires a concluding statement that summarises the different perspectives, but not necessarily a personal judgment unless combined with 'evaluate'.</li>
+                                                    <li>If the question includes "to what extent", ensure your discussion addresses the degree or level.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Discuss the effectiveness of the separation of powers in checking parliamentary power."</li>
+                                                    <li>"Discuss two reasons for law reform."</li>
+                                                    <li>"Discuss the arguments for and against the codification of common law."</li>
+                                                    <li>"Discuss the extent to which the High Court's interpretation of section 109 has impacted state sovereignty."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Discuss">Get AI Coach Tips for 'Discuss' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-evaluate" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Evaluate</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Make a judgement based on criteria; determine the value or effectiveness.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'evaluate' requires you to make a considered judgement about the value, worth, or effectiveness of something. This involves identifying criteria (which may be explicit in the question or implied, e.g., principles of justice, effectiveness), weighing up strengths and weaknesses (or arguments for and against), and forming a supported conclusion.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Establish clear criteria for your evaluation if not provided.</li>
+                                                    <li>Present both strengths and weaknesses, or arguments for and against, related to the criteria.</li>
+                                                    <li>Provide supporting evidence or examples for each point.</li>
+                                                    <li>Make a clear, substantiated judgement in your conclusion. This judgement should directly answer the question.</li>
+                                                    <li>Use comparative language (e.g., "more effective than," "less significant due to").</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Evaluate the effectiveness of the bicameral structure of Commonwealth Parliament as a check on parliamentary power."</li>
+                                                    <li>"Evaluate the extent to which the High Court can influence law-making through statutory interpretation."</li>
+                                                    <li>"Evaluate one law reform body in terms of its ability to influence law reform."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Evaluate">Get AI Coach Tips for 'Evaluate' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-analyse" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Analyse</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Break down into components; examine in detail to uncover relationships or meaning.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'analyse' requires you to break down a topic or issue into its constituent parts and examine them in detail. The goal is often to uncover the relationships between these parts, their significance, or the underlying principles or implications. It's about dissecting information rather than just describing it.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Identify the key components or elements of the topic.</li>
+                                                    <li>Examine how these components relate to each other.</li>
+                                                    <li>Explore the implications, impacts, or significance of these components or relationships.</li>
+                                                    <li>Go beyond surface-level description; delve into the 'how' and 'why'.</li>
+                                                    <li>May involve identifying patterns, causes, or effects.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Analyse the impact of one High Court case on the division of law-making powers."</li>
+                                                    <li>"Analyse the relationship between parliament and the courts in law-making."</li>
+                                                    <li>"Analyse two factors that affect the ability of parliament to make law."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Analyse">Get AI Coach Tips for 'Analyse' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-compare" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Compare</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Identify and explain similarities and differences.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'compare' requires you to identify both similarities and differences between two or more legal concepts, principles, institutions, or processes. It's important to not just list them but also to explain these points of comparison.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Clearly identify the things being compared.</li>
+                                                    <li>Address both similarities and differences.</li>
+                                                    <li>Provide specific examples or details for each point of similarity and difference.</li>
+                                                    <li>Structure the answer logically, either by discussing similarities first then differences, or by comparing point-by-point.</li>
+                                                    <li>Use comparative language (e.g., "similarly," "however," "in contrast," "both," "whereas").</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Compare the law-making process of the Commonwealth Parliament with that of the Victorian Parliament."</li>
+                                                    <li>"Compare the roles of the Senate and the House of Representatives in the law-making process."</li>
+                                                    <li>"Compare two dispute resolution bodies, such as VCAT and the Magistrates' Court."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Compare">Get AI Coach Tips for 'Compare' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-distinguish" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Distinguish</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Identify and explain points of difference only.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'distinguish' requires you to focus solely on the differences between two or more legal concepts, principles, institutions, or processes. Unlike 'compare', similarities are not required and should not be included.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Clearly identify the things being distinguished.</li>
+                                                    <li>Address only the differences. Do not include similarities.</li>
+                                                    <li>Provide specific examples or details for each point of difference.</li>
+                                                    <li>Use contrasting language (e.g., "however," "in contrast," "unlike," "whereas," "on the other hand").</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Distinguish between summary offences and indictable offences."</li>
+                                                    <li>"Distinguish between the role of a judge and the role of a jury in a criminal trial."</li>
+                                                    <li>"Distinguish between binding precedent and persuasive precedent."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Distinguish">Get AI Coach Tips for 'Distinguish' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-justify" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Justify</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Show or prove to be right or reasonable; provide supporting evidence or reasons.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'justify' requires you to support an argument, statement, or conclusion with valid reasons or evidence. You need to demonstrate why a particular position or decision is warranted or defensible.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Clearly state the position or decision being justified.</li>
+                                                    <li>Provide strong reasons, evidence, or legal principles to support it.</li>
+                                                    <li>Explain how the evidence or reasons support the justification.</li>
+                                                    <li>Acknowledge and (if appropriate) counter potential opposing arguments, though the focus is on positive support.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Justify the use of plea negotiations in the criminal justice system."</li>
+                                                    <li>"Justify the need for law reform in relation to one contemporary issue."</li>
+                                                    <li>"Provide justification for the High Court's decision in a specific case."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Justify">Get AI Coach Tips for 'Justify' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <div id="task-interpret" class="task-word-content hidden">
+                                                <h5 class="font-semibold text-purple-700 mb-1">Interpret</h5>
+                                                <p class="text-xs text-slate-500 italic mb-2">Explain the meaning of something; construe or understand in a particular way.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Definition:</h6>
+                                                <p class="text-sm text-slate-700 mb-2">In VCE Legal Studies, 'interpret' most commonly refers to statutory interpretation – the process by which courts determine the meaning of words or phrases in legislation to apply them to specific cases. It can also refer to interpreting legal principles or judicial pronouncements.</p>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Specific Requirements:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>Identify the word, phrase, or section of legislation that needs interpretation.</li>
+                                                    <li>Explain the different possible meanings or ambiguities.</li>
+                                                    <li>Discuss the methods or rules of interpretation courts might use (e.g., literal, purpose approaches, maxims, intrinsic/extrinsic materials).</li>
+                                                    <li>Explain the outcome or effect of a particular interpretation.</li>
+                                                </ul>
+                                                
+                                                <h6 class="font-medium text-purple-600 text-sm mt-2 mb-1">Example Question Stems:</h6>
+                                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 mb-2">
+                                                    <li>"Interpret the meaning of 'postal, telegraphic, telephonic, and other like services' in section 51(v) of the Constitution, with reference to a relevant High Court case."</li>
+                                                    <li>"Explain how courts interpret statutes, using an example."</li>
+                                                    <li>"Discuss the difficulties courts face when interpreting statutes."</li>
+                                                </ul>
+                                                <div class="mt-4 pt-3 border-t border-purple-200"> <!-- Container for AI Coach -->
+                                                    <button class="ai-task-coach-btn py-1 px-3 bg-purple-500 text-white rounded hover:bg-purple-600 text-xs" data-taskword="Interpret">Get AI Coach Tips for 'Interpret' ✨</button>
+                                                    <div class="ai-coach-loading text-xs text-slate-500 mt-2 hidden">
+                                                        <div class="animate-pulse">Loading AI Coach tips...</div>
+                                                    </div>
+                                                    <div class="ai-coach-tips text-sm mt-2 p-3 bg-purple-50 border border-purple-200 rounded">
+                                                        <!-- AI tips will be displayed here -->
+                                                    </div>
+                                                    <p class="ai-coach-error text-xs text-red-600 mt-1 hidden"></p>
+                                                </div>
+                                            </div>
+                                            <p class="mt-3 text-xs text-slate-400">Use analytical and signposting words to improve structure (e.g., "Therefore", "Significantly", "However", "For example") [cite: 709-711].</p>
                                         </div>
-                                        <div id="task-evaluate" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Evaluate</h5>
-                                            <p><strong>Meaning:</strong> Make a JUDGEMENT based on criteria (e.g., Principles of Justice); weigh strengths/weaknesses; conclude [cite: 650-651, 659].</p>
-                                            <p><strong>Structure (Example [cite: 659-663]):</strong></p>
-                                            <ul class="list-disc ml-5"><li>Opener (Optional but recommended): State position clearly.</li><li>Paragraph 1 (Benefits/Strengths): Introduce point, explain, add ideas.</li><li>Paragraph 2 (Limitations/Weaknesses): Introduce point, explain, add ideas.</li><li>Conclusion: Provide overall conclusion/opinion, substantiating judgment.</li></ul>
-                                        </div>
-                                        <div id="task-analyse" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Analyse</h5>
-                                            <p><strong>Meaning:</strong> Break down; examine relationships/impacts (how/why). Study parts in detail to determine interrelations; 'Unpack' [cite: 665-666].</p>
-                                            <p><strong>Structure (Example [cite: 667-668]):</strong></p>
-                                            <ul class="list-disc ml-5"><li>Identify key components/factors related to the question's focus.</li><li>Explain how components interrelate or connect.</li><li>Draw out significance, consequences, impacts (positive/negative).</li></ul>
-                                        </div>
-                                        <div id="task-compare" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Compare</h5>
-                                            <p><strong>Meaning:</strong> Recognise similarities AND differences between features/characteristics and their significance.</p>
-                                            <p><strong>Structure (Example [cite: 681-682]):</strong></p>
-                                            <ul class="list-disc ml-5"><li>Paragraph 1 (Similarities): Introduce similarity, use comparative language.</li><li>Paragraph 2 (Differences): Introduce difference, use contrasting language.</li></ul>
-                                        </div>
-                                        <div id="task-distinguish" class="task-word-content hidden">
-                                            <h5 class="font-semibold text-purple-700">Distinguish</h5>
-                                            <p><strong>Meaning:</strong> Explain points of difference ONLY.</p>
-                                            <p><strong>Structure (Example):</strong></p>
-                                            <ul class="list-disc ml-5"><li>Focus sentences on points of difference. Use contrasting language (e.g., "In contrast", "Unlike").</li></ul>
-                                        </div>
-                                        <p class="mt-3 text-xs text-slate-400">Use analytical and signposting words to improve structure (e.g., "Therefore", "Significantly", "However", "For example") [cite: 709-711].</p>
+                                    </div>
+
+                                    <div id="bridging-skills-to-knowledge-content" class="primary-exam-skill-content hidden">
+                                        <h5 class="text-lg font-semibold mb-2 text-purple-700">Bridging Skills to Knowledge</h5>
+                                        <p class="text-gray-600 text-sm">This section will provide strategies and examples for effectively linking your understanding of key skills (like 'analyse' or 'evaluate') with specific legal content from U4AOS1. For instance, how to use 'evaluate' when assessing the effectiveness of s109, or 'analyse' when breaking down the impact of a High Court case on the division of powers. Placeholder content.</p>
+                                        <!-- More detailed content to be added later -->
+                                    </div>
+
+                                    <div id="exam-pitfalls-pro-tips-content" class="primary-exam-skill-content hidden">
+                                        <h5 class="text-lg font-semibold mb-2 text-purple-700">Exam Pitfalls & Pro Tips</h5>
+                                        <p class="text-gray-600 text-sm">Common mistakes to avoid and advanced tips for maximizing your marks. Examples: Misinterpreting task words, not using legal terminology correctly, failing to link to stimulus material, or providing overly descriptive rather than analytical responses. Pro tips might include time management strategies, how to effectively use reading time, and structuring extended responses for clarity and impact. Placeholder content.</p>
+                                        <!-- More detailed content to be added later -->
                                     </div>
                                 </div>
                             </div>
@@ -1066,3 +1407,5 @@
     <script src="caseReconstructionDOP.js"></script>
 </body>
 </html>
+
+[end of index.html]
