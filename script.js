@@ -114,25 +114,43 @@ document.addEventListener('DOMContentLoaded', function () {
                                  'bg-orange-500', 'text-white', 
                                  'bg-cyan-500', 'text-white', 'active-skill-hub-toggle', 
                                  'bg-purple-500', 'text-white',
-                                 'bg-lime-500', 'text-white', 'active-game-toggle');
-            // Note: Logic for restoring default yellow for the now-deleted button is also removed.
+                                 'bg-lime-500', 'text-white', 'active-game-toggle',
+                                 'bg-yellow-500', 'text-white'); // Added yellow for Case Reconstruction (DoP)
+            // Apply default styling back
+            if (btn.classList.contains('text-indigo-700')) btn.classList.add('bg-indigo-100');
+            else if (btn.classList.contains('text-teal-700')) btn.classList.add('bg-teal-100');
+            else if (btn.classList.contains('text-orange-700')) btn.classList.add('bg-orange-100');
+            else if (btn.classList.contains('text-cyan-700')) btn.classList.add('bg-cyan-100');
+            else if (btn.classList.contains('text-lime-700')) btn.classList.add('bg-lime-100');
+            else if (btn.classList.contains('text-purple-700')) btn.classList.add('bg-purple-100');
+            else if (btn.classList.contains('text-yellow-700')) btn.classList.add('bg-yellow-100');
+
+
         });
 
         // Apply active style to the clicked button based on its category
         if (buttonToActivate.classList.contains('text-indigo-700')) {
+            buttonToActivate.classList.remove('bg-indigo-100');
             buttonToActivate.classList.add('bg-indigo-500', 'text-white');
         } else if (buttonToActivate.classList.contains('text-teal-700')) {
+            buttonToActivate.classList.remove('bg-teal-100');
             buttonToActivate.classList.add('bg-teal-500', 'text-white');
         } else if (buttonToActivate.classList.contains('text-orange-700')) {
+            buttonToActivate.classList.remove('bg-orange-100');
             buttonToActivate.classList.add('bg-orange-500', 'text-white');
         } else if (buttonToActivate.classList.contains('text-cyan-700')) { 
+            buttonToActivate.classList.remove('bg-cyan-100');
             buttonToActivate.classList.add('bg-cyan-500', 'text-white', 'active-skill-hub-toggle');
         } else if (buttonToActivate.classList.contains('text-lime-700')) { 
+            buttonToActivate.classList.remove('bg-lime-100');
             buttonToActivate.classList.add('bg-lime-500', 'text-white', 'active-game-toggle');
         } else if (buttonToActivate.classList.contains('text-purple-700')) {
+            buttonToActivate.classList.remove('bg-purple-100');
             buttonToActivate.classList.add('bg-purple-500', 'text-white');
+        } else if (buttonToActivate.classList.contains('text-yellow-700')) { // Added for Case Reconstruction (DoP)
+            buttonToActivate.classList.remove('bg-yellow-100');
+            buttonToActivate.classList.add('bg-yellow-500', 'text-white');
         }
-        // Note: The 'else if' for 'u4aos1-case-reconstruction-dop' (yellow button) is removed.
         
         u4aos1AllContent.forEach(contentSection => {
             const isTarget = contentSection.id === targetId;
@@ -143,7 +161,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                      'u4aos1-case-deconstruction', 'u4aos1-term-match-game',
                                      'u4aos1-glossary', 'u4aos1-interactive-diagrams', 
                                      'u4aos1-case-explorer', 'u4aos1-exam-skills', 
-                                     'u4aos1-practice-questions'].includes(targetId);
+                                     'u4aos1-practice-questions',
+                                     'u4aos1-case-reconstruction-dop-tool' // Added Case Reconstruction (DoP)
+                                    ].includes(targetId);
 
                 if (!isComplexTool) { // Only reset accordions for simple informational sections
                     contentSection.querySelectorAll('.accordion-content').forEach(ac => {
@@ -180,9 +200,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Check if this accordion is one of the main U4AOS1 content blocks
             const parentU4AOS1ContentBlock = toggle.closest('.u4aos1-content');
-            const mainAccordionContainer = document.getElementById('u4a1-accordion-container');
+            const mainAccordionContainer = document.getElementById('u4aos1-accordion-container'); // Corrected ID
             
-            // isMainU4AOS1Accordion: true if the toggle's parent '.u4aos1-content' is a direct child of '#u4a1-accordion-container'
+            // isMainU4AOS1Accordion: true if the toggle's parent '.u4aos1-content' is a direct child of '#u4aos1-accordion-container'
             const isMainU4AOS1Accordion = parentU4AOS1ContentBlock && parentU4AOS1ContentBlock.parentElement === mainAccordionContainer;
 
             if (!isExpanded && isMainU4AOS1Accordion) {
@@ -599,7 +619,8 @@ window.categorizedGlossaryData = categorizedGlossaryData;
     // Event listeners for primary exam skill tabs
     primaryExamSkillTabs.forEach(primaryTab => {
         primaryTab.addEventListener('click', () => {
-            const primaryTargetId = primaryTab.dataset.target;
+            const primaryTargetId = primaryTab.dataset.target || primaryTab.dataset.primaryTarget;
+
 
             primaryExamSkillTabs.forEach(pt => {
                 pt.classList.remove('active-primary-exam-skill-tab', 'text-purple-700', 'font-semibold');
@@ -619,6 +640,13 @@ window.categorizedGlossaryData = categorizedGlossaryData;
                     activateTaskWordTab(firstTaskWordTab); // Activate the first tab
                 }
             }
+             // If "Structured Answer Templates" is activated, ensure its content is shown
+            if (primaryTargetId === 'esh-answer-templates') {
+                const answerTemplatesContent = document.getElementById('esh-answer-templates');
+                if (answerTemplatesContent) {
+                    answerTemplatesContent.classList.remove('hidden');
+                }
+            }
         });
     });
 
@@ -633,21 +661,25 @@ window.categorizedGlossaryData = categorizedGlossaryData;
                 if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
                     const isHidden = examSkillsHelperContent.classList.contains('hidden');
                     if (!isHidden) { // When "Exam Skills Helper" is shown
-                        const firstPrimaryTab = document.querySelector('.primary-exam-skill-tab-button');
-                        if (firstPrimaryTab && !firstPrimaryTab.classList.contains('active-primary-exam-skill-tab')) {
-                            // If no primary tab is active, click the first one.
-                            // This also handles activating the first secondary tab within "Task Word Deep Dive".
-                            firstPrimaryTab.click();
-                        } else if (firstPrimaryTab && firstPrimaryTab.classList.contains('active-primary-exam-skill-tab') && firstPrimaryTab.dataset.target === 'task-word-deep-dive-content') {
-                            // If the first primary tab ("Task Word Deep Dive") is already active, ensure its first secondary tab is also active.
-                            const firstTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab');
-                            // Check if no task word tab is currently active or if the first one isn't active
-                            const activeTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab.active-task-word-tab');
-                            if (!activeTaskWordTab || activeTaskWordTab !== firstTaskWordTab) {
-                                if (firstTaskWordTab) {
-                                   activateTaskWordTab(firstTaskWordTab);
+                        let activePrimaryTab = document.querySelector('.primary-exam-skill-tab-button.active-primary-exam-skill-tab');
+                        if (!activePrimaryTab) {
+                             activePrimaryTab = document.querySelector('.primary-exam-skill-tab-button'); // Get first one
+                             if (activePrimaryTab) activePrimaryTab.click();
+                        } else {
+                            // If a tab is already active, ensure its content is visible and initialized
+                             const primaryTargetId = activePrimaryTab.dataset.target || activePrimaryTab.dataset.primaryTarget;
+                             const contentToShow = document.getElementById(primaryTargetId);
+                             if (contentToShow) {
+                                primaryExamSkillContents.forEach(pc => pc.classList.add('hidden'));
+                                contentToShow.classList.remove('hidden');
+                                if (primaryTargetId === 'task-word-deep-dive-content') {
+                                    const firstTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab');
+                                    const activeTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab.active-task-word-tab');
+                                    if (!activeTaskWordTab && firstTaskWordTab) {
+                                       activateTaskWordTab(firstTaskWordTab);
+                                    }
                                 }
-                            }
+                             }
                         }
                     }
                 }
@@ -661,9 +693,36 @@ window.categorizedGlossaryData = categorizedGlossaryData;
     const practiceQuestionToggleButtons = document.querySelectorAll('.practice-question-toggle-answer');
     practiceQuestionToggleButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const answerDiv = button.nextElementSibling;
-            if (answerDiv) {
-                answerDiv.style.display = answerDiv.style.display === 'none' || answerDiv.style.display === '' ? 'block' : 'none';
+            const practiceQuestionDiv = button.closest('.practice-question');
+            if (practiceQuestionDiv) {
+                const answerDiv = practiceQuestionDiv.querySelector('.practice-question-answer');
+                if (answerDiv) {
+                    answerDiv.classList.toggle('hidden'); // Use hidden class
+                }
+            }
+        });
+    });
+
+    // Practice Questions - Toggle Worked Example (NEW)
+    const workedExampleToggleButtons = document.querySelectorAll('.practice-question-toggle-worked-example');
+    workedExampleToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const practiceQuestionDiv = button.closest('.practice-question');
+            if (practiceQuestionDiv) {
+                const workedExampleDiv = practiceQuestionDiv.querySelector('.practice-question-worked-example');
+                if (workedExampleDiv) {
+                    workedExampleDiv.classList.toggle('hidden');
+                    // Optional: Change button text based on visibility
+                    if (workedExampleDiv.classList.contains('hidden')) {
+                        button.textContent = 'Show Worked Example ✨';
+                    } else {
+                        button.textContent = 'Hide Worked Example  ocultar';
+                    }
+                } else {
+                    console.warn('Worked example content div not found for button:', button);
+                }
+            } else {
+                console.warn('Parent .practice-question div not found for button:', button);
             }
         });
     });

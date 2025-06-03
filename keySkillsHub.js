@@ -197,150 +197,112 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // --- End of Structured Answer Templates ---
 
-    const ksBridgeData = [
-      {
+const ksBridgeData = [
+    {
         id: "ksb_define_terminology",
         keySkillText: "Define and use legal terminology",
         relatedKnowledgePoints: [
-          "The roles of the Crown and the Houses of Parliament (Victorian and Commonwealth) in law-making.",
-          "The law-making powers of the state and Commonwealth parliaments, including exclusive, concurrent and residual powers.",
-          "The significance of section 109 of the Australian Constitution.",
-          "Factors that affect the ability of parliament to make law...",
-          "The means by which the Australian Constitution acts as a check on parliament...",
-          "The reasons for, and effects of, statutory interpretation.",
-          "Features of the doctrine of precedent...",
-          "Factors that affect the ability of courts to make law...",
-          "Features of the relationship between courts and parliament in law-making..."
+            "the Australian Constitution: roles of the Crown and the houses of parliament (Victorian and Commonwealth), division of law-making powers (exclusive, concurrent and residual), section 109, the ways in which the Australian Constitution acts as a check on parliament in law-making (bicameral structure of parliament, separation of legislative, executive and judicial powers, express protection of rights, role of the High Court in interpreting the Australian Constitution, requirement for a referendum).",
+            "the roles of the Victorian courts and the High Court in law-making: doctrine of precedent (stare decisis, ratio decidendi, obiter dictum, binding precedents, persuasive precedents), statutory interpretation.",
+            "factors that affect the ability of parliament and courts to make law: (parliament – roles of the houses of parliament, representative nature of parliament, political pressures, restrictions on law-making powers; courts – doctrine of precedent, judicial conservatism, judicial activism, costs and time in bringing a case to court, requirement for standing).",
+            "features of the relationship between courts and parliament in law-making: supremacy of parliament, ability of courts to influence parliament, interpretation of statutes by courts, codification of common law, abrogation of common law."
         ],
-        exampleQuestionStems: [
-          "Define 'bicameral parliament'.",
-          "Define 'ratio decidendi'."
-        ],
-        directLinks: [
-          { text: "See Interactive Glossary", targetId: "u4aos1-glossary" }
-        ]
-      },
-      {
+        exampleQuestionStems: ["Define 'bicameral parliament'.", "Define 'ratio decidendi'."],
+        directLinks: [{ text: "See Interactive Glossary", targetId: "u4aos1-glossary" }]
+    },
+    {
         id: "ksb_discuss_interpret_analyse",
         keySkillText: "Discuss, interpret and analyse legal principles and information",
         relatedKnowledgePoints: [
-          "The significance of section 109 of the Australian Constitution.",
-          "One High Court case which has had an impact on state and Commonwealth law-making powers.",
-          "The means by which the Australian Constitution acts as a check on parliament in law-making (e.g., separation of powers, express rights).",
-          "Features of the doctrine of precedent including binding precedent, persuasive precedent, and the reversing, overruling, distinguishing, and disapproving of precedent."
+            "the Australian Constitution: roles of the Crown and the houses of parliament (Victorian and Commonwealth), division of law-making powers (exclusive, concurrent and residual), section 109, the ways in which the Australian Constitution acts as a check on parliament in law-making (bicameral structure of parliament, separation of legislative, executive and judicial powers, express protection of rights, role of the High Court in interpreting the Australian Constitution, requirement for a referendum).",
+            "the roles of the Victorian courts and the High Court in law-making: doctrine of precedent (stare decisis, ratio decidendi, obiter dictum, binding precedents, persuasive precedents), statutory interpretation.",
+            "factors that affect the ability of parliament and courts to make law: (parliament – roles of the houses of parliament, representative nature of parliament, political pressures, restrictions on law-making powers; courts – doctrine of precedent, judicial conservatism, judicial activism, costs and time in bringing a case to court, requirement for standing).",
+            "features of the relationship between courts and parliament in law-making: supremacy of parliament, ability of courts to influence parliament, interpretation of statutes by courts, codification of common law, abrogation of common law."
         ],
-        exampleQuestionStems: [
-          "Analyse the impact of the Tasmanian Dams Case on the division of powers.",
-          "Interpret the meaning of 'ultra vires' in the context of a High Court challenge to legislation."
-        ],
-        directLinks: [
-          { text: "See Case Explorer for examples", targetId: "u4aos1-case-explorer" }
-        ]
-      },
-      {
+        exampleQuestionStems: ["Analyse the impact of the Tasmanian Dams Case on the division of powers.", "Interpret the meaning of 'ultra vires' in the context of a High Court challenge to legislation."],
+        directLinks: [{ text: "See Case Explorer for examples", targetId: "u4aos1-case-explorer" }]
+    },
+    {
         id: "ksb_explain_lawmaking_powers",
         keySkillText: "Explain the law-making powers of the state and Commonwealth parliaments, using examples",
         relatedKnowledgePoints: [
-          "The law-making powers of the state and Commonwealth parliaments, including exclusive, concurrent and residual powers.",
-          "The significance of section 109 of the Australian Constitution.",
-          "One High Court case which has had an impact on state and Commonwealth law-making powers."
+            "the Australian Constitution: roles of the Crown and the houses of parliament (Victorian and Commonwealth), division of law-making powers (exclusive, concurrent and residual), section 109."
         ],
-        exampleQuestionStems: [
-          "Explain, using an example, one exclusive power of the Commonwealth Parliament.",
-          "Explain how concurrent powers operate, providing an example."
-        ],
+        exampleQuestionStems: ["Explain, using an example, one exclusive power of the Commonwealth Parliament.", "Explain how concurrent powers operate, providing an example."],
         directLinks: [
-          { text: "See notes on 'Parliament and the Australian Constitution' (Division of Powers)", targetId: "u4aos1-ks2" }
+            { text: "See notes on 'Parliament and the Australian Constitution' (Division of Powers)", targetId: "u4aos1-ks2" },
+            { text: "then try the 'Power Classification Sort' in Key Skills Hub", targetId: "u4aos1-key-skills-hub" }
         ]
-      },
-      {
+    },
+    {
         id: "ksb_analyse_parliament_courts_relationship",
         keySkillText: "Analyse the relationship between parliament and courts",
         relatedKnowledgePoints: [
-          "Features of the relationship between courts and parliament in law-making, including: the supremacy of parliament, the ability of courts to influence parliament, the codification of common law, the abrogation of common law."
+            "features of the relationship between courts and parliament in law-making: supremacy of parliament, ability of courts to influence parliament, interpretation of statutes by courts, codification of common law, abrogation of common law."
         ],
-        exampleQuestionStems: [
-          "Analyse two features of the relationship between parliament and the courts in law-making."
-        ],
+        exampleQuestionStems: ["Analyse two features of the relationship between parliament and the courts in law-making."],
         directLinks: [
-          { text: "See notes on 'Court & Parliament Relationship'", targetId: "u4aos1-ks8" }
+            { text: "See notes on 'Courts & Parliament Relationship'", targetId: "u4aos1-ks8" },
+            { text: "then try the 'Relationship Quadrant Matcher' in Key Skills Hub", targetId: "u4aos1-key-skills-hub" }
         ]
-      },
-      {
+    },
+    {
         id: "ksb_explain_s109_significance",
         keySkillText: "Explain the significance of section 109 of the Australian Constitution",
         relatedKnowledgePoints: [
-          "The significance of section 109 of the Australian Constitution.",
-          "The law-making powers of the state and Commonwealth parliaments, including... concurrent powers."
+            "the Australian Constitution: division of law-making powers (exclusive, concurrent and residual), section 109."
         ],
-        exampleQuestionStems: [
-          "Explain the significance of section 109 of the Australian Constitution in resolving conflicts between state and Commonwealth laws."
-        ],
+        exampleQuestionStems: ["Explain the significance of section 109 of the Australian Constitution in resolving conflicts between state and Commonwealth laws."],
         directLinks: [
-          { text: "See notes on 'Parliament and the Australian Constitution' (s109)", targetId: "u4aos1-ks3" }
+            { text: "See notes on 'Parliament and the Australian Constitution' (s109)", targetId: "u4aos1-ks3" },
+            { text: "then try the 'Inconsistency Resolver' in Key Skills Hub", targetId: "u4aos1-key-skills-hub" }
         ]
-      },
-      {
+    },
+    {
         id: "ksb_discuss_hc_case_impact",
         keySkillText: "Discuss the significance of one High Court case which has had an impact on state and Commonwealth law-making powers",
         relatedKnowledgePoints: [
-          "One High Court case which has had an impact on state and Commonwealth law-making powers (e.g., R v Brislan; Commonwealth v Tasmania (Tasmanian Dams Case)).",
-          "The law-making powers of the state and Commonwealth parliaments..."
+            "the Australian Constitution: division of law-making powers (exclusive, concurrent and residual), section 109.",
+            "the significance of High Court cases in interpreting sections 7 and 24 of the Australian Constitution.",
+            "the significance of one High Court case interpreting sections 7 and 24 of the Australian Constitution (Roach v Electoral Commissioner (2007) or one more recent case).",
+            "the significance of one High Court case relating to the division of law-making powers (Commonwealth v Tasmania (1983) (Tasmanian Dam Case) or one more recent case).",
+            "the roles of the Victorian courts and the High Court in law-making: doctrine of precedent, statutory interpretation."
         ],
-        exampleQuestionStems: [
-          "Discuss the significance of the R v Brislan case on Commonwealth law-making powers."
-        ],
+        exampleQuestionStems: ["Discuss the significance of the R v Brislan case on Commonwealth law-making powers."],
         directLinks: [
-          { text: "See Case Explorer", targetId: "u4aos1-case-explorer" },
-          { text: "Review High Court Cases & Powers", targetId: "u4aos1-ks5"}
+            { text: "See Case Explorer", targetId: "u4aos1-case-explorer" },
+            { text: "See 'Case Reconstruction (DoP)' in Key Skills Hub", targetId: "u4aos1-key-skills-hub" }
         ]
-      },
-      {
+    },
+    {
         id: "ksb_discuss_ability_make_law",
         keySkillText: "Discuss the ability of parliament and the courts to make law",
         relatedKnowledgePoints: [
-          "Factors that affect the ability of parliament to make law...",
-          "Factors that affect the ability of courts to make law...",
-          "Features of the relationship between courts and parliament in law-making..."
+            "factors that affect the ability of parliament and courts to make law: (parliament – roles of the houses of parliament, representative nature of parliament, political pressures, restrictions on law-making powers; courts – doctrine of precedent, judicial conservatism, judicial activism, costs and time in bringing a case to court, requirement for standing)."
         ],
-        exampleQuestionStems: [
-          "Discuss two factors that affect the ability of parliament to make law.",
-          "Discuss the ability of courts to make law through the doctrine of precedent."
-        ],
+        exampleQuestionStems: ["Discuss two factors that affect the ability of parliament to make law.", "Discuss the ability of courts to make law through the doctrine of precedent."],
         directLinks: [
-          { text: "See 'Factors Affecting Parliament'", targetId: "u4aos1-ks4" },
-          { text: "See 'Factors Affecting Courts'", targetId: "u4aos1-ks7" },
-          { text: "See 'Courts' Role in Law-Making'", targetId: "u4aos1-ks6" }
+            { text: "See 'Factors Affecting Parliament & Constitution as a Check'", targetId: "u4aos1-ks4" },
+            { text: "See 'Factors Affecting Courts'", targetId: "u4aos1-ks7" }
         ]
-      },
-      {
+    },
+    {
         id: "ksb_evaluate_constitution_checks",
         keySkillText: "Evaluate the means by which the Australian Constitution acts as a check on parliament in law-making",
         relatedKnowledgePoints: [
-          "The means by which the Australian Constitution acts as a check on parliament in law-making, including: the role of the High Court in protecting the principle of representative government, the separation of the legislative, executive and judicial powers, the express protection of rights, the bicameral structure of parliament, the requirement for a double majority in a referendum."
+            "the ways in which the Australian Constitution acts as a check on parliament in law-making (bicameral structure of parliament, separation of legislative, executive and judicial powers, express protection of rights, role of the High Court in interpreting the Australian Constitution, requirement for a referendum)."
         ],
-        exampleQuestionStems: [
-          "Evaluate the separation of powers as a check on Commonwealth parliament.",
-          "Evaluate the effectiveness of the express protection of rights in limiting parliamentary power."
-        ],
-        directLinks: [
-          { text: "See notes on 'The Constitution as a Check on Parliament'", targetId: "u4aos1-ks4" }
-        ]
-      },
-      {
+        exampleQuestionStems: ["Evaluate the separation of powers as a check on Commonwealth parliament.", "Evaluate the effectiveness of the express protection of rights in limiting parliamentary power."],
+        directLinks: [{ text: "See notes on 'The Constitution as a Check on Parliament'", targetId: "u4aos1-ks4" }]
+    },
+    {
         id: "ksb_synthesise_apply_scenarios",
         keySkillText: "Synthesise and apply legal principles to actual and/or hypothetical scenarios",
-        relatedKnowledgePoints: [
-          "(This skill draws on all key knowledge within an AOS)."
-        ],
-        exampleQuestionStems: [
-          "Consider the following scenario... Analyse the legal issues and apply relevant principles to advise on the likely outcome."
-        ],
-        directLinks: [
-          { text: "See Practice Questions for scenario application", targetId: "u4aos1-practice-questions" }
-        ]
-      }
-    ];
+        relatedKnowledgePoints: ["(This skill draws on all key knowledge within an AOS)."],
+        exampleQuestionStems: ["Consider the following scenario... Analyse the legal issues and apply relevant principles to advise on the likely outcome."],
+        directLinks: [{ text: "See Practice Questions for scenario application", targetId: "u4aos1-practice-questions" }]
+    }
+];
 
     // --- Bridging Skills to Knowledge ---
     let ksBridgeKeySkillSelect, ksBridgeDetailContainer, ksBridgeKeyKnowledgeDisplay, ksBridgeExampleQuestionsDisplay, ksBridgeDirectLinksDisplay;
@@ -1379,7 +1341,7 @@ function ks6ClearBoard() {
                 const list = target.querySelector('.dropped-items-list');
                 if(list) list.innerHTML = '';
                 // Remove placement classes from the drop target itself if they were applied there
-                target.classList.remove('correct-placement', 'incorrect-placement');
+                target.classList.remove('correct-placement-target', 'incorrect-placement-target');
             }
         });
     }
@@ -2064,8 +2026,13 @@ function initializeKeySkillsHub() {
     }
 
     // Initialize Exam Pitfalls Accordions
-    if (document.getElementById('pitfallsAccordionContainer')) { // Check if the container exists
+    if (document.getElementById('examPitfallsAccordionContainer')) { // Check if the container exists
         ksPitfallsInitializeAccordions();
+    }
+
+    // Initialize Structured Answer Templates Tool
+    if (document.getElementById('templateTaskWordSelect') && typeof ksTemplatesInitialize === 'function') {
+        ksTemplatesInitialize();
     }
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
@@ -2073,21 +2040,25 @@ window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally 
 
 // --- Exam Pitfalls Accordion Logic ---
 function ksPitfallsInitializeAccordions() {
-    const pitfallAccordionToggles = document.querySelectorAll('.pitfall-accordion-toggle');
+    const pitfallAccordionToggles = document.querySelectorAll('.exam-pitfall-accordion-trigger'); // Updated selector
 
     if (pitfallAccordionToggles.length === 0) {
-        return; // No accordions to initialize
+        // console.warn("No 'pitfall-accordion-toggle' elements found for Exam Pitfalls.");
+        return;
     }
 
     pitfallAccordionToggles.forEach(toggle => {
+        // Ensure this event listener is only added once or is idempotent
+        if (toggle.dataset.pitfallInitialized) return;
+
         toggle.addEventListener('click', () => {
             const content = toggle.nextElementSibling;
-            const arrow = toggle.querySelector('.arrow-icon'); // As per new instruction
-
-            if (!content || !content.classList.contains('pitfall-accordion-content')) {
-                console.warn('Accordion content not found for toggle:', toggle);
+            // Ensure the content element is correctly identified by class
+            if (!content || !content.classList.contains('exam-pitfall-accordion-content')) {
+                console.warn('Exam Pitfall: Accordion content not found for toggle:', toggle);
                 return;
             }
+            const arrow = toggle.querySelector('.arrow-icon');
 
             const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
 
@@ -2099,8 +2070,9 @@ function ksPitfallsInitializeAccordions() {
                 if (arrow) arrow.style.transform = 'rotate(180deg)';
             }
         });
+        toggle.dataset.pitfallInitialized = 'true'; // Mark as initialized
     });
-    console.log("Exam Pitfalls accordions initialized.");
+    console.log("Exam Pitfalls accordions initialized (or re-checked).");
 }
 // End of Exam Pitfalls Accordion Logic ---
 
@@ -2228,8 +2200,3 @@ window.setupCategorizedGlossary = function() { // Expose to window
         window.addAIGlossaryExplainers();
     }
 }
-
-
-
-
-[end of keySkillsHub.js]
