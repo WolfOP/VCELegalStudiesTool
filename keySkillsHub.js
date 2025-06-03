@@ -1687,7 +1687,7 @@ window.initializeKeySkillsHub = function() {
     async function callGeminiAPI(promptText) {
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
-            console.error(errorMessage);
+            console.error(errorMessage); // Log full error for dev
             // Update UI with this specific error
             const activeAIContentDiv = document.querySelector('.ai-explanation-content:not([style*="display: none"])');
             if (activeAIContentDiv) {
@@ -1721,12 +1721,13 @@ window.initializeKeySkillsHub = function() {
                 let errorPayload;
                 const contentType = response.headers.get("content-type");
                 if (contentType && contentType.includes("application/json")) {
-                    errorPayload = await response.json(); // Read body once as JSON
+                    errorPayload = await response.json();
                 } else {
-                    const textError = await response.text(); // Read body once as text
+                    const textError = await response.text();
                     errorPayload = { error: { message: textError || "Proxy returned non-JSON error" } };
                 }
-                console.error("Proxy API Error Response:", errorPayload);
+                // Enhanced console log for non-OK responses
+                console.error("callGeminiAPI: Proxy returned non-OK response. Status:", response.status, "Response body/payload:", errorPayload);
                 const errorMessage = errorPayload?.error?.message || errorPayload?.message || response.statusText || 'Unknown proxy error.';
                 throw new Error(`Proxy Error: ${response.status}. ${errorMessage}`);
             }
@@ -1741,30 +1742,18 @@ window.initializeKeySkillsHub = function() {
                 console.warn("Proxy returned full Gemini structure. Consider simplifying proxy response to { text: '...' }.");
                 return result.candidates[0].content.parts[0].text;
             } else {
-                console.error("Proxy API Response Unexpected Structure:", result);
+                // Enhanced console log for unexpected structure
+                console.error("callGeminiAPI: Unexpected response structure from proxy:", result);
                 throw new Error("Could not extract text from proxy response. Ensure proxy returns { text: '...' } or standard Gemini structure.");
             }
         } catch (error) {
-            console.error("Error calling Proxy API or processing response:", error);
-            // Update UI with this error
-            const activeAIContentDiv = document.querySelector('.ai-explanation-content:not([style*="display: none"])');
-            if (activeAIContentDiv) {
-                activeAIContentDiv.innerHTML = `<span class=\"text-red-600 font-semibold\">Error:</span> ${error.message}`;
-                activeAIContentDiv.classList.remove('loading-ai');
-            }
-            const aiCaseInsightErrorEl = document.getElementById('aiCaseInsightError');
-            if (aiCaseInsightErrorEl) {
-                aiCaseInsightErrorEl.textContent = `Error: ${error.message}`;
-                aiCaseInsightErrorEl.classList.remove('hidden');
-                const aiCaseInsightLoadingEl = document.getElementById('aiCaseInsightLoading');
-                if(aiCaseInsightLoadingEl) aiCaseInsightLoadingEl.classList.add('hidden');
-            }
-            // Re-enable buttons that might have been disabled
-            const getAICaseInsightBtnEl = document.getElementById('getAICaseInsightBtn');
-            if(getAICaseInsightBtnEl) getAICaseInsightBtnEl.disabled = false;
-            const activeExplainBtn = document.querySelector('.ai-explain-further-btn:disabled');
-            if(activeExplainBtn) activeExplainBtn.disabled = false;
+            // This catch block now handles errors thrown from above (non-OK, structure issues) and network errors from fetch itself.
+            console.error("Error calling Proxy API or processing response in callGeminiAPI:", error);
             
+            // UI updates for errors are now primarily handled by the calling function (e.g., initializeAICoachButtons)
+            // to provide more context-specific UI feedback.
+            // However, we can keep a generic fallback here if needed, or ensure calling functions always handle UI.
+            // For now, re-throwing allows the specific caller (like AI Coach or Case Insights) to handle its own UI.
             throw error; 
         }
     }
@@ -1809,7 +1798,8 @@ window.initializeKeySkillsHub = function() {
                     const explanation = await callGeminiAPI(prompt);
                     aiContentDiv.innerHTML = explanation.replace(/\n/g, '<br>');
                 } catch (error) {
-                    aiContentDiv.innerHTML = `Sorry, couldn't fetch an explanation at this time. Error: ${error.message}`;
+                    console.error("Glossary AI Explainer Error for term:", termName, error); // Specific log
+                    aiContentDiv.innerHTML = `Sorry, couldn't fetch an explanation. Error: ${error.message}. Check console for details.`;
                 } finally {
                     aiContentDiv.classList.remove('loading-ai');
                     explainBtn.disabled = false;
@@ -1858,7 +1848,8 @@ window.initializeKeySkillsHub = function() {
                 const insight = await callGeminiAPI(prompt);
                 aiCaseInsightResult.innerHTML = insight.replace(/\n/g, '<br>');
             } catch (error) {
-                aiCaseInsightError.textContent = `Sorry, couldn't fetch AI insights for this case. Error: ${error.message}`;
+                console.error("Case Insight API Error for case:", caseData.name, error); // Specific log
+                aiCaseInsightError.textContent = `Sorry, couldn't fetch AI insights. Error: ${error.message}. Check console.`;
                 aiCaseInsightError.classList.remove('hidden');
             } finally {
                 aiCaseInsightLoading.classList.add('hidden');
@@ -2135,8 +2126,8 @@ function initializeAICoachButtons() {
 
             } catch (error) {
                 // Handle Error
-                console.error("AI Coach API Error for taskword", taskword, ":", error);
-                errorP.textContent = "Sorry, could not fetch AI tips at this time. Please try again later.";
+                console.error("AI Coach API Call Failed for taskword:", taskword, error); // Enhanced log
+                errorP.textContent = `Sorry, AI Coach could not provide tips at this time. Please check the browser console for more details. (Error: ${error.message})`; // Modified user message
                 errorP.classList.remove('hidden');
             } finally {
                 // Update UI (End)
@@ -2200,3 +2191,5 @@ window.setupCategorizedGlossary = function() { // Expose to window
         window.addAIGlossaryExplainers();
     }
 }
+
+[end of keySkillsHub.js]

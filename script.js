@@ -99,6 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
             window.initializeKeySkillsHub();
         }
+        // Call initializeKeySkillsHub when the main "Exam Skills Helper" accordion is opened,
+        // as it contains multiple tools that need initialization (Bridging Skills, Templates, Pitfalls).
+        if (targetId === 'u4aos1-exam-skills' && typeof window.initializeKeySkillsHub === 'function') {
+            window.initializeKeySkillsHub();
+        }
         if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') {
             window.setupCategorizedGlossary();
         }
