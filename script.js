@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Call initializeKeySkillsHub when the main "Exam Skills Helper" accordion is opened,
         // as it contains multiple tools that need initialization (Bridging Skills, Templates, Pitfalls).
         if (targetId === 'u4aos1-exam-skills' && typeof window.initializeKeySkillsHub === 'function') {
+            console.log("DEBUG: script.js - initializeToolIfNeeded: u4aos1-exam-skills detected, attempting to call window.initializeKeySkillsHub.");
             window.initializeKeySkillsHub();
         }
         if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') {

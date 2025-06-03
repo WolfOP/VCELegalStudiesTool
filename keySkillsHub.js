@@ -405,7 +405,9 @@ const ksBridgeData = [
     }
 
     function ksBridgeInitialize() {
+        console.log("DEBUG: ksBridgeInitialize: Function called.");
         ksBridgeKeySkillSelect = document.getElementById('bridgeKeySkillSelect');
+        console.log("DEBUG: ksBridgeInitialize: keySkillSelect element:", ksBridgeKeySkillSelect);
         ksBridgeDetailContainer = document.getElementById('bridgeSkillDetailContainer');
         ksBridgeKeyKnowledgeDisplay = document.getElementById('bridgeKeyKnowledgeDisplay');
         ksBridgeExampleQuestionsDisplay = document.getElementById('bridgeExampleQuestionsDisplay');
@@ -415,20 +417,25 @@ const ksBridgeData = [
             console.warn("Bridging Skills to Knowledge tool elements not found in the DOM for Exam Skills Helper. Feature will not initialize.");
             return;
         }
+        console.log("DEBUG: ksBridgeInitialize: Essential DOM elements found. ksBridgeData content:", JSON.parse(JSON.stringify(window.ksBridgeData || [])));
 
         while (ksBridgeKeySkillSelect.options.length > 1) {
             ksBridgeKeySkillSelect.remove(1);
         }
+        console.log("DEBUG: ksBridgeInitialize: About to populate dropdown. Number of skills in ksBridgeData:", window.ksBridgeData ? window.ksBridgeData.length : 'ksBridgeData not found');
         if (typeof ksBridgeData !== 'undefined' && ksBridgeData.length > 0) {
             ksBridgeData.forEach(item => {
+                console.log(`DEBUG: ksBridgeInitialize: Processing item - ID: ${item.id}, Text: ${item.keySkillText}`);
                 const option = document.createElement('option');
                 option.value = item.id;
                 option.textContent = item.keySkillText;
-                ksBridgeKeySkillSelect.appendChild(option);
+                console.log("DEBUG: ksBridgeInitialize: Created option:", option);
+                if(ksBridgeKeySkillSelect) ksBridgeKeySkillSelect.appendChild(option); else console.error("DEBUG: keySkillSelect is null, cannot append option.");
             });
         } else {
             console.warn("ksBridgeData is not defined or empty. Dropdown will not be populated for Bridging Skills tool.");
         }
+        if(ksBridgeKeySkillSelect) console.log("DEBUG: ksBridgeInitialize: Dropdown population complete. Total options:", ksBridgeKeySkillSelect.options.length);
 
         ksBridgeKeySkillSelect.addEventListener('change', ksBridgeDisplaySkillInfo);
 
@@ -1685,6 +1692,8 @@ window.initializeKeySkillsHub = function() {
     const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
     async function callGeminiAPI(promptText) {
+        console.log("DEBUG: callGeminiAPI: Function called with promptText:", promptText);
+        console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL);
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
             console.error(errorMessage); // Log full error for dev
@@ -1716,6 +1725,7 @@ window.initializeKeySkillsHub = function() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt: promptText })
             });
+            console.log("DEBUG: callGeminiAPI: Raw fetch response status:", response.status);
 
             if (!response.ok) {
                 let errorPayload;
@@ -1726,6 +1736,7 @@ window.initializeKeySkillsHub = function() {
                     const textError = await response.text();
                     errorPayload = { error: { message: textError || "Proxy returned non-JSON error" } };
                 }
+                console.log("DEBUG: callGeminiAPI: Response not OK. errorPayload:", errorPayload);
                 // Enhanced console log for non-OK responses
                 console.error("callGeminiAPI: Proxy returned non-OK response. Status:", response.status, "Response body/payload:", errorPayload);
                 const errorMessage = errorPayload?.error?.message || errorPayload?.message || response.statusText || 'Unknown proxy error.';
@@ -1733,6 +1744,7 @@ window.initializeKeySkillsHub = function() {
             }
 
             const result = await response.json();
+            console.log("DEBUG: callGeminiAPI: Parsed JSON result:", result);
 
             if (result && result.text) {
                 return result.text;
@@ -1742,11 +1754,13 @@ window.initializeKeySkillsHub = function() {
                 console.warn("Proxy returned full Gemini structure. Consider simplifying proxy response to { text: '...' }.");
                 return result.candidates[0].content.parts[0].text;
             } else {
+                console.log("DEBUG: callGeminiAPI: Unexpected response structure.");
                 // Enhanced console log for unexpected structure
                 console.error("callGeminiAPI: Unexpected response structure from proxy:", result);
                 throw new Error("Could not extract text from proxy response. Ensure proxy returns { text: '...' } or standard Gemini structure.");
             }
         } catch (error) {
+            console.error("DEBUG: callGeminiAPI: Error during fetch or processing. Full error object:", error);
             // This catch block now handles errors thrown from above (non-OK, structure issues) and network errors from fetch itself.
             console.error("Error calling Proxy API or processing response in callGeminiAPI:", error);
             
@@ -1986,6 +2000,7 @@ window.initializeKeySkillsHub = function() {
 
 // Modify initializeKeySkillsHub to include new setups
 function initializeKeySkillsHub() {
+    console.log("DEBUG: initializeKeySkillsHub: Function called.");
     console.log("Key Skills Hub Initialized or Re-initialized");
     // Existing initializations
     if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') loadSTCQuestion(currentSTCQuestion);
@@ -2007,11 +2022,13 @@ function initializeKeySkillsHub() {
     }
 
     // Initialize AI Coach Buttons for Task Words
+    console.log("DEBUG: initializeKeySkillsHub: About to call initializeAICoachButtons. AI Coach buttons found on page:", document.querySelectorAll('.ai-task-coach-btn').length);
     if (typeof initializeAICoachButtons === 'function') {
         initializeAICoachButtons();
     }
 
     // Initialize Bridging Skills to Knowledge Tool
+    console.log("DEBUG: initializeKeySkillsHub: Checking if bridgeKeySkillSelect exists for ksBridgeInitialize call. Element:", document.getElementById('bridgeKeySkillSelect'));
     if (document.getElementById('bridgeKeySkillSelect') && typeof ksBridgeInitialize === 'function') {
         ksBridgeInitialize();
     }
@@ -2070,9 +2087,13 @@ function ksPitfallsInitializeAccordions() {
 
 // --- AI Coach for Task Words ---
 function initializeAICoachButtons() {
+    console.log("DEBUG: initializeAICoachButtons: Function called.");
     const aiCoachButtons = document.querySelectorAll('.ai-task-coach-btn');
+    console.log("DEBUG: initializeAICoachButtons: Found aiCoachButtons elements:", aiCoachButtons.length);
     aiCoachButtons.forEach(button => {
+        console.log("DEBUG: initializeAICoachButtons: Setting up button with data-taskword:", button.dataset.taskword);
         button.addEventListener('click', async (event) => {
+            console.log("DEBUG: AI Coach button clicked for taskword:", button.dataset.taskword);
             const currentButton = event.currentTarget;
             const taskword = currentButton.dataset.taskword;
             const parentElement = currentButton.parentElement;
@@ -2101,10 +2122,12 @@ function initializeAICoachButtons() {
 
             // Construct Gemini API Prompt
             const prompt = `You are an expert VCE Legal Studies exam coach. For the VCAA task word '${taskword}', provide 3-4 concise, actionable tips for a Year 12 student on how to structure a high-scoring response. Focus on what examiners look for and common pitfalls to avoid. Present as a bulleted list.`;
+            console.log("DEBUG: initializeAICoachButtons: Calling callGeminiAPI with prompt for taskword '", taskword, "'. Prompt:", prompt);
 
             try {
                 // Call Gemini API (ensure callGeminiAPI is defined and accessible)
                 const responseText = await callGeminiAPI(prompt);
+                console.log("DEBUG: initializeAICoachButtons: callGeminiAPI successful for '", taskword, "'. Response text:", responseText);
 
                 // Handle Success: Convert markdown-style bullet points to HTML
                 const lines = responseText.split('\n').filter(line => line.trim() !== '');
@@ -2126,6 +2149,7 @@ function initializeAICoachButtons() {
 
             } catch (error) {
                 // Handle Error
+                console.error("DEBUG: initializeAICoachButtons: callGeminiAPI failed for '", taskword, "'. Full error object:", error);
                 console.error("AI Coach API Call Failed for taskword:", taskword, error); // Enhanced log
                 errorP.textContent = `Sorry, AI Coach could not provide tips at this time. Please check the browser console for more details. (Error: ${error.message})`; // Modified user message
                 errorP.classList.remove('hidden');
