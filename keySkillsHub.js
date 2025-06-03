@@ -9,70 +9,145 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const ksBridgeData = [
       {
-        id: "ksb_roles_parliament",
-        keySkillText: "Explain the roles of the Crown and Houses of Parliament (Vic & Cth)",
+        id: "ksb_define_terminology",
+        keySkillText: "Define and use legal terminology",
         relatedKnowledgePoints: [
-          "Structure of Commonwealth Parliament (Crown, Senate, HoR).",
-          "Structure of Victorian Parliament (Crown, Legislative Council, Legislative Assembly).",
-          "Specific roles and functions of each house (e.g., initiating laws, review, representation, forming government).",
-          "Role of the Crown (Royal Assent)."
+          "The roles of the Crown and the Houses of Parliament (Victorian and Commonwealth) in law-making.",
+          "The law-making powers of the state and Commonwealth parliaments, including exclusive, concurrent and residual powers.",
+          "The significance of section 109 of the Australian Constitution.",
+          "Factors that affect the ability of parliament to make law...",
+          "The means by which the Australian Constitution acts as a check on parliament...",
+          "The reasons for, and effects of, statutory interpretation.",
+          "Features of the doctrine of precedent...",
+          "Factors that affect the ability of courts to make law...",
+          "Features of the relationship between courts and parliament in law-making..."
         ],
         exampleQuestionStems: [
-          "Explain one role of the Senate in the Commonwealth Parliament (3 marks).",
-          "Outline two roles of the House of Representatives (4 marks)."
+          "Define 'bicameral parliament'.",
+          "Define 'ratio decidendi'."
         ],
         directLinks: [
-          { text: "Review: Roles of Crown & Parliament", targetId: "u4aos1-ks1" }
+          { text: "See Interactive Glossary", targetId: "u4aos1-glossary" }
         ]
       },
       {
-        id: "ksb_division_powers",
-        keySkillText: "Analyse the division of law-making powers",
+        id: "ksb_discuss_interpret_analyse",
+        keySkillText: "Discuss, interpret and analyse legal principles and information",
         relatedKnowledgePoints: [
-          "Definition and examples of exclusive powers.",
-          "Definition and examples of concurrent powers.",
-          "Definition and examples of residual powers.",
-          "The constitutional basis for each type of power."
+          "The significance of section 109 of the Australian Constitution.",
+          "One High Court case which has had an impact on state and Commonwealth law-making powers.",
+          "The means by which the Australian Constitution acts as a check on parliament in law-making (e.g., separation of powers, express rights).",
+          "Features of the doctrine of precedent including binding precedent, persuasive precedent, and the reversing, overruling, distinguishing, and disapproving of precedent."
         ],
         exampleQuestionStems: [
-          "Distinguish between concurrent and residual powers, providing an example of each (4 marks).",
-          "Analyse the impact of the division of law-making powers on state parliaments (6 marks)."
+          "Analyse the impact of the Tasmanian Dams Case on the division of powers.",
+          "Interpret the meaning of 'ultra vires' in the context of a High Court challenge to legislation."
         ],
         directLinks: [
-          { text: "Review: Division of Law-making Powers", targetId: "u4aos1-ks2" }
+          { text: "See Case Explorer for examples", targetId: "u4aos1-case-explorer" }
         ]
       },
       {
-        id: "ksb_s109_significance",
-        keySkillText: "Evaluate the significance of Section 109",
+        id: "ksb_explain_lawmaking_powers",
+        keySkillText: "Explain the law-making powers of the state and Commonwealth parliaments, using examples",
         relatedKnowledgePoints: [
-          "Wording and operation of Section 109 of the Constitution.",
-          "Requirement for inconsistency between Commonwealth and State law in a concurrent area.",
-          "Consequence: Commonwealth law prevails, State law invalid to extent of inconsistency.",
-          "Role of the High Court in interpreting s109 (e.g., McBain v Victoria)."
+          "The law-making powers of the state and Commonwealth parliaments, including exclusive, concurrent and residual powers.",
+          "The significance of section 109 of the Australian Constitution.",
+          "One High Court case which has had an impact on state and Commonwealth law-making powers."
         ],
         exampleQuestionStems: [
-          "Explain the significance of Section 109 of the Australian Constitution (4 marks).",
-          "Using a relevant case, evaluate the impact of Section 109 on the law-making powers of state parliaments (8 marks)."
+          "Explain, using an example, one exclusive power of the Commonwealth Parliament.",
+          "Explain how concurrent powers operate, providing an example."
         ],
         directLinks: [
-          { text: "Review: Significance of Section 109", targetId: "u4aos1-ks3" }
+          { text: "See notes on 'Parliament and the Australian Constitution' (Division of Powers)", targetId: "u4aos1-ks2" }
         ]
       },
       {
-        id: "ksb_constitution_checks",
-        keySkillText: "Evaluate how the Constitution acts as a check on Parliament",
+        id: "ksb_analyse_parliament_courts_relationship",
+        keySkillText: "Analyse the relationship between parliament and courts",
         relatedKnowledgePoints: [
-          "Mechanisms: Bicameral structure, separation of powers (legislative, executive, judicial), express protection of rights, role of High Court (interpreting Constitution, implied rights, representative government), referendums (s128).",
-          "Strengths and limitations of each mechanism as a check.",
-          "Relevant cases (e.g., Roach v Electoral Commissioner for representative government)."
+          "Features of the relationship between courts and parliament in law-making, including: the supremacy of parliament, the ability of courts to influence parliament, the codification of common law, the abrogation of common law."
         ],
         exampleQuestionStems: [
-          "Evaluate the effectiveness of the separation of powers as a check on Commonwealth parliamentary power (8 marks).",
-          "Discuss the extent to which express rights in the Constitution limit parliamentary law-making (6 marks)."
+          "Analyse two features of the relationship between parliament and the courts in law-making."
         ],
         directLinks: [
-          { text: "Review: Constitution as a Check on Parliament", targetId: "u4aos1-ks4" }
+          { text: "See notes on 'Court & Parliament Relationship'", targetId: "u4aos1-ks8" }
+        ]
+      },
+      {
+        id: "ksb_explain_s109_significance",
+        keySkillText: "Explain the significance of section 109 of the Australian Constitution",
+        relatedKnowledgePoints: [
+          "The significance of section 109 of the Australian Constitution.",
+          "The law-making powers of the state and Commonwealth parliaments, including... concurrent powers."
+        ],
+        exampleQuestionStems: [
+          "Explain the significance of section 109 of the Australian Constitution in resolving conflicts between state and Commonwealth laws."
+        ],
+        directLinks: [
+          { text: "See notes on 'Parliament and the Australian Constitution' (s109)", targetId: "u4aos1-ks3" }
+        ]
+      },
+      {
+        id: "ksb_discuss_hc_case_impact",
+        keySkillText: "Discuss the significance of one High Court case which has had an impact on state and Commonwealth law-making powers",
+        relatedKnowledgePoints: [
+          "One High Court case which has had an impact on state and Commonwealth law-making powers (e.g., R v Brislan; Commonwealth v Tasmania (Tasmanian Dams Case)).",
+          "The law-making powers of the state and Commonwealth parliaments..."
+        ],
+        exampleQuestionStems: [
+          "Discuss the significance of the R v Brislan case on Commonwealth law-making powers."
+        ],
+        directLinks: [
+          { text: "See Case Explorer", targetId: "u4aos1-case-explorer" },
+          { text: "Review High Court Cases & Powers", targetId: "u4aos1-ks5"}
+        ]
+      },
+      {
+        id: "ksb_discuss_ability_make_law",
+        keySkillText: "Discuss the ability of parliament and the courts to make law",
+        relatedKnowledgePoints: [
+          "Factors that affect the ability of parliament to make law...",
+          "Factors that affect the ability of courts to make law...",
+          "Features of the relationship between courts and parliament in law-making..."
+        ],
+        exampleQuestionStems: [
+          "Discuss two factors that affect the ability of parliament to make law.",
+          "Discuss the ability of courts to make law through the doctrine of precedent."
+        ],
+        directLinks: [
+          { text: "See 'Factors Affecting Parliament'", targetId: "u4aos1-ks4" },
+          { text: "See 'Factors Affecting Courts'", targetId: "u4aos1-ks7" },
+          { text: "See 'Courts' Role in Law-Making'", targetId: "u4aos1-ks6" }
+        ]
+      },
+      {
+        id: "ksb_evaluate_constitution_checks",
+        keySkillText: "Evaluate the means by which the Australian Constitution acts as a check on parliament in law-making",
+        relatedKnowledgePoints: [
+          "The means by which the Australian Constitution acts as a check on parliament in law-making, including: the role of the High Court in protecting the principle of representative government, the separation of the legislative, executive and judicial powers, the express protection of rights, the bicameral structure of parliament, the requirement for a double majority in a referendum."
+        ],
+        exampleQuestionStems: [
+          "Evaluate the separation of powers as a check on Commonwealth parliament.",
+          "Evaluate the effectiveness of the express protection of rights in limiting parliamentary power."
+        ],
+        directLinks: [
+          { text: "See notes on 'The Constitution as a Check on Parliament'", targetId: "u4aos1-ks4" }
+        ]
+      },
+      {
+        id: "ksb_synthesise_apply_scenarios",
+        keySkillText: "Synthesise and apply legal principles to actual and/or hypothetical scenarios",
+        relatedKnowledgePoints: [
+          "(This skill draws on all key knowledge within an AOS)."
+        ],
+        exampleQuestionStems: [
+          "Consider the following scenario... Analyse the legal issues and apply relevant principles to advise on the likely outcome."
+        ],
+        directLinks: [
+          { text: "See Practice Questions for scenario application", targetId: "u4aos1-practice-questions" }
         ]
       }
     ];
@@ -91,23 +166,23 @@ document.addEventListener('DOMContentLoaded', function () {
         if (aos1Button && !aos1Button.classList.contains('active')) {
             aos1Button.click(); // Ensure AOS1 content is visible
         }
-        
+
         const targetButton = document.querySelector(`.u4aos1-content-toggle[data-target="${targetAccordionId}"]`);
         if (targetButton) {
-            targetButton.click(); 
+            targetButton.click();
 
             setTimeout(() => {
                 const targetElement = document.getElementById(targetAccordionId);
                 if (targetElement) {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    
+
                     const innerAccordionToggle = targetElement.querySelector('.accordion-toggle');
                     const innerAccordionContent = targetElement.querySelector('.accordion-content');
 
                     if (innerAccordionToggle && innerAccordionContent) {
                         const isExpanded = innerAccordionContent.style.maxHeight && innerAccordionContent.style.maxHeight !== '0px';
                         if (!isExpanded) {
-                            if (!innerAccordionToggle.classList.contains('opening')) { 
+                            if (!innerAccordionToggle.classList.contains('opening')) {
                                 innerAccordionToggle.classList.add('opening');
                                 innerAccordionToggle.click();
                                 setTimeout(() => innerAccordionToggle.classList.remove('opening'), 300);
@@ -117,14 +192,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 } else {
                     console.warn(`ksBridgeHandleDirectLink: Target element with ID "${targetAccordionId}" not found for scrolling.`);
                 }
-            }, 300); 
+            }, 300);
         } else {
             console.warn(`ksBridgeHandleDirectLink: Target button for accordion ID "${targetAccordionId}" not found.`);
         }
     }
 
     function ksBridgeDisplaySkillInfo() {
-        ksBridgeKeySkillSelect = document.getElementById('bridgeKeySkillSelect'); 
+        ksBridgeKeySkillSelect = document.getElementById('bridgeKeySkillSelect');
         ksBridgeDetailContainer = document.getElementById('bridgeSkillDetailContainer');
         ksBridgeKeyKnowledgeDisplay = document.getElementById('bridgeKeyKnowledgeDisplay');
         ksBridgeExampleQuestionsDisplay = document.getElementById('bridgeExampleQuestionsDisplay');
@@ -169,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const button = document.createElement('button');
             button.classList.add('ks-bridge-direct-link', 'py-1.5', 'px-4', 'bg-purple-600', 'text-white', 'rounded-md', 'hover:bg-purple-700', 'text-xs', 'mr-2', 'mb-2', 'focus:outline-none', 'focus:ring-2', 'focus:ring-purple-500', 'focus:ring-opacity-75');
             button.textContent = link.text;
-            button.dataset.targetId = link.targetId; 
+            button.dataset.targetId = link.targetId;
             button.addEventListener('click', () => ksBridgeHandleDirectLink(link.targetId));
             ksBridgeDirectLinksDisplay.appendChild(button);
         });
@@ -202,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             console.warn("ksBridgeData is not defined or empty. Dropdown will not be populated for Bridging Skills tool.");
         }
-        
+
         ksBridgeKeySkillSelect.addEventListener('change', ksBridgeDisplaySkillInfo);
 
         ksBridgeDetailContainer.classList.add('hidden');
@@ -1088,7 +1163,7 @@ function ks6DisplayDOPCaseElements(caseId) {
 
     if (!ks6SourceElementsContainer) return;
     // Clear placeholder before adding items
-    ks6SourceElementsContainer.innerHTML = ''; 
+    ks6SourceElementsContainer.innerHTML = '';
 
     promptsToDisplay.forEach((prompt, index) => {
         const draggableItem = document.createElement('div');
@@ -1114,7 +1189,7 @@ function ks6ClearBoard() {
                 const list = target.querySelector('.dropped-items-list');
                 if(list) list.innerHTML = '';
                 // Remove placement classes from the drop target itself if they were applied there
-                target.classList.remove('correct-placement', 'incorrect-placement'); 
+                target.classList.remove('correct-placement', 'incorrect-placement');
             }
         });
     }
@@ -1133,7 +1208,7 @@ function ks6HandleDragEnd() {
 }
 
 function ks6HandleDragOver(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
 }
 
@@ -1152,11 +1227,11 @@ function ks6HandleDragLeave(e) {
 
 function ks6HandleDrop(e) {
     e.preventDefault();
-    e.stopPropagation(); 
+    e.stopPropagation();
 
     if (!this.classList.contains('dop-drop-target')) return; // Ensure drop is on a valid target
     this.classList.remove('drag-over');
-    
+
     const draggedItemId = e.dataTransfer.getData('text/plain');
     const draggedItem = document.getElementById(draggedItemId);
 
@@ -1203,7 +1278,7 @@ function ks6CheckDOPAnswers() {
         if (droppedItem) {
             const correctCategoryForItem = droppedItem.dataset.correctCategory;
             // Derive targetCategory from the key of ks6DropTargets (e.g. 'facts', 'issue')
-            const targetCategory = categoryKey; 
+            const targetCategory = categoryKey;
 
             if (correctCategoryForItem === targetCategory) {
                 feedbackHtml += `<li class="text-green-700">${ks6CurrentSelectedCase.elements[targetCategory].substring(0,20)}... (Category: ${targetCategory}): Correct!</li>`;
@@ -1220,7 +1295,7 @@ function ks6CheckDOPAnswers() {
             allCorrect = false;
         }
     });
-    
+
     feedbackHtml += "</ul>";
     ks6FeedbackDiv.innerHTML = feedbackHtml;
 
@@ -1230,7 +1305,7 @@ function ks6CheckDOPAnswers() {
         ks6FeedbackDiv.className = 'mt-2 text-xs p-2 rounded bg-red-100 text-red-700';
     }
 }
-        
+
 function ks6InitializeDOPReconstructionTool() {
     ks6CaseSelect = document.getElementById('ks6DopCaseSelect');
     ks6SourceElementsContainer = document.getElementById('ks6DopSourceElements');
@@ -1248,7 +1323,7 @@ function ks6InitializeDOPReconstructionTool() {
         console.warn("One or more KS6 DoP reconstruction tool elements not found. Initialization incomplete.");
         return;
     }
-    
+
     // Check if all drop targets are found
     let allTargetsFound = true;
     for (const key in ks6DropTargets) {
@@ -1283,16 +1358,16 @@ function ks6InitializeDOPReconstructionTool() {
             target.addEventListener('drop', ks6HandleDrop);
         }
     });
-    
+
     if(ks6CheckAnswersBtn) ks6CheckAnswersBtn.addEventListener('click', ks6CheckDOPAnswers);
-    
+
     ks6ClearBoard(); // Initial clear
 }
 
 // --- Update initializeKeySkillsHub ---
 // Ensure this function is defined only ONCE, typically at the end of keySkillsHub.js
 
-const originalInitializeKeySkillsHub = window.initializeKeySkillsHub; 
+const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
 
 window.initializeKeySkillsHub = function() {
     if(typeof originalInitializeKeySkillsHub === 'function' && originalInitializeKeySkillsHub.toString() !== window.initializeKeySkillsHub.toString()) {
@@ -1312,15 +1387,15 @@ window.initializeKeySkillsHub = function() {
             setupRelationshipMatcherGame();
         }
     }
-    
+
     // Initialize Inconsistency Resolver (Key Skill 5)
     if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') { // Corrected: was window.loadIRScenario
-        loadIRScenario(0); 
+        loadIRScenario(0);
     }
 
     // Initialize Case Reconstruction (DoP) (Key Skill 6)
-    ks6InitializeDOPReconstructionTool(); 
-    
+    ks6InitializeDOPReconstructionTool();
+
     console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver and KS6 DoP Tool.");
 };
 
@@ -1758,7 +1833,7 @@ window.initializeKeySkillsHub = function() {
 
         ks7CheckScenarioBtnEl.addEventListener('click', ks7CheckScenarioAnswer);
         ks7NextScenarioBtnEl.addEventListener('click', ks7ShowNextScenario);
-        
+
         currentKs7ScenarioIndex = 0; // Reset index on initialization
         ks7LoadScenario(currentKs7ScenarioIndex);
         console.log("Key Skill 7 (High Court & Judicial Review) initialized.");
@@ -1777,12 +1852,12 @@ function initializeKeySkillsHub() {
     if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') setupPowerSortGame();
     if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') setupRelationshipMatcherGame();
     if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') loadIRScenario(0);
-    
+
     // Initialize KS6 (DoP Case Reconstruction) if its elements exist
     if (document.getElementById('ks6DopCaseDisplay') && typeof ks6InitializeDOPReconstructionTool === 'function') {
       ks6InitializeDOPReconstructionTool();
     }
-    
+
     // Initialize KS7 (High Court & Judicial Review)
     if (document.getElementById('ks7ScenarioSpotter') && typeof ks7InitializeHighCourtJudicialReview === 'function') {
         ks7InitializeHighCourtJudicialReview();
@@ -1797,8 +1872,47 @@ function initializeKeySkillsHub() {
     if (document.getElementById('bridgeKeySkillSelect') && typeof ksBridgeInitialize === 'function') {
         ksBridgeInitialize();
     }
+
+    // Initialize Exam Pitfalls Accordions
+    if (document.getElementById('pitfallsAccordionContainer')) { // Check if the container exists
+        ksPitfallsInitializeAccordions();
+    }
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
+
+
+// --- Exam Pitfalls Accordion Logic ---
+function ksPitfallsInitializeAccordions() {
+    const pitfallAccordionToggles = document.querySelectorAll('.pitfall-accordion-toggle');
+
+    if (pitfallAccordionToggles.length === 0) {
+        return; // No accordions to initialize
+    }
+
+    pitfallAccordionToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const content = toggle.nextElementSibling;
+            const arrow = toggle.querySelector('.arrow-icon'); // As per new instruction
+
+            if (!content || !content.classList.contains('pitfall-accordion-content')) {
+                console.warn('Accordion content not found for toggle:', toggle);
+                return;
+            }
+
+            const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+            if (isExpanded) {
+                content.style.maxHeight = '0px';
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                if (arrow) arrow.style.transform = 'rotate(180deg)';
+            }
+        });
+    });
+    console.log("Exam Pitfalls accordions initialized.");
+}
+// End of Exam Pitfalls Accordion Logic ---
 
 
 // --- AI Coach for Task Words ---
@@ -1809,7 +1923,7 @@ function initializeAICoachButtons() {
             const currentButton = event.currentTarget;
             const taskword = currentButton.dataset.taskword;
             const parentElement = currentButton.parentElement;
-            
+
             if (!parentElement) {
                 console.error("AI Coach: Could not find parent element for button:", currentButton);
                 return;
@@ -1849,11 +1963,11 @@ function initializeAICoachButtons() {
                         // If not a bullet point, still include it as a list item or paragraph
                         // For simplicity, treating all non-empty lines as list items if not bullets.
                         // Consider more sophisticated parsing if Gemini response varies greatly.
-                        htmlList += `<li>${line}</li>`; 
+                        htmlList += `<li>${line}</li>`;
                     }
                 });
                 htmlList += '</ul>';
-                
+
                 tipsDiv.innerHTML = htmlList;
                 tipsDiv.classList.remove('hidden');
 
