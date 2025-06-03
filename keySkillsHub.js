@@ -7,6 +7,212 @@ document.addEventListener('DOMContentLoaded', function () {
     const stcNextQuestionBtn = document.getElementById('stcNextQuestionBtn');
     const stcFeedbackArea = document.getElementById('stcFeedbackArea');
 
+    const ksBridgeData = [
+      {
+        id: "ksb_roles_parliament",
+        keySkillText: "Explain the roles of the Crown and Houses of Parliament (Vic & Cth)",
+        relatedKnowledgePoints: [
+          "Structure of Commonwealth Parliament (Crown, Senate, HoR).",
+          "Structure of Victorian Parliament (Crown, Legislative Council, Legislative Assembly).",
+          "Specific roles and functions of each house (e.g., initiating laws, review, representation, forming government).",
+          "Role of the Crown (Royal Assent)."
+        ],
+        exampleQuestionStems: [
+          "Explain one role of the Senate in the Commonwealth Parliament (3 marks).",
+          "Outline two roles of the House of Representatives (4 marks)."
+        ],
+        directLinks: [
+          { text: "Review: Roles of Crown & Parliament", targetId: "u4aos1-ks1" }
+        ]
+      },
+      {
+        id: "ksb_division_powers",
+        keySkillText: "Analyse the division of law-making powers",
+        relatedKnowledgePoints: [
+          "Definition and examples of exclusive powers.",
+          "Definition and examples of concurrent powers.",
+          "Definition and examples of residual powers.",
+          "The constitutional basis for each type of power."
+        ],
+        exampleQuestionStems: [
+          "Distinguish between concurrent and residual powers, providing an example of each (4 marks).",
+          "Analyse the impact of the division of law-making powers on state parliaments (6 marks)."
+        ],
+        directLinks: [
+          { text: "Review: Division of Law-making Powers", targetId: "u4aos1-ks2" }
+        ]
+      },
+      {
+        id: "ksb_s109_significance",
+        keySkillText: "Evaluate the significance of Section 109",
+        relatedKnowledgePoints: [
+          "Wording and operation of Section 109 of the Constitution.",
+          "Requirement for inconsistency between Commonwealth and State law in a concurrent area.",
+          "Consequence: Commonwealth law prevails, State law invalid to extent of inconsistency.",
+          "Role of the High Court in interpreting s109 (e.g., McBain v Victoria)."
+        ],
+        exampleQuestionStems: [
+          "Explain the significance of Section 109 of the Australian Constitution (4 marks).",
+          "Using a relevant case, evaluate the impact of Section 109 on the law-making powers of state parliaments (8 marks)."
+        ],
+        directLinks: [
+          { text: "Review: Significance of Section 109", targetId: "u4aos1-ks3" }
+        ]
+      },
+      {
+        id: "ksb_constitution_checks",
+        keySkillText: "Evaluate how the Constitution acts as a check on Parliament",
+        relatedKnowledgePoints: [
+          "Mechanisms: Bicameral structure, separation of powers (legislative, executive, judicial), express protection of rights, role of High Court (interpreting Constitution, implied rights, representative government), referendums (s128).",
+          "Strengths and limitations of each mechanism as a check.",
+          "Relevant cases (e.g., Roach v Electoral Commissioner for representative government)."
+        ],
+        exampleQuestionStems: [
+          "Evaluate the effectiveness of the separation of powers as a check on Commonwealth parliamentary power (8 marks).",
+          "Discuss the extent to which express rights in the Constitution limit parliamentary law-making (6 marks)."
+        ],
+        directLinks: [
+          { text: "Review: Constitution as a Check on Parliament", targetId: "u4aos1-ks4" }
+        ]
+      }
+    ];
+
+    // --- Bridging Skills to Knowledge ---
+    let ksBridgeKeySkillSelect, ksBridgeDetailContainer, ksBridgeKeyKnowledgeDisplay, ksBridgeExampleQuestionsDisplay, ksBridgeDirectLinksDisplay;
+
+    function ksBridgeHandleDirectLink(targetAccordionId) {
+        // Click the main U4AOS1 tab button if not already active
+        const unit4Button = document.querySelector('button.main-nav-button[data-target="unit4-content"]');
+        if (unit4Button && !unit4Button.classList.contains('active')) {
+            unit4Button.click(); // Ensure Unit 4 content is visible
+        }
+        // Then ensure AOS1 tab is active
+        const aos1Button = document.querySelector('button.unit4-nav-button[data-target="unit4-aos1"]');
+        if (aos1Button && !aos1Button.classList.contains('active')) {
+            aos1Button.click(); // Ensure AOS1 content is visible
+        }
+        
+        const targetButton = document.querySelector(`.u4aos1-content-toggle[data-target="${targetAccordionId}"]`);
+        if (targetButton) {
+            targetButton.click(); 
+
+            setTimeout(() => {
+                const targetElement = document.getElementById(targetAccordionId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    const innerAccordionToggle = targetElement.querySelector('.accordion-toggle');
+                    const innerAccordionContent = targetElement.querySelector('.accordion-content');
+
+                    if (innerAccordionToggle && innerAccordionContent) {
+                        const isExpanded = innerAccordionContent.style.maxHeight && innerAccordionContent.style.maxHeight !== '0px';
+                        if (!isExpanded) {
+                            if (!innerAccordionToggle.classList.contains('opening')) { 
+                                innerAccordionToggle.classList.add('opening');
+                                innerAccordionToggle.click();
+                                setTimeout(() => innerAccordionToggle.classList.remove('opening'), 300);
+                            }
+                        }
+                    }
+                } else {
+                    console.warn(`ksBridgeHandleDirectLink: Target element with ID "${targetAccordionId}" not found for scrolling.`);
+                }
+            }, 300); 
+        } else {
+            console.warn(`ksBridgeHandleDirectLink: Target button for accordion ID "${targetAccordionId}" not found.`);
+        }
+    }
+
+    function ksBridgeDisplaySkillInfo() {
+        ksBridgeKeySkillSelect = document.getElementById('bridgeKeySkillSelect'); 
+        ksBridgeDetailContainer = document.getElementById('bridgeSkillDetailContainer');
+        ksBridgeKeyKnowledgeDisplay = document.getElementById('bridgeKeyKnowledgeDisplay');
+        ksBridgeExampleQuestionsDisplay = document.getElementById('bridgeExampleQuestionsDisplay');
+        ksBridgeDirectLinksDisplay = document.getElementById('bridgeDirectLinksDisplay');
+
+        if (!ksBridgeKeySkillSelect || !ksBridgeDetailContainer || !ksBridgeKeyKnowledgeDisplay || !ksBridgeExampleQuestionsDisplay || !ksBridgeDirectLinksDisplay) {
+            console.error("KS Bridge: One or more display elements missing in ksBridgeDisplaySkillInfo.");
+            return;
+        }
+
+        const selectedSkillId = ksBridgeKeySkillSelect.value;
+
+        ksBridgeKeyKnowledgeDisplay.innerHTML = '';
+        ksBridgeExampleQuestionsDisplay.innerHTML = '';
+        ksBridgeDirectLinksDisplay.innerHTML = '';
+
+        if (!selectedSkillId) {
+            ksBridgeDetailContainer.classList.add('hidden');
+            return;
+        }
+
+        const skillData = ksBridgeData.find(skill => skill.id === selectedSkillId);
+        if (!skillData) {
+            console.error(`KS Bridge: No data found for skill ID: ${selectedSkillId}`);
+            ksBridgeDetailContainer.classList.add('hidden');
+            return;
+        }
+
+        skillData.relatedKnowledgePoints.forEach(point => {
+            const li = document.createElement('li');
+            li.textContent = point;
+            ksBridgeKeyKnowledgeDisplay.appendChild(li);
+        });
+
+        skillData.exampleQuestionStems.forEach(stem => {
+            const li = document.createElement('li');
+            li.textContent = stem;
+            ksBridgeExampleQuestionsDisplay.appendChild(li);
+        });
+
+        skillData.directLinks.forEach(link => {
+            const button = document.createElement('button');
+            button.classList.add('ks-bridge-direct-link', 'py-1.5', 'px-4', 'bg-purple-600', 'text-white', 'rounded-md', 'hover:bg-purple-700', 'text-xs', 'mr-2', 'mb-2', 'focus:outline-none', 'focus:ring-2', 'focus:ring-purple-500', 'focus:ring-opacity-75');
+            button.textContent = link.text;
+            button.dataset.targetId = link.targetId; 
+            button.addEventListener('click', () => ksBridgeHandleDirectLink(link.targetId));
+            ksBridgeDirectLinksDisplay.appendChild(button);
+        });
+
+        ksBridgeDetailContainer.classList.remove('hidden');
+    }
+
+    function ksBridgeInitialize() {
+        ksBridgeKeySkillSelect = document.getElementById('bridgeKeySkillSelect');
+        ksBridgeDetailContainer = document.getElementById('bridgeSkillDetailContainer');
+        ksBridgeKeyKnowledgeDisplay = document.getElementById('bridgeKeyKnowledgeDisplay');
+        ksBridgeExampleQuestionsDisplay = document.getElementById('bridgeExampleQuestionsDisplay');
+        ksBridgeDirectLinksDisplay = document.getElementById('bridgeDirectLinksDisplay');
+
+        if (!ksBridgeKeySkillSelect || !ksBridgeDetailContainer || !ksBridgeKeyKnowledgeDisplay || !ksBridgeExampleQuestionsDisplay || !ksBridgeDirectLinksDisplay) {
+            console.warn("Bridging Skills to Knowledge tool elements not found in the DOM for Exam Skills Helper. Feature will not initialize.");
+            return;
+        }
+
+        while (ksBridgeKeySkillSelect.options.length > 1) {
+            ksBridgeKeySkillSelect.remove(1);
+        }
+        if (typeof ksBridgeData !== 'undefined' && ksBridgeData.length > 0) {
+            ksBridgeData.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.id;
+                option.textContent = item.keySkillText;
+                ksBridgeKeySkillSelect.appendChild(option);
+            });
+        } else {
+            console.warn("ksBridgeData is not defined or empty. Dropdown will not be populated for Bridging Skills tool.");
+        }
+        
+        ksBridgeKeySkillSelect.addEventListener('change', ksBridgeDisplaySkillInfo);
+
+        ksBridgeDetailContainer.classList.add('hidden');
+        ksBridgeKeyKnowledgeDisplay.innerHTML = '';
+        ksBridgeExampleQuestionsDisplay.innerHTML = '';
+        ksBridgeDirectLinksDisplay.innerHTML = '';
+        console.log("Bridging Skills to Knowledge tool initialized for Exam Skills Helper.");
+    }
+    // End of Bridging Skills to Knowledge ---
+
     const scenarioTermChallenges = [
         {
             scenario: "Parliament passes a law that directly contradicts a previous High Court ruling on a non-constitutional common law matter.",
@@ -1585,6 +1791,11 @@ function initializeKeySkillsHub() {
     // Initialize AI Coach Buttons for Task Words
     if (typeof initializeAICoachButtons === 'function') {
         initializeAICoachButtons();
+    }
+
+    // Initialize Bridging Skills to Knowledge Tool
+    if (document.getElementById('bridgeKeySkillSelect') && typeof ksBridgeInitialize === 'function') {
+        ksBridgeInitialize();
     }
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
