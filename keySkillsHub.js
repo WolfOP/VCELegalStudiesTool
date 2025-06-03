@@ -308,6 +308,7 @@ const ksBridgeData = [
     let ksBridgeKeySkillSelect, ksBridgeDetailContainer, ksBridgeKeyKnowledgeDisplay, ksBridgeExampleQuestionsDisplay, ksBridgeDirectLinksDisplay;
 
     function ksBridgeHandleDirectLink(targetAccordionId) {
+        console.log("ksBridgeHandleDirectLink: Attempting to navigate to targetAccordionId:", targetAccordionId);
         // Click the main U4AOS1 tab button if not already active
         const unit4Button = document.querySelector('button.main-nav-button[data-target="unit4-content"]');
         if (unit4Button && !unit4Button.classList.contains('active')) {
@@ -363,6 +364,7 @@ const ksBridgeData = [
         }
 
         const selectedSkillId = ksBridgeKeySkillSelect.value;
+        console.log("ksBridgeDisplaySkillInfo: Selected skill ID:", selectedSkillId);
 
         ksBridgeKeyKnowledgeDisplay.innerHTML = '';
         ksBridgeExampleQuestionsDisplay.innerHTML = '';
@@ -379,6 +381,7 @@ const ksBridgeData = [
             ksBridgeDetailContainer.classList.add('hidden');
             return;
         }
+        console.log("ksBridgeDisplaySkillInfo: Displaying info for skill:", skillData.keySkillText);
 
         skillData.relatedKnowledgePoints.forEach(point => {
             const li = document.createElement('li');
@@ -420,6 +423,7 @@ const ksBridgeData = [
             ksBridgeKeySkillSelect.remove(1);
         }
         if (typeof ksBridgeData !== 'undefined' && ksBridgeData.length > 0) {
+            console.log("ksBridgeInitialize: ksBridgeData loaded with", ksBridgeData.length, "items.");
             ksBridgeData.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.id;
@@ -1517,39 +1521,7 @@ function ks6InitializeDOPReconstructionTool() {
 }
 
 // --- Update initializeKeySkillsHub ---
-// Ensure this function is defined only ONCE, typically at the end of keySkillsHub.js
-
-const originalInitializeKeySkillsHub = window.initializeKeySkillsHub;
-
-window.initializeKeySkillsHub = function() {
-    if(typeof originalInitializeKeySkillsHub === 'function' && originalInitializeKeySkillsHub.toString() !== window.initializeKeySkillsHub.toString()) {
-        originalInitializeKeySkillsHub(); 
-    } else {
-        // Fallback initializations for other Key Skills tools if this is the first full definition
-        if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') {
-            loadSTCQuestion(typeof currentSTCQuestion !== 'undefined' ? currentSTCQuestion : 0);
-        }
-        if (document.getElementById('sourceAnalysisChallengeContainer') && typeof loadSACExcerpt === 'function') {
-             loadSACExcerpt(typeof currentSACExcerpt !== 'undefined' ? currentSACExcerpt : 0);
-        }
-        if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') { // Corrected: was window.setupPowerSortGame
-            setupPowerSortGame();
-        }
-        if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') { // Corrected: was window.setupRelationshipMatcherGame
-            setupRelationshipMatcherGame();
-        }
-    }
-
-    // Initialize Inconsistency Resolver (Key Skill 5)
-    if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') { // Corrected: was window.loadIRScenario
-        loadIRScenario(0);
-    }
-
-    // Initialize Case Reconstruction (DoP) (Key Skill 6)
-    ks6InitializeDOPReconstructionTool();
-
-    console.log("Key Skills Hub Initialized/Re-initialized, including Inconsistency Resolver and KS6 DoP Tool.");
-};
+// This section is being removed as we will consolidate into the final initializeKeySkillsHub function.
 
 // Ensure other initializers like for Guided Answers are also correctly handled if they are part of Key Skills Hub
 // For example, if Guided Answers is part of Key Skills Hub, its initialization should also be here.
@@ -1654,21 +1626,21 @@ if (checkGuidedAnswerBtn) {
 
 // Update initializeKeySkillsHub OR ensure initializeToolIfNeeded in script.js calls this
 // If initializeKeySkillsHub is your main initializer for tools in keySkillsHub.js:
-const originalInitializeKeySkillsHubForGuidedAnswers = window.initializeKeySkillsHub;
-window.initializeKeySkillsHub = function() {
-    if(typeof originalInitializeKeySkillsHubForGuidedAnswers === 'function' && originalInitializeKeySkillsHubForGuidedAnswers.toString() !== window.initializeKeySkillsHub.toString()) {
-        originalInitializeKeySkillsHubForGuidedAnswers(); 
-    } else {
-        // Fallback initializations if original was placeholder or for other tools in keySkillsHub.js
-        if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') { /* ... */ }
-        // ... other initializations from keySkillsHub.js ...
-    }
-    // Initialize Guided Answer Construction if its container exists
-    if (document.getElementById('guidedAnswerContainer') && typeof window.loadGuidedAnswerQuestion === 'function') {
-        window.loadGuidedAnswerQuestion(0); // Load the first question
-    }
-    console.log("Key Skills Hub Initialized/Re-initialized, ensuring Guided Answers is loaded if visible.");
-};
+// const originalInitializeKeySkillsHubForGuidedAnswers = window.initializeKeySkillsHub; // Removed
+// window.initializeKeySkillsHub = function() { // Removed
+//     if(typeof originalInitializeKeySkillsHubForGuidedAnswers === 'function' && originalInitializeKeySkillsHubForGuidedAnswers.toString() !== window.initializeKeySkillsHub.toString()) {
+//         originalInitializeKeySkillsHubForGuidedAnswers();
+//     } else {
+//         // Fallback initializations if original was placeholder or for other tools in keySkillsHub.js
+//         if (document.getElementById('scenarioTermChallengeContainer') && typeof window.loadSTCQuestion === 'function') { /* ... */ }
+//         // ... other initializations from keySkillsHub.js ...
+//     }
+//     // Initialize Guided Answer Construction if its container exists
+//     if (document.getElementById('guidedAnswerContainer') && typeof window.loadGuidedAnswerQuestion === 'function') {
+//         window.loadGuidedAnswerQuestion(0); // Load the first question
+//     }
+//     console.log("Key Skills Hub Initialized/Re-initialized, ensuring Guided Answers is loaded if visible.");
+// }; // Removed
 
 
 
@@ -1685,6 +1657,9 @@ window.initializeKeySkillsHub = function() {
     const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
     async function callGeminiAPI(promptText) {
+        console.log("callGeminiAPI: Received prompt:", promptText); // Log prompt reception
+        console.log("callGeminiAPI: Using proxy URL:", PROXY_ENDPOINT_URL); // Log proxy URL
+
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
             console.error(errorMessage); // Log full error for dev
@@ -1711,6 +1686,7 @@ window.initializeKeySkillsHub = function() {
         }
 
         try {
+            console.log("callGeminiAPI: Attempting to fetch from proxy..."); // Log before fetch
             const response = await fetch(PROXY_ENDPOINT_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -1732,7 +1708,9 @@ window.initializeKeySkillsHub = function() {
                 throw new Error(`Proxy Error: ${response.status}. ${errorMessage}`);
             }
 
+            console.log("callGeminiAPI: Raw fetch response status:", response.status); // Log raw status for successful response
             const result = await response.json();
+            console.log("callGeminiAPI: Parsed JSON result:", result); // Log parsed JSON
 
             if (result && result.text) {
                 return result.text;
@@ -1985,28 +1963,36 @@ window.initializeKeySkillsHub = function() {
 });
 
 // Modify initializeKeySkillsHub to include new setups
-function initializeKeySkillsHub() {
+function initializeKeySkillsHub() { // This is now the single, comprehensive initializer
     console.log("Key Skills Hub Initialized or Re-initialized");
-    // Existing initializations
-    if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') loadSTCQuestion(currentSTCQuestion);
-    if (document.getElementById('sourceAnalysisChallengeContainer') && typeof loadSACExcerpt === 'function') loadSACExcerpt(currentSACExcerpt);
 
-    // NEW initializations for KS3, KS4, KS5
-    if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') setupPowerSortGame();
-    if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') setupRelationshipMatcherGame();
-    if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') loadIRScenario(0);
-
-    // Initialize KS6 (DoP Case Reconstruction) if its elements exist
-    if (document.getElementById('ks6DopCaseDisplay') && typeof ks6InitializeDOPReconstructionTool === 'function') {
-      ks6InitializeDOPReconstructionTool();
+    // Standard tool initializations (if their containers exist)
+    if (document.getElementById('scenarioTermChallengeContainer') && typeof loadSTCQuestion === 'function') {
+        loadSTCQuestion(typeof currentSTCQuestion !== 'undefined' ? currentSTCQuestion : 0);
     }
-
-    // Initialize KS7 (High Court & Judicial Review)
+    if (document.getElementById('sourceAnalysisChallengeContainer') && typeof loadSACExcerpt === 'function') {
+        loadSACExcerpt(typeof currentSACExcerpt !== 'undefined' ? currentSACExcerpt : 0);
+    }
+    if (document.getElementById('powerSortGameContainer') && typeof setupPowerSortGame === 'function') {
+        setupPowerSortGame();
+    }
+    if (document.getElementById('relationshipMatcherContainer') && typeof setupRelationshipMatcherGame === 'function') {
+        setupRelationshipMatcherGame();
+    }
+    if (document.getElementById('inconsistencyResolverContainer') && typeof loadIRScenario === 'function') {
+        loadIRScenario(0);
+    }
+    if (document.getElementById('ks6DopCaseDisplay') && typeof ks6InitializeDOPReconstructionTool === 'function') {
+        ks6InitializeDOPReconstructionTool();
+    }
     if (document.getElementById('ks7ScenarioSpotter') && typeof ks7InitializeHighCourtJudicialReview === 'function') {
         ks7InitializeHighCourtJudicialReview();
     }
+    if (document.getElementById('guidedAnswerContainer') && typeof window.loadGuidedAnswerQuestion === 'function') {
+        window.loadGuidedAnswerQuestion(0); // Initialize Guided Answers
+    }
 
-    // Initialize AI Coach Buttons for Task Words
+    // Initialize AI Coach Buttons for Task Words (not checking for a container, should always try to init if function exists)
     if (typeof initializeAICoachButtons === 'function') {
         initializeAICoachButtons();
     }
@@ -2017,7 +2003,7 @@ function initializeKeySkillsHub() {
     }
 
     // Initialize Exam Pitfalls Accordions
-    if (document.getElementById('examPitfallsAccordionContainer')) { // Check if the container exists
+    if (document.getElementById('examPitfallsAccordionContainer') && typeof ksPitfallsInitializeAccordions === 'function') {
         ksPitfallsInitializeAccordions();
     }
 
@@ -2025,6 +2011,7 @@ function initializeKeySkillsHub() {
     if (document.getElementById('templateTaskWordSelect') && typeof ksTemplatesInitialize === 'function') {
         ksTemplatesInitialize();
     }
+    // Add other initializers here as needed
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
 
@@ -2052,13 +2039,27 @@ function ksPitfallsInitializeAccordions() {
             const arrow = toggle.querySelector('.arrow-icon');
 
             const isExpanded = content.style.maxHeight && content.style.maxHeight !== '0px';
+            console.log(`Exam Pitfall Accordion: Clicked. Currently isExpanded: ${isExpanded}. Initial maxHeight: ${content.style.maxHeight}`);
+
+            // Stop event propagation to prevent generic accordion handlers (if any) from firing
+            event.stopPropagation();
 
             if (isExpanded) {
                 content.style.maxHeight = '0px';
-                if (arrow) arrow.style.transform = 'rotate(0deg)';
+                if (arrow) {
+                    arrow.style.transform = 'rotate(0deg)';
+                    console.log(`Exam Pitfall Accordion: Collapsing. Set maxHeight to 0px. Arrow transform: rotate(0deg)`);
+                } else {
+                    console.log(`Exam Pitfall Accordion: Collapsing. Set maxHeight to 0px. No arrow found.`);
+                }
             } else {
                 content.style.maxHeight = content.scrollHeight + 'px';
-                if (arrow) arrow.style.transform = 'rotate(180deg)';
+                if (arrow) {
+                    arrow.style.transform = 'rotate(180deg)';
+                    console.log(`Exam Pitfall Accordion: Expanding. Set maxHeight to ${content.scrollHeight}px. Arrow transform: rotate(180deg)`);
+                } else {
+                    console.log(`Exam Pitfall Accordion: Expanding. Set maxHeight to ${content.scrollHeight}px. No arrow found.`);
+                }
             }
         });
         toggle.dataset.pitfallInitialized = 'true'; // Mark as initialized
@@ -2075,6 +2076,7 @@ function initializeAICoachButtons() {
         button.addEventListener('click', async (event) => {
             const currentButton = event.currentTarget;
             const taskword = currentButton.dataset.taskword;
+            console.log("AI Coach button clicked for taskword:", taskword); // Log button click
             const parentElement = currentButton.parentElement;
 
             if (!parentElement) {
