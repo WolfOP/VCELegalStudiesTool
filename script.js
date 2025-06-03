@@ -583,7 +583,7 @@ window.categorizedGlossaryData = categorizedGlossaryData;
         });
         tabToActivate.classList.add('active-task-word-tab', 'border-purple-500', 'font-semibold', 'text-purple-800', 'bg-purple-100');
         tabToActivate.classList.remove('border-transparent', 'text-purple-600');
-        
+
         taskWordContents.forEach(content => {
             content.classList.toggle('hidden', content.id !== targetId);
         });
