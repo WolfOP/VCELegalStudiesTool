@@ -567,26 +567,95 @@ window.categorizedGlossaryData = categorizedGlossaryData;
         });
     }
 
-    // Exam Skills Helper Tabs
-    const taskWordTabs = document.querySelectorAll('.task-word-tab');
-    const taskWordContents = document.querySelectorAll('.task-word-content');
+    // Exam Skills Helper Tabs (NEW Two-Level Structure)
+    const primaryExamSkillTabs = document.querySelectorAll('.primary-exam-skill-tab-button');
+    const primaryExamSkillContents = document.querySelectorAll('.primary-exam-skill-content');
+    const taskWordTabs = document.querySelectorAll('.task-word-tab'); // Secondary tabs
+    const taskWordContents = document.querySelectorAll('.task-word-content'); // Secondary content
+
+    // Function to activate a secondary (task word) tab
+    function activateTaskWordTab(tabToActivate) {
+        const targetId = tabToActivate.dataset.target;
+        taskWordTabs.forEach(t => {
+            // Using 'active-task-word-tab' for active state, and specific styling classes
+            t.classList.remove('active-task-word-tab', 'border-purple-500', 'font-semibold', 'text-purple-800', 'bg-purple-100');
+            t.classList.add('border-transparent', 'text-purple-600');
+        });
+        tabToActivate.classList.add('active-task-word-tab', 'border-purple-500', 'font-semibold', 'text-purple-800', 'bg-purple-100');
+        tabToActivate.classList.remove('border-transparent', 'text-purple-600');
+        
+        taskWordContents.forEach(content => {
+            content.classList.toggle('hidden', content.id !== targetId);
+        });
+    }
+
+    // Event listeners for secondary (task word) tabs
     taskWordTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            const targetId = tab.dataset.target;
-            taskWordTabs.forEach(t => {
-                t.classList.remove('border-purple-500', 'font-semibold', 'text-purple-800', 'bg-purple-100');
-                t.classList.add('border-transparent', 'text-purple-600');
-            });
-            tab.classList.add('border-purple-500', 'font-semibold', 'text-purple-800', 'bg-purple-100');
-            tab.classList.remove('border-transparent', 'text-purple-600');
-            taskWordContents.forEach(content => {
-                content.classList.toggle('hidden', content.id !== targetId);
-            });
+            activateTaskWordTab(tab);
         });
     });
-    if (taskWordTabs.length > 0) { 
-        taskWordTabs[0].click(); 
+
+    // Event listeners for primary exam skill tabs
+    primaryExamSkillTabs.forEach(primaryTab => {
+        primaryTab.addEventListener('click', () => {
+            const primaryTargetId = primaryTab.dataset.target;
+
+            primaryExamSkillTabs.forEach(pt => {
+                pt.classList.remove('active-primary-exam-skill-tab', 'text-purple-700', 'font-semibold');
+                pt.classList.add('text-gray-500', 'hover:text-purple-700');
+            });
+            primaryTab.classList.add('active-primary-exam-skill-tab', 'text-purple-700', 'font-semibold');
+            primaryTab.classList.remove('text-gray-500', 'hover:text-purple-700');
+
+            primaryExamSkillContents.forEach(pc => {
+                pc.classList.toggle('hidden', pc.id !== primaryTargetId);
+            });
+
+            // If "Task Word Deep Dive" is activated, activate its first task word tab
+            if (primaryTargetId === 'task-word-deep-dive-content') {
+                const firstTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab');
+                if (firstTaskWordTab) {
+                    activateTaskWordTab(firstTaskWordTab); // Activate the first tab
+                }
+            }
+        });
+    });
+
+    // Default state for Exam Skills Helper when it becomes visible
+    // This will be triggered when the "Exam Skills Helper" accordion is opened.
+    // We find the "Exam Skills Helper" main content block
+    const examSkillsHelperContent = document.getElementById('u4aos1-exam-skills');
+    if (examSkillsHelperContent) {
+        // Use MutationObserver to detect when it becomes visible
+        const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const isHidden = examSkillsHelperContent.classList.contains('hidden');
+                    if (!isHidden) { // When "Exam Skills Helper" is shown
+                        const firstPrimaryTab = document.querySelector('.primary-exam-skill-tab-button');
+                        if (firstPrimaryTab && !firstPrimaryTab.classList.contains('active-primary-exam-skill-tab')) {
+                            // If no primary tab is active, click the first one.
+                            // This also handles activating the first secondary tab within "Task Word Deep Dive".
+                            firstPrimaryTab.click();
+                        } else if (firstPrimaryTab && firstPrimaryTab.classList.contains('active-primary-exam-skill-tab') && firstPrimaryTab.dataset.target === 'task-word-deep-dive-content') {
+                            // If the first primary tab ("Task Word Deep Dive") is already active, ensure its first secondary tab is also active.
+                            const firstTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab');
+                            // Check if no task word tab is currently active or if the first one isn't active
+                            const activeTaskWordTab = document.querySelector('#taskWordTabs .task-word-tab.active-task-word-tab');
+                            if (!activeTaskWordTab || activeTaskWordTab !== firstTaskWordTab) {
+                                if (firstTaskWordTab) {
+                                   activateTaskWordTab(firstTaskWordTab);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        observer.observe(examSkillsHelperContent, { attributes: true });
     }
+
 
     // Practice Questions Toggle Answer
     const practiceQuestionToggleButtons = document.querySelectorAll('.practice-question-toggle-answer');
