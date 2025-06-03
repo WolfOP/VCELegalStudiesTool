@@ -7,6 +7,196 @@ document.addEventListener('DOMContentLoaded', function () {
     const stcNextQuestionBtn = document.getElementById('stcNextQuestionBtn');
     const stcFeedbackArea = document.getElementById('stcFeedbackArea');
 
+    const answerTemplatesData = {
+      "Explain": {
+        "Low (2-4 marks)": `
+          <h5 class="text-md font-semibold text-purple-700 mb-2">Template: Explain (Low Marks, e.g., 2-4)</h5>
+          <p class="text-sm text-slate-600 mb-2"><strong>General Approach:</strong> Clearly state the concept/role/reason, provide key details, and explain its function or significance briefly.</p>
+          <ul class="list-disc list-inside text-sm text-slate-700 space-y-1 pl-4 mb-3">
+            <li><strong>Point 1 / Element 1:</strong>
+                <ul class="list-circle list-inside pl-4 text-xs">
+                    <li>State the role/concept/reason clearly.</li>
+                    <li>Explain <em>how</em> it is performed or <em>why</em> it is the case with relevant details.</li>
+                    <li>Briefly explain its importance/significance.</li>
+                </ul>
+            </li>
+            <li><em>(If multiple points/elements needed for marks, repeat above structure for each)</em></li>
+          </ul>
+          <p class="text-xs text-slate-500 italic"><strong>Key Reminders:</strong> Use precise legal terminology. Include a brief, relevant example if it fits within the mark allocation and clarifies your explanation.</p>
+        `
+      },
+      "Evaluate": {
+        "High (8-10+ marks)": `
+          <h5 class="text-md font-semibold text-purple-700 mb-2">Template: Evaluate (High Marks, e.g., 8-10+)</h5>
+          <p class="text-sm text-slate-600 mb-2"><strong>General Approach:</strong> Make a reasoned judgment on the topic's effectiveness or worth by examining strengths and limitations, supported by evidence.</p>
+          <div class="space-y-2 text-sm">
+            <div>
+                <h6 class="font-medium text-purple-600">Introduction:</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Briefly introduce the topic/concept being evaluated.</li>
+                    <li>Clearly state the core issue or argument from the question.</li>
+                    <li>(Optional) Briefly outline the scope of your evaluation or your main contention.</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">Body Paragraph 1 (e.g., Strength / Factor Supporting Effectiveness):</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Clear topic sentence introducing the strength or positive aspect.</li>
+                    <li>Detailed explanation using precise legal knowledge and terminology.</li>
+                    <li>Provide specific supporting evidence/examples (e.g., cases, legislation, constitutional provisions).</li>
+                    <li>Link this point back to the question, explaining how it contributes to the effectiveness (or aspect being evaluated).</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">Body Paragraph 2 (e.g., Limitation / Factor Detracting from Effectiveness):</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Clear topic sentence introducing the limitation or negative aspect.</li>
+                    <li>Detailed explanation using precise legal knowledge and terminology.</li>
+                    <li>Provide specific supporting evidence/examples.</li>
+                    <li>Link this point back to the question, explaining how it detracts from effectiveness.</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600"><em>(Repeat Body Paragraphs as needed to cover multiple strengths and limitations, ensuring balance and depth appropriate for the marks.)</em></h6>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">Conclusion:</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Summarize the main arguments (key strengths and limitations discussed).</li>
+                    <li>Provide an overall, substantiated judgment that directly answers the question (e.g., "Overall, X is effective to a [significant/moderate/limited] extent because... while its limitations include...").</li>
+                    <li>Use the language of "evaluate" (or the specific task word) in your judgment.</li>
+                    <li>Avoid introducing new information.</li>
+                </ul>
+            </div>
+          </div>
+        `
+      },
+      "Scenario/Case Application": { // This is a 'type' rather than a task word combined with mark range
+        "Scenario/Case Application": `
+          <h5 class="text-md font-semibold text-purple-700 mb-2">Template: Scenario/Case Application Questions</h5>
+          <p class="text-sm text-slate-600 mb-2"><strong>General Approach:</strong> Systematically apply relevant legal principles to the specific facts of the given scenario or case.</p>
+          <div class="space-y-2 text-sm">
+            <div>
+                <h6 class="font-medium text-purple-600">1. Identify Legal Issue(s):</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Clearly state the central legal question(s) or problem(s) raised by the scenario/case.</li>
+                    <li>What needs to be resolved or advised upon?</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">2. State Relevant Legal Principles/Law:</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Identify the specific area of law involved (e.g., constitutional law, negligence, statutory interpretation, elements of an offence).</li>
+                    <li>Outline the relevant legal rules, definitions, elements of the offence/claim, or constitutional sections that apply to the identified issue(s).</li>
+                    <li>Cite relevant sections of Acts or key precedent cases if applicable.</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">3. Apply Law to Facts (The 'Reasoning' Step):</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Systematically connect each element of the relevant law/principles to the specific facts provided in the scenario/case.</li>
+                    <li>Explain <em>how</em> the law applies to those facts. This is where you demonstrate legal reasoning.</li>
+                    <li>Avoid simply restating facts or law; show the connection.</li>
+                    <li>If comparing to a precedent case, explain how the facts are similar or different and why that matters.</li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="font-medium text-purple-600">4. Reach a Conclusion:</h6>
+                <ul class="list-disc list-inside pl-4 text-xs">
+                    <li>Based on your application of the law to the facts, provide a reasoned conclusion.</li>
+                    <li>Directly answer the question asked about the scenario (e.g., likely outcome, who is liable/not liable, whether a law is valid/invalid, advice to a party).</li>
+                    <li>Be clear and concise.</li>
+                </ul>
+            </div>
+          </div>
+        `
+      }
+      // More templates can be added here for other task words and mark ranges.
+    };
+
+    // --- Structured Answer Templates ---
+    let templateTaskWordSelect, templateMarkRangeSelect, templateDisplayArea; // Declared here for broader access if needed
+
+    function ksTemplatesDisplayTemplate() {
+        // Ensure elements are available (might be called before full initialization in some edge cases or if structure changes)
+        templateTaskWordSelect = document.getElementById('templateTaskWordSelect');
+        templateMarkRangeSelect = document.getElementById('templateMarkRangeSelect');
+        templateDisplayArea = document.getElementById('templateDisplayArea');
+
+        if (!templateTaskWordSelect || !templateMarkRangeSelect || !templateDisplayArea) {
+            // console.error("Structured Answer Templates: Display elements not found during display update.");
+            return;
+        }
+
+        const selectedTaskWord = templateTaskWordSelect.value;
+        const selectedMarkRange = templateMarkRangeSelect.value;
+
+        if (!selectedTaskWord || !selectedMarkRange) {
+            templateDisplayArea.innerHTML = '<p class="text-sm text-slate-500 italic">Please select both a task word and a mark range/type to view a template.</p>';
+            return;
+        }
+
+        if (selectedMarkRange === "Scenario/Case Application") {
+            // "Scenario/Case Application" is a special key in answerTemplatesData, directly under itself.
+            if (answerTemplatesData["Scenario/Case Application"] && answerTemplatesData["Scenario/Case Application"]["Scenario/Case Application"]) {
+                templateDisplayArea.innerHTML = answerTemplatesData["Scenario/Case Application"]["Scenario/Case Application"];
+            } else {
+                templateDisplayArea.innerHTML = '<p class="text-sm text-slate-500 italic">The template for "Scenario/Case Application" is not yet available.</p>';
+            }
+        } else if (answerTemplatesData[selectedTaskWord] && answerTemplatesData[selectedTaskWord][selectedMarkRange]) {
+            templateDisplayArea.innerHTML = answerTemplatesData[selectedTaskWord][selectedMarkRange];
+        } else {
+            templateDisplayArea.innerHTML = `<p class="text-sm text-slate-500 italic">A specific template for "${selectedTaskWord}" with "${selectedMarkRange}" is not yet available. Please check general structural advice or similar task words.</p>`;
+        }
+    }
+
+    function ksTemplatesInitialize() {
+        templateTaskWordSelect = document.getElementById('templateTaskWordSelect');
+        templateMarkRangeSelect = document.getElementById('templateMarkRangeSelect');
+        templateDisplayArea = document.getElementById('templateDisplayArea');
+
+        if (!templateTaskWordSelect || !templateMarkRangeSelect || !templateDisplayArea) {
+            console.warn("Structured Answer Templates elements not found in the DOM. Feature will not initialize.");
+            return;
+        }
+
+        // Populate Task Word Dropdown
+        const vcaaTaskWords = [
+            "Analyse", "Compare", "Define", "Describe", "Discuss", "Distinguish",
+            "Evaluate", "Explain", "Interpret", "Justify", "Outline"
+        ]; // Standard 11 VCAA task words, sorted alphabetically.
+
+        const allTaskWordOptions = [...vcaaTaskWords].sort();
+
+
+        templateTaskWordSelect.innerHTML = '<option value="">-- Select Task Word --</option>'; // Clear existing
+        allTaskWordOptions.forEach(word => {
+            const option = document.createElement('option');
+            option.value = word;
+            option.textContent = word;
+            templateTaskWordSelect.appendChild(option);
+        });
+
+        // Populate Mark Range Dropdown
+        const markRanges = ["Low (2-4 marks)", "Mid (5-8 marks)", "High (8-10+ marks)", "Scenario/Case Application"];
+        templateMarkRangeSelect.innerHTML = '<option value="">-- Select Range/Type --</option>'; // Clear existing
+        markRanges.forEach(range => {
+            const option = document.createElement('option');
+            option.value = range;
+            option.textContent = range;
+            templateMarkRangeSelect.appendChild(option);
+        });
+
+        // Add Event Listeners
+        templateTaskWordSelect.addEventListener('change', ksTemplatesDisplayTemplate);
+        templateMarkRangeSelect.addEventListener('change', ksTemplatesDisplayTemplate);
+
+        // Initial State
+        ksTemplatesDisplayTemplate(); // Call once to set initial message based on empty selections
+        console.log("Structured Answer Templates tool initialized.");
+    }
+    // --- End of Structured Answer Templates ---
+
     const ksBridgeData = [
       {
         id: "ksb_define_terminology",
@@ -2041,3 +2231,5 @@ window.setupCategorizedGlossary = function() { // Expose to window
 
 
 
+
+[end of keySkillsHub.js]
