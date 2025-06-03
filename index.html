@@ -148,6 +148,7 @@
                         <button class="u4aos1-content-toggle py-2 px-3 bg-lime-100 text-lime-700 rounded hover:bg-lime-200 text-sm" data-target="u4aos1-term-match-game">Term Match Game</button>
                         <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-exam-skills">Exam Skills Helper</button>
                         <button class="u4aos1-content-toggle py-2 px-3 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 text-sm" data-target="u4aos1-practice-questions">Practice Questions</button>
+                        <button class="u4aos1-content-toggle py-2 px-3 bg-yellow-100 text-yellow-700 hover:bg-yellow-200 rounded text-sm" data-target="u4aos1-case-reconstruction-dop-tool">Case Reconstruction (DoP)</button>
                     </div>
 
                     <div id="u4aos1-accordion-container" class="space-y-3">
@@ -958,6 +959,7 @@
                                         <button class="primary-exam-skill-tab-button active-primary-exam-skill-tab py-2 px-4 text-purple-700 font-semibold focus:outline-none text-sm" data-target="task-word-deep-dive-content">Task Word Deep Dive</button>
                                         <button class="primary-exam-skill-tab-button py-2 px-4 text-gray-500 hover:text-purple-700 focus:outline-none text-sm" data-target="bridging-skills-to-knowledge-content">Bridging Skills to Knowledge</button>
                                         <button class="primary-exam-skill-tab-button py-2 px-4 text-gray-500 hover:text-purple-700 focus:outline-none text-sm" data-target="exam-pitfalls-pro-tips-content">Exam Pitfalls & Pro Tips</button>
+                                        <button class="primary-exam-skill-tab-button py-2 px-4 text-gray-600 hover:text-purple-700 hover:border-purple-500 border-b-2 border-transparent text-sm" data-primary-target="esh-answer-templates">Structured Answer Templates</button>
                                     </div>
 
                                     <!-- Primary Tab Content Sections -->
@@ -1327,7 +1329,7 @@
         <div class="border border-slate-300 rounded-lg shadow-sm">
             <button type="button" class="exam-pitfall-accordion-trigger flex items-center justify-between w-full p-3 font-medium text-left text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-t-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors duration-150">
                 <span class="text-sm">Pitfall 1: Misinterpreting Task Words (e.g., 'Evaluate' vs. 'Discuss')</span>
-                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200 arrow-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="exam-pitfall-accordion-content hidden p-3 border-t border-slate-300 bg-white rounded-b-lg text-xs">
                 <p class="text-slate-600 mb-2"><strong>The Pitfall:</strong> Using "explain" when the question asks to "identify," or "discussing" pros and cons when asked to "analyse" a specific aspect. This leads to not meeting the specific requirements of the question and losing marks.</p>
@@ -1345,7 +1347,7 @@
         <div class="border border-slate-300 rounded-lg shadow-sm">
             <button type="button" class="exam-pitfall-accordion-trigger flex items-center justify-between w-full p-3 font-medium text-left text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors duration-150">
                 <span class="text-sm">Pitfall 2: Lack of Specific Examples (Cases/Legislation)</span>
-                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200 arrow-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="exam-pitfall-accordion-content hidden p-3 border-t border-slate-300 bg-white rounded-b-lg text-xs">
                 <p class="text-slate-600 mb-2"><strong>The Pitfall:</strong> Answers are too general and lack concrete supporting evidence from relevant cases, sections of legislation, or specific real-world examples related to law reform, which are essential for demonstrating depth of understanding.</p>
@@ -1363,7 +1365,7 @@
         <div class="border border-slate-300 rounded-lg shadow-sm">
             <button type="button" class="exam-pitfall-accordion-trigger flex items-center justify-between w-full p-3 font-medium text-left text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors duration-150">
                 <span class="text-sm">Pitfall 3: Insufficient Depth or Unbalanced Arguments (Higher-Mark Qs)</span>
-                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200 arrow-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="exam-pitfall-accordion-content hidden p-3 border-t border-slate-300 bg-white rounded-b-lg text-xs">
                 <p class="text-slate-600 mb-2"><strong>The Pitfall:</strong> For questions worth more marks (e.g., 6, 8, or 10 marks), answers may be too brief, list points without adequate explanation, or fail to demonstrate the required level of analysis or evaluation (e.g., for 'discuss' or 'evaluate', only presenting one side of an argument or only strengths without limitations).</p>
@@ -1381,7 +1383,7 @@
         <div class="border border-slate-300 rounded-lg shadow-sm">
             <button type="button" class="exam-pitfall-accordion-trigger flex items-center justify-between w-full p-3 font-medium text-left text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors duration-150">
                 <span class="text-sm">Pitfall 4: Not Directly Addressing All Parts of the Question</span>
-                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200 arrow-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="exam-pitfall-accordion-content hidden p-3 border-t border-slate-300 bg-white rounded-b-lg text-xs">
                 <p class="text-slate-600 mb-2"><strong>The Pitfall:</strong> Some questions have multiple components (e.g., 'Explain X *and* discuss its impact on Y'). Students may focus on one part and neglect the other, or not link them sufficiently.</p>
@@ -1398,7 +1400,7 @@
         <div class="border border-slate-300 rounded-lg shadow-sm">
             <button type="button" class="exam-pitfall-accordion-trigger flex items-center justify-between w-full p-3 font-medium text-left text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-b-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors duration-150">
                 <span class="text-sm">Pitfall 5: Poor Time Management</span>
-                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                <svg class="w-5 h-5 shrink-0 transform transition-transform duration-200 arrow-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
             </button>
             <div class="exam-pitfall-accordion-content hidden p-3 border-t border-slate-300 bg-white rounded-b-lg text-xs">
                 <p class="text-slate-600 mb-2"><strong>The Pitfall:</strong> Spending too much time on low-mark questions and not enough on high-mark questions, or not finishing the exam. This can significantly impact the overall score.</p>
@@ -1413,6 +1415,33 @@
         </div>
     </div>
 </div>
+
+                                    <div id="esh-answer-templates" class="primary-exam-skill-content mt-4 hidden">
+    <h5 class="text-xl font-semibold text-purple-700 mb-1">Structured Answer Templates</h5>
+    <p class="text-sm text-slate-600 mb-4">Select a VCAA Task Word and a typical mark range/question type to see a recommended structural template for your answers. Remember to always adapt templates to the specific question being asked and the marks allocated.</p>
+
+    <div class="grid md:grid-cols-2 gap-4 mb-6 p-4 border border-purple-200 rounded-lg bg-purple-50 shadow-sm">
+        <div>
+            <label for="templateTaskWordSelect" class="block text-sm font-medium text-purple-700 mb-1">1. Select VCAA Task Word:</label>
+            <select id="templateTaskWordSelect" class="w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-sm">
+                <option value="">-- Select Task Word --</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+        <div>
+            <label for="templateMarkRangeSelect" class="block text-sm font-medium text-purple-700 mb-1">2. Select Mark Range / Type:</label>
+            <select id="templateMarkRangeSelect" class="w-full p-2 border border-slate-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-sm">
+                <option value="">-- Select Range/Type --</option>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+    </div>
+
+    <div id="templateDisplayArea" class="mt-4 p-4 border border-purple-200 rounded-lg bg-white shadow-sm min-h-[200px]">
+        <p class="text-sm text-slate-500 italic">Select a task word and mark range/type to view a template here.</p>
+        <!-- Template content will be dynamically inserted here by JavaScript -->
+    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1431,18 +1460,133 @@
                                         <div class="practice-question">
                                             <p class="font-medium practice-question-text">1. Explain the role of the Governor-General in the Commonwealth law-making process. (3 marks)</p>
                                             <button class="text-xs text-purple-600 hover:underline practice-question-toggle-answer">Show/Hide Answer Points</button>
+                                            <button class="text-xs text-teal-600 hover:underline practice-question-toggle-worked-example ml-2">Show Worked Example ✨</button>
                                             <div class="practice-question-answer p-2 bg-purple-50 rounded mt-1">
                                                 <ul class="list-disc ml-5 text-xs"><li>Grants Royal Assent to bills passed by both Houses of Parliament (final step for a bill to become law).</li><li>Can (theoretically/rarely) withhold Royal Assent.</li><li>Appoints Executive Council / Summons Parliament / Dissolves Parliament (reserve powers).</li></ul>
+                                            </div>
+                                            <div class="practice-question-worked-example p-3 bg-teal-50 rounded mt-2 hidden border border-teal-200">
+                                                <h6 class="text-sm font-semibold text-teal-700 mb-2">Worked Example:</h6>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">1. Question Deconstruction:</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li><strong>Task Word(s):</strong> <span class="decon-task-word">[Populate later]</span></li>
+                                                        <li><strong>Key Content Terms:</strong> <span class="decon-content-terms">[Populate later]</span></li>
+                                                        <li><strong>Mark Allocation:</strong> <span class="decon-mark-allocation">[Populate later]</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">2. Suggested Plan/Outline:</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li>[Populate later with plan points]</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">3. Full Model Answer:</p>
+                                                    <div class="model-answer text-xs text-slate-700 p-2 border border-slate-200 rounded bg-white">
+                                                        <p>[Populate later with model answer]</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs font-semibold text-teal-600">4. Annotations/Commentary (Why this answer works):</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li>[Populate later with annotations]</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="practice-question">
                                             <p class="font-medium practice-question-text">2. Distinguish between exclusive and concurrent law-making powers as outlined in the Australian Constitution, using an example for each. (4 marks)</p>
                                             <button class="text-xs text-purple-600 hover:underline practice-question-toggle-answer">Show/Hide Answer Points</button>
+                                            <button class="text-xs text-teal-600 hover:underline practice-question-toggle-worked-example ml-2">Show Worked Example ✨</button>
                                             <div class="practice-question-answer p-2 bg-purple-50 rounded mt-1">
                                                  <ul class="list-disc ml-5 text-xs"><li>Exclusive powers: Law-making powers only the Commonwealth Parliament can exercise (e.g., defence, currency, customs). States cannot legislate in these areas.</li><li>Concurrent powers: Law-making powers shared by both Commonwealth and state parliaments (e.g., taxation, marriage). Both can legislate in these areas.</li><li>Difference: Exclusive means Cth only; Concurrent means Cth and States can both make laws.</li><li>Difference: If inconsistency in concurrent area, s109 states Cth law prevails. No such provision needed for exclusive as only Cth legislates.</li></ul>
                                             </div>
+                                            <div class="practice-question-worked-example p-3 bg-teal-50 rounded mt-2 hidden border border-teal-200">
+                                                <h6 class="text-sm font-semibold text-teal-700 mb-2">Worked Example:</h6>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">1. Question Deconstruction:</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li><strong>Task Word(s):</strong> <span class="decon-task-word">[Populate later]</span></li>
+                                                        <li><strong>Key Content Terms:</strong> <span class="decon-content-terms">[Populate later]</span></li>
+                                                        <li><strong>Mark Allocation:</strong> <span class="decon-mark-allocation">[Populate later]</span></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">2. Suggested Plan/Outline:</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li>[Populate later with plan points]</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p class="text-xs font-semibold text-teal-600">3. Full Model Answer:</p>
+                                                    <div class="model-answer text-xs text-slate-700 p-2 border border-slate-200 rounded bg-white">
+                                                        <p>[Populate later with model answer]</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p class="text-xs font-semibold text-teal-600">4. Annotations/Commentary (Why this answer works):</p>
+                                                    <ul class="list-disc list-inside text-xs text-slate-700 pl-4 space-y-0.5">
+                                                        <li>[Populate later with annotations]</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
                                         <p class="text-xs text-slate-400 mt-3">More questions and detailed answer guides will be added.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="u4aos1-case-reconstruction-dop-tool" class="u4aos1-content hidden">
+                            <div class="border border-slate-300 rounded-lg">
+                                <button class="accordion-toggle w-full text-left p-4 bg-yellow-50 hover:bg-yellow-100 rounded-t-lg">
+                                    <div class="flex justify-between items-center">
+                                        <h4 class="text-lg font-medium text-yellow-700">Case Reconstruction: Division of Powers</h4>
+                                        <span class="arrow-icon text-yellow-700 text-xl transform transition-transform duration-300">▼</span>
+                                    </div>
+                                </button>
+                                <div class="accordion-content p-4 border-t border-slate-200">
+                                    <p class="text-sm text-slate-600 mb-3">Drag and drop the case elements into the correct categories. Select a case to begin.</p>
+
+                                    <div class="mb-3">
+                                        <label for="caseReconstructionDopToolSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Case:</label>
+                                        <select id="caseReconstructionDopToolSelect" class="w-full p-2 border border-slate-300 rounded bg-white text-sm">
+                                            <option value="">-- Select a Case --</option>
+                                            <!-- Options will be populated by JavaScript -->
+                                        </select>
+                                    </div>
+
+                                    <div id="caseReconstructionDopToolInteractiveArea" class="mt-4 space-y-4">
+                                        <div id="dopToolSourceElements" class="p-3 bg-slate-100 rounded border min-h-[100px] flex flex-wrap gap-2 justify-center">
+                                            <span class="text-xs text-slate-500 italic">Select a case to load elements.</span>
+                                            <!-- Draggable items will be populated here -->
+                                        </div>
+
+                                        <div class="grid md:grid-cols-2 gap-3 text-sm">
+                                            <div id="dopToolDropTargetFacts" class="dop-drop-target p-3 bg-rose-50 border-2 border-dashed border-rose-300 rounded min-h-[80px]">
+                                                <h5 class="font-semibold text-rose-700 text-center mb-1">Facts of the Case</h5>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopToolDropTargetIssue" class="dop-drop-target p-3 bg-amber-50 border-2 border-dashed border-amber-300 rounded min-h-[80px]">
+                                                <h5 class="font-semibold text-amber-700 text-center mb-1">Legal Issue(s)</h5>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopToolDropTargetDecision" class="dop-drop-target p-3 bg-lime-50 border-2 border-dashed border-lime-300 rounded min-h-[80px]">
+                                                <h5 class="font-semibold text-lime-700 text-center mb-1">Decision / Outcome</h5>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopToolDropTargetImpact" class="dop-drop-target p-3 bg-sky-50 border-2 border-dashed border-sky-300 rounded min-h-[80px]">
+                                                <h5 class="font-semibold text-sky-700 text-center mb-1">Impact on Division of Powers</h5>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                            <div id="dopToolDropTargetConstitution" class="dop-drop-target p-3 bg-violet-50 border-2 border-dashed border-violet-300 rounded min-h-[80px] md:col-span-2">
+                                                <h5 class="font-semibold text-violet-700 text-center mb-1">Relevant Constitutional Sections/Principles</h5>
+                                                <div class="dropped-items-list space-y-1 mt-1"></div>
+                                            </div>
+                                        </div>
+
+                                        <button id="checkDopToolAnswersButton" class="mt-3 py-2 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold rounded text-sm">Check My Reconstruction</button>
+                                        <div id="dopToolFeedbackArea" class="mt-3 p-2 text-xs"></div>
                                     </div>
                                 </div>
                             </div>
