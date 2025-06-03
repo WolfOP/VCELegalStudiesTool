@@ -2029,7 +2029,7 @@ function ksPitfallsInitializeAccordions() {
         // Ensure this event listener is only added once or is idempotent
         if (toggle.dataset.pitfallInitialized) return;
 
-        toggle.addEventListener('click', () => {
+        toggle.addEventListener('click', (event) => { // Added event parameter
             const content = toggle.nextElementSibling;
             // Ensure the content element is correctly identified by class
             if (!content || !content.classList.contains('exam-pitfall-accordion-content')) {
@@ -2042,7 +2042,7 @@ function ksPitfallsInitializeAccordions() {
             console.log(`Exam Pitfall Accordion: Clicked. Currently isExpanded: ${isExpanded}. Initial maxHeight: ${content.style.maxHeight}`);
 
             // Stop event propagation to prevent generic accordion handlers (if any) from firing
-            event.stopPropagation();
+            if(event) event.stopPropagation(); // Added check for event, though it should always be present now
 
             if (isExpanded) {
                 content.style.maxHeight = '0px';
