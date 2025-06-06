@@ -5,6 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VCE Legal Studies Interactive Hub</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="output.css">
+      <style>
+        /* Updated for Key Skill 6 integration */
+        #ks6DopSourceElements {
+            border: 1px solid #cbd5e1; /* slate-300 */
+            padding: 0.75rem; /* p-3 */
+            min-height: 150px;
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .dop-draggable-item {
+            background-color: #ffffff; /* white */
+            padding: 0.5rem 0.75rem; /* py-2 px-3 */
+            margin-bottom: 0.5rem; /* mb-2 */
+            border: 1px solid #e2e8f0; /* slate-200 */
+            border-radius: 0.375rem; /* rounded-md */
+            cursor: grab;
+            font-size: 0.875rem; /* text-sm */
+            box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        }
+        .dop-draggable-item:active {
+            cursor: grabbing;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        .dop-drop-target {
+            /* General styling for drop targets, colors are now applied via Tailwind in HTML */
+            transition: background-color 0.2s ease-in-out;
+        }
+        .dop-drop-target.drag-over {
+            border-color: #94a3b8; /* slate-400, as a generic darker border */
+            border-style: solid;
+        }
+        .dop-drop-target .dop-draggable-item { /* Style for items when they are inside a drop target */
+            cursor: default; /* No longer grabbing once dropped */
+        }
+        .correct-placement .dop-draggable-item {
+            border-left: 4px solid #22c55e; /* green-500 */
+            background-color: #f0fdf4; /* green-50 */
+        }
+        .incorrect-placement .dop-draggable-item {
+            border-left: 4px solid #ef4444; /* red-500 */
+            background-color: #fef2f2; /* red-50 */
+        }
+        .dragging {
+            opacity: 0.5;
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-lg */
+        }
+        #ks7ScenarioOptions label {
+            display: block;
+            padding: 0.375rem 0.5rem; /* py-1.5 px-2 */
+            border-radius: 0.25rem; /* rounded-sm */
+            cursor: pointer;
+            border: 1px solid transparent; /* For smooth hover transition */
+        }
+        #ks7ScenarioOptions label:hover {
+            background-color: #f0f9ff; /* sky-50 for a light hover effect */
+            border-color: #e0f2fe; /* sky-100 for a light border on hover */
+        }
+        #ks7ScenarioOptions input[type="radio"]:checked + label {
+            background-color: #ecfccb; /* lime-100 */
+            border-color: #d9f99d; /* lime-200 */
+            color: #4d7c0f; /* lime-700 */
+            font-weight: 500; /* medium */
+        }
+      </style>
     <!-- Favicon links -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -87,7 +152,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks1-header">KS1: The Principles of Justice: Fairness, Equality, and Access</button>
                     <div class="accordion-content" id="u4aos1-ks1">
-                        <p>The principles of justice are fundamental ideals that underpin our legal system, aiming to ensure that all individuals are treated justly and equitably before the law. An introductory sentence to set the context for this key skill.</p>
+                        <p>The principles of justice – fairness, equality, and access – are cornerstone ideals that underpin the Victorian legal system, striving to ensure just and equitable outcomes for all individuals.</p>
                         <h4>Fairness</h4>
                         <p><strong>Definition:</strong> Fairness means ensuring impartial legal processes and a just hearing. All parties should have an adequate opportunity to present their case, and decisions should be made without bias. It involves transparency in procedures and adherence to the rules of evidence, ensuring only relevant and reliable information is considered. For example, the right to legal representation, even if one cannot afford it (in certain circumstances), and the right to silence for an accused, contribute to fairness.</p>
                         <h4>Equality</h4>
@@ -109,7 +174,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks2-header">KS2: Key Concepts in the Victorian Criminal Justice System</button>
                     <div class="accordion-content" id="u4aos1-ks2">
-                        <p>Understanding these key concepts is crucial for comprehending how the Victorian criminal justice system operates and aims to achieve justice. An introductory sentence to set the context for this key skill.</p>
+                        <p>A thorough understanding of key concepts such as the distinction between summary and indictable offences, the burden and standard of proof, and the presumption of innocence is essential for comprehending the operational framework of the Victorian criminal justice system.</p>
                         <h4>Distinction between Summary and Indictable Offences</h4>
                         <p><strong>Summary Offences:</strong> Minor criminal offences generally heard and determined in the Magistrates' Court by a magistrate. Examples include minor traffic violations (e.g., speeding), offensive behaviour, or minor assaults. They are typically determined without a jury. The presumption of innocence applies.</p>
                         <p><strong>Indictable Offences:</strong> More serious criminal offences that may be heard by a judge and jury in the County Court or Supreme Court. Examples include murder, manslaughter, rape, and serious drug trafficking. Some indictable offences (known as "indictable offences triable summarily") can be heard in the Magistrates' Court if certain conditions are met (e.g., accused consents, court deems it appropriate). The presumption of innocence is a cornerstone here.</p>
@@ -132,7 +197,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks3-header">KS3: Rights of an Accused and of Victims</button>
                     <div class="accordion-content" id="u4aos1-ks3">
-                        <p>The criminal justice system seeks to balance the need to prosecute crime with the protection of individual rights, both for the accused and for victims. An introductory sentence to set the context for this key skill.</p>
+                        <p>In the Victorian criminal justice system, a delicate balance is sought between the state's need to prosecute criminal behaviour and the imperative to safeguard the fundamental rights of both accused individuals and victims of crime.</p>
                         <h4>Rights of an Accused</h4>
                         <p>These rights are crucial for ensuring a fair trial and are protected by legislation (e.g., Criminal Procedure Act 2009 (Vic), Evidence Act 2008 (Vic)) and common law, and are affirmed in the Charter of Human Rights and Responsibilities Act 2006 (Vic).</p>
                         <ul>
@@ -165,7 +230,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks4-header">KS4: The Roles of Victorian Legal Aid (VLA) and Community Legal Centres (CLCs)</button>
                     <div class="accordion-content" id="u4aos1-ks4">
-                        <p>VLA and CLCs play a vital role in promoting access to justice, particularly for those who are disadvantaged or face barriers to engaging with the legal system. An introductory sentence to set the context for this key skill.</p>
+                        <p>Victorian Legal Aid (VLA) and Community Legal Centres (CLCs) are pivotal institutions in Victoria, dedicated to enhancing access to justice, especially for individuals facing disadvantage or barriers within the legal system.</p>
                         <h4>Victorian Legal Aid (VLA)</h4>
                         <p>VLA is a government-funded statutory authority that provides legal information, education, advice, and representation to Victorians.</p>
                         <p><strong>Roles of VLA:</strong></p>
@@ -208,7 +273,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks5-header">KS5: The Purposes of Committal Proceedings in the Victorian Criminal Justice System</button>
                     <div class="accordion-content" id="u4aos1-ks5">
-                        <p>Committal proceedings are a pre-trial stage in the Magistrates' Court for indictable offences where the accused has not pleaded guilty. They serve several important functions. An introductory sentence to set the context for this key skill.</p>
+                        <p>Committal proceedings represent a critical pre-trial phase within the Magistrates' Court for indictable offences where an accused has entered a plea of not guilty, serving multiple vital functions in the criminal justice process.</p>
                         <p>Committal proceedings are not a trial to determine guilt or innocence; rather, they are a filtering process.</p>
                         <h4>Purposes of Committal Proceedings:</h4>
                         <ul>
@@ -240,7 +305,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks6-header">KS6: Purposes and Appropriateness of Plea Negotiations and Sentence Indications</button>
                     <div class="accordion-content" id="u4aos1-ks6">
-                        <p>Plea negotiations and sentence indications are mechanisms used within the criminal justice system to resolve cases or provide clarity without proceeding to a full contested trial. An introductory sentence to set the context for this key skill.</p>
+                        <p>Plea negotiations and sentence indications are two significant mechanisms within the Victorian criminal justice system aimed at resolving cases more efficiently or providing clarity to the accused before a full, contested trial.</p>
                         <h4>Plea Negotiations (or Charge Negotiations)</h4>
                         <p><strong>Definition:</strong> Discussions between the prosecutor and the accused (usually through their legal representatives) about the charges against the accused. The aim is to resolve the case by agreement, often involving the accused pleading guilty to fewer charges or a less serious charge in exchange for the withdrawal of other/more serious charges.</p>
                         <p><strong>Purposes of Plea Negotiations:</strong></p>
@@ -476,7 +541,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks7-header">KS7: Reasons for a Victorian Court Hierarchy</button>
                     <div class="accordion-content" id="u4aos1-ks7">
-                        <p>Victoria has a hierarchy of courts, meaning courts are ranked from lowest to highest in terms of the seriousness and complexity of cases they can hear. An introductory sentence to set the context for this key skill.</p>
+                        <p>The Victorian court system is structured as a hierarchy, with courts organized in levels based on the seriousness and complexity of the cases they are empowered to hear; this structure serves multiple crucial functions within the legal system.</p>
                         <p>The Victorian court hierarchy (for state matters) generally consists of:
                             <ol>
                                 <li>Magistrates' Court</li>
@@ -529,7 +594,7 @@
                 <div class="accordion-item">
                     <button class="accordion-header" id="u4aos1-ks8-header">KS8: Responsibilities of Key Personnel in a Criminal Trial</button>
                     <div class="accordion-content" id="u4aos1-ks8">
-                        <p>A criminal trial involves various key personnel, each with distinct responsibilities to ensure the trial is conducted fairly and according to law. An introductory sentence to set the context for this key skill. This section focuses on a trial for an indictable offence.</p>
+                        <p>A Victorian criminal trial for an indictable offence involves several key personnel, each entrusted with distinct responsibilities designed to ensure the trial is conducted fairly, justly, and in accordance with established legal principles.</p>
                         <h4>The Judge</h4>
                         <p>An independent and impartial adjudicator who presides over the trial.</p>
                         <ul>
@@ -616,6 +681,53 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="accordion-item" id="u4aos1-case-reconstruction-dop-tool-accordion"> <!-- Changed ID to avoid conflict if u4aos1-case-reconstruction-dop-tool is the content div -->
+                    <button class="accordion-header" id="u4aos1-case-reconstruction-dop-tool-header">Case Reconstruction (DoP) - Standalone</button>
+                    <div class="accordion-content" id="u4aos1-case-reconstruction-dop-tool-content">
+                        <p class="text-sm text-slate-600 mb-2">This tool helps you understand how key High Court cases have interpreted the division of law-making powers in the Australian Constitution. Select a case and try to piece together the key elements.</p>
+                        <div class="my-2">
+                            <label for="caseReconstructionDopToolSelect" class="block text-sm font-medium text-slate-700 mb-1">Select Case:</label>
+                            <select id="caseReconstructionDopToolSelect" class="w-full p-1 border border-slate-300 rounded-md text-xs">
+                                <option value="">-- Select a Case --</option>
+                                <!-- Options populated by caseReconstructionDOP.js -->
+                            </select>
+                        </div>
+                        <div id="dopToolSourceElements" class="my-3 p-2 bg-slate-100 rounded shadow min-h-[50px]">
+                            <span class="text-xs text-slate-500 italic">Select a case to load elements. Drag these elements to the correct boxes below.</span>
+                            <!-- Draggable items populated by caseReconstructionDOP.js -->
+                        </div>
+                        <div id="dopToolDropTargets" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                            <div id="dopToolDropTargetFacts" class="dop-drop-target bg-red-50 p-2 rounded-lg shadow min-h-[60px]" data-category="facts">
+                                <h6 class="font-semibold text-xs text-red-700 text-center">Facts</h6>
+                                <div class="dropped-items-list min-h-[40px] border-t border-red-200 mt-1 pt-1"></div>
+                            </div>
+                            <div id="dopToolDropTargetIssue" class="dop-drop-target bg-yellow-50 p-2 rounded-lg shadow min-h-[60px]" data-category="issue">
+                                <h6 class="font-semibold text-xs text-yellow-700 text-center">Issue (Constitutional Question)</h6>
+                                <div class="dropped-items-list min-h-[40px] border-t border-yellow-200 mt-1 pt-1"></div>
+                            </div>
+                            <div id="dopToolDropTargetDecision" class="dop-drop-target bg-green-50 p-2 rounded-lg shadow min-h-[60px]" data-category="decision">
+                                <h6 class="font-semibold text-xs text-green-700 text-center">Decision (High Court Ruling)</h6>
+                                <div class="dropped-items-list min-h-[40px] border-t border-green-200 mt-1 pt-1"></div>
+                            </div>
+                            <div id="dopToolDropTargetImpact" class="dop-drop-target bg-blue-50 p-2 rounded-lg shadow min-h-[60px]" data-category="impact">
+                                <h6 class="font-semibold text-xs text-blue-700 text-center">Impact on Division of Powers</h6>
+                                <div class="dropped-items-list min-h-[40px] border-t border-blue-200 mt-1 pt-1"></div>
+                            </div>
+                            <div id="dopToolDropTargetConstitution" class="dop-drop-target bg-indigo-50 p-2 rounded-lg shadow min-h-[60px]" data-category="constitution">
+                                <h6 class="font-semibold text-xs text-indigo-700 text-center">Section(s) of Constitution Interpreted</h6>
+                                <div class="dropped-items-list min-h-[40px] border-t border-indigo-200 mt-1 pt-1"></div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button id="checkDopToolAnswersButton" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-1 px-3 rounded-md text-xs">Check My Reconstruction</button>
+                            <!-- No explicit reset button in this version's JS, re-selecting case resets items -->
+                        </div>
+                        <div id="dopToolFeedbackArea" class="mt-2 p-1 border-t border-purple-200 text-xs min-h-[20px]">
+                            <!-- Feedback will appear here -->
+                        </div>
+                    </div>
+                </div>
             </div> <!-- End of U4AOS1 Accordion -->
 
             <h4>Practice Questions & Scenarios (U4AOS1)</h4>
@@ -631,7 +743,14 @@
                     </div>
                     <button class="toggle-worked-example">Toggle Worked Example</button>
                     <div class="worked-example" style="display:none;">
-                        <p><em>Placeholder for full model answer and annotations.</em></p>
+                        <h5>Question Deconstruction:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added - e.g., Identify task words, key concepts, mark allocation implications.]</p>
+                        <h5>Suggested Plan/Outline:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added - e.g., Dot points for structure: VLA role + example, CLC role + example.]</p>
+                        <h5>Full Model Answer:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added]</p>
+                        <h5>Annotations/Commentary:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added - e.g., How marks are awarded, use of examples, linking words.]</p>
                     </div>
                 </div>
                 <div class="practice-question">
@@ -646,7 +765,14 @@
                     </div>
                     <button class="toggle-worked-example">Toggle Worked Example</button>
                     <div class="worked-example" style="display:none;">
-                        <p><em>Placeholder for full model answer and annotations.</em></p>
+                        <h5>Question Deconstruction:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added - e.g., Task word 'Discuss' requires arguments for/against or different aspects. 'Two reasons' - focus on two. 'Using examples' is critical.]</p>
+                        <h5>Suggested Plan/Outline:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added - e.g., Intro sentence. Reason 1 + explanation + example. Reason 2 + explanation + example. Brief conclusion if needed for 'discuss'.]</p>
+                        <h5>Full Model Answer:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added]</p>
+                        <h5>Annotations/Commentary:</h5>
+                        <p class="text-xs italic text-slate-500">[Content to be added]</p>
                     </div>
                 </div>
                  <div class="practice-question">
@@ -673,7 +799,7 @@
                             <li><strong>Analysis:</strong> Goes beyond just listing purposes. For example, for "prima facie case," it explains *why* this is important (efficiency, sparing accused). For "disclosure," it links to "procedural fairness" and "prepare their defence."</li>
                             <li><strong>Depth:</strong> Covers multiple facets – filtering, fairness, efficiency, informed plea.</li>
                             <li><strong>Conciseness:</strong> Addresses the question directly without irrelevant information.</li>
-                            <li><strong>To improve further (if space/time permitted for more marks):</strong> Could briefly mention the purpose of determining how the accused will plead or allowing the accused to put forward a case early. However, for 5 marks, the depth on two to three purposes with analysis is strong.</li>
+                            <li><strong>To improve further (if more marks):</strong> Could mention other purposes like determining plea or accused presenting a case early. However, for 5 marks, current depth is strong.</li>
                         </ul>
                     </div>
                 </div>

@@ -92,6 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetId === 'u4aos1-key-skills-hub' && typeof window.initializeKeySkillsHub === 'function') {
             window.initializeKeySkillsHub();
         }
+        // Added for standalone Case Reconstruction (DoP) tool
+        if (targetId === 'u4aos1-case-reconstruction-dop-tool-content' && typeof window.initializeCaseReconstructionTool === 'function') {
+            window.initializeCaseReconstructionTool();
+        }
         if (targetId === 'u4aos1-exam-skills' && typeof window.initializeKeySkillsHub === 'function') {
             window.initializeKeySkillsHub();
         }
@@ -158,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                      'u4aos1-glossary', 'u4aos1-interactive-diagrams', 
                                      'u4aos1-case-explorer', 'u4aos1-exam-skills', 
                                      'u4aos1-practice-questions',
-                                     'u4aos1-case-reconstruction-dop-tool'
+                                     'u4aos1-case-reconstruction-dop-tool-content' // Matched to the content div ID
                                     ].includes(targetId);
 
                 if (!isComplexTool) {
@@ -328,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function () {
             details: "<strong>Facts:</strong> Challenge to a Commonwealth law dissolving the Communist Party.<br><strong>Significance:</strong> High Court declared the law invalid, highlighting the judiciary's role in checking parliamentary power as part of the separation of powers."
         },
         koowarta: {
-            name: "Koowarta v. Bjelke-Petersen (1982)",
+            name: "Koowarta v Bjelke-Petersen (1982)",
             details: "<strong>Facts:</strong> Concerned the external affairs power (s51(xxix)), with the Chief Justice expressing concern about unlimited legislative power if the Commonwealth could legislate to give effect to every international agreement.<br><strong>Significance:</strong> Also mentioned in relation to s109."
         },
         jones: {
@@ -608,20 +612,23 @@ if (getAICaseInsightBtn && caseSelectExplorer && aiCaseInsightLoading && aiCaseI
         observer.observe(examSkillsHelperContent, { attributes: true });
     }
 
-    const practiceQuestionToggleButtons = document.querySelectorAll('.practice-question-toggle-answer');
-    practiceQuestionToggleButtons.forEach(button => {
+    // Corrected selector for "Toggle Answer Points" buttons
+    const answerPointsToggleButtons = document.querySelectorAll('.toggle-answer-points');
+    answerPointsToggleButtons.forEach(button => {
         button.addEventListener('click', () => {
             const practiceQuestionDiv = button.closest('.practice-question');
             if (practiceQuestionDiv) {
-                const answerDiv = practiceQuestionDiv.querySelector('.practice-question-answer');
+                // Corrected selector for the answer points div
+                const answerDiv = practiceQuestionDiv.querySelector('.answer-points');
                 if (answerDiv) {
                     answerDiv.classList.toggle('hidden');
+                    button.textContent = answerDiv.classList.contains('hidden') ? 'Show Answer Points' : 'Hide Answer Points';
                 }
             }
         });
     });
 
-    const workedExampleToggleButtons = document.querySelectorAll('.practice-question-toggle-worked-example');
+    const workedExampleToggleButtons = document.querySelectorAll('.toggle-worked-example');
     workedExampleToggleButtons.forEach(button => {
         button.addEventListener('click', () => {
             const practiceQuestionDiv = button.closest('.practice-question');
@@ -629,11 +636,7 @@ if (getAICaseInsightBtn && caseSelectExplorer && aiCaseInsightLoading && aiCaseI
                 const workedExampleDiv = practiceQuestionDiv.querySelector('.practice-question-worked-example');
                 if (workedExampleDiv) {
                     workedExampleDiv.classList.toggle('hidden');
-                    if (workedExampleDiv.classList.contains('hidden')) {
-                        button.textContent = 'Show Worked Example ✨';
-                    } else {
-                        button.textContent = 'Hide Worked Example';
-                    }
+                    button.textContent = workedExampleDiv.classList.contains('hidden') ? 'Show Worked Example ✨' : 'Hide Worked Example';
                 } else {
                     console.warn('Worked example content div not found for button:', button);
                 }
