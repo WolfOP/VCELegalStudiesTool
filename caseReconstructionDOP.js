@@ -31,6 +31,28 @@ const caseReconstructionData = [
             impact: "Greatly expanded the Cth's power to regulate industrial relations for constitutional corporations, significantly reducing states' roles in this area. Demonstrated the potential breadth of the corporations power.",
             constitution: "s51(xx) - Corporations power."
         }
+    },
+    {
+        id: "coleWhitfield",
+        name: "Cole v Whitfield (1988)",
+        elements: {
+            facts: "Tasmanian law restricted the sale of undersized crayfish. The case questioned whether this breached s92's guarantee of free interstate trade.",
+            issue: "Did the Tasmanian law contravene s92 of the Constitution by imposing a protectionist burden on interstate trade?",
+            decision: "The High Court held the law was not protectionist but for conservation purposes, so it did not infringe s92.",
+            impact: "Clarified that s92 prohibits discriminatory or protectionist laws but allows non-discriminatory regulations, influencing state powers to regulate trade.",
+            constitution: "s92 - Interstate trade and commerce"
+        }
+    },
+    {
+        id: "roach",
+        name: "Roach v Electoral Commissioner (2007)",
+        elements: {
+            facts: "Challenge to a Commonwealth law preventing all sentenced prisoners from voting in federal elections.",
+            issue: "Whether the blanket ban on prisoner voting was consistent with the requirement in ss7 and 24 that parliament be 'directly chosen by the people'.",
+            decision: "The High Court held the complete ban unconstitutional. Only prisoners serving significant sentences could be excluded.",
+            impact: "Confirmed an implied right to vote as part of representative government, limiting Commonwealth power to restrict the franchise.",
+            constitution: "ss7 & 24 - Representative government"
+        }
     }
 ];
 
