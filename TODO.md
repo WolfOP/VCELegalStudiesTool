@@ -7,7 +7,7 @@ needs additional data and which markdown files contain that information.
 
 ## Top 3 Immediate Tasks
 
-1. **Populate Unit 4 AOS1 section content**
+1. **Populate Unit 4 AOS1 section content** ✅
    - HTML location: `index.html` inside each `u4aos1-content` accordion.
    - Source: `updated section heading.md` provides the full notes for the
      headings such as *Roles of the Crown*, *Division of Law‑making Powers*,
