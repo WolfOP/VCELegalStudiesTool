@@ -1077,6 +1077,18 @@ const ksBridgeData = [
             options: ["Doctrine of Precedent", "Constitutional Amendment", "Statutory Interpretation", "High Court Interpreting the Constitution"],
             answerIndex: 3,
             explanation: "The **High Court interprets the Australian Constitution** to give meaning to its words. This can involve interpreting specific sections like Section 51(v) ('postal, telegraphic, telephonic, and other like services'), and its interpretation can impact the division of law-making powers."
+        },
+        {
+            scenario: "Parliament delegates power to a local council to make detailed parking regulations for a city district.",
+            options: ["Delegated Legislation", "Judicial Conservatism", "Codification of Common Law", "Abrogation of Common Law"],
+            answerIndex: 0,
+            explanation: "This is an example of **delegated legislation**, where parliament gives law-making authority to subordinate bodies such as local councils or government departments."
+        },
+        {
+            scenario: "A lower court follows a precedent set by a higher court but states that societal values have changed and urges parliament to update the law.",
+            options: ["Binding Precedent", "Persuasive Precedent", "Ability of Courts to Influence Parliament", "Statutory Interpretation"],
+            answerIndex: 2,
+            explanation: "Courts can influence parliament by highlighting outdated precedents in obiter dictum and suggesting reform, even when bound to follow the precedent."
         }
     ];
     let currentSTCQuestion = 0;
@@ -1263,6 +1275,16 @@ const ksBridgeData = [
             excerpt: "A hostile upper house occurs when the government of the day does not hold a majority in the upper house... In these situations... [government] being forced to gather support from the opposition or the crossbench, by making amendments and compromises... This increases the level of scrutiny on bills... However... the law-making process... can be slowed and skewed...",
             question: "Explain what is meant by a 'hostile upper house' and how it operates within a bicameral parliament. Discuss one way a hostile upper house can impact the government's ability to pass legislation.",
             keywords: ["Bicameral structure", "upper house", "hostile upper house", "Senate", "Legislative Council", "government majority", "balance of power", "amendments", "delay legislation", "scrutiny of bills"]
+        },
+        {
+            excerpt: "The 1967 referendum altered the Constitution so that Aboriginal people would be counted in the census and allowed the Commonwealth to make laws for them.",
+            question: "Discuss one way in which the 1967 referendum changed the division of law-making powers between the Commonwealth and the states.",
+            keywords: ["1967 referendum", "constitutional change", "Indigenous Australians", "division of powers", "s51(xxvi)", "Commonwealth power"]
+        },
+        {
+            excerpt: "A government bill proposing a national standard for environmental protection is heavily amended in the Senate after an inquiry hears evidence from experts and the public.",
+            question: "Identify which role of the Senate is illustrated in this excerpt and explain how it can improve the quality of legislation.",
+            keywords: ["House of review", "Senate inquiry", "amendments", "scrutiny", "bicameral structure", "improve legislation"]
         }
     ];
     let currentSACExcerpt = 0;
@@ -1671,8 +1693,30 @@ const ksBridgeData = [
                 significanceKeywords: ["national standard", "prevents conflicting regulations", "consistency in trade", "concurrent area (food standards)"]
             },
             modelSignificance: "Section 109 is significant here as it provides a mechanism to resolve conflicting regulations in areas of shared law-making power like food standards, ensuring that national standards set by the Commonwealth prevail over inconsistent state laws, promoting consistency for businesses and consumers across Australia."
+        },
+        {
+            id: 'ir3',
+            scenario: "The Commonwealth enacts a Telecommunications Security Act requiring all messaging apps to store encryption keys. A state law later prohibits storing such keys citing privacy concerns.",
+            answers: {
+                section: ["s109", "section 109", "109"],
+                prevails: "Commonwealth",
+                effect: ["invalid to the extent of the inconsistency", "inoperative to the extent of inconsistency"],
+                significanceKeywords: ["communication", "national security", "consistency", "concurrent power"]
+            },
+            modelSignificance: "Where Commonwealth and state laws conflict in a concurrent area like communications security, section 109 ensures national requirements prevail, preventing fragmented standards." 
+        },
+        {
+            id: 'ir4',
+            scenario: "A state law sets a lower minimum wage than a Commonwealth industrial relations law covering the same employees.",
+            answers: {
+                section: ["s109", "section 109", "109"],
+                prevails: "Commonwealth",
+                effect: ["invalid to the extent of the inconsistency", "inoperative to the extent of the inconsistency"],
+                significanceKeywords: ["workplace relations", "concurrent", "commonwealth overrides", "uniform standards"]
+            },
+            modelSignificance: "Section 109 protects the supremacy of Commonwealth industrial relations legislation, ensuring consistent workplace standards across Australia." 
         }
-        // Add more scenarios here
+        // Additional scenarios can be added here
     ];
     let currentIRScenarioIndex = 0;
 
@@ -1827,6 +1871,28 @@ const ks6DopCaseData = [
             decision: "The High Court held that 'other like services' could be interpreted to include radio broadcasting, even though it wasn't specifically envisaged by the Constitution's drafters in 1901. The Commonwealth law was valid.",
             impact: "Broadened the interpretation of s51(v), allowing the Commonwealth to legislate on new forms of communication technology. Demonstrated that constitutional powers can be interpreted to adapt to technological advancements.",
             constitution: "Section 51(v) (Postal, telegraphic, telephonic, and other like services)."
+        }
+    },
+    {
+        id: "coleWhitfield",
+        name: "Cole v Whitfield (1988)",
+        elements: {
+            facts: "Tasmania restricted sale of undersized crayfish, raising s92 free trade issues.",
+            issue: "Whether this law imposed a protectionist burden on interstate trade in breach of s92.",
+            decision: "High Court ruled it was a non-protectionist conservation measure, so s92 not infringed.",
+            impact: "Clarified that only discriminatory or protectionist laws breach s92, allowing reasonable regulation by states.",
+            constitution: "Section 92 - Interstate trade and commerce"
+        }
+    },
+    {
+        id: "roach",
+        name: "Roach v Electoral Commissioner (2007)",
+        elements: {
+            facts: "Commonwealth law banned all sentenced prisoners from voting in federal elections.",
+            issue: "Did this blanket ban conflict with sections 7 and 24 requiring parliament be directly chosen by the people?",
+            decision: "High Court held the complete ban invalid; only serious offenders could be excluded.",
+            impact: "Recognised an implied constitutional protection of the right to vote, limiting Commonwealth power.",
+            constitution: "Sections 7 & 24 - Representative government"
         }
     }
 ];
@@ -2103,8 +2169,20 @@ const guidedAnswerQuestions = [
             { id: "gaq1_blank5", answer: ["'regulated weapon'", "'man'"] }, // Example phrases
             { id: "gaq1_blank6", answer: ["resolve the dispute", "clarify its application", "apply law to facts"] }
         ]
+    },
+    {
+        id: 'gaq2',
+        question: "Discuss two strengths of the bicameral structure as a check on parliament. (4 marks)",
+        taskWord: "Discuss",
+        taskWordChecklist: ["Present different viewpoints", "Provide examples", "Link to effectiveness"],
+        scaffold: `One strength of having two houses is that the <input type="text" id="gaq2_blank1" data-gaq-id="gaq2" data-blank-index="0" class="guided-answer-blank" placeholder="upper house"> can <input type="text" id="gaq2_blank2" data-gaq-id="gaq2" data-blank-index="1" class="guided-answer-blank" placeholder="review"> bills thoroughly. Another strength is that it requires <input type="text" id="gaq2_blank3" data-gaq-id="gaq2" data-blank-index="2" class="guided-answer-blank" placeholder="agreement"> of both houses, preventing rushed legislation.`,
+        blanks: [
+            { id: "gaq2_blank1", answer: ["upper house", "Senate", "Legislative Council"] },
+            { id: "gaq2_blank2", answer: ["review", "scrutinise", "examine"] },
+            { id: "gaq2_blank3", answer: ["agreement", "approval", "consideration"] }
+        ]
     }
-    // Add more question objects here for the Guided Answer Construction tool
+    // Additional questions can be added here for the Guided Answer Construction tool
 ];
 
 window.loadGuidedAnswerQuestion = function(index) { // Expose to window if called from script.js

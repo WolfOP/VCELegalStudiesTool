@@ -7,7 +7,9 @@ needs additional data and which markdown files contain that information.
 
 ## Top 3 Immediate Tasks
 
-1. **Populate Unit 4 AOS1 section content**
+
+1. **Populate Unit 4 AOS1 section content** ✅
+
    - HTML location: `index.html` inside each `u4aos1-content` accordion.
    - Source: `updated section heading.md` provides the full notes for the
      headings such as *Roles of the Crown*, *Division of Law‑making Powers*,
@@ -15,7 +17,9 @@ needs additional data and which markdown files contain that information.
    - Action: Replace the placeholder paragraphs in the accordions with the
      detailed explanations from the markdown file.
 
-2. **Fill out Exam Skills Helper data**
+
+2. **Fill out Exam Skills Helper data** ✅
+
    - JavaScript: `keySkillsHub.js` contains objects such as
      `answerTemplatesData`, `ksBridgeData` and other helpers for the
      "Exam Skills Helper" tab.
@@ -24,7 +28,9 @@ needs additional data and which markdown files contain that information.
    - Action: Convert that markdown content into entries in the JS data
      structures so the helper tabs show full information and examples.
 
-3. **Expand interactive tool datasets**
+
+3. **Expand interactive tool datasets** ✅
+
    - JavaScript files `keySkillsHub.js` and `caseReconstructionDOP.js` define
      arrays for activities (e.g. `lawMakingAreasData`,
      `relationshipScenariosData`, `scenarioTermChallenges`,
