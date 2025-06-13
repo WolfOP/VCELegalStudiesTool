@@ -2181,6 +2181,32 @@ const guidedAnswerQuestions = [
             { id: "gaq2_blank2", answer: ["review", "scrutinise", "examine"] },
             { id: "gaq2_blank3", answer: ["agreement", "approval", "consideration"] }
         ]
+    },
+    {
+        id: 'gaq3',
+        question: "Evaluate the effectiveness of the separation of powers as a check on Commonwealth parliament. (5 marks)",
+        taskWord: "Evaluate",
+        taskWordChecklist: ["Make a judgement", "Use evidence", "Consider strengths and weaknesses"],
+        scaffold: `The separation of powers divides <input type="text" id="gaq3_blank1" data-gaq-id="gaq3" data-blank-index="0" class="guided-answer-blank" placeholder="three functions"> among <input type="text" id="gaq3_blank2" data-gaq-id="gaq3" data-blank-index="1" class="guided-answer-blank" placeholder="different bodies">. One strength is that it allows the <input type="text" id="gaq3_blank3" data-gaq-id="gaq3" data-blank-index="2" class="guided-answer-blank" placeholder="judiciary"> to declare laws <input type="text" id="gaq3_blank4" data-gaq-id="gaq3" data-blank-index="3" class="guided-answer-blank" placeholder="ultra vires">. However, a weakness is that there is an <input type="text" id="gaq3_blank5" data-gaq-id="gaq3" data-blank-index="4" class="guided-answer-blank" placeholder="overlap"> between the executive and legislature.`,
+        blanks: [
+            { id: "gaq3_blank1", answer: ["legislative, executive and judicial powers", "three powers"] },
+            { id: "gaq3_blank2", answer: ["different bodies", "separate bodies"] },
+            { id: "gaq3_blank3", answer: ["judiciary", "courts"] },
+            { id: "gaq3_blank4", answer: ["ultra vires", "invalid"] },
+            { id: "gaq3_blank5", answer: ["overlap", "fusion"] }
+        ]
+    },
+    {
+        id: 'gaq4',
+        question: "Outline the key steps required to change the Australian Constitution. (3 marks)",
+        taskWord: "Outline",
+        taskWordChecklist: ["Provide main features", "Use correct sequence", "Be concise"],
+        scaffold: `A proposed change must first pass <input type="text" id="gaq4_blank1" data-gaq-id="gaq4" data-blank-index="0" class="guided-answer-blank" placeholder="parliament"> with an absolute majority. It is then put to the <input type="text" id="gaq4_blank2" data-gaq-id="gaq4" data-blank-index="1" class="guided-answer-blank" placeholder="people"> in a referendum and must achieve a <input type="text" id="gaq4_blank3" data-gaq-id="gaq4" data-blank-index="2" class="guided-answer-blank" placeholder="double majority">.`,
+        blanks: [
+            { id: "gaq4_blank1", answer: ["Commonwealth Parliament", "parliament"] },
+            { id: "gaq4_blank2", answer: ["people", "electorate", "voters"] },
+            { id: "gaq4_blank3", answer: ["double majority", "majority of voters in a majority of states"] }
+        ]
     }
     // Additional questions can be added here for the Guided Answer Construction tool
 ];
