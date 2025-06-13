@@ -18,6 +18,8 @@ needs additional data and which markdown files contain that information.
      detailed explanations from the markdown file.
 
 
+  - Added additional guided answer questions in `keySkillsHub.js` for the
+    Exam Skills Helper tool. Continue expanding with more examples.
 2. **Fill out Exam Skills Helper data** ✅
 
    - JavaScript: `keySkillsHub.js` contains objects such as
