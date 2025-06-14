@@ -108,6 +108,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') {
             window.setupCategorizedGlossary();
         }
+        if (targetId === 'u4aos1-case-reconstruction-dop-tool' && typeof window.initializeCaseReconstructionTool === 'function') {
+            window.initializeCaseReconstructionTool();
+        }
     }
 
     function handleU4AOS1ContentToggle(buttonToActivate) {
@@ -444,7 +447,6 @@ const categorizedGlossaryData = {
         { term: "Overruling a Precedent", definition: "Superior court in a later, different case changes a precedent set by a lower court or one of same standing." },
         { term: "Persuasive Precedent", definition: "Legal reasoning guiding judges though not binding. E.g., obiter dictum, decisions from lower courts/different hierarchies." },
         { term: "Promoting Legislative Change", definition: "Effect of statutory interpretation; parliament may amend legislation for clarity or to confirm a court decision." },
-        { term: "Quantum Translocator", definition: "Hypothetical device used in an example for statutory interpretation." },
         { term: "Ratio Decidendi", definition: "'The reason for the decision'; legal reason for the decision, binding part followed by lower courts." },
         { term: "Reasons for Statutory Interpretation", definition: "Include clarifying word meanings, changing word nature, applying legislation to unforeseen circumstances." },
         { term: "Reversing a Precedent", definition: "On appeal, superior court changes precedent set by a lower court in the same case. New precedent established by superior court. Differs from overruling (different case)." },

@@ -1543,11 +1543,11 @@ const ksBridgeData = [
         { id: 'rs9', text: "Following the Mabo (No. 2) decision, which recognised native title under common law, the Commonwealth Parliament passes the Native Title Act 1993 (Cth), codifying the principle into statute law.", correctQuadrant: "codification" },
         { id: 'rs10', text: "Parliament passes an Act that restates and consolidates various common law rules about implied terms in contracts, making the law more accessible and predictable.", correctQuadrant: "codification" },
         { id: 'rs11', text: "A common law precedent clarifying an aspect of negligence law is widely accepted. The Victorian Parliament amends the Wrongs Act 1958 (Vic) to incorporate this rule, codifying the common law.", correctQuadrant: "codification" },
-        // ABROGATION OF COMMON LAW
-        { id: 'rs12', text: "Courts develop a common law principle allowing damages for pure mental harm. Parliament passes legislation restricting such claims to stricter conditions, abrogating the broader common law principle.", correctQuadrant: "abrogation" },
-        { id: 'rs13', text: "A long-standing common law rule does not consider a certain behaviour as harassment. Parliament, reflecting changing values, passes an Act making this behaviour a civil wrong, abrogating the old rule.", correctQuadrant: "abrogation" },
-        { id: 'rs14', text: "The High Court interprets common law in a way that changes a long-held legal concept. Parliament disagrees and passes legislation restoring the previous understanding, abrogating the court's interpretation.", correctQuadrant: "abrogation" },
-        { id: 'rs15', text: "A lower court applies an outdated common law precedent and expresses disapproval. Parliament passes an Act explicitly repealing the specific common law rule, directly abrogating it.", correctQuadrant: "abrogation" }
+        // ABROGATION OF COMMON LAW (Changed to INTERPRETATION to match HTML Quadrants)
+        { id: 'rs12', text: "Courts develop a common law principle allowing damages for pure mental harm. Parliament passes legislation restricting such claims to stricter conditions, effectively altering the common law position that arose from court interpretation/development.", correctQuadrant: "interpretation" },
+        { id: 'rs13', text: "A long-standing common law rule does not consider a certain behaviour as harassment. Parliament, reflecting changing values, passes an Act making this behaviour a civil wrong, thus changing the legal landscape previously shaped by common law (or lack thereof).", correctQuadrant: "interpretation" },
+        { id: 'rs14', text: "The High Court interprets common law in a way that changes a long-held legal concept. Parliament disagrees and passes legislation restoring the previous understanding, responding to the court's interpretation.", correctQuadrant: "interpretation" },
+        { id: 'rs15', text: "A lower court applies an outdated common law precedent and expresses disapproval. Parliament passes an Act explicitly repealing the specific common law rule, responding to the situation highlighted by court application/interpretation.", correctQuadrant: "interpretation" }
     ];
     let draggedScenarioItem = null;
 
@@ -2830,6 +2830,7 @@ function initializeAICoachButtons() {
 
 
 window.setupCategorizedGlossary = function() { // Expose to window
+    const categorizedGlossaryContainer = document.getElementById('categorizedGlossaryContainer'); // Get the container
     if (!categorizedGlossaryContainer) {
         console.error("Glossary container not found!");
         return;
