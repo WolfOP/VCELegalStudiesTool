@@ -16,13 +16,16 @@ export const examData = {
             {
               id: 'dop-q1',
               text: 'Which section of the Constitution lists concurrent powers?',
+
               options: ['Section 51', 'Section 52', 'Section 109', 'Section 72'],
+
               answer: 'Section 51',
               difficulty: 'easy',
               topic: 'Constitution',
               skillType: 'recall',
               marks: 1,
               time: 1
+
             },
             {
               id: 'dop-q2',
@@ -45,6 +48,7 @@ export const examData = {
               skillType: 'understanding',
               marks: 2,
               time: 2
+
             }
           ]
         }

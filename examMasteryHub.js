@@ -23,6 +23,7 @@ export function getProgress() {
 }
 
 // Simple renderer placeholder
+
 function createQuestionElement(question, progress) {
   const wrapper = document.createElement('div');
   wrapper.className = 'mb-4 p-4 border rounded';
@@ -90,6 +91,7 @@ export function renderExamHub(containerId) {
   questions.forEach(q => {
     container.appendChild(createQuestionElement(q, progress));
   });
+
 }
 
 // Initialize on DOMContentLoaded
