@@ -2694,6 +2694,8 @@ function initializeKeySkillsHub() {
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
 
+window.callGeminiAPI = callGeminiAPI; // Make callGeminiAPI globally accessible
+
 
 // --- Exam Pitfalls Accordion Logic ---
 function ksPitfallsInitializeAccordions() {
