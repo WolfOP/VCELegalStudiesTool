@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             window.setupCategorizedGlossary();
         }
 
+
     }
 
     function handleU4AOS1ContentToggle(buttonToActivate) {
