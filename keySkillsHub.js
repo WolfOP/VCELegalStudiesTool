@@ -1661,6 +1661,82 @@ const ksBridgeData = [
         });
     }
 
+    // --- Term Match Game ---
+    const termsContainerEl = document.getElementById('termsContainer');
+    const definitionsContainerEl = document.getElementById('definitionsContainer');
+    const termMatchFeedbackEl = document.getElementById('termMatchFeedback');
+    const checkTermMatchesBtnEl = document.getElementById('checkTermMatchesBtn');
+    const resetTermMatchGameBtnEl = document.getElementById('resetTermMatchGameBtn');
+
+    const termMatchData = [
+        { id: 'tm1', term: 'Define', definition: 'Provide the precise meaning of a term or concept.' },
+        { id: 'tm2', term: 'Describe', definition: 'Give details and characteristics of a legal concept, process, institution, or role.' },
+        { id: 'tm3', term: 'Explain', definition: 'Clarify how or why something works or is significant, often outlining steps or reasons.' },
+        { id: 'tm4', term: 'Analyse', definition: 'Break down a concept and show relationships, factors or impacts.' },
+        { id: 'tm5', term: 'Discuss', definition: 'Explore a topic from various viewpoints or consider multiple factors.' },
+        { id: 'tm6', term: 'Evaluate', definition: 'Make a judgment about effectiveness or worth, providing evidence.' },
+        { id: 'tm7', term: 'Justify', definition: 'Provide reasons or evidence to support a statement or decision.' },
+        { id: 'tm8', term: 'Compare', definition: 'Explain similarities and differences between two or more things.' }
+    ];
+
+    let draggedTermItem = null;
+
+    window.setupTermMatchGame = function() {
+        if (!termsContainerEl || !definitionsContainerEl || !termMatchFeedbackEl) return;
+
+        termsContainerEl.innerHTML = '';
+        definitionsContainerEl.innerHTML = '';
+        termMatchFeedbackEl.textContent = '';
+
+        shuffleArray([...termMatchData]).forEach(pair => {
+            const termDiv = document.createElement('div');
+            termDiv.classList.add('term-item');
+            termDiv.textContent = pair.term;
+            termDiv.draggable = true;
+            termDiv.dataset.id = pair.id;
+            termDiv.addEventListener('dragstart', e => { draggedTermItem = termDiv; setTimeout(()=>termDiv.classList.add('dragging'),0); });
+            termDiv.addEventListener('dragend', () => { termDiv.classList.remove('dragging'); draggedTermItem = null; });
+            termsContainerEl.appendChild(termDiv);
+        });
+
+        shuffleArray([...termMatchData]).forEach(pair => {
+            const defDiv = document.createElement('div');
+            defDiv.classList.add('definition-slot');
+            defDiv.dataset.id = pair.id;
+            defDiv.textContent = pair.definition;
+            defDiv.addEventListener('dragover', e => { e.preventDefault(); defDiv.classList.add('drag-over'); });
+            defDiv.addEventListener('dragleave', () => defDiv.classList.remove('drag-over'));
+            defDiv.addEventListener('drop', e => { e.preventDefault(); defDiv.classList.remove('drag-over'); if (draggedTermItem) defDiv.appendChild(draggedTermItem); });
+            definitionsContainerEl.appendChild(defDiv);
+        });
+    };
+
+    if (checkTermMatchesBtnEl) {
+        checkTermMatchesBtnEl.addEventListener('click', () => {
+            let correct = 0;
+            termMatchData.forEach(pair => {
+                const slot = definitionsContainerEl.querySelector(`.definition-slot[data-id='${pair.id}']`);
+                if (!slot) return;
+                const placed = slot.querySelector('.term-item');
+                slot.classList.remove('matched','incorrect-match');
+                if (placed && placed.dataset.id === pair.id) {
+                    slot.classList.add('matched');
+                    correct++;
+                } else if (placed) {
+                    slot.classList.add('incorrect-match');
+                }
+            });
+            termMatchFeedbackEl.textContent = `You matched ${correct} of ${termMatchData.length} correctly.`;
+        });
+    }
+
+    if (resetTermMatchGameBtnEl) {
+        resetTermMatchGameBtnEl.addEventListener('click', () => {
+            if (typeof window.setupTermMatchGame === 'function') window.setupTermMatchGame();
+        });
+    }
+
+
     // --- Key Skill 5: Explain the significance of section 109 (Inconsistency Resolver) ---
     const irScenarioArea = document.getElementById('irScenarioArea');
     const irInputSection = document.getElementById('irInputSection');
@@ -2355,10 +2431,8 @@ if (checkGuidedAnswerBtn) {
     const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
     async function callGeminiAPI(promptText) {
- feature-review/logging-enhancements
-       console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
-console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
- main
+        console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
+        console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
             console.error(errorMessage); // Log full error for dev
@@ -2411,11 +2485,7 @@ console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_UR
 
             console.log("callGeminiAPI: Raw fetch response status:", response.status); // Log raw status for successful response
             const result = await response.json();
-< feature-review/logging-enhancements
-            console.log("callGeminiAPI: Parsed JSON result:", result); // Log parsed JSON
-=======
             console.log("DEBUG: callGeminiAPI: Parsed JSON result:", result);
- main
 
             if (result && result.text) {
                 return result.text;
@@ -2670,12 +2740,8 @@ console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_UR
 });
 
 // Modify initializeKeySkillsHub to include new setups
- feature-review/logging-enhancements
-function initializeKeySkillsHub() { // This is now the single, comprehensive initializer
-=======
 function initializeKeySkillsHub() {
     console.log("DEBUG: initializeKeySkillsHub: Function called.");
- main
     console.log("Key Skills Hub Initialized or Re-initialized");
 
     // Standard tool initializations (if their containers exist)
@@ -2704,12 +2770,9 @@ function initializeKeySkillsHub() {
         window.loadGuidedAnswerQuestion(0); // Initialize Guided Answers
     }
 
- feature-review/logging-enhancements
     // Initialize AI Coach Buttons for Task Words (not checking for a container, should always try to init if function exists)
 
-    // Initialize AI Coach Buttons for Task Words
     console.log("DEBUG: initializeKeySkillsHub: About to call initializeAICoachButtons. AI Coach buttons found on page:", document.querySelectorAll('.ai-task-coach-btn').length);
- main
     if (typeof initializeAICoachButtons === 'function') {
         initializeAICoachButtons();
     }
@@ -2918,5 +2981,3 @@ window.setupCategorizedGlossary = function() { // Expose to window
         window.addAIGlossaryExplainers();
     }
 }
-
-[end of keySkillsHub.js]
