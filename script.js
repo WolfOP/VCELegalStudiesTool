@@ -249,87 +249,157 @@ document.addEventListener('DOMContentLoaded', function () {
     window.caseExplorerData = {
         brislan: {
             name: "R v Brislan; Ex parte Williams (1935)",
-            details: "<strong>Facts:</strong> Challenge to the validity of the Wireless Telegraphy Act 1905 (Cth), requiring wireless set licences. The High Court interpreted 'other like services' in s51(v) to include broadcasting to a wireless set, thus validating the Commonwealth law.<br><strong>Significance:</strong> Extended Commonwealth power over broadcasting and influenced later decisions on communication technologies."
+            details: "<strong>Facts:</strong> Challenge to the Wireless Telegraphy Act 1905 (Cth) which required licences for wireless sets." +
+                "<br><strong>Issue:</strong> Did \"other like services\" in s51(v) extend to radio broadcasting?" +
+                "<br><strong>Decision:</strong> Yes &ndash; broadcasting was a like service so the Act was valid." +
+                "<br><strong>Significance:</strong> Extended Commonwealth power over communications and influenced later technology cases."
         },
         tasmanianDams: {
             name: "Commonwealth v Tasmania (Tasmanian Dam case) (1983)",
-            details: "<strong>Facts:</strong> Tasmanian government planned to build a dam on the Gordon River, a World Heritage site. The Commonwealth passed legislation prohibiting the dam based on obligations under the World Heritage Convention. The High Court held the external affairs power allows the Commonwealth to legislate to fulfil international treaty obligations, even in areas traditionally considered state powers.<br><strong>Significance:</strong> Shifted law-making power towards the Commonwealth; Tasmanian law was invalid under s109."
+            details: "<strong>Facts:</strong> Tasmania proposed a dam on the Gordon River, part of a World Heritage area, while the Commonwealth passed legislation to stop it." +
+                "<br><strong>Issue:</strong> Could the external affairs power in s51(xxix) be used to enforce a treaty and override state legislation?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the Commonwealth law was valid and the inconsistent Tasmanian law invalid under s109." +
+                "<br><strong>Significance:</strong> Marked a shift of power to the Commonwealth when implementing international treaties." 
         },
         mcbain: {
             name: "McBain v Victoria (2000)",
-            details: "<strong>Facts:</strong> Conflict between Victorian law restricting IVF for single women and Commonwealth Sex Discrimination Act 1984 (Cth).<br><strong>Significance:</strong> High Court found the Victorian law inconsistent with the Commonwealth law and invalid to that extent under s109. Demonstrates how s109 resolves inconsistencies."
+            details: "<strong>Facts:</strong> Victorian legislation restricted IVF to married or de facto couples, while Commonwealth law prohibited discrimination on marital status." +
+                "<br><strong>Issue:</strong> Was the Victorian law inconsistent with the Sex Discrimination Act 1984 (Cth)?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the state law was invalid to the extent of the inconsistency." +
+                "<br><strong>Significance:</strong> Clear example of s109 resolving conflicts between Commonwealth and state laws." 
         },
         actv: {
             name: "Australian Capital Television Pty Ltd v Commonwealth (1992)",
-            details: "<strong>Facts:</strong> Challenge to a Commonwealth law prohibiting TV advertising during election campaigns. The High Court interpreted sections 7 and 24 of the Constitution.<br><strong>Significance:</strong> Recognised an implied right to freedom of political communication as fundamental to representative government. Law was declared invalid for infringing this right."
+            details: "<strong>Facts:</strong> Commonwealth law banned political advertising on television during elections." +
+                "<br><strong>Issue:</strong> Did the ban infringe an implied freedom of political communication from ss7 and 24?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the law was invalid as it burdened this implied freedom." +
+                "<br><strong>Significance:</strong> First recognition of an implied right to political communication protecting representative government." 
         },
         roach: {
             name: "Roach v Electoral Commissioner (2007)",
-            details: "<strong>Facts:</strong> Challenge to a Commonwealth law banning all sentenced prisoners from voting. The High Court interpreted sections 7 and 24 of the Constitution.<br><strong>Significance:</strong> Affirmed that the right to vote is a structural protection for representative government. A complete ban was unconstitutional; removal of the right to vote must be for significant reasons."
+            details: "<strong>Facts:</strong> A Commonwealth law removed voting rights from all prisoners." +
+                "<br><strong>Issue:</strong> Was this blanket ban inconsistent with the requirement in ss7 and 24 that parliament be \"directly chosen by the people\"?" +
+                "<br><strong>Decision:</strong> Yes &ndash; only prisoners serving substantial sentences could be excluded." +
+                "<br><strong>Significance:</strong> Confirmed a constitutional protection of the franchise and limited Parliament's ability to restrict it." 
         },
         mabo: {
             name: "Mabo v Queensland (No. 2) (1992)",
-            details: "<strong>Facts:</strong> Overturned terra nullius, recognising native title for Indigenous Australians maintaining a connection to traditional land.<br><strong>Significance:</strong> Established a new common law principle, later codified in the Native Title Act 1993 (Cth). Example of judicial activism."
+            details: "<strong>Facts:</strong> Torres Strait Islanders claimed traditional ownership of Mer Island." +
+                "<br><strong>Issue:</strong> Did the common law recognise native title or was Australia \"terra nullius\" at settlement?" +
+                "<br><strong>Decision:</strong> The High Court held that native title could exist where connection to land remained." +
+                "<br><strong>Significance:</strong> Rejected terra nullius and prompted the Native Title Act 1993 (Cth)."
+        },
+        deingTarola: {
+            name: "Deing v Tarola (1993)",
+            details: "<strong>Facts:</strong> A man was charged for wearing a studded belt deemed a 'regulated weapon' under Victorian law." +
+                "<br><strong>Issue:</strong> Did the term 'regulated weapon' in the Control of Weapons Act 1990 (Vic) include a studded belt?" +
+                "<br><strong>Decision:</strong> No &ndash; the court interpreted the phrase narrowly and dismissed the charge." +
+                "<br><strong>Significance:</strong> Demonstrates statutory interpretation narrowing the scope of legislation."
         },
         coleWhitfield: {
             name: "Cole v Whitfield (1988)",
-            details: "<strong>Facts:</strong> Interpreted s92 of the Constitution regarding interstate trade. Examined a Tasmanian law on crayfish size.<br><strong>Significance:</strong> s92 prevents discriminatory/protectionist laws against interstate trade, but allows non-discriminatory burdens. Tasmanian law was for conservation, not discrimination."
+            details: "<strong>Facts:</strong> A Tasmanian law restricted the sale of undersized crayfish imported from South Australia." +
+                "<br><strong>Issue:</strong> Did the law breach s92 by imposing a protectionist burden on interstate trade?" +
+                "<br><strong>Decision:</strong> No &ndash; the restriction was for conservation and not protectionist." +
+                "<br><strong>Significance:</strong> Clarified that s92 only prohibits discriminatory or protectionist legislation." 
         },
         goryl: {
             name: "Goryl v Greyhound Australia Pty Ltd (1994)",
-            details: "<strong>Facts:</strong> Interpreted s117 of the Constitution, which prevents discrimination based on state of residence. Queensland law limited damages for non-residents.<br><strong>Significance:</strong> Law was invalid under s117, affirming a wide interpretation of this right."
+            details: "<strong>Facts:</strong> Queensland legislation capped damages for plaintiffs who lived outside the state." +
+                "<br><strong>Issue:</strong> Did this discriminate on the basis of state residence contrary to s117?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the limitation was invalid." +
+                "<br><strong>Significance:</strong> Confirmed a broad reading of s117 prohibiting state-based discrimination." 
         },
         brown: {
             name: "Brown v R (1986)",
-            details: "<strong>Facts:</strong> Interpreted s80 of the Constitution, guaranteeing trial by jury for Commonwealth indictable offences.<br><strong>Significance:</strong> Right to jury trial is mandatory for Commonwealth indictable offences and cannot be waived."
+            details: "<strong>Facts:</strong> Accused sought a judge-alone trial for a Commonwealth offence." +
+                "<br><strong>Issue:</strong> Could the constitutional right to jury trial in s80 be waived?" +
+                "<br><strong>Decision:</strong> No &ndash; trial by jury is mandatory for Commonwealth indictable offences." +
+                "<br><strong>Significance:</strong> Affirmed the absolute nature of the s80 jury trial guarantee." 
         },
         aon: {
             name: "AON Risk Services Aust Ltd v ANU (2009)",
-            details: "<strong>Facts:</strong> Concerned whether a party could make significant amendments to their case late in the process.<br><strong>Significance:</strong> High Court overruled its previous decision in Queensland v JL Holdings Pty Ltd (1997), agreeing that allowing substantial amendments could disadvantage the other party."
+            details: "<strong>Facts:</strong> Party sought to amend its pleadings very late in proceedings." +
+                "<br><strong>Issue:</strong> Should such late amendments be permitted under case management principles?" +
+                "<br><strong>Decision:</strong> The High Court refused the amendment and overruled the earlier approach in JL Holdings." +
+                "<br><strong>Significance:</strong> Emphasised efficiency and fairness in litigation and gave courts greater control over amendments." 
         },
         carr: {
             name: "Carr v State of Western Australia (2007)",
-            details: "<strong>Facts:</strong> Interpreted 'interview' in WA legislation regarding videotaping admissions. Court gave a broad interpretation, making a cell conversation admissible evidence.<br><strong>Significance:</strong> Broadened the application of the statute."
+            details: "<strong>Facts:</strong> Police secretly recorded a conversation between a suspect and an undercover officer in a cell." +
+                "<br><strong>Issue:</strong> Did the requirement to videotape an \"interview\" apply to such conversations?" +
+                "<br><strong>Decision:</strong> Yes &ndash; \"interview\" was interpreted broadly so the recording was admissible." +
+                "<br><strong>Significance:</strong> Example of courts giving a wide meaning to statutory terms." 
         },
         palmer: {
             name: "Palmer v State of Western Australia (2021)",
-            details: "<strong>Facts:</strong> Challenge to WA's COVID-19 border closures, partly referencing s92 (interstate trade).<br><strong>Significance:</strong> High Court rejected the challenge, clarifying s92 does not apply to necessary, non-discriminatory public health measures."
+            details: "<strong>Facts:</strong> WA closed its borders during the COVID‑19 pandemic and businessman Clive Palmer challenged the restriction." +
+                "<br><strong>Issue:</strong> Did the closure infringe the guarantee that trade, commerce and intercourse among the states shall be absolutely free (s92)?" +
+                "<br><strong>Decision:</strong> No &ndash; the restriction was a reasonable public health measure." +
+                "<br><strong>Significance:</strong> Confirmed that s92 allows non‑discriminatory measures necessary for public health or safety." 
         },
         kevinJennifer: {
             name: "Attorney-General (Cth) v Kevin and Jennifer (2003)",
-            details: "<strong>Facts:</strong> Interpretation of 'man' in the Marriage Act 1961 (Cth) for a transgender man. Court held the word should be given a contemporary meaning, validating the marriage.<br><strong>Significance:</strong> Statutory interpretation and recognition of gender diversity."
+            details: "<strong>Facts:</strong> The validity of a marriage involving a transgender man was challenged." +
+                "<br><strong>Issue:</strong> How should the word 'man' in the Marriage Act 1961 (Cth) be interpreted?" +
+                "<br><strong>Decision:</strong> The court gave 'man' a contemporary meaning that included transgender men and upheld the marriage." +
+                "<br><strong>Significance:</strong> Illustrates statutory interpretation adapting to social change." 
         },
         trigwell: {
             name: "State Insurance Commission v Trigwell (1979)",
-            details: "<strong>Facts:</strong> Applied an older common law precedent regarding landowner liability for animals straying onto highways.<br><strong>Significance:</strong> In obiter dictum, the Court expressed disapproval of the precedent and suggested law-making should be left to parliament. Demonstrates how courts can signal a need for legislative change."
+            details: "<strong>Facts:</strong> Motorists were injured when their car hit sheep on a roadway and sued the landowner." +
+                "<br><strong>Issue:</strong> Should the High Court depart from an old English precedent denying such liability?" +
+                "<br><strong>Decision:</strong> The Court followed the precedent but criticised it in obiter." +
+                "<br><strong>Significance:</strong> Example of judicial conservatism prompting Parliament to later change the law." 
         },
         communistParty: {
             name: "Australian Communist Party v Commonwealth (1951)",
-            details: "<strong>Facts:</strong> Challenge to a Commonwealth law dissolving the Communist Party.<br><strong>Significance:</strong> High Court declared the law invalid, highlighting the judiciary's role in checking parliamentary power as part of the separation of powers."
+            details: "<strong>Facts:</strong> The Commonwealth attempted to ban the Communist Party and seize its property." +
+                "<br><strong>Issue:</strong> Did the Constitution give the Commonwealth power to pass such a law?" +
+                "<br><strong>Decision:</strong> No &ndash; the law was beyond power and therefore invalid." +
+                "<br><strong>Significance:</strong> Demonstrated judicial independence and limits on Commonwealth power." 
         },
         koowarta: {
             name: "Koowarta v. Bjelke-Petersen (1982)",
-            details: "<strong>Facts:</strong> Concerned the external affairs power (s51(xxix)), with the Chief Justice expressing concern about unlimited legislative power if the Commonwealth could legislate to give effect to every international agreement.<br><strong>Significance:</strong> Also mentioned in relation to s109."
+            details: "<strong>Facts:</strong> Queensland refused to approve the purchase of land by Aboriginal people. The Commonwealth relied on the Racial Discrimination Act." +
+                "<br><strong>Issue:</strong> Was the Act supported by the external affairs power and did it override state policy?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the Act was valid and inconsistent state actions were invalid." +
+                "<br><strong>Significance:</strong> Confirmed broad use of the external affairs power and operation of s109." 
         },
         jones: {
             name: "Jones v The Commonwealth (No 2) (1965)",
-            details: "<strong>Facts:</strong> Influenced by Brislan, the High Court decided that television broadcasts also fit within s51(v).<br><strong>Significance:</strong> Reinforced the broad interpretation of Commonwealth power over communication technologies."
+            details: "<strong>Facts:</strong> Television licence fees were challenged on the basis that broadcasting might not fall under s51(v)." +
+                "<br><strong>Issue:</strong> Does s51(v) extend to television as an \"other like service\"?" +
+                "<br><strong>Decision:</strong> Yes &ndash; television was treated as a like service following Brislan." +
+                "<br><strong>Significance:</strong> Further entrenched Commonwealth power over emerging communications." 
         },
         croome: {
             name: "Croome v. Tasmania (1997)",
-            details: "<strong>Facts:</strong> Challenge to Tasmanian laws criminalising homosexual acts, arguing inconsistency with Commonwealth human rights legislation based on an international covenant.<br><strong>Significance:</strong> High Court applied s109 to invalidate the Tasmanian law, making a residual power concurrent and increasing Commonwealth power."
+            details: "<strong>Facts:</strong> A man argued that Tasmanian laws criminalising homosexual conduct conflicted with Commonwealth human rights legislation." +
+                "<br><strong>Issue:</strong> Were the state provisions inconsistent with the federal law implementing an international covenant?" +
+                "<br><strong>Decision:</strong> Yes &ndash; the state provisions were invalid under s109." +
+                "<br><strong>Significance:</strong> Showed how a residual area can become concurrent through external affairs treaties." 
         },
         lange: {
             name: "Lange v Australian Broadcasting Corporation (1997)",
-            details: "<strong>Facts:</strong> Further developed the implied right to freedom of political communication from sections 7 and 24.<br><strong>Significance:</strong> High Court established a test to determine if a law infringes this implied freedom."
+            details: "<strong>Facts:</strong> Former New Zealand Prime Minister David Lange sued the ABC for defamation." +
+                "<br><strong>Issue:</strong> How does the implied freedom of political communication affect defamation laws?" +
+                "<br><strong>Decision:</strong> High Court set out a two‑stage test and remitted the matter for trial." +
+                "<br><strong>Significance:</strong> Authoritative statement of the implied freedom and its limits." 
         },
         icm: {
             name: "ICM Agriculture Pty Ltd v Commonwealth (2009)",
-            details: "<strong>Facts:</strong> Interpreted 'acquisition of property on just terms' under s51(xxxi).<br><strong>Significance:</strong> Clarified the scope of 'acquisition', distinguishing it from 'deprivation' of property rights."
+            details: "<strong>Facts:</strong> Commonwealth legislation reduced groundwater entitlements without compensation." +
+                "<br><strong>Issue:</strong> Was this an \"acquisition of property\" requiring just terms under s51(xxxi)?" +
+                "<br><strong>Decision:</strong> No &ndash; the scheme involved a deprivation, not an acquisition." +
+                "<br><strong>Significance:</strong> Clarified the distinction between acquisition and mere deprivation of property." 
         },
         mccloy: {
             name: "McCloy v NSW (2015)",
-            details: "<strong>Facts:</strong> Expanded the test developed in Lange for determining whether a law infringes the implied freedom of political communication.<br><strong>Significance:</strong> Further clarified the application of the implied freedom."
+            details: "<strong>Facts:</strong> NSW laws capped political donations and restricted property developers from donating." +
+                "<br><strong>Issue:</strong> Did these restrictions impermissibly burden the implied freedom of political communication?" +
+                "<br><strong>Decision:</strong> The laws were upheld and the Court articulated a structured proportionality test." +
+                "<br><strong>Significance:</strong> Refined the approach for assessing laws against the implied freedom." 
         }
     };
     
@@ -378,6 +448,7 @@ const categorizedGlossaryData = {
         { term: "External Affairs Power", definition: "Commonwealth Parliament's law-making power under section 51(xxix) of the Constitution, interpreted by the High Court to allow legislation on areas covered by international treaties." },
         { term: "Freedom of Religion", definition: "An express right under section 116 of the Australian Constitution, stating the Commonwealth shall not make laws establishing religion, imposing observance, or prohibiting free exercise. It primarily limits the Commonwealth, not states." },
         { term: "High Court of Australia (HCA)", definition: "Established by the Constitution, with jurisdiction under sections 75 and 76 to hear matters arising under or interpreting the Constitution. It acts as guardian of the Constitution, interprets it, settles disputes, and can declare laws ultra vires." },
+        { term: "Separation of Powers", definition: "Constitutional principle keeping legislative, executive and judicial powers distinct to prevent abuses of power. In Australia the legislative and executive overlap but the judiciary remains independent." },
         { term: "Implied Right", definition: "A right not explicitly in the Constitution but interpreted by the High Court to exist, like the implied right to freedom of political communication from sections 7 and 24." },
         { term: "Interstate Trade and Commerce", definition: "An express right under section 92 of the Constitution, stating 'trade, commerce, and intercourse among the States... shall be absolutely free'. Not absolute; laws can restrict movement if non-discriminatory." },
         { term: "Referendum", definition: "A compulsory national vote on a proposed change to the Australian Constitution's wording, as per section 128. Requires a double majority." },
@@ -396,6 +467,7 @@ const categorizedGlossaryData = {
         { term: "Commonwealth Parliament", definition: "The federal bicameral parliament: King (via Governor-General), Senate (upper house), House of Representatives (lower house)." },
         { term: "Debate (Parliament)", definition: "Bills are debated during the second reading stage." },
         { term: "Delegated Legislation (Secondary Legislation)", definition: "Rules made by secondary authorities (councils, departments, statutory authorities) empowered by an enabling Act." },
+        { term: "Democratic Society", definition: "A community organised so that laws and processes are created by elected representatives." },
         { term: "Factors Affecting Parliament's Ability to Make Law", definition: "Includes bicameral structure, international pressures, and representative nature." },
         { term: "Governor (Victorian)", definition: "The Crown's representative in Victorian Parliament, primary role is granting royal assent." },
         { term: "Governor-General (Commonwealth)", definition: "The Crown's representative in Commonwealth Parliament, primary role is granting royal assent." },
@@ -416,6 +488,7 @@ const categorizedGlossaryData = {
         { term: "Scrutinising Government/Legislation", definition: "Close examination of bills or government administration. Commonwealth: Senate's primary role for House of Reps bills. Victoria: Legislative Council's primary role as house of review." },
         { term: "Secondary Legislation", definition: "See Delegated Legislation." },
         { term: "Senate (Commonwealth Upper House)", definition: "Upper house with 76 members (12/state, 2/territory). Often 'states' house' or house of review. Roles: house of review, equal state representation, scrutinising bills, initiating non-money bills." },
+        { term: "Proportional Representation", definition: "Voting system for the Senate where several candidates are elected in proportion to votes received, allowing smaller parties to gain seats." },
         { term: "Statute Law", definition: "See Act of Parliament." },
         { term: "Supremacy of Parliament", definition: "Parliament can make, amend, or abolish laws (subject to constitution) and is supreme over other government arms. Can confirm/cancel common law (except High Court constitutional decisions)." },
         { term: "Victorian Parliament", definition: "King (via Governor), Legislative Council (upper), Legislative Assembly (lower)." },
@@ -435,6 +508,7 @@ const categorizedGlossaryData = {
         { term: "Juries", definition: "Role in criminal and civil trials. Criminal: determines guilt." },
         { term: "Just Terms", definition: "Fair and reasonable compensation by Commonwealth Parliament when acquiring property under s51(xxxi)." },
         { term: "Locus Standi (Standing)", definition: "Requirement to bring a case; individual/group must be affected by or have special interest in the issues." },
+        { term: "Standing", definition: "A party must be directly affected by an issue to commence court action; also described as having a special interest." },
         { term: "Special Interest", definition: "Party must be affected more than the general public to have standing." },
         { term: "Material Facts", definition: "Key facts/details in a legal case critical to the decision." },
         { term: "Obiter Dictum", definition: "'Said by the way'; judge's comments not contributing to ratio decidendi but can be persuasive precedent. Disapproving a precedent is obiter dictum." },
