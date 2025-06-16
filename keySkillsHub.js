@@ -720,7 +720,8 @@ const ksBridgeData = [
         id: "ksb_define_terminology",
         keySkillText: "Define and use legal terminology",
         relatedKnowledgePoints: [
-            "This skill applies to all key knowledge areas in Unit 4 AOS 1, including understanding terms related to the Australian Constitution, parliamentary roles, law-making powers (exclusive, concurrent, residual), section 109, constitutional checks (bicameralism, separation of powers, express rights, High Court interpretation, referendums), court roles, precedent, statutory interpretation, and factors affecting law-making."
+            "Terminology across Unit 4 AOS 1 content: roles of the Crown and the Houses of Parliament, the division of law‑making powers (exclusive, concurrent, residual) and section 109.",
+            "Terms describing constitutional checks (bicameralism, separation of powers, express rights, High Court interpretation, referendums), statutory interpretation and precedent, plus factors influencing law‑making."
         ],
         exampleQuestionStems: [
             "Define 'bicameral structure of parliament'.",
@@ -733,7 +734,8 @@ const ksBridgeData = [
         id: "ksb_discuss_interpret_analyse",
         keySkillText: "Discuss, interpret and analyse legal principles and information",
         relatedKnowledgePoints: [
-            "This skill is crucial for engaging with all key knowledge, including analysing High Court case impacts (e.g., Tasmanian Dams, Roach), interpreting constitutional sections (e.g., s7, s24, s51, s109), discussing factors affecting law-making, and evaluating constitutional checks."
+            "Analyse High Court cases (e.g., Tasmanian Dams, Roach) and interpret constitutional sections such as ss7, 24, 51 and 109.",
+            "Discuss factors affecting law‑making and evaluate checks on parliament including bicameralism, separation of powers and express rights."
         ],
         exampleQuestionStems: [
             "Analyse the impact of the Tasmanian Dams Case on the division of law-making powers.",
@@ -749,7 +751,8 @@ const ksBridgeData = [
         id: "ksb_explain_lawmaking_powers",
         keySkillText: "Explain the law-making powers of state and Commonwealth parliaments, using examples",
         relatedKnowledgePoints: [
-            "the Australian Constitution: division of law-making powers (exclusive, concurrent and residual), section 109."
+            "Roles of the Crown and the Houses of Parliament in law‑making.",
+            "The Australian Constitution: division of law‑making powers (exclusive, concurrent and residual) and the operation of section 109."
         ],
         exampleQuestionStems: [
             "Explain, using an example, one exclusive power of the Commonwealth Parliament.",
@@ -765,7 +768,8 @@ const ksBridgeData = [
         id: "ksb_analyse_parliament_courts_relationship",
         keySkillText: "Analyse the relationship between parliament and courts in law-making",
         relatedKnowledgePoints: [
-            "features of the relationship between courts and parliament in law-making: supremacy of parliament, ability of courts to influence parliament, interpretation of statutes by courts, codification of common law, abrogation of common law."
+            "Features of the relationship between courts and parliament: supremacy of parliament, ability of courts to influence parliament, interpretation of statutes, codification of common law and abrogation of common law.",
+            "Reasons for and effects of statutory interpretation and the operation of precedent when courts make law."
         ],
         exampleQuestionStems: [
             "Analyse two features of the relationship between parliament and the courts in law-making, using examples.",
@@ -780,7 +784,8 @@ const ksBridgeData = [
         id: "ksb_explain_s109_significance",
         keySkillText: "Explain the significance of section 109 of the Australian Constitution",
         relatedKnowledgePoints: [
-            "the Australian Constitution: division of law-making powers (exclusive, concurrent and residual), section 109."
+            "The Australian Constitution: division of law‑making powers (exclusive, concurrent and residual).",
+            "Section 109: Commonwealth law prevails over inconsistent state law once challenged in the High Court; ensures consistency in concurrent areas."
         ],
         exampleQuestionStems: [
             "Explain the significance of section 109 of the Australian Constitution in resolving conflicts between state and Commonwealth laws.",
@@ -2431,8 +2436,10 @@ if (checkGuidedAnswerBtn) {
     const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
     async function callGeminiAPI(promptText) {
-        console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
-        console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
+
+       console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
+console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
+
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
             console.error(errorMessage); // Log full error for dev
@@ -2485,6 +2492,9 @@ if (checkGuidedAnswerBtn) {
 
             console.log("callGeminiAPI: Raw fetch response status:", response.status); // Log raw status for successful response
             const result = await response.json();
+
+            console.log("callGeminiAPI: Parsed JSON result:", result); // Log parsed JSON
+
             console.log("DEBUG: callGeminiAPI: Parsed JSON result:", result);
 
             if (result && result.text) {
@@ -2740,6 +2750,9 @@ if (checkGuidedAnswerBtn) {
 });
 
 // Modify initializeKeySkillsHub to include new setups
+
+function initializeKeySkillsHub() { // This is now the single, comprehensive initializer
+
 function initializeKeySkillsHub() {
     console.log("DEBUG: initializeKeySkillsHub: Function called.");
     console.log("Key Skills Hub Initialized or Re-initialized");
