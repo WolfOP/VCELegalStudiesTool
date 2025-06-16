@@ -34,17 +34,35 @@ function createQuestionElement(question, progress) {
   wrapper.appendChild(title);
 
   const form = document.createElement('form');
-  question.options.forEach(opt => {
-    const label = document.createElement('label');
-    label.className = 'block mb-1';
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = question.id;
-    input.value = opt;
-    label.appendChild(input);
-    label.append(' ' + opt);
-    form.appendChild(label);
-  });
+
+  if (question.type === 'shortAnswer') {
+    const textArea = document.createElement('textarea');
+    textArea.name = question.id;
+    textArea.className = 'w-full p-2 border rounded';
+    textArea.placeholder = 'Type your answer here...';
+    form.appendChild(textArea);
+  } else if (question.type === 'extendedResponse') {
+    const textArea = document.createElement('textarea');
+    textArea.name = question.id;
+    textArea.className = 'w-full p-2 border rounded h-40'; // Added h-40 for more height
+    textArea.rows = 6; // Suggest more rows for extended response
+    textArea.placeholder = 'Type your detailed response here...';
+    form.appendChild(textArea);
+  }
+  else {
+    // Multiple-choice logic
+    question.options.forEach(opt => {
+      const label = document.createElement('label');
+      label.className = 'block mb-1';
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = question.id;
+      input.value = opt;
+      label.appendChild(input);
+      label.append(' ' + opt);
+      form.appendChild(label);
+    });
+  }
 
   const submit = document.createElement('button');
   submit.type = 'submit';
@@ -63,11 +81,23 @@ function createQuestionElement(question, progress) {
 
   form.addEventListener('submit', e => {
     e.preventDefault();
-    const chosen = form.querySelector('input:checked');
-    if (!chosen) return;
-    const correct = chosen.value === question.answer;
-    recordQuestionResult(question.id, correct);
-    feedback.textContent = correct ? 'Correct' : `Incorrect. Answer: ${question.answer}`;
+    if (question.type === 'shortAnswer' || question.type === 'extendedResponse') {
+      const textArea = form.querySelector(`textarea[name="${question.id}"]`);
+      if (!textArea || !textArea.value.trim()) {
+        feedback.textContent = 'Please enter an answer.';
+        return;
+      }
+      // For now, just display the model answer, no auto-grading
+      feedback.textContent = `Model Answer: ${question.modelAnswer}`;
+      // Skipping recordQuestionResult for these types for now
+    } else {
+      // Multiple-choice logic
+      const chosen = form.querySelector('input:checked');
+      if (!chosen) return;
+      const correct = chosen.value === question.answer;
+      recordQuestionResult(question.id, correct);
+      feedback.textContent = correct ? 'Correct' : `Incorrect. Answer: ${question.answer}`;
+    }
   });
 
   return wrapper;
