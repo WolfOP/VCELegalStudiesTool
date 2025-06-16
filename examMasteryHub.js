@@ -1,3 +1,4 @@
+import { initializeExamSkillsHelper } from "./examSkillsHelper.js";
 // examMasteryHub.js - handles rendering and progress tracking for Exam Mastery Hub
 import { examData } from './examData.js';
 
@@ -104,6 +105,7 @@ function createQuestionElement(question, progress) {
 }
 
 export function renderExamHub(containerId) {
+  initializeExamSkillsHelper();
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -127,4 +129,5 @@ export function renderExamHub(containerId) {
 // Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
   renderExamHub('exam-mastery-hub');
+  initializeExamSkillsHelper();
 });
