@@ -109,10 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
             window.setupCategorizedGlossary();
         }
 
+
     }
 
     function handleU4AOS1ContentToggle(buttonToActivate) {
         const targetId = buttonToActivate.dataset.target;
+
 
         u4aos1ContentToggles.forEach(btn => {
             // Reset active styles from all categories

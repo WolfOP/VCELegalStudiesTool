@@ -2094,6 +2094,8 @@ function initializeKeySkillsHub() {
 }
 window.initializeKeySkillsHub = initializeKeySkillsHub; // Ensure it's globally accessible
 
+window.callGeminiAPI = callGeminiAPI; // Make callGeminiAPI globally accessible
+
 
     if (pitfallAccordionToggles.length === 0) {
         // console.warn("No 'pitfall-accordion-toggle' elements found for Exam Pitfalls.");
