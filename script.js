@@ -108,7 +108,14 @@ document.addEventListener('DOMContentLoaded', function () {
         if (targetId === 'u4aos1-glossary' && typeof window.setupCategorizedGlossary === 'function') {
             window.setupCategorizedGlossary();
         }
-        
+
+
+    }
+
+    function handleU4AOS1ContentToggle(buttonToActivate) {
+        const targetId = buttonToActivate.dataset.target;
+
+
         u4aos1ContentToggles.forEach(btn => {
             // Reset active styles from all categories
             btn.classList.remove('bg-indigo-500', 'text-white', 
