@@ -53,39 +53,6 @@ const caseReconstructionData = [
             impact: "Confirmed an implied right to vote as part of representative government, limiting Commonwealth power to restrict the franchise.",
             constitution: "ss7 & 24 - Representative government"
         }
-    },
-    {
-        id: "mcbain",
-        name: "McBain v Victoria (2000)",
-        elements: {
-            facts: "Victorian law restricted IVF treatment to married women, conflicting with the Sex Discrimination Act 1984 (Cth).",
-            issue: "Did the inconsistency render the Victorian law invalid under s109?",
-            decision: "Yes. The Federal Court declared the Victorian provisions invalid to the extent of inconsistency with Commonwealth law.",
-            impact: "Demonstrated direct operation of s109, limiting state laws that conflict with Commonwealth anti-discrimination legislation.",
-            constitution: "s109 - Inconsistency rule"
-        }
-    },
-    {
-        id: "koowarta",
-        name: "Koowarta v Bjelke-Petersen (1982)",
-        elements: {
-            facts: "Queensland refused to approve land purchase by Aboriginal people. The Racial Discrimination Act 1975 (Cth) was relied upon to challenge the decision.",
-            issue: "Whether the Act was valid under the external affairs power despite dealing with a state matter.",
-            decision: "The High Court upheld the Act as a valid implementation of an international treaty.",
-            impact: "Confirmed broad use of the external affairs power, allowing Commonwealth legislation to override state decisions.",
-            constitution: "s51(xxix) - External affairs; s109 - inconsistency"
-        }
-    },
-    {
-        id: "croome",
-        name: "Croome v Tasmania (1997)",
-        elements: {
-            facts: "Tasmanian laws criminalised homosexual conduct, challenged for inconsistency with Commonwealth human rights legislation.",
-            issue: "Could Commonwealth laws relying on external affairs invalidate inconsistent state laws?",
-            decision: "Proceedings prompted repeal; High Court confirmed the applicants had standing to challenge. The inconsistency principle would favour Commonwealth law.",
-            impact: "Illustrated how external affairs legislation can expand Commonwealth power into residual areas when inconsistent state laws exist.",
-            constitution: "s51(xxix) - External affairs; s109"
-        }
     }
 ];
 
