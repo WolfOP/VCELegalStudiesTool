@@ -927,6 +927,142 @@ export const examData = {
                 skillType: 'recall',
                 marks: 1,
                 time: 1
+            },
+            {
+              id: 'cop-mcq-q8',
+              type: 'multipleChoice',
+              text: 'If the Commonwealth Government holds a strong majority in the Senate, how might this affect the bicameral structure as a check on power?',
+              options: [
+                'It strengthens the Senate\'s ability to scrutinise bills, as the government has more expertise.',
+                'It may weaken the check, as the Senate could become a "rubber stamp" for government legislation.',
+                'It forces the High Court to review all legislation passed.',
+                'It automatically triggers a referendum for any controversial bills.'
+              ],
+              answer: 'It may weaken the check, as the Senate could become a "rubber stamp" for government legislation.',
+              difficulty: 'medium',
+              topic: 'Bicameralism',
+              skillType: 'application',
+              marks: 1,
+              time: 2
+            },
+            {
+              id: 'cop-mcq-q9',
+              type: 'multipleChoice',
+              text: 'Delegated legislation (e.g., regulations made by a government department) can potentially challenge the separation of powers because:',
+              options: [
+                'It involves the judiciary making laws, which is a legislative function.',
+                'It involves the executive branch making law-like rules, traditionally a legislative function.',
+                'It allows states to override Commonwealth laws.',
+                'It requires all judges to be members of the executive branch.'
+              ],
+              answer: 'It involves the executive branch making law-like rules, traditionally a legislative function.',
+              difficulty: 'hard',
+              topic: 'Separation of Powers',
+              skillType: 'analysis',
+              marks: 2,
+              time: 2
+            },
+            {
+              id: 'cop-mcq-q10',
+              type: 'multipleChoice',
+              text: 'Section 80 of the Constitution guarantees a trial by jury for indictable Commonwealth offences. A key limitation of this right is that:',
+              options: [
+                'It only applies to civil cases, not criminal cases.',
+                'Parliament can define which offences are "indictable", potentially limiting its scope.',
+                'It only applies if the accused is a resident of a specific state.',
+                'The jury\'s decision can be overturned by the Governor-General.'
+              ],
+              answer: 'Parliament can define which offences are "indictable", potentially limiting its scope.',
+              difficulty: 'hard',
+              topic: 'Express Rights',
+              skillType: 'understanding',
+              marks: 2,
+              time: 2
+            },
+            {
+              id: 'cop-mcq-q11',
+              type: 'multipleChoice',
+              text: 'Administrative tribunals, like the AAT, exercise powers that are primarily:',
+              options: [
+                'Legislative, as they create new laws.',
+                'Judicial in the strict constitutional sense, as they are federal courts.',
+                'Executive or administrative, reviewing decisions made by government bodies according to law.',
+                'Diplomatic, as they negotiate treaties.'
+              ],
+              answer: 'Executive or administrative, reviewing decisions made by government bodies according to law.',
+              difficulty: 'medium',
+              topic: 'Separation of Powers',
+              skillType: 'application',
+              marks: 1,
+              time: 2
+            },
+            {
+              id: 'cop-mcq-q12',
+              type: 'multipleChoice',
+              text: 'Section 116 of the Constitution prevents the Commonwealth from making laws that:',
+              options: [
+                'Restrict freedom of political communication.',
+                'Impose any religious observance or prohibit the free exercise of any religion.',
+                'Discriminate against residents of another state.',
+                'Acquire property without providing just terms.'
+              ],
+              answer: 'Impose any religious observance or prohibit the free exercise of any religion.',
+              difficulty: 'easy',
+              topic: 'Express Rights',
+              skillType: 'recall',
+              marks: 1,
+              time: 1
+            },
+            {
+              id: 'cop-mcq-q13',
+              type: 'multipleChoice',
+              text: 'The High Court\'s primary role in relation to the Australian Constitution is to:',
+              options: [
+                'Amend the Constitution through referendums.',
+                'Draft new sections of the Constitution as society changes.',
+                'Interpret the Constitution and rule on its application and validity of laws.',
+                'Enforce international treaties even if they conflict with the Constitution.'
+              ],
+              answer: 'Interpret the Constitution and rule on its application and validity of laws.',
+              difficulty: 'medium',
+              topic: 'High Court',
+              skillType: 'understanding',
+              marks: 1,
+              time: 1
+            },
+            {
+              id: 'cop-mcq-q14',
+              type: 'multipleChoice',
+              text: 'Which scenario best illustrates the High Court exercising its power of judicial review as a check on parliamentary power?',
+              options: [
+                'The High Court advising Parliament on the wording of a proposed bill.',
+                'The High Court declaring a Commonwealth Act invalid because it goes beyond the Commonwealth\'s constitutional powers.',
+                'The High Court sentencing a person found guilty of a Commonwealth indictable offence.',
+                'The High Court appointing a Royal Commission to investigate parliamentary conduct.'
+              ],
+              answer: 'The High Court declaring a Commonwealth Act invalid because it goes beyond the Commonwealth\'s constitutional powers.',
+              difficulty: 'medium',
+              topic: 'High Court',
+              skillType: 'application',
+              marks: 2,
+              time: 2
+            },
+            {
+              id: 'cop-mcq-q15',
+              type: 'multipleChoice',
+              text: 'A situation where the Senate repeatedly blocks bills passed by the House of Representatives, controlled by the government, is often referred to as a:',
+              options: [
+                '"Rubber stamp" Senate',
+                'Constitutional monarchy',
+                '"Hostile" Senate leading to potential gridlock',
+                'Referral of powers'
+              ],
+              answer: '"Hostile" Senate leading to potential gridlock',
+              difficulty: 'easy',
+              topic: 'Bicameralism',
+              skillType: 'recall',
+              marks: 1,
+              time: 1
             }
           ]
         },
@@ -1123,6 +1259,142 @@ export const examData = {
               topic: 'Doctrine of Precedent',
               skillType: 'understanding',
               marks: 1,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q8',
+              type: 'multipleChoice',
+              text: 'A County Court judge in Victoria is deciding a case with facts very similar to a case decided by the High Court of Australia last year. The County Court judge must:',
+              options: [
+                'Ignore the High Court decision as it is from a different court.',
+                'Apply the ratio decidendi of the High Court decision as it is a binding precedent.',
+                'Only consider the High Court decision if it supports their preferred outcome.',
+                'Ask the High Court to rehear the current case.'
+              ],
+              answer: 'Apply the ratio decidendi of the High Court decision as it is a binding precedent.',
+              difficulty: 'medium',
+              topic: 'Doctrine of Precedent',
+              skillType: 'application',
+              marks: 2,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q9',
+              type: 'multipleChoice',
+              text: 'Parliament passes an Act stating "all communication devices must be licensed". A court later rules this includes smartwatches. This is an example of:',
+              options: [
+                'Parliament abrogating common law.',
+                'A court distinguishing precedent.',
+                'Statutory interpretation by a court clarifying ambiguous wording.',
+                'The High Court overruling a previous constitutional interpretation.'
+              ],
+              answer: 'Statutory interpretation by a court clarifying ambiguous wording.',
+              difficulty: 'medium',
+              topic: 'Statutory Interpretation',
+              skillType: 'application',
+              marks: 1,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q10',
+              type: 'multipleChoice',
+              text: 'If a judge known for judicial activism is deciding a novel case concerning online privacy where no clear legislation exists, they might be more inclined to:',
+              options: [
+                'Refuse to hear the case, stating it is a matter for Parliament.',
+                'Strictly apply any outdated precedents even if they seem unjust in the new context.',
+                'Develop new common law principles considering current social values and the implications of technology.',
+                'Only make a decision if all parties consent to arbitration.'
+              ],
+              answer: 'Develop new common law principles considering current social values and the implications of technology.',
+              difficulty: 'hard',
+              topic: 'Factors Affecting Courts',
+              skillType: 'application',
+              marks: 2,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q11',
+              type: 'multipleChoice',
+              text: 'An environmental group wishes to challenge a government decision allowing development in a protected area, but they do not own land or have direct financial interest in that specific area. Their case might be dismissed due to:',
+              options: [
+                'The doctrine of parliamentary supremacy.',
+                'A lack of binding precedent.',
+                'The requirement for standing (locus standi).',
+                'Judicial conservatism of the presiding judge.'
+              ],
+              answer: 'The requirement for standing (locus standi).',
+              difficulty: 'medium',
+              topic: 'Factors Affecting Courts',
+              skillType: 'application',
+              marks: 1,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q12',
+              type: 'multipleChoice',
+              text: 'After the High Court\'s decision in the Mabo (No.2) case recognized native title, the Commonwealth Parliament passed the Native Title Act 1993. This Act is best described as an example of:',
+              options: [
+                'Parliament abrogating the Mabo decision.',
+                'Parliament codifying the common law principles from the Mabo decision.',
+                'The High Court interpreting the Native Title Act.',
+                'A state parliament referring powers to the Commonwealth.'
+              ],
+              answer: 'Parliament codifying the common law principles from the Mabo decision.',
+              difficulty: 'medium',
+              topic: 'Parliament & Courts',
+              skillType: 'understanding',
+              marks: 1,
+              time: 2
+            },
+            {
+              id: 'clm-mcq-q13',
+              type: 'multipleChoice',
+              text: 'Which of these is an example of obiter dictum?',
+              options: [
+                'The final order made by the judge in a case.',
+                'The binding legal reason for the decision in a case.',
+                'A judge\'s comment made \'by the way\' that is not essential to the decision but may offer insight.',
+                'A section of an Act of Parliament that is being interpreted by the court.'
+              ],
+              answer: 'A judge\'s comment made \'by the way\' that is not essential to the decision but may offer insight.',
+              difficulty: 'easy',
+              topic: 'Doctrine of Precedent',
+              skillType: 'recall',
+              marks: 1,
+              time: 1
+            },
+            {
+              id: 'clm-mcq-q14',
+              type: 'multipleChoice',
+              text: 'If Parliament passes a law that effectively cancels out a common law rule established by a court decision, this is called:',
+              options: [
+                'Judicial review',
+                'Codification',
+                'Abrogation',
+                'Distinguishing'
+              ],
+              answer: 'Abrogation',
+              difficulty: 'easy',
+              topic: 'Parliament & Courts',
+              skillType: 'recall',
+              marks: 1,
+              time: 1
+            },
+            {
+              id: 'clm-mcq-q15',
+              type: 'multipleChoice',
+              text: 'A judge deciding not to follow a precedent from another court hierarchy (e.g., a Victorian judge not following a NSW Supreme Court decision) because the facts are different, is an example of:',
+              options: [
+                'Overruling the precedent.',
+                'Applying binding precedent.',
+                'Distinguishing the precedent.',
+                'Reversing the precedent.'
+              ],
+              answer: 'Distinguishing the precedent.',
+              difficulty: 'hard',
+              topic: 'Doctrine of Precedent',
+              skillType: 'application',
+              marks: 2,
               time: 2
             }
           ]
