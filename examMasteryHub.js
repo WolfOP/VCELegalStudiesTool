@@ -2,14 +2,25 @@
 import { examData } from './examData.js';
 
 const STORAGE_KEY = 'examHubProgress';
+let inMemoryProgress = {};
 
 function getStoredProgress() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  return raw ? JSON.parse(raw) : {};
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : inMemoryProgress;
+  } catch (err) {
+    console.warn('Local storage unavailable, using in-memory progress.', err);
+    return inMemoryProgress;
+  }
 }
 
 function saveProgress(progress) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  inMemoryProgress = progress;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  } catch (err) {
+    console.warn('Local storage unavailable, progress not persisted.', err);
+  }
 }
 
 // Helper function to find question details (skill, difficulty)
