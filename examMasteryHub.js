@@ -1,3 +1,4 @@
+import { initializeExamSkillsHelper } from "./examSkillsHelper.js";
 // examMasteryHub.js - handles rendering and progress tracking for Exam Mastery Hub
 import { examData } from './examData.js';
 
@@ -260,7 +261,10 @@ function createQuestionElement(question, progress, skillIdToRender) { // Added s
   return wrapper;
 }
 
-export function renderExamHub(containerId, skillId = null) {
+
+export function renderExamHub(containerId) {
+  initializeExamSkillsHelper();
+
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -340,15 +344,8 @@ export function renderExamHub(containerId, skillId = null) {
 
 // Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-  // Example: Render the first skill of unit4, aos1 by default.
-  // In a real app, skillId would come from user navigation.
-  let initialSkillId = null;
-  const firstUnitKey = Object.keys(examData)[0];
-    if (examData[firstUnitKey]) {
-        const firstAosKey = Object.keys(examData[firstUnitKey])[0];
-        if (examData[firstUnitKey][firstAosKey] && examData[firstUnitKey][firstAosKey].skills && examData[firstUnitKey][firstAosKey].skills.length > 0) {
-            initialSkillId = examData[firstUnitKey][firstAosKey].skills[0].id; // Default to first skill
-        }
-    }
-  renderExamHub('exam-mastery-hub', initialSkillId);
+
+  renderExamHub('exam-mastery-hub');
+  initializeExamSkillsHelper();
+
 });
