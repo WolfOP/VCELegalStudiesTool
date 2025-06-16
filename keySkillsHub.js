@@ -2207,6 +2207,45 @@ const guidedAnswerQuestions = [
             { id: "gaq4_blank2", answer: ["people", "electorate", "voters"] },
             { id: "gaq4_blank3", answer: ["double majority", "majority of voters in a majority of states"] }
         ]
+    },
+    {
+        id: 'gaq5',
+        question: "Discuss the extent to which the separation of powers acts as a check on the Commonwealth Parliament.",
+        taskWord: "Discuss",
+        taskWordChecklist: ["Present strengths", "Present weaknesses", "Reach a judgement"],
+        scaffold: `The separation of powers divides <input type="text" id="gaq5_blank1" data-gaq-id="gaq5" data-blank-index="0" class="guided-answer-blank" placeholder="three powers"> among <input type="text" id="gaq5_blank2" data-gaq-id="gaq5" data-blank-index="1" class="guided-answer-blank" placeholder="bodies">. A key strength is that the <input type="text" id="gaq5_blank3" data-gaq-id="gaq5" data-blank-index="2" class="guided-answer-blank" placeholder="courts"> can declare laws <input type="text" id="gaq5_blank4" data-gaq-id="gaq5" data-blank-index="3" class="guided-answer-blank" placeholder="invalid">. However, there is <input type="text" id="gaq5_blank5" data-gaq-id="gaq5" data-blank-index="4" class="guided-answer-blank" placeholder="overlap"> between the legislature and executive.`,
+        blanks: [
+            { id: "gaq5_blank1", answer: ["legislative, executive and judicial powers", "three powers"] },
+            { id: "gaq5_blank2", answer: ["separate bodies", "different bodies"] },
+            { id: "gaq5_blank3", answer: ["courts", "judiciary"] },
+            { id: "gaq5_blank4", answer: ["invalid", "ultra vires"] },
+            { id: "gaq5_blank5", answer: ["overlap", "fusion"] }
+        ]
+    },
+    {
+        id: 'gaq6',
+        question: "Explain one role of the House of Representatives.",
+        taskWord: "Explain",
+        taskWordChecklist: ["Provide details", "State reasons", "Link cause/effect"],
+        scaffold: `One role of the House of Representatives is to <input type="text" id="gaq6_blank1" data-gaq-id="gaq6" data-blank-index="0" class="guided-answer-blank" placeholder="form government">. This occurs when the party with the <input type="text" id="gaq6_blank2" data-gaq-id="gaq6" data-blank-index="1" class="guided-answer-blank" placeholder="majority"> of members forms government, ensuring <input type="text" id="gaq6_blank3" data-gaq-id="gaq6" data-blank-index="2" class="guided-answer-blank" placeholder="representation">.`,
+        blanks: [
+            { id: "gaq6_blank1", answer: ["form government"] },
+            { id: "gaq6_blank2", answer: ["majority"] },
+            { id: "gaq6_blank3", answer: ["the people's choices are represented", "representation"] }
+        ]
+    },
+    {
+        id: 'gaq7',
+        question: "Referring to R v Brislan, discuss how the High Court has impacted on the division of law-making powers.",
+        taskWord: "Discuss",
+        taskWordChecklist: ["Identify case facts", "Explain decision", "State impact"],
+        scaffold: `In <input type="text" id="gaq7_blank1" data-gaq-id="gaq7" data-blank-index="0" class="guided-answer-blank" placeholder="Brislan"> the High Court interpreted <input type="text" id="gaq7_blank2" data-gaq-id="gaq7" data-blank-index="1" class="guided-answer-blank" placeholder="section"> to include <input type="text" id="gaq7_blank3" data-gaq-id="gaq7" data-blank-index="2" class="guided-answer-blank" placeholder="broadcasting">, therefore <input type="text" id="gaq7_blank4" data-gaq-id="gaq7" data-blank-index="3" class="guided-answer-blank" placeholder="expanding"> Commonwealth power.`,
+        blanks: [
+            { id: "gaq7_blank1", answer: ["Brislan"] },
+            { id: "gaq7_blank2", answer: ["section 51(v)", "s51(v)"] },
+            { id: "gaq7_blank3", answer: ["radio broadcasting", "wireless broadcasting"] },
+            { id: "gaq7_blank4", answer: ["expanding", "broadening"] }
+        ]
     }
     // Additional questions can be added here for the Guided Answer Construction tool
 ];
