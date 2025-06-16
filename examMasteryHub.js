@@ -262,7 +262,7 @@ function createQuestionElement(question, progress, skillIdToRender) { // Added s
 }
 
 
-export function renderExamHub(containerId) {
+export function renderExamHub(containerId, skillId = null) {
   initializeExamSkillsHelper();
 
   const container = document.getElementById(containerId);
