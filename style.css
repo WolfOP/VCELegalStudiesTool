@@ -78,10 +78,22 @@ body {
     flex-direction: column; 
     justify-content: center; 
 }
-.diagram-box h4 { 
-    font-weight: 600; 
-    color: #3730a3; /* Indigo-800 */ 
+.diagram-box h4 {
+    font-weight: 600;
+    color: #3730a3; /* Indigo-800 */
     margin-bottom: 0.25rem;
+}
+.constitution-dot {
+    width: 1rem;
+    height: 1rem;
+    background-color: #0ea5e9; /* sky-500 */
+    border-radius: 9999px;
+    cursor: pointer;
+}
+.constitution-label {
+    font-size: 0.75rem;
+    text-align: center;
+    margin-top: 0.25rem;
 }
 .diagram-arrow { 
     text-align: center; 

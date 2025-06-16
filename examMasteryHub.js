@@ -1,3 +1,4 @@
+import { initializeExamSkillsHelper } from "./examSkillsHelper.js";
 // examMasteryHub.js - handles rendering and progress tracking for Exam Mastery Hub
 import { examData } from './examData.js';
 
@@ -445,7 +446,10 @@ function createQuestionElement(question, progress, skillIdToRender) {
   return wrapper;
 }
 
+
 export function renderExamHub(containerId, skillId = null) {
+  initializeExamSkillsHelper();
+
   const container = document.getElementById(containerId);
   if (!container) return;
 
@@ -745,6 +749,7 @@ export function displayExamHubStatistics() {
 
 // Initialize on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+
   // Example: Render the first skill of unit4, aos1 by default.
   // In a real app, skillId would come from user navigation.
   let initialSkillId = null;
@@ -833,5 +838,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     console.warn("AI Recommendations button not found.");
   }
+
 
 });
