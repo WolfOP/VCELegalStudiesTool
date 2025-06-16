@@ -407,7 +407,149 @@ document.addEventListener('DOMContentLoaded', function () {
                 "<br><strong>Significance:</strong> Refined the approach for assessing laws against the implied freedom." 
         }
     };
+
+    const caseDeconstructionData = [
+        {
+            id: 'brislan',
+            name: 'R v Brislan (1935)',
+            elements: {
+                facts: 'Challenge to the Wireless Telegraphy Act requiring licences for radio sets.',
+                issue: "Did 'other like services' in s51(v) include radio broadcasting?",
+                decision: 'Yes – broadcasting was considered a like service so the Act was valid.',
+                significance: 'Extended Commonwealth power over communications technology.'
+            },
+            primaryImpact: 'Division of Powers',
+            relatedConcepts: ['s51(v) communications power', 'technological advances', 'division of powers']
+        },
+        {
+            id: 'tasDams',
+            name: 'Commonwealth v Tasmania (1983)',
+            elements: {
+                facts: 'Commonwealth legislation stopped a Tasmanian dam in a World Heritage area.',
+                issue: 'Could the external affairs power allow the Commonwealth to override state legislation?',
+                decision: 'Yes – the law was valid and the inconsistent state law was invalid under s109.',
+                significance: 'Demonstrated expansion of Commonwealth power via external affairs.'
+            },
+            primaryImpact: 'Division of Powers',
+            relatedConcepts: ['s51(xxix) external affairs', 's109 inconsistency', 'treaty obligations']
+        },
+        {
+            id: 'mabo',
+            name: 'Mabo v Queensland (No. 2) (1992)',
+            elements: {
+                facts: 'Torres Strait Islanders claimed traditional ownership of Mer Island.',
+                issue: 'Did the common law recognise native title or was Australia terra nullius?',
+                decision: 'The High Court recognised native title could exist where connection remained.',
+                significance: 'Overturned terra nullius and led to the Native Title Act 1993 (Cth).'
+            },
+            primaryImpact: 'Precedent and Rights',
+            relatedConcepts: ['native title', 'Indigenous rights', 'codification']
+        }
+    ];
+
+    function shuffleArrayCaseDecon(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    window.populateCaseDeconSelector = function() {
+        const select = document.getElementById('caseDeconSelect');
+        if (!select) return;
+        while (select.options.length > 1) select.remove(1);
+        caseDeconstructionData.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.id;
+            opt.textContent = c.name;
+            select.appendChild(opt);
+        });
+        select.addEventListener('change', () => loadCaseDeconstruction(select.value));
+    };
+
+    function loadCaseDeconstruction(caseId) {
+        const data = caseDeconstructionData.find(c => c.id === caseId);
+        const area = document.getElementById('caseDeconArea');
+        if (!data || !area) { if (area) area.classList.add('hidden'); return; }
+        area.classList.remove('hidden');
+        ['facts','issue','decision','significance'].forEach(type => {
+            const select = area.querySelector(`select[data-type="${type}"]`);
+            if (!select) return;
+            select.innerHTML = `<option value="">Select ${type.charAt(0).toUpperCase()+type.slice(1)}...</option>`;
+            const pool = shuffleArrayCaseDecon(caseDeconstructionData.map(c => c.elements[type]));
+            pool.forEach(text => {
+                const opt = document.createElement('option');
+                opt.value = text;
+                opt.textContent = text;
+                select.appendChild(opt);
+            });
+            select.dataset.correct = data.elements[type];
+        });
+        const impactDiv = document.getElementById('caseDeconImpactOptions');
+        if (impactDiv) {
+            const impacts = [...new Set(caseDeconstructionData.map(c => c.primaryImpact))];
+            impactDiv.innerHTML = '';
+            impacts.forEach(imp => {
+                const label = document.createElement('label');
+                label.innerHTML = `<input type="radio" name="impactArea" value="${imp}"> ${imp}`;
+                impactDiv.appendChild(label);
+            });
+            impactDiv.dataset.correct = data.primaryImpact;
+        }
+        const conceptDiv = document.getElementById('caseDeconConceptOptions');
+        if (conceptDiv) {
+            conceptDiv.innerHTML = '';
+            data.relatedConcepts.forEach(con => {
+                const label = document.createElement('label');
+                label.innerHTML = `<input type="checkbox" value="${con}"> ${con}`;
+                conceptDiv.appendChild(label);
+            });
+            conceptDiv.dataset.correct = data.relatedConcepts.join('|');
+        }
+    }
+
+    window.checkCaseDeconstruction = function() {
+        const area = document.getElementById('caseDeconArea');
+        if (!area) return;
+        let correct = true;
+        let feedback = '';
+        ['facts','issue','decision','significance'].forEach(type => {
+            const select = area.querySelector(`select[data-type="${type}"]`);
+            if (!select) return;
+            if (select.value === select.dataset.correct) {
+                feedback += `<div class="case-decon-feedback-item correct">${type}: correct</div>`;
+            } else {
+                feedback += `<div class="case-decon-feedback-item incorrect">${type}: incorrect</div>`;
+                correct = false;
+            }
+        });
+        const impactDiv = document.getElementById('caseDeconImpactOptions');
+        if (impactDiv) {
+            const selected = impactDiv.querySelector('input[name="impactArea"]:checked');
+            if (selected && selected.value === impactDiv.dataset.correct) {
+                feedback += '<div class="case-decon-feedback-item correct">Impact area correct</div>';
+            } else {
+                feedback += '<div class="case-decon-feedback-item incorrect">Impact area incorrect</div>';
+                correct = false;
+            }
+        }
+        const conceptDiv = document.getElementById('caseDeconConceptOptions');
+        if (conceptDiv) {
+            const correctConcepts = conceptDiv.dataset.correct.split('|');
+            const selected = Array.from(conceptDiv.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+            const allCorrect = selected.length === correctConcepts.length && selected.every(v => correctConcepts.includes(v));
+            feedback += `<div class="case-decon-feedback-item ${allCorrect ? 'correct' : 'incorrect'}">Related concepts ${allCorrect ? 'correct' : 'incorrect'}</div>`;
+            if (!allCorrect) correct = false;
+        }
+        const feedbackDiv = document.getElementById('caseDeconFeedback');
+        if (feedbackDiv) feedbackDiv.innerHTML = feedback;
+        return correct;
+    };
+
     
+    const checkCaseDeconBtn = document.getElementById('checkCaseDeconBtn');
+    if (checkCaseDeconBtn) checkCaseDeconBtn.addEventListener('click', window.checkCaseDeconstruction);
     // Dynamically populate Case Explorer dropdown
     const caseSelectExplorer = document.getElementById('caseSelectExplorer');
     const caseDetailsExplorerDiv = document.getElementById('caseDetailsExplorer');
