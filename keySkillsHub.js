@@ -2316,10 +2316,8 @@ if (checkGuidedAnswerBtn) {
     const PROXY_ENDPOINT_URL = "/.netlify/functions/gemini-proxy"; 
 
     async function callGeminiAPI(promptText) {
- feature-review/logging-enhancements
-       console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
-console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
- main
+        console.log("DEBUG: callGeminiAPI: Received prompt:", promptText); // Log prompt reception
+        console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_URL); // Log proxy URL
         if (PROXY_ENDPOINT_URL === "YOUR_DEPLOYED_SERVERLESS_FUNCTION_URL_HERE" || PROXY_ENDPOINT_URL === "") {
             const errorMessage = "Proxy endpoint URL is not configured. Please update PROXY_ENDPOINT_URL in keySkillsHub.js.";
             console.error(errorMessage); // Log full error for dev
@@ -2372,11 +2370,7 @@ console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_UR
 
             console.log("callGeminiAPI: Raw fetch response status:", response.status); // Log raw status for successful response
             const result = await response.json();
-< feature-review/logging-enhancements
-            console.log("callGeminiAPI: Parsed JSON result:", result); // Log parsed JSON
-=======
             console.log("DEBUG: callGeminiAPI: Parsed JSON result:", result);
- main
 
             if (result && result.text) {
                 return result.text;
@@ -2631,12 +2625,8 @@ console.log("DEBUG: callGeminiAPI: Using PROXY_ENDPOINT_URL:", PROXY_ENDPOINT_UR
 });
 
 // Modify initializeKeySkillsHub to include new setups
- feature-review/logging-enhancements
 function initializeKeySkillsHub() { // This is now the single, comprehensive initializer
-=======
-function initializeKeySkillsHub() {
     console.log("DEBUG: initializeKeySkillsHub: Function called.");
- main
     console.log("Key Skills Hub Initialized or Re-initialized");
 
     // Standard tool initializations (if their containers exist)
@@ -2665,12 +2655,8 @@ function initializeKeySkillsHub() {
         window.loadGuidedAnswerQuestion(0); // Initialize Guided Answers
     }
 
- feature-review/logging-enhancements
     // Initialize AI Coach Buttons for Task Words (not checking for a container, should always try to init if function exists)
-
-    // Initialize AI Coach Buttons for Task Words
     console.log("DEBUG: initializeKeySkillsHub: About to call initializeAICoachButtons. AI Coach buttons found on page:", document.querySelectorAll('.ai-task-coach-btn').length);
- main
     if (typeof initializeAICoachButtons === 'function') {
         initializeAICoachButtons();
     }
